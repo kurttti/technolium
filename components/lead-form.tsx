@@ -73,7 +73,7 @@ export function LeadForm() {
       
       // Отправляем событие в Яндекс.Метрику
       if (typeof window.ym !== 'undefined') {
-        window.ym(METRIKA_ID, 'reachGoal', 'form_submit', {
+        window.ym(Number(METRIKA_ID), 'reachGoal', 'form_submit', {
           utmSource: utmParams.get('utm_source') || 'direct',
           utmMedium: utmParams.get('utm_medium'),
           utmCampaign: utmParams.get('utm_campaign'),

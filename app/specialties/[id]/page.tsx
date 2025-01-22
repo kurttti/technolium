@@ -33,7 +33,7 @@ const specialties = {
     image: "/placeholder.svg?height=400&width=800",
     stats: [
       { label: "Трудоустройство", value: "92%" },
-      { label: "Средняя зарплата", value: "210т ₽" },
+      { label: "Средняя зарплата", value: "280т ₽" },
       { label: "Проектов в портфолио", value: "12+" },
     ],
     skills: [
@@ -88,7 +88,7 @@ const specialties = {
     image: "/placeholder.svg?height=400&width=800",
     stats: [
       { label: "Трудоустройство", value: "89%" },
-      { label: "Средняя зарплата", value: "210т ₽" },
+      { label: "Средняя зарплата", value: "180т ₽" },
       { label: "Проектов в портфолио", value: "8+" },
     ],
     skills: [
@@ -138,7 +138,7 @@ const specialties = {
     image: "/placeholder.svg?height=400&width=800",
     stats: [
       { label: "Трудоустройство", value: "94%" },
-      { label: "Средняя зарплата", value: "210т ₽" },
+      { label: "Средняя зарплата", value: "250т ₽" },
       { label: "Проектов в портфолио", value: "10+" },
     ],
     skills: [
@@ -189,7 +189,7 @@ const specialties = {
     image: "/placeholder.svg?height=400&width=800",
     stats: [
       { label: "Трудоустройство", value: "91%" },
-      { label: "Средняя зарплата", value: "210т ₽" },
+      { label: "Средняя зарплата", value: "220т ₽" },
       { label: "Проектов в портфолио", value: "15+" },
     ],
     skills: ["Python/Node.js", "SQL и NoSQL БД", "REST API", "Микросервисы", "Docker", "Cloud Services"],

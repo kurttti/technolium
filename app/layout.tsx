@@ -68,8 +68,7 @@ export default function RootLayout({
       <body className="min-h-screen overflow-x-hidden">
         <NavBar />
         {children}
-        <CallWidget />
-
+        {pathname !== '/landing' && <CallWidget />}
         {/* Bitrix24 Integration */}
         <Script
           id="b24-integration"

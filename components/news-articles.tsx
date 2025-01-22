@@ -82,7 +82,7 @@ export function NewsArticles() {
               className="group block bg-white border border-gray-200 transition-all duration-300 hover:shadow-lg hover:border-[#1E4FCD]"
             >
               <div className="flex flex-col md:flex-row">
-                <div className="relative w-full md:w-[300px] h-[200px] flex-shrink-0 overflow-hidden mt-4 ml-4">
+                <div className="relative w-full md:w-[300px] h-[200px] flex-shrink-0 overflow-hidden md:mt-4 md:ml-4">
                   <Image
                     src={article.image || "/placeholder.svg"}
                     alt={article.title}

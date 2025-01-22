@@ -91,11 +91,20 @@ export function ContactFooter() {
                   План обучения
                 </Link>
               </li>
+              <li>
+                <a 
+                  href="https://drive.google.com/file/d/1_REhKsiMKtuVAf1vTVB2ndwhmcTwQGKO/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Публичная оферта
+                </a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
-
       <ContactFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} type="general" />
     </footer>
   )

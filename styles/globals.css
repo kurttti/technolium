@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --header-height: 72px;
+  --header-height: 56px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --header-height: 72px;
+  }
 }
 
 html {
@@ -88,4 +94,3 @@ body {
     overflow-wrap: break-word;
   }
 }
-

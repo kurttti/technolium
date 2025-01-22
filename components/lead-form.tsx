@@ -15,6 +15,17 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
+import { createBitrixDeal } from '@/actions/bitrix24'
+
+declare global {
+  interface Window {
+    ym: (id: number, method: string, event: string, params?: any) => void;
+  }
+}
+
+const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || 'XXXXXXXX'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать минимум 2 символа'),
@@ -40,29 +51,47 @@ export function LeadForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsSubmitting(true)
+      setSubmitStatus('idle')
+      
       const utmParams = new URLSearchParams(window.location.search)
-      const leadData = {
-        ...values,
-        utmSource: utmParams.get('utm_source') || 'direct',
-        utmMedium: utmParams.get('utm_medium'),
-        utmCampaign: utmParams.get('utm_campaign'),
-        referrer: document.referrer,
-        timestamp: new Date().toISOString(),
+      const formData = new FormData()
+      
+      // Добавляем основные данные формы
+      formData.append('name', values.name)
+      formData.append('email', values.email)
+      formData.append('phone', values.phone)
+      formData.append('message', values.message || '')
+      
+      // Добавляем тип заявки и URL страницы
+      formData.append('type', 'lead')
+      formData.append('pageUrl', window.location.href)
+      
+      // Добавляем UTM-метки
+      formData.append('utm_source', utmParams.get('utm_source') || 'direct')
+      formData.append('utm_medium', utmParams.get('utm_medium') || '')
+      formData.append('utm_campaign', utmParams.get('utm_campaign') || '')
+      
+      // Отправляем событие в Яндекс.Метрику
+      if (typeof window.ym !== 'undefined') {
+        window.ym(METRIKA_ID, 'reachGoal', 'form_submit', {
+          utmSource: utmParams.get('utm_source') || 'direct',
+          utmMedium: utmParams.get('utm_medium'),
+          utmCampaign: utmParams.get('utm_campaign'),
+          referrer: document.referrer,
+        });
       }
 
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(leadData),
-      })
-
-      if (!response.ok) throw new Error('Ошибка отправки')
+      // Создаем сделку в Bitrix24
+      const result = await createBitrixDeal(formData)
       
-      setSubmitStatus('success')
-      form.reset()
+      if (result.success) {
+        setSubmitStatus('success')
+        form.reset()
+      } else {
+        throw new Error(result.message)
+      }
     } catch (error) {
+      console.error('Error submitting form:', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -70,20 +99,28 @@ export function LeadForm() {
   }
 
   return (
-    <div className="w-full max-w-md p-6 bg-white shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Оставить заявку</h2>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="w-full bg-white shadow-lg p-4 sm:p-6 rounded-lg mx-auto max-w-md"
+    >
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center text-gray-800">Оставить заявку</h2>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Имя</FormLabel>
+                <FormLabel className="text-sm sm:text-base text-gray-700">Имя</FormLabel>
                 <FormControl>
-                  <Input className="rounded-none" placeholder="Введите ваше имя" {...field} />
+                  <Input 
+                    className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-10 sm:h-12 text-sm sm:text-base" 
+                    placeholder="Введите ваше имя" 
+                    {...field} 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm text-red-500 mt-1" />
               </FormItem>
             )}
           />
@@ -92,11 +129,16 @@ export function LeadForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-sm sm:text-base text-gray-700">Email</FormLabel>
                 <FormControl>
-                  <Input className="rounded-none" type="email" placeholder="your@email.com" {...field} />
+                  <Input 
+                    className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-10 sm:h-12 text-sm sm:text-base" 
+                    type="email" 
+                    placeholder="your@email.com" 
+                    {...field} 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm text-red-500 mt-1" />
               </FormItem>
             )}
           />
@@ -105,11 +147,15 @@ export function LeadForm() {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Телефон</FormLabel>
+                <FormLabel className="text-sm sm:text-base text-gray-700">Телефон</FormLabel>
                 <FormControl>
-                  <Input className="rounded-none" placeholder="+7 (999) 999-99-99" {...field} />
+                  <Input 
+                    className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 h-10 sm:h-12 text-sm sm:text-base" 
+                    placeholder="+7 (999) 999-99-99" 
+                    {...field} 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm text-red-500 mt-1" />
               </FormItem>
             )}
           />
@@ -118,35 +164,64 @@ export function LeadForm() {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Сообщение (необязательно)</FormLabel>
+                <FormLabel className="text-sm sm:text-base text-gray-700">Сообщение (необязательно)</FormLabel>
                 <FormControl>
-                  <Textarea className="rounded-none" placeholder="Ваше сообщение..." {...field} />
+                  <Textarea 
+                    className="rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[80px] sm:min-h-[100px] text-sm sm:text-base" 
+                    placeholder="Ваше сообщение..." 
+                    {...field} 
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm text-red-500 mt-1" />
               </FormItem>
             )}
           />
           <Button 
             type="submit" 
-            className="w-full bg-blue-600 hover:bg-blue-700 rounded-none"
+            className={`w-full h-10 sm:h-12 relative ${
+              isSubmitting ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'
+            } text-white rounded-md transition-all duration-200 ease-in-out text-sm sm:text-base`}
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+            {isSubmitting ? (
+              <span className="flex items-center justify-center">
+                <Loader2 className="animate-spin mr-2" size={16} />
+                Отправка...
+              </span>
+            ) : (
+              'Отправить заявку'
+            )}
           </Button>
           
-          {submitStatus === 'success' && (
-            <p className="text-green-600 text-center mt-4">
-              Спасибо! Ваша заявка успешно отправлена.
-            </p>
-          )}
-          
-          {submitStatus === 'error' && (
-            <p className="text-red-600 text-center mt-4">
-              Произошла ошибка. Пожалуйста, попробуйте позже.
-            </p>
-          )}
+          <AnimatePresence>
+            {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="bg-green-50 border border-green-200 rounded-md p-3 sm:p-4 mt-3 sm:mt-4"
+              >
+                <p className="text-green-600 text-center text-sm sm:text-base font-medium">
+                  Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.
+                </p>
+              </motion.div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="bg-red-50 border border-red-200 rounded-md p-3 sm:p-4 mt-3 sm:mt-4"
+              >
+                <p className="text-red-600 text-center text-sm sm:text-base font-medium">
+                  Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже или свяжитесь с нами другим способом.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </form>
       </Form>
-    </div>
+    </motion.div>
   )
 }

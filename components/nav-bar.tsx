@@ -31,9 +31,9 @@ export function NavBar() {
   }, [isMenuOpen])
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white z-50 w-full border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 bg-white z-50 w-full">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
-        <nav className="flex items-center justify-between h-[72px]">
+        <nav className="flex items-center justify-between h-[56px] sm:h-[72px]">
           <Link href="/" className="flex items-center">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TechnoliumLogoCube-CF7adPTdcUn7kfkGQZSYy7xadiPS8p.svg"
@@ -107,4 +107,3 @@ export function NavBar() {
     </header>
   )
 }
-

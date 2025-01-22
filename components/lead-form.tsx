@@ -37,6 +37,7 @@ const formSchema = z.object({
 export function LeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [error, setError] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,19 +49,20 @@ export function LeadForm() {
     },
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       setIsSubmitting(true)
       setSubmitStatus('idle')
+      setError(null)
       
       const utmParams = new URLSearchParams(window.location.search)
       const formData = new FormData()
       
       // Добавляем основные данные формы
-      formData.append('name', values.name)
-      formData.append('email', values.email)
-      formData.append('phone', values.phone)
-      formData.append('message', values.message || '')
+      formData.append('name', data.name)
+      formData.append('email', data.email)
+      formData.append('phone', data.phone)
+      formData.append('message', data.message || '')
       
       // Добавляем тип заявки и URL страницы
       formData.append('type', 'lead')
@@ -72,13 +74,17 @@ export function LeadForm() {
       formData.append('utm_campaign', utmParams.get('utm_campaign') || '')
       
       // Отправляем событие в Яндекс.Метрику
-      if (typeof window.ym !== 'undefined') {
-        window.ym(Number(METRIKA_ID), 'reachGoal', 'form_submit', {
-          utmSource: utmParams.get('utm_source') || 'direct',
-          utmMedium: utmParams.get('utm_medium'),
-          utmCampaign: utmParams.get('utm_campaign'),
-          referrer: document.referrer,
-        });
+      try {
+        if (typeof window.ym === 'function') {
+          window.ym(Number(METRIKA_ID), 'reachGoal', 'form_submit', {
+            utmSource: utmParams.get('utm_source') || 'direct',
+            utmMedium: utmParams.get('utm_medium'),
+            utmCampaign: utmParams.get('utm_campaign'),
+            referrer: document.referrer,
+          });
+        }
+      } catch (err) {
+        console.error('Ошибка отправки события в Яндекс.Метрику:', err);
       }
 
       // Создаем сделку в Bitrix24
@@ -91,7 +97,8 @@ export function LeadForm() {
         throw new Error(result.message)
       }
     } catch (error) {
-      console.error('Error submitting form:', error)
+      console.error('Ошибка при отправке формы:', error)
+      setError('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.')
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -215,7 +222,7 @@ export function LeadForm() {
                 className="bg-red-50 border border-red-200 rounded-md p-3 sm:p-4 mt-3 sm:mt-4"
               >
                 <p className="text-red-600 text-center text-sm sm:text-base font-medium">
-                  Произошла ошибка при отправке заявки. Пожалуйста, попробуйте позже или свяжитесь с нами другим способом.
+                  {error}
                 </p>
               </motion.div>
             )}

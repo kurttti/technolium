@@ -30,7 +30,7 @@ export default function AboutPage() {
                   Наша цель - подготовить специалистов, готовых к реальным задачам современной IT-индустрии.
                 </p>
               </div>
-              <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
+              <div className="relative h-[400px] shadow-xl">
                 <Image
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=800&fit=crop"
                   alt="Команда специалистов за работой"
@@ -96,4 +96,3 @@ export default function AboutPage() {
     </div>
   )
 }
-

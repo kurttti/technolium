@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react"
 import { X } from "lucide-react"
 import { createBitrixDeal } from "@/actions/bitrix24"
+import { createPortal } from "react-dom"
 
 interface ContactFormModalProps {
   isOpen: boolean
@@ -67,13 +68,13 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
 
   if (!isOpen) return null
 
-  return (
+  const modalContent = (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] p-4"
       onClick={handleOutsideClick}
     >
       <div
-        className="bg-white p-8 max-w-md w-full m-4 max-h-[90vh] overflow-y-auto"
+        className="bg-white p-8 max-w-md w-full m-4 max-h-[90vh] overflow-y-auto relative"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4 sm:mb-6">
@@ -167,24 +168,11 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
           </form>
         )}
       </div>
-      <style jsx>{`
-      @keyframes modalEnter {
-        from {
-          opacity: 0;
-          transform: scale(0.95) translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1) translateY(0);
-        }
-      }
-      @media (max-height: 600px) {
-        .max-h-[90vh] {
-          max-height: 100vh;
-        }
-      }
-    `}</style>
     </div>
   )
-}
 
+  // Используем портал для рендеринга модального окна в корне документа
+  return typeof document !== 'undefined' 
+    ? createPortal(modalContent, document.body)
+    : null
+}

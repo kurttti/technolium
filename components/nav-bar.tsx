@@ -31,7 +31,7 @@ export function NavBar() {
   }, [isMenuOpen])
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white z-50 w-full">
+    <header className="fixed top-0 left-0 right-0 bg-white z-40 w-full">
       <div className="max-w-7xl mx-auto px-2 sm:px-4">
         <nav className="flex items-center justify-between h-[56px] sm:h-[72px]">
           <Link href="/" className="flex items-center">

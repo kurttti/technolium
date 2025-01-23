@@ -84,6 +84,16 @@ body {
   transition: opacity 300ms, transform 300ms;
 }
 
+/* Mobile menu animation classes */
+.clip-path-slide-in {
+  clip-path: inset(0 0 0 0);
+}
+
+.clip-path-slide-out {
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+}
+
 @media screen and (max-width: 374px) {
   body {
     word-break: break-word;
@@ -93,4 +103,38 @@ body {
     word-break: break-word;
     overflow-wrap: break-word;
   }
+}
+
+/* Typography */
+.h1 {
+  @apply text-3xl sm:text-4xl lg:text-5xl font-bold;
+}
+
+.h2 {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-bold;
+}
+
+.h3 {
+  @apply text-xl sm:text-2xl lg:text-3xl font-bold;
+}
+
+.text-body {
+  @apply text-base sm:text-lg lg:text-xl;
+}
+
+.text-body-sm {
+  @apply text-sm sm:text-base lg:text-lg;
+}
+
+.text-caption {
+  @apply text-xs sm:text-sm lg:text-base;
+}
+
+/* Responsive line heights */
+.h1, .h2, .h3 {
+  @apply leading-tight;
+}
+
+.text-body, .text-body-sm, .text-caption {
+  @apply leading-relaxed;
 }

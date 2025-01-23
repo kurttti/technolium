@@ -107,37 +107,14 @@ export function CallWidget() {
             <div className="p-4 sm:p-6">
               <div className="relative w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6">
                 <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TechnoliumLogoCube-CF7adPTdcUn7kfkGQZSYy7xadiPS8p.svg"
+                  src="/footerlogo.png"
                   alt="Технолиум"
                   fill
                   className="object-contain"
                   sizes="(max-width: 640px) 96px, 128px"
                 />
               </div>
-              <CallbackForm onClose={() => setIsOpen(false)}>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Ваше имя"
-                  className="w-full p-2 border border-gray-300 rounded-none"
-                />
-
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  placeholder="Ваш телефон"
-                  className="w-full p-2 border border-gray-300 rounded-none"
-                />
-
-                <textarea
-                  name="message"
-                  placeholder="Ваше сообщение (необязательно)"
-                  rows={3}
-                  className="w-full p-2 border border-gray-300 rounded-none"
-                />
-              </CallbackForm>
+              <CallbackForm onClose={() => setIsOpen(false)} />
             </div>
           </div>
         </div>

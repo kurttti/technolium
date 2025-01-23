@@ -5,6 +5,15 @@ try {
   // ignore error
 }
 
+const allowedOrigins = {
+  development: ['http://localhost:3000'],
+  production: [
+    'https://technolium.ru',
+    'https://cdn-ru.bitrix24.ru',
+    'https://mc.yandex.ru'
+  ]
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -15,12 +24,32 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com']
   },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: process.env.NODE_ENV === 'development' 
+              ? allowedOrigins.development.join(',')
+              : allowedOrigins.production.join(',')
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, OPTIONS'
+          }
+        ]
+      }
+    ]
+  }
 }
 
 mergeConfig(nextConfig, userConfig)

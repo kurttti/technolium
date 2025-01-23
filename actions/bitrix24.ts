@@ -90,8 +90,7 @@ export async function createBitrixDeal(formData: FormData) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fields: dealData,
-        params: { REGISTER_SONET_EVENT: "Y" },
+        fields: dealData
       }),
     })
 
@@ -111,4 +110,3 @@ export async function createBitrixDeal(formData: FormData) {
     return { success: false, message: "Произошла ошибка при отправке заявки" }
   }
 }
-

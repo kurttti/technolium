@@ -19,12 +19,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 import { createBitrixDeal } from '@/actions/bitrix24'
 
-declare global {
-  interface Window {
-    ym: (id: number, method: string, event: string, params?: any) => void;
-  }
-}
-
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || 'XXXXXXXX'
 
 const formSchema = z.object({

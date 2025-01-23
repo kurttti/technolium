@@ -9,6 +9,9 @@ interface BitrixDealData {
   UF_CRM_COURSE?: string
   UF_CRM_COURSE_PRICE?: string
   UF_CRM_COURSE_DURATION?: string
+  UTM_SOURCE?: string
+  UTM_MEDIUM?: string
+  UTM_CAMPAIGN?: string
 }
 
 async function createOrGetContact(name: string, email: string, phone: string): Promise<string> {
@@ -59,6 +62,9 @@ export async function createBitrixDeal(formData: FormData) {
     const courseDuration = formData.get("courseDuration") as string
     const type = formData.get("type") as string
     const plan = formData.get("plan") as string
+    const utmSource = formData.get("utm_source") as string
+    const utmMedium = formData.get("utm_medium") as string
+    const utmCampaign = formData.get("utm_campaign") as string
 
     const leadTitle = courseTitle
       ? `Запись на курс: ${courseTitle}`
@@ -83,6 +89,11 @@ export async function createBitrixDeal(formData: FormData) {
       dealData.UF_CRM_COURSE_PRICE = coursePrice
       dealData.UF_CRM_COURSE_DURATION = courseDuration
     }
+
+    // Add UTM parameters to the deal
+    if (utmSource) dealData.UTM_SOURCE = utmSource
+    if (utmMedium) dealData.UTM_MEDIUM = utmMedium
+    if (utmCampaign) dealData.UTM_CAMPAIGN = utmCampaign
 
     const response = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.deal.add`, {
       method: "POST",

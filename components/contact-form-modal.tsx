@@ -78,7 +78,7 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-[#1B324A]">{titles[type]}</h2>
+          <h2 className="h3 text-[#1B324A]">{titles[type]}</h2>
           <button onClick={handleClose} className="text-gray-500 hover:text-gray-700 transition-colors">
             <X className="w-6 h-6" />
           </button>
@@ -91,11 +91,11 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold mb-4 text-[#1B324A]">Заявка отправлена!</h3>
-            <p className="text-[#4A5568] mb-8">Мы свяжемся с вами в ближайшее время для обсуждения деталей.</p>
+            <h3 className="h3 mb-4 text-[#1B324A]">Заявка отправлена!</h3>
+            <p className="text-body text-[#4A5568] mb-8">Мы свяжемся с вами в ближайшее время для обсуждения деталей.</p>
             <button
               onClick={handleClose}
-              className="w-full bg-[#0095FF] text-white py-3 rounded-none hover:bg-[#0080FF] transition-colors"
+              className="text-body-sm w-full bg-[#0095FF] text-white py-3 rounded-none hover:bg-[#0080FF] transition-colors"
             >
               Закрыть
             </button>
@@ -103,65 +103,75 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             {courseInfo && (
-              <div className="mb-6 p-4 bg-gray-50 rounded-sm">
-                <h3 className="font-medium mb-2">Информация о курсе:</h3>
-                <p className="text-[#4A5568]">Название: {courseInfo.title}</p>
-                <p className="text-[#4A5568]">Длительность: {courseInfo.duration}</p>
-                <p className="text-[#4A5568]">Стоимость: {courseInfo.price} руб.</p>
+              <div className="bg-gray-50 p-4 mb-6 space-y-2">
+                <h3 className="text-body-sm font-semibold text-[#1B324A]">Информация о курсе:</h3>
+                <p className="text-body-sm text-gray-600">Название: {courseInfo.title}</p>
+                <p className="text-body-sm text-gray-600">Длительность: {courseInfo.duration}</p>
+                <p className="text-body-sm text-gray-600">Стоимость: {courseInfo.price} руб.</p>
               </div>
             )}
 
-            <div className="mb-4">
-              <label className="block mb-2 text-[#1B324A] text-left">Имя *</label>
+            <div>
+              <label htmlFor="name" className="text-body-sm block text-[#1B324A] font-medium mb-1">
+                Имя <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
+                id="name"
                 name="name"
                 required
-                className="w-full p-2 border border-gray-300"
                 placeholder="Введите ваше имя"
+                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors"
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-2 text-[#1B324A] text-left">Email *</label>
+            <div>
+              <label htmlFor="email" className="text-body-sm block text-[#1B324A] font-medium mb-1">
+                Email <span className="text-red-500">*</span>
+              </label>
               <input
                 type="email"
+                id="email"
                 name="email"
                 required
-                className="w-full p-2 border border-gray-300"
                 placeholder="example@mail.com"
+                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors"
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-2 text-[#1B324A] text-left">Телефон *</label>
+            <div>
+              <label htmlFor="phone" className="text-body-sm block text-[#1B324A] font-medium mb-1">
+                Телефон <span className="text-red-500">*</span>
+              </label>
               <input
                 type="tel"
+                id="phone"
                 name="phone"
                 required
-                className="w-full p-2 border border-gray-300"
                 placeholder="+7 (___) ___-__-__"
+                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors"
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block mb-2 text-[#1B324A] text-left">Сообщение</label>
+            <div>
+              <label htmlFor="message" className="text-body-sm block text-[#1B324A] font-medium mb-1">
+                Сообщение
+              </label>
               <textarea
+                id="message"
                 name="message"
                 rows={4}
-                className="w-full p-2 border border-gray-300"
                 placeholder="Ваше сообщение..."
+                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors resize-none"
               />
             </div>
 
-            {error && <div className="text-red-600 mb-4">{error}</div>}
+            {error && <p className="text-red-500 text-body-sm">{error}</p>}
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full bg-[#1E4FCD] text-white py-3 transition-colors ${
-                isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-[#1733A5]"
-              }`}
+              className="text-body-sm w-full bg-[#1E4FCD] text-white py-3 hover:bg-[#1733A5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Отправка..." : "Отправить"}
             </button>

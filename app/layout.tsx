@@ -9,7 +9,11 @@ const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 
 export const metadata: Metadata = {
   title: 'Технолиум - онлайн университет',
-  description: 'Обучение современным IT-профессиям'
+  description: 'Обучение современным IT-профессиям',
+  icons: {
+    icon: '/TechnoliumLogo.svg',
+    apple: '/TechnoliumLogo.svg',
+  }
 }
 
 export default function RootLayout({

@@ -36,11 +36,10 @@ export function NavBar() {
         <nav className="flex items-center justify-between h-[56px] sm:h-[72px]">
           <Link href="/" className="flex items-center">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/TechnoliumLogoCube-CF7adPTdcUn7kfkGQZSYy7xadiPS8p.svg"
+              src="/footerlogo.png"
               alt="Технолиум"
-              width={120}
-              height={35}
-              className="w-[120px] h-auto"
+              width={140}
+              height={36}
               priority
             />
           </Link>

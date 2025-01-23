@@ -7,7 +7,6 @@ import { CallWidget } from '@/components/call-widget'
 import Script from 'next/script'
 import '@/styles/globals.css'
 
-// Замените на ваш ID метрики
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || 'XXXXXXXX'
 
 export default function RootLayout({
@@ -43,33 +42,27 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <head>
-        <Script 
-          id="yandex-metrika" 
+        <Script
+          id="yandex-metrika"
           strategy="afterInteractive"
-          onError={(e) => {
-            console.error('Ошибка загрузки Яндекс.Метрики:', e);
-          }}
-        >
-          {`
+          src="https://mc.yandex.ru/metrika/tag.js"
+          onLoad={() => {
             try {
-              (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-              m[i].l=1*new Date();
-              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-              ym(${METRIKA_ID}, "init", {
+              window.ym(Number(METRIKA_ID), "init", {
                 clickmap: true,
                 trackLinks: true,
                 accurateTrackBounce: true,
                 webvisor: true,
                 ecommerce: "dataLayer"
-              });
+              } as any);
             } catch(err) {
               console.error('Ошибка инициализации Яндекс.Метрики:', err);
             }
-          `}
-        </Script>
+          }}
+          onError={(e) => {
+            console.error('Ошибка загрузки Яндекс.Метрики:', e);
+          }}
+        />
         <noscript>
           <div>
             <img 
@@ -87,27 +80,11 @@ export default function RootLayout({
         <Script
           id="b24-integration"
           strategy="afterInteractive"
+          src="https://cdn-ru.bitrix24.ru/b24593293/crm/site_button/loader_2_87vvqx.js"
           onError={(e) => {
             console.error('Ошибка загрузки виджета Bitrix24:', e);
           }}
-        >
-          {`
-            try {
-              (function(w,d,u){
-                var s=d.createElement('script');
-                s.async=true;
-                s.src=u+'?'+(Date.now()/180000|0);
-                s.onerror = function(err) {
-                  console.error('Ошибка загрузки скрипта Bitrix24:', err);
-                };
-                var h=d.getElementsByTagName('script')[0];
-                h.parentNode.insertBefore(s,h);
-              })(window,document,'https://cdn-ru.bitrix24.ru/b24593293/crm/site_button/loader_2_87vvqx.js');
-            } catch(err) {
-              console.error('Ошибка инициализации виджета Bitrix24:', err);
-            }
-          `}
-        </Script>
+        />
       </body>
     </html>
   )

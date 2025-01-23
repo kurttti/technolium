@@ -84,6 +84,16 @@ body {
   transition: opacity 300ms, transform 300ms;
 }
 
+/* Mobile menu animation classes */
+.clip-path-slide-in {
+  clip-path: inset(0 0 0 0);
+}
+
+.clip-path-slide-out {
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+}
+
 @media screen and (max-width: 374px) {
   body {
     word-break: break-word;

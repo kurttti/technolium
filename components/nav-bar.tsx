@@ -76,37 +76,39 @@ export function NavBar() {
         </nav>
 
         {/* Mobile menu */}
-        {isMenuOpen && (
-          <div
-            ref={menuRef}
-            className={`absolute top-[56px] sm:top-[72px] left-0 right-0 bg-white transform transition-transform duration-200 ease-in-out ${
-              isMenuOpen ? "translate-y-0" : "-translate-y-full"
-            } sm:hidden`}
-            style={{ borderTop: "1px solid #e5e7eb" }}
-          >
-            <div className="flex flex-col px-6 py-4">
-              {[
-                ["Главная", "/"],
-                ["О нас", "/about"],
-                ["Направления", "/directions"],
-                ["Новости", "/news"],
-              ].map(([title, url]) => (
-                <Link
-                  key={url}
-                  href={url}
-                  className={`py-3 text-lg ${
-                    pathname === url
-                      ? "text-blue-600 font-medium"
-                      : "text-gray-700 hover:text-blue-600"
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {title}
-                </Link>
-              ))}
-            </div>
+        <div
+          ref={menuRef}
+          className={`fixed top-[56px] sm:top-[72px] left-0 right-0 bg-white shadow-lg transition-[clip-path] duration-300 ease-in-out ${
+            isMenuOpen ? "clip-path-slide-in" : "clip-path-slide-out"
+          } md:hidden`}
+          style={{ 
+            borderTop: "1px solid #e5e7eb",
+          }}
+        >
+          <div className={`flex flex-col px-6 py-4 transition-opacity duration-300 ${
+            isMenuOpen ? "opacity-100" : "opacity-0"
+          }`}>
+            {[
+              ["Главная", "/"],
+              ["О нас", "/about"],
+              ["Направления", "/directions"],
+              ["Новости", "/news"],
+            ].map(([title, url]) => (
+              <Link
+                key={url}
+                href={url}
+                className={`py-3 text-lg ${
+                  pathname === url
+                    ? "text-blue-600 font-medium"
+                    : "text-gray-700 hover:text-blue-600"
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {title}
+              </Link>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </header>
   )

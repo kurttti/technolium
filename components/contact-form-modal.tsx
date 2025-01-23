@@ -77,8 +77,8 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
         className="bg-white p-8 max-w-md w-full m-4 max-h-[90vh] overflow-y-auto relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex justify-between items-center mb-4 sm:mb-6">
-          <h2 className="h3 text-[#1B324A]">{titles[type]}</h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-[24px] text-[#1B324A] font-bold">{titles[type]}</h2>
           <button onClick={handleClose} className="text-gray-500 hover:text-gray-700 transition-colors">
             <X className="w-6 h-6" />
           </button>
@@ -91,29 +91,29 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="h3 mb-4 text-[#1B324A]">Заявка отправлена!</h3>
-            <p className="text-body text-[#4A5568] mb-8">Мы свяжемся с вами в ближайшее время для обсуждения деталей.</p>
+            <h3 className="text-[24px] font-bold mb-4 text-[#1B324A]">Заявка отправлена!</h3>
+            <p className="text-[16px] text-[#4A5568] mb-8">Мы свяжемся с вами в ближайшее время для обсуждения деталей.</p>
             <button
               onClick={handleClose}
-              className="text-body-sm w-full bg-[#0095FF] text-white py-3 rounded-none hover:bg-[#0080FF] transition-colors"
+              className="w-full bg-[#0095FF] text-white py-3 text-[16px] hover:bg-[#0080FF] transition-colors"
             >
               Закрыть
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {courseInfo && (
               <div className="bg-gray-50 p-4 mb-6 space-y-2">
-                <h3 className="text-body-sm font-semibold text-[#1B324A]">Информация о курсе:</h3>
-                <p className="text-body-sm text-gray-600">Название: {courseInfo.title}</p>
-                <p className="text-body-sm text-gray-600">Длительность: {courseInfo.duration}</p>
-                <p className="text-body-sm text-gray-600">Стоимость: {courseInfo.price} руб.</p>
+                <h3 className="text-[16px] font-semibold text-[#1B324A]">Информация о курсе:</h3>
+                <p className="text-[16px] text-gray-600">Название: {courseInfo.title}</p>
+                <p className="text-[16px] text-gray-600">Длительность: {courseInfo.duration}</p>
+                <p className="text-[16px] text-gray-600">Стоимость: {courseInfo.price} руб.</p>
               </div>
             )}
 
             <div>
-              <label htmlFor="name" className="text-body-sm block text-[#1B324A] font-medium mb-1">
-                Имя <span className="text-red-500">*</span>
+              <label htmlFor="name" className="block text-[16px] text-[#1B324A] mb-2">
+                Имя <span className="text-[#FF0000]">*</span>
               </label>
               <input
                 type="text"
@@ -121,13 +121,13 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                 name="name"
                 required
                 placeholder="Введите ваше имя"
-                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors"
+                className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="text-body-sm block text-[#1B324A] font-medium mb-1">
-                Email <span className="text-red-500">*</span>
+              <label htmlFor="email" className="block text-[16px] text-[#1B324A] mb-2">
+                Email <span className="text-[#FF0000]">*</span>
               </label>
               <input
                 type="email"
@@ -135,13 +135,13 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                 name="email"
                 required
                 placeholder="example@mail.com"
-                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors"
+                className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="phone" className="text-body-sm block text-[#1B324A] font-medium mb-1">
-                Телефон <span className="text-red-500">*</span>
+              <label htmlFor="phone" className="block text-[16px] text-[#1B324A] mb-2">
+                Телефон <span className="text-[#FF0000]">*</span>
               </label>
               <input
                 type="tel"
@@ -149,12 +149,12 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                 name="phone"
                 required
                 placeholder="+7 (___) ___-__-__"
-                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors"
+                className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="text-body-sm block text-[#1B324A] font-medium mb-1">
+              <label htmlFor="message" className="block text-[16px] text-[#1B324A] mb-2">
                 Сообщение
               </label>
               <textarea
@@ -162,16 +162,16 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                 name="message"
                 rows={4}
                 placeholder="Ваше сообщение..."
-                className="text-body-sm w-full p-3 border border-gray-300 focus:border-[#0095FF] focus:outline-none transition-colors resize-none"
+                className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors resize-none"
               />
             </div>
 
-            {error && <p className="text-red-500 text-body-sm">{error}</p>}
+            {error && <p className="text-[#FF0000] text-[16px]">{error}</p>}
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="text-body-sm w-full bg-[#1E4FCD] text-white py-3 hover:bg-[#1733A5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[#1E4FCD] text-white py-4 text-[16px] hover:bg-[#1733A5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? "Отправка..." : "Отправить"}
             </button>

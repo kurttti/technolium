@@ -1,89 +1,53 @@
-'use client'
-
-import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { Metadata } from 'next'
 import { NavBar } from '@/components/nav-bar'
 import { CallWidget } from '@/components/call-widget'
 import Script from 'next/script'
 import '@/styles/globals.css'
+import { ScrollManager } from '@/components/scroll-manager'
 
-const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID || 'XXXXXXXX'
+const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
+
+export const metadata: Metadata = {
+  title: 'Технолиум - онлайн университет',
+  description: 'Обучение современным IT-профессиям'
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname()
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const scrollPosition = sessionStorage.getItem('scrollPosition')
-      if (scrollPosition) {
-        window.scrollTo(0, parseInt(scrollPosition))
-        sessionStorage.removeItem('scrollPosition')
-      }
-    }
-  }, [pathname])
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      sessionStorage.setItem('scrollPosition', window.scrollY.toString())
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
-  }, [])
-
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning={true}>
       <head>
-        <Script
-          id="yandex-metrika"
-          strategy="afterInteractive"
-          src="https://mc.yandex.ru/metrika/tag.js"
-          onLoad={() => {
-            try {
-              window.ym(Number(METRIKA_ID), "init", {
-                clickmap: true,
-                trackLinks: true,
-                accurateTrackBounce: true,
-                webvisor: true,
-                ecommerce: "dataLayer"
-              } as any);
-            } catch(err) {
-              console.error('Ошибка инициализации Яндекс.Метрики:', err);
-            }
-          }}
-          onError={(e) => {
-            console.error('Ошибка загрузки Яндекс.Метрики:', e);
-          }}
-        />
-        <noscript>
-          <div>
-            <img 
-              src={`https://mc.yandex.ru/watch/${METRIKA_ID}`} 
-              style={{ position: 'absolute', left: '-9999px' }} 
-              alt="" 
-            />
-          </div>
-        </noscript>
+        {METRIKA_ID && (
+          <Script
+            id="yandex-metrika"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+                m[i].l=1*new Date();
+                k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+                (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+                ym(${METRIKA_ID}, "init", {
+                  clickmap:true,
+                  trackLinks:true,
+                  accurateTrackBounce:true
+                });
+              `,
+            }}
+          />
+        )}
       </head>
-      <body className="min-h-screen overflow-x-hidden">
+      <body suppressHydrationWarning={true}>
         <NavBar />
+        <ScrollManager />
         {children}
-        {pathname !== '/landing' && <CallWidget />}
         <Script
           id="b24-integration"
           strategy="afterInteractive"
           src="https://cdn-ru.bitrix24.ru/b24593293/crm/site_button/loader_2_87vvqx.js"
-          onError={(e) => {
-            console.error('Ошибка загрузки виджета Bitrix24:', e);
-          }}
         />
       </body>
     </html>

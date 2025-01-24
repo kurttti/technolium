@@ -57,11 +57,7 @@ export default function Home() {
   }
 
   return (
-    <motion.main 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-    >
+    <main>
       <motion.div
         initial="hidden"
         animate="visible"
@@ -139,6 +135,6 @@ export default function Home() {
       >
         <ContactFooter />
       </motion.div>
-    </motion.main>
+    </main>
   )
 }

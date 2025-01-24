@@ -10,12 +10,12 @@ import { ContactFooter } from "@/components/contact-footer"
 import { motion } from "framer-motion"
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: { 
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1]  
     }
   }
@@ -26,12 +26,11 @@ export default function Home() {
     <motion.main 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2 }}
     >
       <motion.div
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        animate="visible"
         variants={fadeInUp}
       >
         <Hero />
@@ -40,9 +39,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: 0.05 }}
       >
         <Specialties />
       </motion.div>
@@ -50,9 +49,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.15 }}
+        transition={{ delay: 0.1 }}
       >
         <Regions />
       </motion.div>
@@ -60,9 +59,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: 0.15 }}
       >
         <AdmissionPlan />
       </motion.div>
@@ -70,9 +69,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.25 }}
+        transition={{ delay: 0.2 }}
       >
         <EducationFormat />
       </motion.div>
@@ -80,9 +79,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.25 }}
       >
         <CommercialViability />
       </motion.div>
@@ -90,9 +89,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.35 }}
+        transition={{ delay: 0.3 }}
       >
         <News />
       </motion.div>
@@ -100,9 +99,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.35 }}
       >
         <ContactFooter />
       </motion.div>

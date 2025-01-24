@@ -12,49 +12,49 @@ export function Hero() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-        ease: "easeOut"
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   }
 
   const logoVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
+    hidden: { scale: 0.9, opacity: 0 },
     visible: {
       scale: 1,
       opacity: 1,
       transition: {
-        duration: 0.5,
-        ease: "easeOut"
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1]
       }
     }
   }
 
   const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
+    hidden: { opacity: 0, scale: 0.95 },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.5,
-        ease: "easeOut"
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1]
       }
     },
     hover: {
-      scale: 1.05,
+      scale: 1.03,
       transition: {
-        duration: 0.2
+        duration: 0.15
       }
     }
   }
@@ -65,8 +65,7 @@ export function Hero() {
         className="w-full max-w-7xl bg-[#F8F8F8]"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
+        animate="visible"
       >
         <div className="text-center px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-12">
           <motion.div 
@@ -77,10 +76,10 @@ export function Hero() {
               <motion.div 
                 className="absolute inset-0 bg-[#0095FF] bg-opacity-5 rounded-full"
                 animate={{
-                  scale: [1, 1.1, 1],
+                  scale: [1, 1.05, 1],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 1.5,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
@@ -122,6 +121,7 @@ export function Hero() {
             className="w-full sm:w-auto bg-[#0095FF] text-white px-6 sm:px-10 py-3 sm:py-4 text-lg font-medium hover:bg-[#0080FF] transition-colors shadow-md hover:shadow-lg rounded-none"
             variants={buttonVariants}
             whileHover="hover"
+            whileTap={{ scale: 0.98 }}
           >
             Начать бесплатно
           </motion.button>

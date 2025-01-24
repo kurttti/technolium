@@ -189,24 +189,19 @@ export function ContactFooter() {
             <h4 className="font-bold text-xl mb-4">Информация</h4>
             <ul className="space-y-2">
               <motion.li variants={listItemVariants}>
-                <Link href="/about" className="text-gray-600 hover:text-gray-900">
-                  О нас
-                </Link>
-              </motion.li>
-              <motion.li variants={listItemVariants}>
-                <Link href="/news" className="text-gray-600 hover:text-gray-900">
-                  Новости
-                </Link>
-              </motion.li>
-              <motion.li variants={listItemVariants}>
-                <Link href="/license" className="text-gray-600 hover:text-gray-900">
-                  Лицензии
-                </Link>
-              </motion.li>
-              <motion.li variants={listItemVariants}>
                 <Link href="/professional-distribution" className="text-gray-600 hover:text-gray-900">
                   Трудоустройство
                 </Link>
+              </motion.li>
+              <motion.li variants={listItemVariants}>
+                <a 
+                  href="https://drive.google.com/file/d/1_REhKsiMKtuVAf1vTVB2ndwhmcTwQGKO/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  Публичная оферта
+                </a>
               </motion.li>
             </ul>
           </motion.div>

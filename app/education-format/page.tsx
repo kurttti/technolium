@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ContactFooter } from "@/components/contact-footer"
 import { ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 const container = {
   hidden: { opacity: 0 },
@@ -24,6 +25,26 @@ const itemVariant = {
     transition: {
       duration: 0.5,
       ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const cardVariants = {
+  hover: {
+    scale: 1.05,
+    transition: {
+      duration: 0.2,
+    }
+  }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
     }
   }
 }
@@ -84,63 +105,102 @@ export default function EducationFormatPage() {
           </div>
         </section>
 
-        {/* Formats Section */}
-        <section className="py-16">
+        {/* Format Cards */}
+        <motion.section 
+          className="py-16"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <div className="max-w-7xl mx-auto px-4">
-            <motion.div 
-              className="grid md:grid-cols-3 gap-8"
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              {formats.map((format, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Link href="/materials" className="block h-full">
                 <motion.div 
-                  key={index} 
-                  className="bg-white shadow-lg overflow-hidden"
-                  variants={itemVariant}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer h-full flex flex-col"
+                  variants={cardVariants}
+                  whileHover="hover"
                 >
-                  <motion.div 
-                    className="relative h-48"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.3 }}
-                  >
+                  <div className="relative h-48 flex-shrink-0">
                     <Image
-                      src={format.image || "/placeholder.svg"}
-                      alt={format.title}
+                      src={formats[0].image}
+                      alt={formats[0].title}
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: "cover" }}
                     />
-                  </motion.div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-4">{format.title}</h3>
-                    <motion.ul 
-                      className="space-y-3"
-                      variants={container}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: true, amount: 0.1 }}
-                    >
-                      {format.description.map((item, i) => (
-                        <motion.li 
-                          key={i} 
-                          className="flex items-start"
-                          variants={itemVariant}
-                          whileHover={{ x: 5, transition: { duration: 0.2 } }}
-                        >
-                          <ChevronRight className="w-5 h-5 text-[#1E4FCD] flex-shrink-0 mt-1" />
-                          <span className="ml-2">{item}</span>
-                        </motion.li>
+                  </div>
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-2xl font-semibold mb-4">{formats[0].title}</h3>
+                    <ul className="space-y-2 flex-grow">
+                      {formats[0].description.map((item, index) => (
+                        <li key={index} className="flex items-start text-gray-600">
+                          <ChevronRight className="w-5 h-5 text-[#1E4FCD] mr-2 flex-shrink-0 mt-1" />
+                          <span>{item}</span>
+                        </li>
                       ))}
-                    </motion.ul>
+                    </ul>
                   </div>
                 </motion.div>
-              ))}
-            </motion.div>
+              </Link>
+
+              <Link href="/tutors" className="block h-full">
+                <motion.div 
+                  className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer h-full flex flex-col"
+                  variants={cardVariants}
+                  whileHover="hover"
+                >
+                  <div className="relative h-48 flex-shrink-0">
+                    <Image
+                      src={formats[1].image}
+                      alt={formats[1].title}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-2xl font-semibold mb-4">{formats[1].title}</h3>
+                    <ul className="space-y-2 flex-grow">
+                      {formats[1].description.map((item, index) => (
+                        <li key={index} className="flex items-start text-gray-600">
+                          <ChevronRight className="w-5 h-5 text-[#1E4FCD] mr-2 flex-shrink-0 mt-1" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              </Link>
+
+              <Link href="/lectures" className="block h-full">
+                <motion.div 
+                  className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer h-full flex flex-col"
+                  variants={cardVariants}
+                  whileHover="hover"
+                >
+                  <div className="relative h-48 flex-shrink-0">
+                    <Image
+                      src={formats[2].image}
+                      alt={formats[2].title}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-2xl font-semibold mb-4">{formats[2].title}</h3>
+                    <ul className="space-y-2 flex-grow">
+                      {formats[2].description.map((item, index) => (
+                        <li key={index} className="flex items-start text-gray-600">
+                          <ChevronRight className="w-5 h-5 text-[#1E4FCD] mr-2 flex-shrink-0 mt-1" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              </Link>
+            </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Schedule Section */}
         <section className="bg-gray-50 py-16">

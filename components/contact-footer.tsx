@@ -139,7 +139,7 @@ export function ContactFooter() {
         viewport={{ once: true }}
         variants={footerContentVariants}
       >
-        <div className="grid md:grid-cols-12 gap-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-12 gap-8">
           <motion.div 
             className="md:col-span-4"
             variants={listItemVariants}

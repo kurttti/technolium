@@ -162,14 +162,14 @@ export function NavBar() {
               >
                 <Link
                   href={href}
-                  className={`text-[#333333] hover:text-gray-600 transition-colors relative ${
+                  className={`inline-flex flex-col items-center text-[#333333] hover:text-gray-600 transition-colors gap-1.5 ${
                     pathname === href ? "text-[#0095FF]" : ""
                   }`}
                 >
                   {label}
                   {pathname === href && (
                     <motion.div
-                      className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#0095FF]"
+                      className="h-[2px] bg-[#0095FF] w-full"
                       layoutId="underline"
                       transition={{ 
                         type: "spring", 
@@ -212,7 +212,7 @@ export function NavBar() {
                   >
                     <Link
                       href={url}
-                      className={`block text-lg ${
+                      className={`inline-flex flex-col items-center text-lg gap-1.5 ${
                         pathname === url
                           ? "text-[#0095FF]"
                           : "text-[#333333] hover:text-gray-600"
@@ -222,7 +222,7 @@ export function NavBar() {
                       {title}
                       {pathname === url && (
                         <motion.div
-                          className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#0095FF]"
+                          className="h-[2px] bg-[#0095FF] w-full"
                           layoutId="underline-mobile"
                           transition={{ 
                             type: "spring", 

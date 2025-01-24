@@ -3,6 +3,30 @@
 import { useRouter } from "next/navigation"
 import { ContactFooter } from "@/components/contact-footer"
 import { ChevronRight, ArrowLeft, Clock, Calendar, Users, BookOpen, Target, CheckCircle } from "lucide-react"
+import { motion } from "framer-motion"
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    }
+  }
+}
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
 
 export default function EducationPlanPage() {
   const router = useRouter()
@@ -55,79 +79,156 @@ export default function EducationPlanPage() {
         {/* Hero Section */}
         <section className="bg-[#1E4FCD] text-white py-16">
           <div className="max-w-7xl mx-auto px-4">
-            <button
+            <motion.button
               onClick={() => router.back()}
               className="flex items-center text-white/80 hover:text-white transition-colors mb-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ x: -5 }}
+              whileTap={{ scale: 0.98 }}
             >
               <ArrowLeft className="mr-2" />
               Назад
-            </button>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">План обучения</h1>
-            <p className="text-xl text-center max-w-3xl mx-auto">
+            </motion.button>
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold mb-6 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+            >
+              План обучения
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-center max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
               Структурированная программа подготовки специалистов с фокусом на практические навыки
-            </p>
+            </motion.p>
           </div>
         </section>
 
         {/* Timeline Section */}
         <section className="py-16">
           <div className="max-w-7xl mx-auto px-4">
-            <div className="space-y-8">
+            <motion.div 
+              className="space-y-8"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+            >
               {stages.map((stage, index) => (
-                <div key={index} className="bg-white p-6 shadow-lg">
+                <motion.div 
+                  key={index} 
+                  className="bg-white p-6 shadow-lg"
+                  variants={itemVariant}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
                   <div className="flex flex-col md:flex-row gap-6">
                     <div className="md:w-64 flex-shrink-0">
-                      <div className="flex items-center gap-2 text-[#1E4FCD] mb-2">
+                      <motion.div 
+                        className="flex items-center gap-2 text-[#1E4FCD] mb-2"
+                        whileHover={{ scale: 1.05 }}
+                      >
                         <Clock className="w-5 h-5" />
                         <span className="font-bold">{stage.duration}</span>
-                      </div>
+                      </motion.div>
                       <h3 className="text-xl font-bold mb-2">{stage.title}</h3>
                       <p className="text-gray-600">{stage.description}</p>
                     </div>
                     <div className="flex-1">
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <motion.div 
+                        className="grid md:grid-cols-2 gap-4"
+                        variants={container}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.1 }}
+                      >
                         {stage.topics.map((topic, i) => (
-                          <div key={i} className="flex items-start">
+                          <motion.div 
+                            key={i} 
+                            className="flex items-start"
+                            variants={itemVariant}
+                            whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                          >
                             <CheckCircle className="w-5 h-5 text-[#1E4FCD] mr-2 flex-shrink-0 mt-1" />
                             <span>{topic}</span>
-                          </div>
+                          </motion.div>
                         ))}
-                      </div>
+                      </motion.div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
         {/* Features Section */}
         <section className="bg-gray-50 py-16">
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12 text-center">Особенности обучения</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 shadow-sm">
-                <div className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4">
+            <motion.h2 
+              className="text-3xl font-bold mb-12 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Особенности обучения
+            </motion.h2>
+            <motion.div 
+              className="grid md:grid-cols-3 gap-8"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+            >
+              <motion.div 
+                className="bg-white p-6 shadow-sm"
+                variants={itemVariant}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <motion.div 
+                  className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <Target className="w-6 h-6 text-white" />
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-bold mb-2">Индивидуальный подход</h3>
                 <p className="text-gray-600">Программа обучения адаптируется под ваш уровень и цели</p>
-              </div>
-              <div className="bg-white p-6 shadow-sm">
-                <div className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4">
+              </motion.div>
+              <motion.div 
+                className="bg-white p-6 shadow-sm"
+                variants={itemVariant}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <motion.div 
+                  className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <BookOpen className="w-6 h-6 text-white" />
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-bold mb-2">Современные материалы</h3>
                 <p className="text-gray-600">Актуальные технологии и реальные проекты от практикующих специалистов</p>
-              </div>
-              <div className="bg-white p-6 shadow-sm">
-                <div className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4">
+              </motion.div>
+              <motion.div 
+                className="bg-white p-6 shadow-sm"
+                variants={itemVariant}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <motion.div 
+                  className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4"
+                  whileHover={{ scale: 1.05 }}
+                >
                   <Users className="w-6 h-6 text-white" />
-                </div>
+                </motion.div>
                 <h3 className="text-xl font-bold mb-2">Поддержка</h3>
                 <p className="text-gray-600">Постоянное сопровождение от преподавателей и кураторов</p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
       </main>
@@ -135,4 +236,3 @@ export default function EducationPlanPage() {
     </div>
   )
 }
-

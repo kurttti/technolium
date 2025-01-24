@@ -11,7 +11,7 @@ const fadeInUp = {
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1]
     }
   }
@@ -23,7 +23,7 @@ const staggerContainer = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.2
+      delayChildren: 0.1
     }
   }
 }
@@ -31,15 +31,15 @@ const staggerContainer = {
 const cardVariants = {
   hidden: { 
     opacity: 0,
-    y: 50,
-    scale: 0.9
+    y: 20,
+    scale: 0.95
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1]
     }
   },
@@ -102,32 +102,32 @@ export default function DirectionsPage() {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <main>
         {/* Hero Section */}
         <motion.section 
           className="bg-[#1E4FCD] text-white py-16"
-          initial="hidden"
-          animate="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
         >
           <div className="max-w-7xl mx-auto px-4">
             <motion.h1 
               className="text-4xl md:text-5xl font-bold mb-6 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
               Направления обучения
             </motion.h1>
             <motion.p 
               className="text-xl text-center max-w-3xl mx-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
-              Выберите подходящее направление и начните свой путь в IT вместе с Технолиум
+              Выберите подходящее направление и начните свой путь в IT уже сегодня
             </motion.p>
           </div>
         </motion.section>
@@ -137,60 +137,34 @@ export default function DirectionsPage() {
           className="py-16"
           variants={staggerContainer}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
           <div className="max-w-7xl mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {directions.map((direction, index) => (
-                <motion.div
+                <motion.div 
                   key={direction.id}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden"
                   variants={cardVariants}
-                  initial="hidden"
-                  animate="visible"
                   whileHover="hover"
-                  transition={{ delay: index * 0.1 }}
-                  className="h-full"
                 >
-                  <Link
-                    href={`/specialties/${direction.id}`}
-                    className="block bg-white shadow-md overflow-hidden h-full"
-                  >
-                    <motion.div 
-                      className="relative h-[200px]"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <Image
-                        src={direction.image || "/placeholder.svg"}
-                        alt={direction.title}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        priority={direction.id === "machine-learning"}
-                      />
-                    </motion.div>
-                    <div className="p-6">
-                      <h2 className="text-2xl font-bold mb-4">{direction.title}</h2>
-                      <p className="text-gray-600 mb-4">{direction.description}</p>
-                      <div className="flex flex-wrap gap-4">
-                        <motion.div 
-                          className="bg-gray-100 px-3 py-1"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <span className="text-sm">Длительность: {direction.duration}</span>
-                        </motion.div>
-                        <motion.div 
-                          className="bg-gray-100 px-3 py-1"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <span className="text-sm">Уровень: {direction.level}</span>
-                        </motion.div>
-                      </div>
+                  <div className="relative h-48">
+                    <Image
+                      src={direction.image}
+                      alt={direction.title}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-2xl font-semibold mb-2">{direction.title}</h3>
+                    <p className="text-gray-600 mb-4">{direction.description}</p>
+                    <div className="flex justify-between items-center text-sm text-gray-500">
+                      <span>{direction.duration}</span>
+                      <span>{direction.level}</span>
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -202,7 +176,7 @@ export default function DirectionsPage() {
           className="bg-gray-50 py-16"
           variants={staggerContainer}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
           viewport={{ once: true }}
         >
           <div className="max-w-7xl mx-auto px-4">

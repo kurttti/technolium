@@ -13,6 +13,9 @@
 }
 
 html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
@@ -25,6 +28,8 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #__next {

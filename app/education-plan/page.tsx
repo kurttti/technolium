@@ -1,8 +1,8 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { ContactFooter } from "@/components/contact-footer"
-import { ChevronRight, ArrowLeft, Clock, Calendar, Users, BookOpen, Target, CheckCircle } from "lucide-react"
+import { CheckCircle2, Clock } from "lucide-react"
 import { motion } from "framer-motion"
 
 const container = {
@@ -29,8 +29,6 @@ const itemVariant = {
 }
 
 export default function EducationPlanPage() {
-  const router = useRouter()
-
   const stages = [
     {
       title: "Базовый этап",
@@ -79,18 +77,6 @@ export default function EducationPlanPage() {
         {/* Hero Section */}
         <section className="bg-[#1E4FCD] text-white py-16">
           <div className="max-w-7xl mx-auto px-4">
-            <motion.button
-              onClick={() => router.back()}
-              className="flex items-center text-white/80 hover:text-white transition-colors mb-8"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ x: -5 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <ArrowLeft className="mr-2" />
-              Назад
-            </motion.button>
             <motion.h1 
               className="text-4xl md:text-5xl font-bold mb-6 text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -154,7 +140,7 @@ export default function EducationPlanPage() {
                             variants={itemVariant}
                             whileHover={{ x: 5, transition: { duration: 0.2 } }}
                           >
-                            <CheckCircle className="w-5 h-5 text-[#1E4FCD] mr-2 flex-shrink-0 mt-1" />
+                            <CheckCircle2 className="w-5 h-5 text-[#1E4FCD] mr-2 flex-shrink-0 mt-1" />
                             <span>{topic}</span>
                           </motion.div>
                         ))}
@@ -195,7 +181,7 @@ export default function EducationPlanPage() {
                   className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Target className="w-6 h-6 text-white" />
+                  <CheckCircle2 className="w-6 h-6 text-white" />
                 </motion.div>
                 <h3 className="text-xl font-bold mb-2">Индивидуальный подход</h3>
                 <p className="text-gray-600">Программа обучения адаптируется под ваш уровень и цели</p>
@@ -209,7 +195,7 @@ export default function EducationPlanPage() {
                   className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <BookOpen className="w-6 h-6 text-white" />
+                  <Clock className="w-6 h-6 text-white" />
                 </motion.div>
                 <h3 className="text-xl font-bold mb-2">Современные материалы</h3>
                 <p className="text-gray-600">Актуальные технологии и реальные проекты от практикующих специалистов</p>
@@ -223,7 +209,7 @@ export default function EducationPlanPage() {
                   className="w-12 h-12 bg-[#1E4FCD] flex items-center justify-center mb-4"
                   whileHover={{ scale: 1.05 }}
                 >
-                  <Users className="w-6 h-6 text-white" />
+                  <CheckCircle2 className="w-6 h-6 text-white" />
                 </motion.div>
                 <h3 className="text-xl font-bold mb-2">Поддержка</h3>
                 <p className="text-gray-600">Постоянное сопровождение от преподавателей и кураторов</p>

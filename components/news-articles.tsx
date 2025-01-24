@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { NewsSearch } from "./news-search"
+import { motion } from "framer-motion"
 
 const articles = [
   {
@@ -48,6 +49,33 @@ const articles = [
   },
 ]
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
+const articleVariants = {
+  hidden: { 
+    opacity: 0,
+    y: 20,
+    scale: 0.98
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
 export function NewsArticles() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
@@ -67,58 +95,85 @@ export function NewsArticles() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <NewsSearch onSearch={setSearchQuery} onFilterChange={setSelectedTags} />
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <NewsSearch onSearch={setSearchQuery} onFilterChange={setSelectedTags} />
+      </motion.div>
 
       {filteredArticles.length === 0 ? (
-        <div className="text-center py-8">
+        <motion.div 
+          className="text-center py-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <p className="text-gray-500">Новости не найдены</p>
-        </div>
+        </motion.div>
       ) : (
-        <div className="space-y-6">
+        <motion.div 
+          className="space-y-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {filteredArticles.map((article) => (
-            <Link
-              href={`/news/${article.id}`}
+            <motion.div
               key={article.id}
-              className="group block bg-white border border-gray-200 transition-all duration-300 hover:shadow-lg hover:border-[#1E4FCD]"
+              variants={articleVariants}
+              layout
             >
-              <div className="flex flex-col md:flex-row">
-                <div className="relative w-full md:w-[300px] h-[200px] flex-shrink-0 overflow-hidden md:mt-4 md:ml-4">
-                  <Image
-                    src={article.image || "/placeholder.svg"}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, 300px"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="mb-4">
-                    <span className={`inline-block px-3 py-1 text-sm text-white ${article.tagColor}`}>
-                      {article.tag}
-                    </span>
+              <Link
+                href={`/news/${article.id}`}
+                className="group block bg-white border border-gray-200 transition-all duration-300 hover:shadow-lg hover:border-[#1E4FCD]"
+              >
+                <div className="flex flex-col md:flex-row">
+                  <div className="relative w-full md:w-[300px] h-[200px] flex-shrink-0 overflow-hidden md:mt-4 md:ml-4">
+                    <Image
+                      src={article.image || "/placeholder.svg"}
+                      alt={article.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, 300px"
+                    />
                   </div>
-                  <h2 className="text-2xl font-bold mb-4 group-hover:text-[#1E4FCD] transition-colors">
-                    {article.title}
-                  </h2>
-                  <p className="text-gray-600 line-clamp-3">{article.description}</p>
-                  <div className="mt-4 flex items-center text-[#1E4FCD] font-medium">
-                    <span className="group-hover:underline">Читать далее</span>
-                    <svg
-                      className="w-4 h-4 ml-2 transform group-hover:translate-x-2 transition-transform"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                  <div className="p-6 flex flex-col flex-grow">
+                    <motion.div 
+                      className="mb-4"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
+                      <span className={`inline-block px-3 py-1 text-sm text-white ${article.tagColor}`}>
+                        {article.tag}
+                      </span>
+                    </motion.div>
+                    <h2 className="text-2xl font-bold mb-4 group-hover:text-[#1E4FCD] transition-colors">
+                      {article.title}
+                    </h2>
+                    <p className="text-gray-600 line-clamp-3">{article.description}</p>
+                    <div className="mt-4 flex items-center text-[#1E4FCD] font-medium">
+                      <span className="group-hover:underline">Читать далее</span>
+                      <motion.svg
+                        className="w-4 h-4 ml-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        animate={{ x: 0 }}
+                        whileHover={{ x: 8 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </motion.svg>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   )
 }
-

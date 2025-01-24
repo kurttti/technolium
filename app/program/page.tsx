@@ -53,7 +53,7 @@ const statVariants = {
 
 export default function ProgramPage() {
   const stats = [
-    { value: "2 года", label: "Длительность обучения" },
+    { value: "1 год", label: "Длительность обучения" },
     { value: "92%", label: "Трудоустройство" },
     { value: "50+", label: "Преподавателей" },
     { value: "24/7", label: "Доступ к материалам" },
@@ -62,12 +62,12 @@ export default function ProgramPage() {
   const timeline = [
     {
       title: "Базовый этап",
-      duration: "6 месяцев",
+      duration: "3 месяца",
       items: ["Основы программирования", "Алгоритмы и структуры данных", "Компьютерные науки", "Математические основы"],
     },
     {
       title: "Специализация",
-      duration: "8 месяцев",
+      duration: "4 месяца",
       items: [
         "Углубленное изучение направления",
         "Работа с современными технологиями",
@@ -77,7 +77,7 @@ export default function ProgramPage() {
     },
     {
       title: "Стажировка",
-      duration: "4 месяца",
+      duration: "3 месяца",
       items: [
         "Работа над реальными проектами",
         "Менторство от специалистов",
@@ -87,7 +87,7 @@ export default function ProgramPage() {
     },
     {
       title: "Трудоустройство",
-      duration: "6 месяцев",
+      duration: "2 месяца",
       items: [
         "Помощь в поиске работы",
         "Подготовка к собеседованиям",

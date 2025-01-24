@@ -19,7 +19,7 @@ export function ApplicationButton({ className = "", variant = "primary" }: Appli
           variant === "primary"
             ? "bg-[#1E4FCD] text-white hover:bg-[#1733A5]"
             : "bg-white text-[#1E4FCD] hover:bg-gray-100"
-        } px-8 py-3 transition-colors ${className}`}
+        } w-full md:w-auto px-4 md:px-8 py-3 text-base md:text-lg rounded-lg transition-colors ${className}`}
       >
         Оставить заявку
       </button>
@@ -27,4 +27,3 @@ export function ApplicationButton({ className = "", variant = "primary" }: Appli
     </>
   )
 }
-

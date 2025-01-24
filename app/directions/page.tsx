@@ -143,29 +143,34 @@ export default function DirectionsPage() {
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {directions.map((direction, index) => (
-                <motion.div 
-                  key={direction.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden"
-                  variants={cardVariants}
-                  whileHover="hover"
+                <Link 
+                  key={direction.id} 
+                  href={`/specialties/${direction.id}`}
+                  className="block"
                 >
-                  <div className="relative h-48">
-                    <Image
-                      src={direction.image}
-                      alt={direction.title}
-                      fill
-                      style={{ objectFit: "cover" }}
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-semibold mb-2">{direction.title}</h3>
-                    <p className="text-gray-600 mb-4">{direction.description}</p>
-                    <div className="flex justify-between items-center text-sm text-gray-500">
-                      <span>{direction.duration}</span>
-                      <span>{direction.level}</span>
+                  <motion.div 
+                    className="bg-white rounded-lg shadow-lg overflow-hidden h-full"
+                    variants={cardVariants}
+                    whileHover="hover"
+                  >
+                    <div className="relative h-48">
+                      <Image
+                        src={direction.image}
+                        alt={direction.title}
+                        fill
+                        style={{ objectFit: "cover" }}
+                      />
                     </div>
-                  </div>
-                </motion.div>
+                    <div className="p-6">
+                      <h3 className="text-2xl font-semibold mb-2">{direction.title}</h3>
+                      <p className="text-gray-600 mb-4">{direction.description}</p>
+                      <div className="flex justify-between items-center text-sm text-gray-500">
+                        <span>{direction.duration}</span>
+                        <span>{direction.level}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>

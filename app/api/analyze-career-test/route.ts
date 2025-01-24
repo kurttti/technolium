@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { ChatOpenAI } from '@langchain/openai'
-import { PromptTemplate } from '@langchain/core/prompts'
-import { HumanMessage } from '@langchain/core/messages'
+import OpenAI from 'openai'
+
+export const runtime = 'edge'
 
 const courses = [
   {
@@ -26,55 +26,54 @@ const courses = [
   }
 ]
 
-const template = `Ты - опытный карьерный консультант в сфере IT. Проанализируй ответы пользователя на тест профориентации и порекомендуй ему наиболее подходящие направления обучения.
+const systemPrompt = `Ты - карьерный консультант в сфере IT. Проанализируй ответы на тест и дай рекомендации строго в следующем формате HTML:
 
-Ответы пользователя (где 1 - далеко от меня, 2 - отчасти про меня, 3 - очень близко):
-{answers}
+<p><strong>Ваши сильные стороны:</strong> [одно предложение о главных выявленных качествах]</p>
 
-Доступные курсы:
-{courses}
+<p><strong>Рекомендуемые направления:</strong></p>
+<ul>
+<li>[Первое направление из списка]</li>
+<li>[Второе направление из списка, если подходит]</li>
+</ul>
 
-На основе этих данных:
-1. Определи сильные стороны и предрасположенности пользователя
-2. Выбери 1-2 наиболее подходящих направления обучения
-3. Объясни, почему именно эти направления подходят пользователю
-4. Дай несколько конкретных рекомендаций по развитию в выбранных направлениях
+<p><strong>Почему подходит:</strong></p>
+<ul>
+<li>[Первая причина - одно предложение]</li>
+<li>[Вторая причина - одно предложение]</li>
+<li>[Третья причина - перспективы на рынке труда]</li>
+</ul>
 
-Формат ответа - HTML с тегами <p>, <ul>, <li>, <strong>. Текст на русском языке.`
+Строго следуй этому формату. Не добавляй никаких других заголовков или секций.`
 
 export async function POST(request: Request) {
   try {
     const { answers } = await request.json()
 
-    // Форматируем ответы для промпта
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
+
     const formattedAnswers = answers
       .map((a: any) => `Вопрос ${a.questionId + 1}: ${a.score}`)
       .join('\n')
 
-    // Форматируем курсы для промпта
     const formattedCourses = courses
       .map(c => `${c.name}: ${c.description}\nНавыки: ${c.skills.join(', ')}`)
       .join('\n\n')
 
-    const prompt = new PromptTemplate({
-      template,
-      inputVariables: ['answers', 'courses'],
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Ответы теста:\n${formattedAnswers}\n\nДоступные курсы:\n${formattedCourses}` }
+      ],
+      temperature: 0.3,
+      max_tokens: 500,
     })
 
-    const model = new ChatOpenAI({
-      modelName: 'gpt-4',
-      temperature: 0.7,
-      maxTokens: 1500,
+    return NextResponse.json({ 
+      result: response.choices[0].message.content 
     })
-
-    const input = await prompt.format({
-      answers: formattedAnswers,
-      courses: formattedCourses,
-    })
-
-    const result = await model.call([new HumanMessage({ content: input })])
-
-    return NextResponse.json({ result: result.content })
   } catch (error) {
     console.error('Error analyzing test results:', error)
     return NextResponse.json(

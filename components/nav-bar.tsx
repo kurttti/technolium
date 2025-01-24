@@ -150,6 +150,8 @@ export function NavBar() {
               { href: "/", label: "Главная" },
               { href: "/about", label: "О нас" },
               { href: "/directions", label: "Направления" },
+              { href: "/education-format", label: "Формат обучения" },
+              { href: "/education-plan", label: "План обучения" },
               { href: "/news", label: "Новости" },
             ].map(({ href, label }, index) => (
               <motion.div
@@ -203,6 +205,8 @@ export function NavBar() {
                   ["Главная", "/"],
                   ["О нас", "/about"],
                   ["Направления", "/directions"],
+                  ["Формат обучения", "/education-format"],
+                  ["План обучения", "/education-plan"],
                   ["Новости", "/news"],
                 ].map(([title, url]) => (
                   <motion.div

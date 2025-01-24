@@ -114,19 +114,19 @@ export function ContactFooter() {
             на горячую линию.
           </motion.p>
           <motion.div 
-            className="flex flex-col md:flex-row justify-center gap-4 md:gap-6"
+            className="flex flex-col md:flex-row justify-center items-stretch gap-4 md:gap-6 max-w-md mx-auto"
             variants={contentVariants}
           >
             <motion.button
               onClick={() => setIsModalOpen(true)}
-              className="border border-[#1E4FCD] text-[#1E4FCD] px-6 md:px-8 py-3 hover:bg-[#1E4FCD] hover:text-white transition-colors whitespace-nowrap text-sm md:text-base rounded-none"
+              className="w-full md:w-auto border border-[#1E4FCD] text-[#1E4FCD] px-6 md:px-8 py-3 hover:bg-[#1E4FCD] hover:text-white transition-colors whitespace-nowrap text-sm md:text-base rounded-lg"
               variants={buttonVariants}
               whileHover="hover"
             >
               Оставить заявку
             </motion.button>
-            <motion.div variants={buttonVariants} whileHover="hover">
-              <EmailButton variant="primary" className="text-sm md:text-base py-3 rounded-none" />
+            <motion.div variants={buttonVariants} whileHover="hover" className="w-full md:w-auto">
+              <EmailButton variant="primary" className="w-full text-sm md:text-base py-3 rounded-lg" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -186,33 +186,34 @@ export function ContactFooter() {
             className="md:col-span-4"
             variants={listItemVariants}
           >
-            <h4 className="font-bold text-xl mb-4">Об Университете</h4>
+            <h4 className="font-bold text-xl mb-4">Информация</h4>
             <ul className="space-y-2">
               <motion.li variants={listItemVariants}>
-                <Link href="/education-format" className="text-gray-600 hover:text-gray-900">
-                  Формат обучения
+                <Link href="/about" className="text-gray-600 hover:text-gray-900">
+                  О нас
                 </Link>
               </motion.li>
               <motion.li variants={listItemVariants}>
-                <Link href="/education-plan" className="text-gray-600 hover:text-gray-900">
-                  План обучения
+                <Link href="/news" className="text-gray-600 hover:text-gray-900">
+                  Новости
                 </Link>
               </motion.li>
               <motion.li variants={listItemVariants}>
-                <a 
-                  href="https://drive.google.com/file/d/1_REhKsiMKtuVAf1vTVB2ndwhmcTwQGKO/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Публичная оферта
-                </a>
+                <Link href="/license" className="text-gray-600 hover:text-gray-900">
+                  Лицензии
+                </Link>
+              </motion.li>
+              <motion.li variants={listItemVariants}>
+                <Link href="/professional-distribution" className="text-gray-600 hover:text-gray-900">
+                  Трудоустройство
+                </Link>
               </motion.li>
             </ul>
           </motion.div>
         </div>
       </motion.div>
-      <ContactFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} type="general" />
+
+      <ContactFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </footer>
   )
 }

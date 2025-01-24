@@ -10,18 +10,7 @@ const fadeInUp = {
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
-    }
-  }
-}
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1],
     }
   }
@@ -32,8 +21,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
     }
   }
 }
@@ -49,7 +38,7 @@ const cardVariants = {
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1],
     }
   }
@@ -78,21 +67,25 @@ export default function AboutPage() {
         {/* Hero Section */}
         <motion.section 
           className="bg-[#1E4FCD] text-white py-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
         >
           <div className="max-w-7xl mx-auto px-4">
             <motion.h1 
               className="text-4xl md:text-5xl font-bold mb-6 text-center"
               variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
               О нас
             </motion.h1>
             <motion.p 
               className="text-xl text-center max-w-3xl mx-auto"
               variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
               Технолиум - это современный онлайн-университет, специализирующийся на подготовке IT-специалистов высокого
               уровня
@@ -122,7 +115,7 @@ export default function AboutPage() {
               </motion.div>
               <motion.div 
                 className="relative h-[400px] shadow-xl overflow-hidden"
-                variants={fadeIn}
+                variants={fadeInUp}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >

@@ -7,7 +7,8 @@ import { EducationFormat } from "@/components/education-format"
 import { CommercialViability } from "@/components/commercial-viability"
 import { News } from "@/components/news"
 import { ContactFooter } from "@/components/contact-footer"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
+import { useEffect, useState } from "react"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 15 },
@@ -22,12 +23,41 @@ const fadeInUp = {
 }
 
 export default function Home() {
+  const prefersReducedMotion = useReducedMotion()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkIfMobile()
+    window.addEventListener('resize', checkIfMobile)
+    
+    return () => window.removeEventListener('resize', checkIfMobile)
+  }, [])
+
+  const viewportAmount = isMobile ? 0.1 : 0.2
+  const staggerDelay = isMobile ? 0.05 : 0.1
+
+  // Если пользователь предпочитает уменьшенное движение, отключаем анимации
+  if (prefersReducedMotion) {
+    return (
+      <main>
+        <Hero />
+        <Specialties />
+        <Regions />
+        <AdmissionPlan />
+        <EducationFormat />
+        <CommercialViability />
+        <News />
+        <ContactFooter />
+      </main>
+    )
+  }
+
   return (
-    <motion.main 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-    >
+    <main>
       <motion.div
         initial="hidden"
         animate="visible"
@@ -39,9 +69,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.05 }}
+        transition={{ delay: staggerDelay }}
       >
         <Specialties />
       </motion.div>
@@ -49,9 +79,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.1 }}
+        transition={{ delay: staggerDelay * 2 }}
       >
         <Regions />
       </motion.div>
@@ -59,9 +89,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.15 }}
+        transition={{ delay: staggerDelay * 3 }}
       >
         <AdmissionPlan />
       </motion.div>
@@ -69,9 +99,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.2 }}
+        transition={{ delay: staggerDelay * 4 }}
       >
         <EducationFormat />
       </motion.div>
@@ -79,9 +109,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.25 }}
+        transition={{ delay: staggerDelay * 5 }}
       >
         <CommercialViability />
       </motion.div>
@@ -89,9 +119,9 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: staggerDelay * 6 }}
       >
         <News />
       </motion.div>
@@ -99,12 +129,12 @@ export default function Home() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: viewportAmount }}
         variants={fadeInUp}
-        transition={{ delay: 0.35 }}
+        transition={{ delay: staggerDelay * 7 }}
       >
         <ContactFooter />
       </motion.div>
-    </motion.main>
+    </main>
   )
 }

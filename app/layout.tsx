@@ -4,6 +4,7 @@ import { CallWidget } from '@/components/call-widget'
 import Script from 'next/script'
 import '@/styles/globals.css'
 import { ScrollManager } from '@/components/scroll-manager'
+import { PageTransitionProvider } from '@/contexts/page-transition-context'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 
@@ -44,10 +45,14 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className="bg-white">
         <NavBar />
-        <ScrollManager />
-        {children}
+        <PageTransitionProvider>
+          <ScrollManager />
+          <main className="overflow-x-hidden">
+            {children}
+          </main>
+        </PageTransitionProvider>
         <Script
           id="b24-integration"
           strategy="afterInteractive"

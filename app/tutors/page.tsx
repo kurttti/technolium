@@ -5,6 +5,30 @@ import { ChevronRight } from "lucide-react"
 import { ArrowLeft } from "lucide-react"
 import { Users } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { motion } from "framer-motion"
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3,
+    }
+  }
+}
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
 
 export default function TutorsPage() {
   const router = useRouter()
@@ -38,90 +62,160 @@ export default function TutorsPage() {
       {/* Hero Section */}
       <section className="bg-[#1E4FCD] text-white">
         <div className="max-w-7xl mx-auto px-4">
-          <button
+          <motion.button
             onClick={() => router.back()}
             className="flex items-center text-white/80 hover:text-white transition-colors py-6"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ x: -5 }}
+            whileTap={{ scale: 0.98 }}
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Назад
-          </button>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-white/10 rounded-lg">
+          </motion.button>
+          <motion.div 
+            className="flex items-center gap-4 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          >
+            <motion.div 
+              className="p-3 bg-white/10 rounded-lg"
+              whileHover={{ scale: 1.05 }}
+            >
               <Users className="w-8 h-8" />
-            </div>
+            </motion.div>
             <h1 className="text-4xl md:text-5xl font-bold">Репетиторы</h1>
-          </div>
-          <p className="text-xl max-w-3xl pb-8">Индивидуальный подход к обучению с опытными специалистами</p>
+          </motion.div>
+          <motion.p 
+            className="text-xl max-w-3xl pb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          >
+            Индивидуальный подход к обучению с опытными специалистами
+          </motion.p>
         </div>
       </section>
       <main className="max-w-7xl mx-auto px-4 pb-12">
         <section className="mb-16 pt-16">
-          <h2 className="text-2xl font-bold mb-8">Преимущества работы с репетитором</h2>
-          <div className="bg-gray-50 p-8 rounded-lg">
-            <ul className="space-y-4">
+          <motion.h2 
+            className="text-2xl font-bold mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Преимущества работы с репетитором
+          </motion.h2>
+          <motion.div 
+            className="bg-gray-50 p-8 rounded-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.ul 
+              className="space-y-4"
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+            >
               {benefits.map((benefit, index) => (
-                <li key={index} className="flex items-start">
+                <motion.li 
+                  key={index} 
+                  className="flex items-start"
+                  variants={item}
+                  whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                >
                   <ChevronRight className="w-5 h-5 text-[#1E4FCD] flex-shrink-0 mt-1" />
                   <span className="ml-2">{benefit}</span>
-                </li>
+                </motion.li>
               ))}
-            </ul>
-          </div>
+            </motion.ul>
+          </motion.div>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-8">Форматы занятий</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <motion.h2 
+            className="text-2xl font-bold mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Форматы занятий
+          </motion.h2>
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {formats.map((format, index) => (
-              <div key={index} className="bg-white p-6 shadow-lg">
+              <motion.div 
+                key={index} 
+                className="bg-white p-6 shadow-lg"
+                variants={item}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
                 <h3 className="text-xl font-bold mb-4">{format.title}</h3>
                 <p className="text-gray-600">{format.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold mb-8">Как проходят занятия</h2>
-          <div className="bg-white p-8 shadow-lg">
-            <ol className="space-y-6">
-              <li className="flex items-start">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center mr-4">
-                  1
-                </span>
-                <div>
-                  <h3 className="font-bold mb-2">Выбор репетитора</h3>
-                  <p className="text-gray-600">
-                    Вы выбираете репетитора из нашей базы специалистов, основываясь на их профиле и специализации
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center mr-4">
-                  2
-                </span>
-                <div>
-                  <h3 className="font-bold mb-2">Согласование формата</h3>
-                  <p className="text-gray-600">Обсуждаете удобный формат занятий и составляете график</p>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center mr-4">
-                  3
-                </span>
-                <div>
-                  <h3 className="font-bold mb-2">Проведение занятий</h3>
-                  <p className="text-gray-600">
-                    Занимаетесь в выбранном формате, получаете обратную связь и рекомендации
-                  </p>
-                </div>
-              </li>
-            </ol>
-          </div>
+          <motion.h2 
+            className="text-2xl font-bold mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Как проходят занятия
+          </motion.h2>
+          <motion.div 
+            className="bg-white p-8 shadow-lg"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <motion.ol className="space-y-6">
+              {[1, 2, 3].map((step, index) => (
+                <motion.li 
+                  key={index} 
+                  className="flex items-start"
+                  variants={item}
+                  whileHover={{ x: 5, transition: { duration: 0.2 } }}
+                >
+                  <span className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center mr-4">
+                    {step}
+                  </span>
+                  <div>
+                    <h3 className="font-bold mb-2">
+                      {index === 0 && "Выбор репетитора"}
+                      {index === 1 && "Согласование формата"}
+                      {index === 2 && "Проведение занятий"}
+                    </h3>
+                    <p className="text-gray-600">
+                      {index === 0 && "Вы выбираете репетитора из нашей базы специалистов, основываясь на их профиле и специализации"}
+                      {index === 1 && "Обсуждаете удобный формат занятий и составляете график"}
+                      {index === 2 && "Занимаетесь в выбранном формате, получаете обратную связь и рекомендации"}
+                    </p>
+                  </div>
+                </motion.li>
+              ))}
+            </motion.ol>
+          </motion.div>
         </section>
       </main>
       <ContactFooter />
     </div>
   )
 }
-

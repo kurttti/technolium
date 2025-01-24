@@ -4,6 +4,7 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { ContactFooter } from "@/components/contact-footer"
+import { motion } from "framer-motion"
 
 const articles = {
   "cybersecurity-courses": {
@@ -80,6 +81,29 @@ const articles = {
   },
 }
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+}
+
 export default function ArticlePage() {
   const params = useParams()
   const slug = params.slug as string
@@ -87,34 +111,71 @@ export default function ArticlePage() {
 
   if (!article) {
     return (
-      <div className="min-h-screen pt-8">
+      <motion.div 
+        className="min-h-screen pt-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-2xl font-bold mb-4">Статья не найдена</h1>
           <Link href="/news" className="text-[#1E4FCD] hover:underline">
             Вернуться к новостям
           </Link>
         </div>
-      </div>
+      </motion.div>
     )
   }
 
   return (
     <div className="min-h-screen">
-      <article className="max-w-4xl mx-auto px-4 py-8">
-        <div className="mb-6">
-          <Link href="/news" className="text-[#1E4FCD] hover:underline">
-            ← Назад к новостям
+      <motion.article 
+        className="max-w-4xl mx-auto px-4 py-8"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+      >
+        <motion.div 
+          className="mb-6"
+          variants={fadeInUp}
+        >
+          <Link href="/news" className="text-[#1E4FCD] hover:underline group flex items-center">
+            <motion.span
+              initial={{ x: 0 }}
+              whileHover={{ x: -4 }}
+              transition={{ duration: 0.2 }}
+            >
+              ←
+            </motion.span>
+            <span className="ml-2">Назад к новостям</span>
           </Link>
-        </div>
+        </motion.div>
 
-        <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
+        <motion.h1 
+          className="text-3xl font-bold mb-4"
+          variants={fadeInUp}
+        >
+          {article.title}
+        </motion.h1>
 
-        <div className="flex items-center gap-4 mb-6">
-          <span className={`${article.tagColor} text-white px-3 py-1 text-sm`}>{article.tag}</span>
+        <motion.div 
+          className="flex items-center gap-4 mb-6"
+          variants={fadeInUp}
+        >
+          <motion.span 
+            className={`${article.tagColor} text-white px-3 py-1 text-sm`}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            {article.tag}
+          </motion.span>
           <span className="text-gray-500 text-sm">{article.date}</span>
-        </div>
+        </motion.div>
 
-        <div className="relative h-[400px] mb-8">
+        <motion.div 
+          className="relative h-[400px] mb-8"
+          variants={fadeInUp}
+        >
           <Image
             src={article.image || "/placeholder.svg"}
             alt={article.title}
@@ -123,40 +184,57 @@ export default function ArticlePage() {
             className="object-cover rounded-lg"
             sizes="(max-width: 1200px) 100vw, 1200px"
           />
-        </div>
+        </motion.div>
 
-        <div className="prose prose-lg max-w-none">
+        <motion.div 
+          className="prose prose-lg max-w-none"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
           {article.content.split("\n\n").map((paragraph, index) => {
-            // Check if this is a list section (has a heading followed by bullet points)
             if (paragraph.includes(":\n")) {
               const [heading, listContent] = paragraph.split(":\n")
               return (
-                <div key={index} className="mb-6">
+                <motion.div 
+                  key={index} 
+                  className="mb-6"
+                  variants={fadeInUp}
+                >
                   <p className="text-gray-600 leading-relaxed mb-4 text-lg">{heading.trim()}:</p>
                   <ul className="list-disc pl-6">
                     {listContent
                       .split("•")
                       .filter((item) => item.trim())
                       .map((item, i) => (
-                        <li key={i} className="text-gray-600 mb-2">
+                        <motion.li 
+                          key={i} 
+                          className="text-gray-600 mb-2"
+                          variants={fadeInUp}
+                          custom={i}
+                          transition={{ delay: i * 0.1 }}
+                        >
                           {item.trim()}
-                        </li>
+                        </motion.li>
                       ))}
                   </ul>
-                </div>
+                </motion.div>
               )
             } else {
               return (
-                <p key={index} className="text-gray-600 leading-relaxed mb-6 text-lg">
+                <motion.p 
+                  key={index} 
+                  className="text-gray-600 leading-relaxed mb-6 text-lg"
+                  variants={fadeInUp}
+                >
                   {paragraph.trim()}
-                </p>
+                </motion.p>
               )
             }
           })}
-        </div>
-      </article>
+        </motion.div>
+      </motion.article>
       <ContactFooter />
     </div>
   )
 }
-

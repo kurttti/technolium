@@ -1,26 +1,116 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { ContactFooter } from "@/components/contact-footer"
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    }
+  }
+}
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    }
+  }
+}
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    }
+  }
+}
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0,
+    y: 20,
+    scale: 0.95,
+  },
+  visible: { 
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    }
+  }
+}
+
+const statVariants = {
+  hidden: { 
+    opacity: 0,
+    scale: 0.5,
+  },
+  visible: { 
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 20,
+    }
+  }
+}
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <main>
         {/* Hero Section */}
-        <section className="bg-[#1E4FCD] text-white py-16">
+        <motion.section 
+          className="bg-[#1E4FCD] text-white py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeIn}
+        >
           <div className="max-w-7xl mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">О нас</h1>
-            <p className="text-xl text-center max-w-3xl mx-auto">
+            <motion.h1 
+              className="text-4xl md:text-5xl font-bold mb-6 text-center"
+              variants={fadeInUp}
+            >
+              О нас
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-center max-w-3xl mx-auto"
+              variants={fadeInUp}
+            >
               Технолиум - это современный онлайн-университет, специализирующийся на подготовке IT-специалистов высокого
               уровня
-            </p>
+            </motion.p>
           </div>
-        </section>
+        </motion.section>
 
         {/* Mission Section */}
-        <section className="py-16">
+        <motion.section 
+          className="py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
+              <motion.div variants={fadeInUp}>
                 <h2 className="text-3xl font-bold mb-6">Наша миссия</h2>
                 <p className="text-lg text-gray-600 mb-4">
                   Мы стремимся сделать качественное IT-образование доступным для каждого, кто хочет развиваться в
@@ -29,68 +119,122 @@ export default function AboutPage() {
                 <p className="text-lg text-gray-600">
                   Наша цель - подготовить специалистов, готовых к реальным задачам современной IT-индустрии.
                 </p>
-              </div>
-              <div className="relative h-[400px] shadow-xl">
+              </motion.div>
+              <motion.div 
+                className="relative h-[400px] shadow-xl overflow-hidden"
+                variants={fadeIn}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=800&fit=crop"
                   alt="Команда специалистов за работой"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 hover:scale-110"
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Advantages Section */}
-        <section className="bg-gray-50 py-16">
+        <motion.section 
+          className="bg-gray-50 py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12 text-center">Преимущества обучения</h2>
+            <motion.h2 
+              className="text-3xl font-bold mb-12 text-center"
+              variants={fadeInUp}
+            >
+              Преимущества обучения
+            </motion.h2>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 shadow-sm">
+              <motion.div 
+                className="bg-white p-6 shadow-sm hover:shadow-lg transition-shadow"
+                variants={cardVariants}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
                 <h3 className="text-xl font-bold mb-4">Практический подход</h3>
                 <p className="text-gray-600">
                   80% времени обучения посвящено практическим заданиям и работе над реальными проектами
                 </p>
-              </div>
-              <div className="bg-white p-6 shadow-sm">
+              </motion.div>
+              <motion.div 
+                className="bg-white p-6 shadow-sm hover:shadow-lg transition-shadow"
+                variants={cardVariants}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
                 <h3 className="text-xl font-bold mb-4">Опытные преподаватели</h3>
                 <p className="text-gray-600">Наши преподаватели - практикующие специалисты из ведущих IT-компаний</p>
-              </div>
-              <div className="bg-white p-6 shadow-sm">
+              </motion.div>
+              <motion.div 
+                className="bg-white p-6 shadow-sm hover:shadow-lg transition-shadow"
+                variants={cardVariants}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
                 <h3 className="text-xl font-bold mb-4">Гарантия трудоустройства</h3>
                 <p className="text-gray-600">Помогаем с трудоустройством и поддерживаем на начальном этапе карьеры</p>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Statistics Section */}
-        <section className="py-16">
+        <motion.section 
+          className="py-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
           <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-12 text-center">Технолиум в цифрах</h2>
+            <motion.h2 
+              className="text-3xl font-bold mb-12 text-center"
+              variants={fadeInUp}
+            >
+              Технолиум в цифрах
+            </motion.h2>
             <div className="grid md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-[#1E4FCD] mb-2">95%</div>
-                <p className="text-gray-600">Трудоустройство выпускников</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-[#1E4FCD] mb-2">50+</div>
-                <p className="text-gray-600">Преподавателей-практиков</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-[#1E4FCD] mb-2">1000+</div>
-                <p className="text-gray-600">Выпускников</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-[#1E4FCD] mb-2">4</div>
-                <p className="text-gray-600">Направления обучения</p>
-              </div>
+              {[
+                { value: "95%", label: "Трудоустройство выпускников" },
+                { value: "50+", label: "Преподавателей-практиков" },
+                { value: "1000+", label: "Выпускников" },
+                { value: "4", label: "Направления обучения" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  variants={statVariants}
+                  whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                >
+                  <motion.div 
+                    className="text-4xl font-bold text-[#1E4FCD] mb-2"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ 
+                      opacity: 1, 
+                      scale: 1,
+                      transition: {
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 20,
+                        delay: index * 0.1,
+                      }
+                    }}
+                    viewport={{ once: true }}
+                  >
+                    {stat.value}
+                  </motion.div>
+                  <p className="text-gray-600">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
           </div>
-        </section>
+        </motion.section>
       </main>
       <ContactFooter />
     </div>

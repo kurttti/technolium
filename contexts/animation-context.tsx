@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext, ReactNode, useState } from 'react';
 
 interface AnimationContextType {
   isAnimating: boolean;
@@ -20,7 +20,7 @@ interface AnimationProviderProps {
 }
 
 export function AnimationProvider({ children }: AnimationProviderProps) {
-  const [isAnimating, setIsAnimating] = React.useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   return (
     <AnimationContext.Provider value={{ isAnimating, setIsAnimating }}>

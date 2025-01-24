@@ -18,7 +18,7 @@ const container = {
   }
 }
 
-const item = {
+const itemVariant = {
   hidden: { opacity: 0, y: 20 },
   show: { 
     opacity: 1, 
@@ -134,7 +134,7 @@ export default function LecturesPage() {
                 <motion.li 
                   key={index} 
                   className="flex items-start"
-                  variants={item}
+                  variants={itemVariant}
                   whileHover={{ x: 5, transition: { duration: 0.2 } }}
                 >
                   <ChevronRight className="w-5 h-5 text-[#1E4FCD] flex-shrink-0 mt-1" />
@@ -155,25 +155,25 @@ export default function LecturesPage() {
           >
             Расписание типовой лекции
           </motion.h2>
-          <motion.div 
-            className="space-y-6"
+          <motion.div
             variants={container}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
+            className="space-y-4"
           >
-            {schedule.map((item, index) => (
+            {schedule.map((scheduleItem, index) => (
               <motion.div 
                 key={index} 
                 className="bg-white p-6 shadow-lg"
-                variants={item}
+                variants={itemVariant}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                  <span className="text-[#1E4FCD] font-bold md:w-48 flex-shrink-0">{item.time}</span>
+                  <span className="text-[#1E4FCD] font-bold md:w-48 flex-shrink-0">{scheduleItem.time}</span>
                   <div>
-                    <h3 className="font-bold mb-2">{item.activity}</h3>
-                    <p className="text-gray-600">{item.description}</p>
+                    <h3 className="font-bold mb-2">{scheduleItem.activity}</h3>
+                    <p className="text-gray-600">{scheduleItem.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -200,7 +200,7 @@ export default function LecturesPage() {
           >
             <motion.div 
               className="bg-white p-6 shadow-lg"
-              variants={item}
+              variants={itemVariant}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <h3 className="text-xl font-bold mb-4">До лекции</h3>
@@ -212,7 +212,7 @@ export default function LecturesPage() {
             </motion.div>
             <motion.div 
               className="bg-white p-6 shadow-lg"
-              variants={item}
+              variants={itemVariant}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
               <h3 className="text-xl font-bold mb-4">После лекции</h3>

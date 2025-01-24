@@ -49,7 +49,7 @@ export default function RootLayout({
         <NavBar />
         <PageTransitionProvider>
           <ScrollManager />
-          <main className="overflow-x-hidden">
+          <main>
             {children}
           </main>
         </PageTransitionProvider>

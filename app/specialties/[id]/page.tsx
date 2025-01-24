@@ -20,6 +20,7 @@ import {
 } from "lucide-react"
 import { ContactFooter } from "@/components/contact-footer"
 import { CourseDetails } from "@/components/course-details"
+import { motion } from "framer-motion"
 
 const specialties = {
   "machine-learning": {
@@ -219,6 +220,53 @@ const specialties = {
   },
 }
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+}
+
+const statVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
+const moduleVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+}
+
 export default function SpecialtyPage() {
   const params = useParams()
   const router = useRouter()
@@ -234,48 +282,93 @@ export default function SpecialtyPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-[#1E4FCD] text-white py-16">
+      <motion.section 
+        className="bg-[#1E4FCD] text-white py-16"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+      >
         <div className="max-w-7xl mx-auto px-4">
-          <button
+          <motion.button
             onClick={() => router.back()}
             className="flex items-center text-white mb-8 hover:opacity-80 transition-opacity"
+            variants={fadeInUp}
+            whileHover={{ x: -4 }}
           >
             <ArrowLeft className="mr-2" />
             Назад
-          </button>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-white/10 rounded-lg">
+          </motion.button>
+          <motion.div 
+            className="flex items-center gap-4 mb-6"
+            variants={fadeInUp}
+          >
+            <motion.div 
+              className="p-3 bg-white/10 rounded-lg"
+              whileHover={{ scale: 1.05 }}
+            >
               <Icon className="w-8 h-8" />
-            </div>
+            </motion.div>
             <h1 className="text-4xl font-bold">{specialty.title}</h1>
-          </div>
-          <p className="text-xl max-w-3xl">{specialty.description}</p>
+          </motion.div>
+          <motion.p 
+            className="text-xl max-w-3xl"
+            variants={fadeInUp}
+          >
+            {specialty.description}
+          </motion.p>
         </div>
-      </section>
+      </motion.section>
 
       {/* Key Info Section */}
-      <section className="py-16 bg-gray-50">
+      <motion.section 
+        className="py-16 bg-gray-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-6">
             {specialty.stats.map((stat, index) => (
-              <div key={index} className="bg-white p-6 shadow-lg text-center">
+              <motion.div 
+                key={index} 
+                className="bg-white p-6 shadow-lg text-center"
+                variants={statVariants}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+              >
                 <div className="text-3xl font-bold text-[#1E4FCD] mb-2">{stat.value}</div>
                 <div className="text-gray-600">{stat.label}</div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Course Details */}
-      <section className="py-12">
+      <motion.section 
+        className="py-12"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2">
-              <h2 className="text-2xl font-bold mb-6">Программа обучения</h2>
+              <motion.h2 
+                className="text-2xl font-bold mb-6"
+                variants={fadeInUp}
+              >
+                Программа обучения
+              </motion.h2>
               <div className="space-y-6">
                 {specialty.program.map((module, index) => (
-                  <div key={index} className="bg-white p-6 shadow-lg">
+                  <motion.div 
+                    key={index} 
+                    className="bg-white p-6 shadow-lg"
+                    variants={moduleVariants}
+                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                  >
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center">
                         {index + 1}
@@ -286,77 +379,109 @@ export default function SpecialtyPage() {
                           <Clock className="w-4 h-4 mr-2" />
                           {module.duration}
                         </div>
-                        <ul className="space-y-2">
+                        <motion.ul 
+                          className="space-y-2"
+                          variants={staggerContainer}
+                        >
                           {module.topics.map((topic, i) => (
-                            <li key={i} className="flex items-center">
+                            <motion.li 
+                              key={i} 
+                              className="flex items-center"
+                              variants={fadeInUp}
+                              custom={i}
+                              transition={{ delay: i * 0.1 }}
+                            >
                               <CheckCircle className="w-4 h-4 text-[#1E4FCD] mr-2" />
                               {topic}
-                            </li>
+                            </motion.li>
                           ))}
-                        </ul>
+                        </motion.ul>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            <div>
+            <motion.div
+              variants={fadeInUp}
+              className="sticky top-4"
+            >
               <CourseDetails
                 duration={specialty.duration}
                 level={specialty.level}
                 price={specialty.price.replace(" руб.", "")}
-                courseTitle={specialty.title} // Ensure this is passed
-                className="sticky top-4"
+                courseTitle={specialty.title}
               />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Skills & Career */}
-      <section className="py-12 bg-white">
+      <motion.section 
+        className="py-12 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
-            <div>
+            <motion.div variants={fadeInUp}>
               <h2 className="text-2xl font-bold mb-6 flex items-center">
                 <BookOpen className="w-6 h-6 mr-2" />
                 Навыки, которые вы получите
               </h2>
-              <div className="bg-gray-50 p-6 rounded-lg">
+              <motion.div 
+                className="bg-gray-50 p-6 rounded-lg"
+                variants={staggerContainer}
+              >
                 <div className="grid grid-cols-2 gap-4">
                   {specialty.skills.map((skill, index) => (
-                    <div key={index} className="flex items-center">
+                    <motion.div 
+                      key={index} 
+                      className="flex items-center"
+                      variants={fadeInUp}
+                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                    >
                       <CheckCircle className="w-4 h-4 text-[#1E4FCD] mr-2" />
                       {skill}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
-            <div>
+            <motion.div variants={fadeInUp}>
               <h2 className="text-2xl font-bold mb-6 flex items-center">
                 <Briefcase className="w-6 h-6 mr-2" />
                 Карьерные перспективы
               </h2>
-              <div className="bg-gray-50 p-6 rounded-lg">
+              <motion.div 
+                className="bg-gray-50 p-6 rounded-lg"
+                variants={staggerContainer}
+              >
                 <div className="grid grid-cols-2 gap-4">
                   {specialty.career.map((position, index) => (
-                    <div key={index} className="flex items-center">
+                    <motion.div 
+                      key={index} 
+                      className="flex items-center"
+                      variants={fadeInUp}
+                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                    >
                       <Trophy className="w-4 h-4 text-[#1E4FCD] mr-2" />
                       {position}
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       <ContactFooter />
     </>
   )
 }
-

@@ -8,20 +8,19 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 
 const navVariants = {
-  hidden: { y: -100 },
+  hidden: { opacity: 0, y: -20 },
   visible: { 
+    opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 20,
-      mass: 1
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1]
     }
   }
 }
 
 const linkVariants = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: { opacity: 0, y: -10 },
   visible: { 
     opacity: 1, 
     y: 0,
@@ -35,18 +34,26 @@ const linkVariants = {
 const mobileMenuVariants = {
   closed: { 
     opacity: 0,
-    y: -20,
+    height: 0,
     transition: {
-      duration: 0.2
+      height: {
+        duration: 0.3
+      },
+      opacity: {
+        duration: 0.2
+      }
     }
   },
   open: { 
     opacity: 1,
-    y: 0,
+    height: "auto",
     transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-      delayChildren: 0.1
+      height: {
+        duration: 0.3
+      },
+      opacity: {
+        duration: 0.3
+      }
     }
   }
 }
@@ -54,7 +61,7 @@ const mobileMenuVariants = {
 const mobileLinkVariants = {
   closed: { 
     opacity: 0,
-    x: -20
+    x: -10
   },
   open: { 
     opacity: 1,
@@ -92,12 +99,12 @@ export function NavBar() {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 bg-white z-40 w-full"
+      className="fixed top-0 left-0 right-0 bg-white z-40 w-full shadow-sm"
       initial="hidden"
       animate="visible"
       variants={navVariants}
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <nav className="flex items-center justify-between h-[56px] sm:h-[72px]">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -120,7 +127,7 @@ export function NavBar() {
             ref={buttonRef}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2"
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
           >
@@ -151,19 +158,24 @@ export function NavBar() {
                 initial="hidden"
                 animate="visible"
                 transition={{ delay: index * 0.1 }}
+                className="relative py-1"
               >
                 <Link
                   href={href}
                   className={`text-[#333333] hover:text-gray-600 transition-colors relative ${
-                    pathname === href ? "text-[#0095FF] font-semibold" : ""
+                    pathname === href ? "text-[#0095FF]" : ""
                   }`}
                 >
                   {label}
                   {pathname === href && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0095FF]"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#0095FF]"
                       layoutId="underline"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 380,
+                        damping: 30
+                      }}
                     />
                   )}
                 </Link>
@@ -177,17 +189,14 @@ export function NavBar() {
           {isMenuOpen && (
             <motion.div
               ref={menuRef}
-              className="fixed top-[56px] sm:top-[72px] left-0 right-0 bg-white shadow-lg md:hidden"
+              className="fixed top-[56px] sm:top-[72px] left-0 right-0 bg-white shadow-lg md:hidden overflow-hidden"
               initial="closed"
               animate="open"
               exit="closed"
               variants={mobileMenuVariants}
-              style={{ 
-                borderTop: "1px solid #e5e7eb",
-              }}
             >
               <motion.div 
-                className="flex flex-col px-6 py-4"
+                className="flex flex-col space-y-4 px-6 py-4"
                 variants={mobileMenuVariants}
               >
                 {[
@@ -199,17 +208,29 @@ export function NavBar() {
                   <motion.div
                     key={url}
                     variants={mobileLinkVariants}
+                    className="relative py-1"
                   >
                     <Link
                       href={url}
-                      className={`py-3 text-lg ${
+                      className={`block text-lg ${
                         pathname === url
-                          ? "text-blue-600 font-medium"
-                          : "text-gray-700 hover:text-blue-600"
+                          ? "text-[#0095FF]"
+                          : "text-[#333333] hover:text-gray-600"
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {title}
+                      {pathname === url && (
+                        <motion.div
+                          className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#0095FF]"
+                          layoutId="underline-mobile"
+                          transition={{ 
+                            type: "spring", 
+                            stiffness: 380,
+                            damping: 30
+                          }}
+                        />
+                      )}
                     </Link>
                   </motion.div>
                 ))}

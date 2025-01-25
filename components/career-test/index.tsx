@@ -10,7 +10,7 @@ import { NotificationToast } from '../notification-toast'
 
 type Answer = {
   questionId: number
-  score: number // 1 - далеко, 2 - средне, 3 - близко
+  answer: string
 }
 
 export function CareerTest() {
@@ -20,10 +20,10 @@ export function CareerTest() {
   const [showError, setShowError] = useState(false)
   const [result, setResult] = useState<string | null>(null)
 
-  const handleAnswer = (score: number) => {
+  const handleAnswer = (answer: string) => {
     const newAnswer: Answer = {
       questionId: currentQuestion,
-      score
+      answer
     }
     
     setAnswers([...answers, newAnswer])

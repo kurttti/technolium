@@ -7,6 +7,7 @@ import { TestQuestion } from './test-question'
 import { TestResult } from './test-result'
 import { questions } from './questions'
 import { NotificationToast } from '../notification-toast'
+import { ChevronLeft } from 'lucide-react'
 
 type Answer = {
   questionId: number
@@ -26,10 +27,26 @@ export function CareerTest() {
       answer
     }
     
-    setAnswers([...answers, newAnswer])
+    // Если ответ на этот вопрос уже существует, заменяем его
+    const updatedAnswers = [...answers]
+    const existingAnswerIndex = updatedAnswers.findIndex(a => a.questionId === currentQuestion)
+    
+    if (existingAnswerIndex !== -1) {
+      updatedAnswers[existingAnswerIndex] = newAnswer
+    } else {
+      updatedAnswers.push(newAnswer)
+    }
+    
+    setAnswers(updatedAnswers)
     
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
+    }
+  }
+
+  const handleBack = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1)
     }
   }
 
@@ -71,6 +88,7 @@ export function CareerTest() {
   }
 
   const progress = ((currentQuestion + 1) / questions.length) * 100
+  const currentAnswer = answers.find(a => a.questionId === currentQuestion)?.answer
 
   return (
     <>
@@ -101,7 +119,7 @@ export function CareerTest() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
             <TestQuestion
               question={questions[currentQuestion]}
@@ -109,9 +127,32 @@ export function CareerTest() {
               isLast={currentQuestion === questions.length - 1}
               onSubmit={handleSubmit}
               isSubmitting={isSubmitting}
+              selectedAnswer={currentAnswer}
             />
           </motion.div>
         </AnimatePresence>
+
+        <div className="mt-6 flex items-center justify-between">
+          <Button
+            variant="outline"
+            onClick={handleBack}
+            disabled={currentQuestion === 0 || isSubmitting}
+            className="flex items-center text-gray-600"
+          >
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Назад
+          </Button>
+
+          {currentQuestion === questions.length - 1 && currentAnswer && (
+            <Button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="bg-blue-600 text-white hover:bg-blue-700"
+            >
+              {isSubmitting ? 'Анализируем...' : 'Получить результаты'}
+            </Button>
+          )}
+        </div>
       </div>
     </>
   )

@@ -1,20 +1,33 @@
-import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import AdminLinkGenerator from '@/components/AdminLinkGenerator';
+'use client';
 
-export default async function AdminPage() {
-  const session = await getServerSession(authOptions);
-  
-  // Check if user is authenticated and is an admin
-  if (!session?.user?.email || !session.user.isAdmin) {
-    redirect('/');
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
+import AdminLinkGenerator from '@/components/AdminLinkGenerator';
+import { LoadingScreen } from '@/components/ui/loading-screen';
+import { AdminHeader } from '@/components/admin/header';
+
+export default function AdminPage() {
+  const { data: session, status } = useSession();
+
+  if (status === 'loading') {
+    return <LoadingScreen />;
+  }
+
+  if (!session?.user?.isAdmin) {
+    redirect('/login');
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">Панель администратора</h1>
-      <AdminLinkGenerator />
+    <div className="min-h-screen flex flex-col">
+      <AdminHeader />
+      <main className="flex-1 container max-w-screen-2xl mx-auto px-4 py-6 md:py-8">
+        <div className="space-y-6">
+          <div className="p-4 sm:p-6 md:p-8 bg-card rounded-lg border shadow-sm">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Генерация ссылок</h2>
+            <AdminLinkGenerator />
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

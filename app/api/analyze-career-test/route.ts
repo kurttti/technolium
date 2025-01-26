@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
-import { createCareerTestLead } from '@/actions/bitrix24-career-test'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -33,18 +32,21 @@ const courses = [
   }
 ]
 
-// Генерация HTML для пользователя
-async function generateUserResponse(answers: any[]) {
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "system",
-        content: "Ты - карьерный консультант по IT. Создай мотивирующую HTML-страницу с рекомендациями на основе ответов пользователя."
-      },
-      {
-        role: "user",
-        content: `
+export async function POST(request: Request) {
+  try {
+    const { answers } = await request.json()
+    console.log('Analyzing career test answers:', answers)
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "system",
+          content: "Ты - карьерный консультант по IT. Создай мотивирующую HTML-страницу с рекомендациями на основе ответов пользователя."
+        },
+        {
+          role: "user",
+          content: `
 Курсы:
 ${courses.map(course => `${course.name} (${course.courseUrl}): ${course.description}`).join('\n')}
 
@@ -85,117 +87,22 @@ ${answers.map((a: any) => `${a.questionId + 1}: ${a.answer}`).join('\n')}
     <p>🎓 [история выпускника]</p>
   </div>
 </div>`
-      }
-    ],
-    temperature: 0.7,
-    max_tokens: 1500
-  })
-
-  return response.choices[0]?.message?.content || ''
-}
-
-// Анализ для Битрикса
-async function generateManagerAnalysis(answers: any[]) {
-  const response = await openai.chat.completions.create({
-    model: "gpt-4-turbo-preview",
-    messages: [
-      {
-        role: "system",
-        content: "Ты - опытный менеджер по продажам. Проанализируй ответы потенциального клиента и создай структурированный JSON для CRM. ВАЖНО: верни только чистый JSON-объект, без markdown форматирования и без дополнительного текста."
-      },
-      {
-        role: "user",
-        content: `Проанализируй ответы клиента и создай JSON с анализом. Верни ТОЛЬКО JSON, без дополнительного текста или форматирования:
-
-Ответы клиента:
-${answers.map((a: any) => `${a.questionId + 1}: ${a.answer}`).join('\n')}
-
-Формат ответа (заполни своими данными):
-{
-  "motivation": {
-    "level": "high/medium/low",
-    "factors": ["факторы мотивации"],
-    "urgency": "high/medium/low"
-  },
-  "budget": {
-    "range": "диапазон бюджета",
-    "flexibility": "high/medium/low"
-  },
-  "schedule": {
-    "availability": "когда может учиться",
-    "hoursPerWeek": "сколько часов в неделю"
-  },
-  "sellingPoints": [
-    "ключевые моменты для продажи"
-  ],
-  "possibleObjections": [
-    {
-      "objection": "возможное возражение",
-      "context": "почему может возникнуть",
-      "response": "как ответить"
-    }
-  ]
-}`
-      }
-    ],
-    temperature: 0.3,
-    max_tokens: 1000
-  })
-
-  const content = response.choices[0]?.message?.content || ''
-  
-  // Добавляем дополнительную обработку на случай, если всё же придет форматированный текст
-  let jsonContent = content
-  if (content.includes('```json')) {
-    jsonContent = content.split('```json')[1].split('```')[0]
-  }
-  
-  try {
-    return JSON.parse(jsonContent.trim())
-  } catch (error) {
-    console.error('Error parsing manager analysis:', error)
-    console.error('Raw content:', content)
-    return null
-  }
-}
-
-export async function POST(request: Request) {
-  try {
-    const { answers, userInfo } = await request.json()
-    console.log('Received request with answers:', answers)
-
-    // Генерируем ответ для пользователя
-    const userContent = await generateUserResponse(answers)
-    
-    // Если есть userInfo, асинхронно запускаем анализ для Битрикса
-    if (userInfo) {
-      // Не ждем завершения этих операций
-      generateManagerAnalysis(answers).then(analysis => {
-        if (analysis) {
-          createCareerTestLead(
-            userInfo.name,
-            userInfo.email,
-            userInfo.phone,
-            {
-              answers,
-              analysis
-            }
-          ).catch(error => {
-            console.error('Error creating Bitrix lead:', error)
-          })
         }
-      }).catch(error => {
-        console.error('Error generating manager analysis:', error)
-      })
+      ],
+      temperature: 0.7,
+      max_tokens: 1500
+    })
+
+    const content = response.choices[0]?.message?.content
+    if (!content) {
+      throw new Error('No response from GPT')
     }
 
-    // Сразу возвращаем результат пользователю
-    return NextResponse.json({ result: userContent })
-
+    return NextResponse.json({ result: content })
   } catch (error) {
-    console.error('Error processing request:', error)
+    console.error('Error analyzing test results:', error)
     return NextResponse.json(
-      { error: 'Failed to process request' },
+      { error: 'Failed to analyze test results' },
       { status: 500 }
     )
   }

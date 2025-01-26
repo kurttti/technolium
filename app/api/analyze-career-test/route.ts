@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
+import { createCareerTestLead } from '@/actions/bitrix24-career-test'
 
-export const runtime = 'edge'
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+})
 
 const courses = [
   {
@@ -32,17 +35,9 @@ const courses = [
 
 export async function POST(request: Request) {
   try {
-    const { answers } = await request.json()
+    const { answers, userInfo } = await request.json()
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    })
-
-    const formattedAnswers = answers
-      .map((a: any) => `Вопрос ${a.questionId + 1}: ${a.answer}`)
-      .join('\n')
-
-    console.log('Formatted answers:', formattedAnswers)
+    console.log('Formatted answers:', answers)
 
     const response = await openai.chat.completions.create({
       model: "gpt-4",
@@ -50,19 +45,20 @@ export async function POST(request: Request) {
         { 
           role: "system", 
           content: `Ты - опытный карьерный консультант, специализирующийся на IT-профессиях. 
-Твоя задача - проанализировать ответы пользователя и составить убедительную, мотивирующую рекомендацию.
-Используй психологические триггеры:
-- Социальное доказательство (истории успеха, статистика трудоустройства)
-- Срочность (почему важно начать именно сейчас)
-- FOMO (что пользователь теряет, откладывая обучение)
-- Конкретные цифры по зарплатам и спросу на рынке
-- Перспективы карьерного роста через 1-3-5 лет`
+Проанализируй ответы пользователя и составь:
+1. Убедительную, мотивирующую рекомендацию для пользователя
+2. Детальный анализ профиля клиента для менеджера по продажам
+
+Для менеджера важно понимать:
+- Уровень мотивации и срочность принятия решения
+- Платежеспособность и отношение к цене
+- Предпочтительный формат обучения
+- Ключевые триггеры для продажи
+- Возможные возражения и как на них отвечать`
         },
         { 
           role: "user", 
           content: `
-Проанализируй ответы пользователя и выбери максимум 2 подходящих направления из списка.
-
 Доступные направления:
 ${courses.map(course => `
 ${course.name}
@@ -71,10 +67,11 @@ URL: ${course.courseUrl}
 ---`).join('\n')}
 
 Ответы пользователя:
-${formattedAnswers}
+${answers.map((a: any) => `Вопрос ${a.questionId + 1}: ${a.answer}`).join('\n')}
 
-Сформируй ответ строго в таком формате HTML:
+Сформируй два ответа:
 
+1. Для пользователя (в HTML):
 <div class="results-container">
   <div class="strength-section">
     <p><strong>Ваши сильные стороны:</strong> [яркое описание сильных сторон, подчеркивающее потенциал]</p>
@@ -108,23 +105,77 @@ ${formattedAnswers}
     <p>🎓 [краткая история выпускника: предыдущий опыт - обучение - результат]</p>
   </div>
 </div>
-` 
+
+2. Для менеджера по продажам (в JSON):
+{
+  "motivation": {
+    "level": "high/medium/low",
+    "factors": ["список факторов мотивации"],
+    "urgency": "high/medium/low"
+  },
+  "budget": {
+    "range": "предполагаемый диапазон",
+    "flexibility": "high/medium/low"
+  },
+  "schedule": {
+    "availability": "когда может учиться",
+    "hoursPerWeek": "сколько часов готов уделять"
+  },
+  "sellingPoints": [
+    "ключевые моменты для продажи"
+  ],
+  "possibleObjections": [
+    {
+      "objection": "возможное возражение",
+      "context": "почему может возникнуть",
+      "response": "как ответить"
+    }
+  ]
+}` 
         }
       ],
       temperature: 0.7,
-      max_tokens: 1500
+      max_tokens: 2000
     })
 
-    console.log('GPT response:', response.choices[0].message.content)
+    const gptResponse = response.choices[0].message.content
+    const [userContent, managerContent] = gptResponse.split('2. Для менеджера по продажам')
+
+    let analysis
+    try {
+      // Извлекаем JSON из текста ответа
+      const jsonStr = managerContent.substring(
+        managerContent.indexOf('{'),
+        managerContent.lastIndexOf('}') + 1
+      )
+      analysis = JSON.parse(jsonStr)
+    } catch (error) {
+      console.error('Error parsing manager content:', error)
+      analysis = null
+    }
+
+    // Создаем лид в Битрикс24
+    if (userInfo && analysis) {
+      try {
+        await createCareerTestLead(
+          userInfo.name,
+          userInfo.email,
+          userInfo.phone,
+          {
+            answers,
+            analysis
+          }
+        )
+      } catch (error) {
+        console.error('Error creating Bitrix24 lead:', error)
+      }
+    }
 
     return NextResponse.json({
-      result: response.choices[0].message.content
+      result: userContent.replace('1. Для пользователя (в HTML):', '').trim()
     })
   } catch (error) {
     console.error('Error analyzing test results:', error)
-    return NextResponse.json(
-      { error: 'Failed to analyze test results' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to analyze test results' }, { status: 500 })
   }
 }

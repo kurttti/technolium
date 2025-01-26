@@ -25,6 +25,44 @@ interface Company {
   details: string;
 }
 
+interface CreditLinkModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  link: string;
+}
+
+const CreditLinkModal = ({ isOpen, onClose, link }: CreditLinkModalProps) => {
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Сгенерированная ссылка</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4 pt-4">
+          <div>
+            <label className="block text-sm mb-2">
+              Ссылка для клиента
+            </label>
+            <Input
+              value={link}
+              readOnly
+              className="bg-[#F8F9FA]"
+            />
+          </div>
+          <div className="flex justify-end gap-4 mt-6">
+            <button
+              onClick={onClose}
+              className="text-sm text-blue-600 hover:text-blue-700"
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 export default function AdminLinkGenerator() {
   const { toast } = useToast();
   const [shopName, setShopName] = useState('Технолиум');
@@ -36,6 +74,8 @@ export default function AdminLinkGenerator() {
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
   const [newProduct, setNewProduct] = useState<Product>({ name: '', price: 0, quantity: 1 });
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [generatedLink, setGeneratedLink] = useState("");
 
   // Пример списка компаний
   const companies: Company[] = [
@@ -81,25 +121,14 @@ export default function AdminLinkGenerator() {
     try {
       setIsLoading(true);
       
-      // Формируем данные для API Тинькофф
       const requestData = {
-        additionalItems: [],
-        integrationType: "online_cabinet",
-        items: [
-          {
-            id: orderNumber,
-            name: products[0]?.name || "Заказ",
-            price: products[0]?.price || 0,
-            quantity: products[0]?.quantity || 1
-          }
-        ],
-        orderNumber: orderNumber,
-        promoCode: `installment_0_0_3_4.8_24`,
-        shopCode: "LK-SB8NN4",
-        sum: getTotalSum()
+        items: products.map(product => ({
+          name: product.name,
+          price: product.price,
+          quantity: product.quantity
+        }))
       };
 
-      // Отправляем запрос через наш прокси-endpoint
       const response = await fetch('/api/tinkoff/create', {
         method: 'POST',
         headers: {
@@ -111,17 +140,9 @@ export default function AdminLinkGenerator() {
       const data = await response.json();
       
       if (data.success) {
-        // Копируем ссылку в буфер обмена
-        await navigator.clipboard.writeText(data.link);
-        
-        toast({
-          title: "Заявка создана",
-          description: "Отправьте клиенту ссылку для дальнейшего заполнения заявки на кредит или рассрочку",
-          variant: "success",
-        });
-        
+        setGeneratedLink(data.link);
+        setIsModalOpen(true);
         // Очищаем форму
-        setOrderNumber('');
         setProducts([]);
       } else {
         toast({
@@ -343,6 +364,12 @@ export default function AdminLinkGenerator() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <CreditLinkModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        link={generatedLink}
+      />
     </div>
   );
 }

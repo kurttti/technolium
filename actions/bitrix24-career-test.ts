@@ -37,7 +37,15 @@ export async function createCareerTestLead(
   testResult: CareerTestResult
 ) {
   try {
+    console.log('Creating career test lead with data:', {
+      name,
+      email,
+      phone,
+      testResult
+    })
+
     const contactId = await createOrGetContact(name, email, phone)
+    console.log('Contact created/found with ID:', contactId)
 
     const dealData = {
       TITLE: `${name}: Прошел карьерный тест`,
@@ -58,6 +66,8 @@ export async function createCareerTestLead(
       })
     }
 
+    console.log('Attempting to create deal with data:', dealData)
+
     const response = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.deal.add`, {
       method: "POST",
       headers: {
@@ -68,8 +78,12 @@ export async function createCareerTestLead(
       }),
     })
 
+    console.log('Bitrix24 API response status:', response.status)
     const result = await response.json()
+    console.log('Bitrix24 API response:', result)
+
     if (!result.result) {
+      console.error('Failed to create deal. Response:', result)
       throw new Error("Failed to create deal")
     }
 
@@ -81,33 +95,34 @@ export async function createCareerTestLead(
 }
 
 function formatCommentsForSales(testResult: CareerTestResult): string {
+  const { analysis } = testResult
   return `
 АНАЛИЗ КАРЬЕРНОГО ТЕСТА
 =======================
 
 МОТИВАЦИЯ:
 ----------
-Уровень: ${testResult.analysis.motivation.level}
-Факторы: ${testResult.analysis.motivation.factors.join(', ')}
-Срочность: ${testResult.analysis.motivation.urgency}
+Уровень: ${analysis.motivation.level}
+Факторы: ${analysis.motivation.factors.join(', ')}
+Срочность: ${analysis.motivation.urgency}
 
 БЮДЖЕТ:
 -------
-Диапазон: ${testResult.analysis.budget.range}
-Гибкость: ${testResult.analysis.budget.flexibility}
+Диапазон: ${analysis.budget.range}
+Гибкость: ${analysis.budget.flexibility}
 
 ГРАФИК:
 -------
-Доступность: ${testResult.analysis.schedule.availability}
-Часов в неделю: ${testResult.analysis.schedule.hoursPerWeek}
+Доступность: ${analysis.schedule.availability}
+Часов в неделю: ${analysis.schedule.hoursPerWeek}
 
 КЛЮЧЕВЫЕ ТОЧКИ ДЛЯ ПРОДАЖИ:
 --------------------------
-${testResult.analysis.sellingPoints.map(point => `• ${point}`).join('\n')}
+${analysis.sellingPoints.map(point => `• ${point}`).join('\n')}
 
 ВОЗМОЖНЫЕ ВОЗРАЖЕНИЯ:
 -------------------
-${testResult.analysis.possibleObjections.map(obj => `
+${analysis.possibleObjections.map(obj => `
 • ${obj.objection}
   Контекст: ${obj.context}
   Как ответить: ${obj.response}

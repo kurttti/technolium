@@ -45,16 +45,14 @@ export async function POST(request: Request) {
         { 
           role: "system", 
           content: `Ты - опытный карьерный консультант, специализирующийся на IT-профессиях. 
-Проанализируй ответы пользователя и составь:
-1. Убедительную, мотивирующую рекомендацию для пользователя
-2. Детальный анализ профиля клиента для менеджера по продажам
+Твоя задача - проанализировать ответы пользователя и предоставить два блока информации:
 
-Для менеджера важно понимать:
-- Уровень мотивации и срочность принятия решения
-- Платежеспособность и отношение к цене
-- Предпочтительный формат обучения
-- Ключевые триггеры для продажи
-- Возможные возражения и как на них отвечать`
+1. Для пользователя: мотивирующая HTML-страница с рекомендациями
+2. Для менеджера: структурированный JSON с анализом профиля
+
+ВАЖНО: Твой ответ ДОЛЖЕН содержать ровно две части, разделенные строкой "2. Для менеджера по продажам".
+Первая часть - HTML для пользователя.
+Вторая часть - только JSON-объект, без дополнительного текста.`
         },
         { 
           role: "user", 
@@ -69,7 +67,7 @@ URL: ${course.courseUrl}
 Ответы пользователя:
 ${answers.map((a: any) => `Вопрос ${a.questionId + 1}: ${a.answer}`).join('\n')}
 
-Сформируй два ответа:
+Сформируй два ответа строго в таком формате:
 
 1. Для пользователя (в HTML):
 <div class="results-container">
@@ -106,7 +104,7 @@ ${answers.map((a: any) => `Вопрос ${a.questionId + 1}: ${a.answer}`).join(
   </div>
 </div>
 
-2. Для менеджера по продажам (в JSON):
+2. Для менеджера по продажам
 {
   "motivation": {
     "level": "high/medium/low",
@@ -131,32 +129,62 @@ ${answers.map((a: any) => `Вопрос ${a.questionId + 1}: ${a.answer}`).join(
       "response": "как ответить"
     }
   ]
-}` 
+}`
         }
       ],
       temperature: 0.7,
       max_tokens: 2000
     })
 
-    const gptResponse = response.choices[0].message.content
-    const [userContent, managerContent] = gptResponse.split('2. Для менеджера по продажам')
+    const gptResponse = response.choices[0]?.message?.content
+    if (!gptResponse) {
+      throw new Error('No response from GPT')
+    }
+    
+    console.log('Raw GPT response:', gptResponse)
+    
+    const parts = gptResponse.split('2. Для менеджера по продажам')
+    console.log('Split parts length:', parts.length)
+    console.log('First part:', parts[0])
+    console.log('Second part:', parts[1])
+    
+    if (parts.length !== 2) {
+      throw new Error('Invalid GPT response format: response not split into two parts')
+    }
+    
+    const [userContent, managerContent] = parts
+    if (!userContent || !managerContent) {
+      throw new Error('Invalid GPT response format: missing content parts')
+    }
 
     let analysis
     try {
       // Извлекаем JSON из текста ответа
-      const jsonStr = managerContent.substring(
-        managerContent.indexOf('{'),
-        managerContent.lastIndexOf('}') + 1
-      )
+      const jsonStartIndex = managerContent.indexOf('{')
+      const jsonEndIndex = managerContent.lastIndexOf('}')
+      
+      if (jsonStartIndex === -1 || jsonEndIndex === -1) {
+        console.error('Cannot find JSON in manager content. Content:', managerContent)
+        throw new Error('Invalid manager content format: no JSON found')
+      }
+      
+      const jsonStr = managerContent.substring(jsonStartIndex, jsonEndIndex + 1)
+      console.log('Extracted JSON string:', jsonStr)
+      
       analysis = JSON.parse(jsonStr)
+      console.log('Parsed analysis:', analysis)
     } catch (error) {
       console.error('Error parsing manager content:', error)
-      analysis = null
     }
 
     // Создаем лид в Битрикс24
     if (userInfo && analysis) {
       try {
+        console.log('Attempting to create Bitrix24 lead with:', {
+          userInfo,
+          analysis
+        })
+        
         await createCareerTestLead(
           userInfo.name,
           userInfo.email,
@@ -166,9 +194,16 @@ ${answers.map((a: any) => `Вопрос ${a.questionId + 1}: ${a.answer}`).join(
             analysis
           }
         )
+        
+        console.log('Successfully created Bitrix24 lead')
       } catch (error) {
         console.error('Error creating Bitrix24 lead:', error)
       }
+    } else {
+      console.log('Skipping Bitrix24 lead creation:', {
+        hasUserInfo: !!userInfo,
+        hasAnalysis: !!analysis
+      })
     }
 
     return NextResponse.json({

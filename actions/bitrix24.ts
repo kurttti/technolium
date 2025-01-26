@@ -14,7 +14,7 @@ interface BitrixDealData {
   UTM_CAMPAIGN?: string
 }
 
-async function createOrGetContact(name: string, email: string, phone: string): Promise<string> {
+export async function createOrGetContact(name: string, email: string, phone: string): Promise<string> {
   // Сначала попробуем найти контакт по email или телефону
   const searchResponse = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.contact.list`, {
     method: "POST",

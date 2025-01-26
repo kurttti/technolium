@@ -45,16 +45,14 @@ export function CareerTest() {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     
-    setUserInfo({
+    const newUserInfo = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
       phone: formData.get('phone') as string
-    })
-
-    await submitTest()
-  }
-
-  const submitTest = async () => {
+    }
+    
+    setUserInfo(newUserInfo)
+    
     setIsSubmitting(true)
     try {
       const response = await fetch('/api/analyze-career-test', {
@@ -64,7 +62,7 @@ export function CareerTest() {
         },
         body: JSON.stringify({
           answers,
-          userInfo
+          userInfo: newUserInfo
         }),
       })
 

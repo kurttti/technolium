@@ -5,6 +5,7 @@ import Script from 'next/script'
 import '@/styles/globals.css'
 import { ScrollManager } from '@/components/scroll-manager'
 import { PageTransitionProvider } from '@/contexts/page-transition-context'
+import { Providers } from '@/components/providers'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 
@@ -72,7 +73,9 @@ export default function RootLayout({
         <PageTransitionProvider>
           <ScrollManager />
           <main>
-            {children}
+            <Providers>
+              {children}
+            </Providers>
           </main>
         </PageTransitionProvider>
         <Script

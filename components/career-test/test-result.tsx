@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import { RotateCcw, ChevronRight, BookOpen, Target, Compass } from 'lucide-react'
+import { RotateCcw, ChevronRight, BookOpen, Target, Compass, GraduationCap } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 type TestResultProps = {
@@ -16,67 +16,183 @@ type Section = {
   icon: JSX.Element
 }
 
+const marketStatStyles = `
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+
+  .stat {
+    background: linear-gradient(to right, #f0f9ff, #e0f2fe);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    color: #1e40af;
+    text-align: center;
+  }
+`
+
+const successStoryStyles = `
+  background: linear-gradient(to right, #ecfdf5, #d1fae5);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-top: 1.5rem;
+  
+  p {
+    color: #065f46;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+`
+
+const benefitsListStyles = `
+  li {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #e5e7eb;
+    color: #1f2937;
+    font-size: 1.125rem;
+    
+    &:hover {
+      border-color: #3b82f6;
+      transform: translateX(5px);
+      transition: all 0.2s;
+    }
+  }
+`
+
 export function TestResult({ result, onRetake }: TestResultProps) {
   const [sections, setSections] = useState<Section[]>([])
+  const [error, setError] = useState<string>('')
 
   useEffect(() => {
-    // Parse HTML content and extract sections
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(result, 'text/html')
-    
-    const parsedSections: Section[] = []
-    
-    // Находим все h3 заголовки и обрабатываем каждый
-    const headers = Array.from(doc.getElementsByTagName('h3'))
-    
-    headers.forEach(header => {
-      const title = header.textContent || ''
-      const content = header.nextElementSibling?.textContent || ''
+    try {
+      console.log('Raw result:', result)
       
-      if (title.includes('Персональный анализ')) {
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(result, 'text/html')
+      
+      const parsedSections: Section[] = []
+      
+      // Сильные стороны и статистика
+      const strengthSection = doc.querySelector('.strength-section')
+      if (strengthSection) {
+        const content = strengthSection.innerHTML.replace(
+          '<div class="market-stats">',
+          `<div class="market-stats" style="${marketStatStyles}">`
+        )
         parsedSections.push({
-          title: 'Персональный анализ',
-          content,
-          icon: <Compass className="w-6 h-6" />
-        })
-      } else if (title.includes('Ваш потенциал')) {
-        parsedSections.push({
-          title: 'Ваш потенциал в IT',
+          title: 'Ваши сильные стороны',
           content,
           icon: <Target className="w-6 h-6" />
         })
       }
-    })
-    
-    // Рекомендуемые направления
-    const recommendationsTitle = doc.querySelector('p strong')
-    if (recommendationsTitle?.textContent?.includes('Рекомендуемые направления')) {
-      const recommendationsList = recommendationsTitle.parentElement?.nextElementSibling
-      if (recommendationsList?.tagName === 'UL') {
+      
+      // Рекомендуемые направления
+      const recommendationsSection = doc.querySelector('.recommendations-section')
+      if (recommendationsSection) {
+        const courseItemStyles = `
+          display: block;
+          padding: 1.5rem;
+          margin-bottom: 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.75rem;
+          transition: all 0.2s;
+          background: white;
+          color: #1e40af;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 1.125rem;
+          position: relative;
+          padding-right: 3rem;
+
+          &:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px rgba(59,130,246,0.1);
+            transform: translateY(-2px);
+          }
+
+          &::after {
+            content: '→';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #3b82f6;
+            transition: transform 0.2s;
+          }
+
+          &:hover::after {
+            transform: translate(5px, -50%);
+          }
+        `
+        
+        const enhancedHtml = recommendationsSection.innerHTML.replace(
+          /<a\s+href="([^"]+)"[^>]*>([^<]+)<\/a>/g,
+          `<a href="$1" class="course-link" style="${courseItemStyles}">$2</a>`
+        )
+        
         parsedSections.push({
           title: 'Рекомендуемые направления',
-          content: recommendationsList.innerHTML,
+          content: enhancedHtml,
           icon: <BookOpen className="w-6 h-6" />
         })
       }
-    }
 
-    setSections(parsedSections)
+      // Почему стоит начать
+      const benefitsSection = doc.querySelector('.benefits-section')
+      if (benefitsSection) {
+        const enhancedHtml = benefitsSection.innerHTML.replace(
+          '<ul>',
+          `<ul style="${benefitsListStyles}">`
+        )
+        parsedSections.push({
+          title: 'Почему стоит начать прямо сейчас',
+          content: enhancedHtml,
+          icon: <Compass className="w-6 h-6" />
+        })
+      }
+
+      // История успеха
+      const successStory = doc.querySelector('.success-story')
+      if (successStory) {
+        const enhancedHtml = `<div style="${successStoryStyles}">${successStory.innerHTML}</div>`
+        parsedSections.push({
+          title: 'История успеха выпускника',
+          content: enhancedHtml,
+          icon: <GraduationCap className="w-6 h-6" />
+        })
+      }
+
+      console.log('Parsed sections:', parsedSections)
+      setSections(parsedSections)
+    } catch (err) {
+      console.error('Error parsing result:', err)
+      setError(err instanceof Error ? err.message : 'Произошла ошибка при обработке результатов')
+    }
   }, [result])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.3 } }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0 }
+  if (error) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+        <p className="text-red-600">{error}</p>
+        <pre className="mt-2 text-sm text-red-800 whitespace-pre-wrap">
+          {result}
+        </pre>
+      </div>
+    )
   }
 
   return (
     <motion.div
-      variants={containerVariants}
+      variants={{
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.3 } }
+      }}
       initial="hidden"
       animate="visible"
       className="max-w-3xl mx-auto"
@@ -103,7 +219,10 @@ export function TestResult({ result, onRetake }: TestResultProps) {
           {sections.map((section, index) => (
             <motion.div
               key={section.title}
-              variants={itemVariants}
+              variants={{
+                hidden: { opacity: 0, x: -20 },
+                visible: { opacity: 1, x: 0 }
+              }}
               className={`${index !== 0 ? 'mt-8 pt-8 border-t' : ''}`}
             >
               <div className="flex items-center mb-4">
@@ -115,21 +234,18 @@ export function TestResult({ result, onRetake }: TestResultProps) {
                 </h3>
               </div>
               
-              {section.title === 'Рекомендуемые направления' ? (
-                <div 
-                  className="space-y-4"
-                  dangerouslySetInnerHTML={{ __html: section.content }}
-                />
-              ) : (
-                <p className="text-gray-700 leading-relaxed">
-                  {section.content}
-                </p>
-              )}
+              <div 
+                className="space-y-4"
+                dangerouslySetInnerHTML={{ __html: section.content }}
+              />
             </motion.div>
           ))}
 
           <motion.div
-            variants={itemVariants}
+            variants={{
+              hidden: { opacity: 0, x: -20 },
+              visible: { opacity: 1, x: 0 }
+            }}
             className="mt-8 pt-8 border-t"
           >
             <div className="flex items-center mb-4">
@@ -142,7 +258,10 @@ export function TestResult({ result, onRetake }: TestResultProps) {
             </div>
             <div className="space-y-4">
               <motion.div
-                variants={itemVariants}
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0 }
+                }}
                 className="bg-gradient-to-r from-blue-50 to-white p-4 rounded-lg border border-blue-100"
               >
                 <Button 

@@ -81,18 +81,26 @@ export default function AdminLinkGenerator() {
     try {
       setIsLoading(true);
       
-      // Формируем данные для отправки
+      // Формируем данные для API Тинькофф
       const requestData = {
-        shopName,
-        shopUrl,
-        companyDetails,
-        orderNumber,
-        creditType,
-        products,
-        totalAmount: getTotalSum()
+        additionalItems: [],
+        integrationType: "online_cabinet",
+        items: [
+          {
+            id: orderNumber,
+            name: products[0]?.name || "Заказ",
+            price: products[0]?.price || 0,
+            quantity: products[0]?.quantity || 1
+          }
+        ],
+        orderNumber: orderNumber,
+        promoCode: `installment_0_0_3_4.8_24`,
+        shopCode: "LK-SB8NN4",
+        sum: getTotalSum()
       };
 
-      const response = await fetch('https://forma.tbank.ru/platform/applications/online/create', {
+      // Отправляем запрос через наш прокси-endpoint
+      const response = await fetch('/api/tinkoff/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +108,12 @@ export default function AdminLinkGenerator() {
         body: JSON.stringify(requestData),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+      
+      if (data.success) {
+        // Копируем ссылку в буфер обмена
+        await navigator.clipboard.writeText(data.link);
+        
         toast({
           title: "Заявка создана",
           description: "Отправьте клиенту ссылку для дальнейшего заполнения заявки на кредит или рассрочку",
@@ -113,7 +126,7 @@ export default function AdminLinkGenerator() {
       } else {
         toast({
           title: "Ошибка",
-          description: "Не удалось создать заявку",
+          description: data.error || "Не удалось создать заявку",
           variant: "destructive",
         });
       }

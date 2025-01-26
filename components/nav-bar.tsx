@@ -104,12 +104,13 @@ export function NavBar() {
       animate="visible"
       variants={navVariants}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <nav className="flex items-center justify-between h-[56px] sm:h-[72px]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        <nav className="flex items-center justify-between h-[56px] sm:h-[64px] md:h-[72px]">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-shrink-0"
           >
             <Link href="/" className="flex items-center">
               <Image
@@ -117,6 +118,7 @@ export function NavBar() {
                 alt="Технолиум"
                 width={140}
                 height={36}
+                className="w-[120px] sm:w-[130px] md:w-[140px] h-auto"
                 priority
               />
             </Link>
@@ -126,7 +128,7 @@ export function NavBar() {
           <motion.button
             ref={buttonRef}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 -mr-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
@@ -139,13 +141,13 @@ export function NavBar() {
                 exit={{ opacity: 0, rotate: 90 }}
                 transition={{ duration: 0.2 }}
               >
-                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
               </motion.div>
             </AnimatePresence>
           </motion.button>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex md:gap-6 lg:gap-8">
             {[
               { href: "/", label: "Главная" },
               { href: "/about", label: "О нас" },
@@ -164,7 +166,7 @@ export function NavBar() {
               >
                 <Link
                   href={href}
-                  className={`inline-flex flex-col items-center text-[#333333] hover:text-gray-600 transition-colors gap-1.5 ${
+                  className={`inline-flex flex-col items-center text-sm lg:text-base text-[#333333] hover:text-gray-600 transition-colors gap-1.5 whitespace-nowrap ${
                     pathname === href ? "text-[#0095FF]" : ""
                   }`}
                 >
@@ -191,14 +193,14 @@ export function NavBar() {
           {isMenuOpen && (
             <motion.div
               ref={menuRef}
-              className="fixed top-[56px] sm:top-[72px] left-0 right-0 bg-white shadow-lg md:hidden overflow-hidden"
+              className="fixed top-[56px] sm:top-[64px] left-0 right-0 bg-white shadow-lg md:hidden overflow-hidden border-t border-gray-100"
               initial="closed"
               animate="open"
               exit="closed"
               variants={mobileMenuVariants}
             >
               <motion.div 
-                className="flex flex-col space-y-4 px-6 py-4"
+                className="flex flex-col space-y-3 px-4 sm:px-6 py-3 sm:py-4"
                 variants={mobileMenuVariants}
               >
                 {[
@@ -216,7 +218,7 @@ export function NavBar() {
                   >
                     <Link
                       href={url}
-                      className={`inline-flex flex-col items-center text-lg gap-1.5 ${
+                      className={`inline-flex flex-col items-start text-base sm:text-lg gap-1.5 ${
                         pathname === url
                           ? "text-[#0095FF]"
                           : "text-[#333333] hover:text-gray-600"

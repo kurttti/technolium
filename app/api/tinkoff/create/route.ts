@@ -12,8 +12,12 @@ interface TinkoffOrderItem {
 }
 
 interface CreateOrderRequest {
-  orderNumber?: string;
+  sum: number;
+  orderNumber: string;
   items: TinkoffOrderItem[];
+  creditType: string;
+  successUrl: string;
+  failUrl: string;
 }
 
 // Функция для генерации номера заказа
@@ -25,34 +29,74 @@ function generateOrderNumber() {
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
+  console.log('=== Starting POST request to /api/tinkoff/create ===');
+  
   try {
     const session = await getServerSession(authOptions);
-    
-    if (!session?.user?.isAdmin) {
-      return new NextResponse('Unauthorized', { status: 401 });
-    }
+    console.log('Session:', session);
 
-    if (!process.env.TINKOFF_SHOP_ID || !process.env.TINKOFF_SHOWCASE_ID) {
-      return NextResponse.json(
-        { success: false, error: 'Tinkoff credentials not configured' },
-        { status: 500 }
+    if (!session?.user?.isAdmin) {
+      console.log('Unauthorized: User is not admin');
+      return new NextResponse(
+        JSON.stringify({ error: 'Unauthorized' }),
+        { status: 401 }
       );
     }
 
-    const { orderNumber, items }: CreateOrderRequest = await request.json();
+    // Проверяем переменные окружения
+    console.log('Checking environment variables...');
+    console.log('TINKOFF_SHOP_ID exists:', !!process.env.TINKOFF_SHOP_ID);
+    console.log('TINKOFF_SHOWCASE_ID exists:', !!process.env.TINKOFF_SHOWCASE_ID);
 
+    if (!process.env.TINKOFF_SHOP_ID || !process.env.TINKOFF_SHOWCASE_ID) {
+      throw new Error('Missing Tinkoff credentials. Required: SHOP_ID, SHOWCASE_ID');
+    }
+
+    // Парсим тело запроса
+    console.log('Parsing request body...');
+    const rawBody = await request.text();
+    console.log('Raw request body:', rawBody);
+    
+    const body: CreateOrderRequest = JSON.parse(rawBody);
+    console.log('Parsed request body:', body);
+
+    // Валидация входных данных
+    console.log('Validating request data...');
+    if (!body.sum || body.sum < 3000 || body.sum > 500000) {
+      console.log('Invalid sum:', body.sum);
+      return new NextResponse(
+        JSON.stringify({
+          error: 'Validation Error',
+          message: 'Сумма заказа должна быть от 3000 до 500000 рублей'
+        }),
+        { status: 400 }
+      );
+    }
+
+    if (!body.items?.length) {
+      console.log('No items in request');
+      return new NextResponse(
+        JSON.stringify({
+          error: 'Validation Error',
+          message: 'Добавьте хотя бы один товар'
+        }),
+        { status: 400 }
+      );
+    }
+
+    // Подготавливаем данные для запроса к Тинькофф
+    console.log('Preparing Tinkoff request...');
     const tinkoffRequest = {
       shopId: process.env.TINKOFF_SHOP_ID,
       showcaseId: process.env.TINKOFF_SHOWCASE_ID,
-      sum: items.reduce((total: number, item: TinkoffOrderItem) => total + (item.price * item.quantity), 0),
-      orderNumber: orderNumber || generateOrderNumber(), // Используем переданный номер или генерируем новый
-      items: items.map((item: TinkoffOrderItem) => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity
-      })),
-      successUrl: `${process.env.NEXT_PUBLIC_APP_URL}/credit/success`,
-      failUrl: `${process.env.NEXT_PUBLIC_APP_URL}/credit/fail`
+      sum: body.sum,
+      orderNumber: body.orderNumber || generateOrderNumber(), 
+      items: body.items,
+      values: {
+        creditProduct: body.creditType
+      },
+      successUrl: body.successUrl || `${process.env.NEXT_PUBLIC_APP_URL}/credit/success`,
+      failUrl: body.failUrl || `${process.env.NEXT_PUBLIC_APP_URL}/credit/fail`
     };
 
     console.log('Sending request to Tinkoff:', JSON.stringify(tinkoffRequest, null, 2));
@@ -63,43 +107,43 @@ export async function POST(request: Request): Promise<NextResponse> {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(tinkoffRequest)
+      body: JSON.stringify(tinkoffRequest),
     });
 
-    // Сначала получаем текст ответа для отладки
-    const responseText = await response.text();
-    console.log('Tinkoff response:', responseText);
+    const data = await response.json();
+    console.log('Tinkoff response:', data);
 
-    let responseData;
-    try {
-      responseData = JSON.parse(responseText);
-    } catch (e) {
-      console.error('Failed to parse Tinkoff response:', e);
-      return NextResponse.json(
-        { success: false, error: 'Invalid response from Tinkoff API' },
-        { status: 500 }
+    if (!response.ok || (data.errors && data.errors.length > 0)) {
+      console.log('Tinkoff API error:', data.errors);
+      return new NextResponse(
+        JSON.stringify({ 
+          error: 'Validation Error', 
+          message: data.errors ? data.errors[0] : 'Failed to create order in Tinkoff',
+          details: data.errors 
+        }),
+        { status: 400 }
       );
     }
 
-    if (!response.ok || responseData.validations) {
-      const error = responseData.validations 
-        ? Object.values(responseData.validations).join(', ')
-        : responseData.message || 'Failed to create application';
-        
-      return NextResponse.json(
-        { success: false, error },
-        { status: response.status || 400 }
-      );
-    }
+    console.log('Successfully created order');
+    return new NextResponse(
+      JSON.stringify({ 
+        success: true,
+        link: data.link 
+      }),
+      { status: 200 }
+    );
 
-    return NextResponse.json({ 
-      success: true,
-      link: responseData.link 
-    });
   } catch (error) {
-    console.error('Error creating Tinkoff application:', error);
-    return NextResponse.json(
-      { success: false, error: 'Internal server error' },
+    console.error('Error in /api/tinkoff/create:', error);
+    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+    
+    return new NextResponse(
+      JSON.stringify({ 
+        error: 'Internal Server Error',
+        message: error instanceof Error ? error.message : 'Не удалось создать заказ',
+        stack: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.stack : null : undefined
+      }),
       { status: 500 }
     );
   }

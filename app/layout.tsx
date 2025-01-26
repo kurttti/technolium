@@ -1,11 +1,6 @@
 import { Metadata } from 'next'
-import { NavBar } from '@/components/nav-bar'
-import { CallWidget } from '@/components/call-widget'
 import Script from 'next/script'
 import '@/styles/globals.css'
-import { ScrollManager } from '@/components/scroll-manager'
-import { PageTransitionProvider } from '@/contexts/page-transition-context'
-import { Providers } from '@/components/providers'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 
@@ -69,15 +64,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body suppressHydrationWarning={true} className="bg-white">
-        <NavBar />
-        <PageTransitionProvider>
-          <ScrollManager />
-          <main>
-            <Providers>
-              {children}
-            </Providers>
-          </main>
-        </PageTransitionProvider>
+        {children}
         <Script
           id="b24-integration"
           strategy="afterInteractive"

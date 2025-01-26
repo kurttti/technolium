@@ -1,21 +1,35 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { LoadingScreen } from '@/components/ui/loading-screen';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { status } = useSession();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Если пользователь уже авторизован, перенаправляем на админку
+  if (status === 'loading') {
+    return <LoadingScreen />;
+  }
+
+  if (status === 'authenticated') {
+    router.push('/admin');
+    return <LoadingScreen />;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     try {
       const result = await signIn('credentials', {
@@ -32,6 +46,8 @@ export default function LoginPage() {
       }
     } catch (error) {
       setError('Произошла ошибка при входе');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,6 +66,7 @@ export default function LoginPage() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -62,6 +79,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -69,8 +87,14 @@ export default function LoginPage() {
             <div className="text-red-500 text-sm">{error}</div>
           )}
 
-          <Button type="submit" className="w-full">
-            Войти
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? (
+              <div className="flex items-center gap-2">
+                <span className="animate-pulse">Вход...</span>
+              </div>
+            ) : (
+              'Войти'
+            )}
           </Button>
         </form>
       </Card>

@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 
 // Правильный URL для создания заявки
-const TINKOFF_API_URL = 'https://forma.tinkoff.ru/api/partners/v2/orders/create';
+const TINKOFF_API_URL = 'https://forma.tbank.ru/api/partners/v2/orders/create';
 
 interface TinkoffOrderItem {
   name: string;
@@ -47,6 +47,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     console.log('Checking environment variables...');
     console.log('TINKOFF_SHOP_ID exists:', !!process.env.TINKOFF_SHOP_ID);
     console.log('TINKOFF_SHOWCASE_ID exists:', !!process.env.TINKOFF_SHOWCASE_ID);
+    console.log('TINKOFF_API_TOKEN exists:', !!process.env.TINKOFF_API_TOKEN);
+    console.log('TINKOFF_CSRF_TOKEN exists:', !!process.env.TINKOFF_CSRF_TOKEN);
 
     if (!process.env.TINKOFF_SHOP_ID || !process.env.TINKOFF_SHOWCASE_ID) {
       throw new Error('Missing Tinkoff credentials. Required: SHOP_ID, SHOWCASE_ID');
@@ -86,17 +88,30 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // Подготавливаем данные для запроса к Тинькофф
     console.log('Preparing Tinkoff request...');
+    
+    // Получаем параметры рассрочки из типа кредита
+    // Например, из "installment_0_0_12_14.5_22" получаем:
+    // months: 12, commission: 14.5
+    const [type, firstPayment, monthlyPayment, months, commission] = body.creditType.split('_');
+    
     const tinkoffRequest = {
       shopId: process.env.TINKOFF_SHOP_ID,
       showcaseId: process.env.TINKOFF_SHOWCASE_ID,
       sum: body.sum,
-      orderNumber: body.orderNumber || generateOrderNumber(), 
-      items: body.items,
+      orderNumber: body.orderNumber || generateOrderNumber(),
+      items: body.items.map(item => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price
+      })),
       values: {
-        creditProduct: body.creditType
+        installmentParams: {
+          term: Number(months),
+          productType: "installment"
+        }
       },
-      successUrl: body.successUrl || `${process.env.NEXT_PUBLIC_APP_URL}/credit/success`,
-      failUrl: body.failUrl || `${process.env.NEXT_PUBLIC_APP_URL}/credit/fail`
+      successUrl: body.successUrl,
+      failUrl: body.failUrl
     };
 
     console.log('Sending request to Tinkoff:', JSON.stringify(tinkoffRequest, null, 2));

@@ -11,6 +11,11 @@ interface TinkoffOrderItem {
   quantity: number;
 }
 
+interface CreateOrderRequest {
+  orderNumber?: string;
+  items: TinkoffOrderItem[];
+}
+
 // Функция для генерации номера заказа
 function generateOrderNumber() {
   const date = new Date();
@@ -19,7 +24,7 @@ function generateOrderNumber() {
   return `ORDER-${timestamp}-${random}`;
 }
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const session = await getServerSession(authOptions);
     
@@ -27,14 +32,21 @@ export async function POST(request: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    const { orderNumber = '', items } = await request.json();
+    if (!process.env.TINKOFF_SHOP_ID || !process.env.TINKOFF_SHOWCASE_ID) {
+      return NextResponse.json(
+        { success: false, error: 'Tinkoff credentials not configured' },
+        { status: 500 }
+      );
+    }
+
+    const { orderNumber, items }: CreateOrderRequest = await request.json();
 
     const tinkoffRequest = {
       shopId: process.env.TINKOFF_SHOP_ID,
       showcaseId: process.env.TINKOFF_SHOWCASE_ID,
-      sum: items.reduce((total, item) => total + (item.price * item.quantity), 0),
+      sum: items.reduce((total: number, item: TinkoffOrderItem) => total + (item.price * item.quantity), 0),
       orderNumber: orderNumber || generateOrderNumber(), // Используем переданный номер или генерируем новый
-      items: items.map(item => ({
+      items: items.map((item: TinkoffOrderItem) => ({
         name: item.name,
         price: item.price,
         quantity: item.quantity

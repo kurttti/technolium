@@ -25,6 +25,8 @@ export function CareerTest() {
     phone: string
   } | null>(null)
   const [showContactForm, setShowContactForm] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleAnswer = async (answer: string) => {
     const newAnswers = [...answers]
@@ -41,41 +43,49 @@ export function CareerTest() {
     }
   }
 
-  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    
-    const newUserInfo = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string
-    }
-    
-    setUserInfo(newUserInfo)
-    
-    setIsSubmitting(true)
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setIsLoading(true)
+    setError(null)
+
     try {
-      const response = await fetch('/api/analyze-career-test', {
+      // 1. Получаем результаты анализа для пользователя
+      const analysisResponse = await fetch('/api/analyze-career-test', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          answers,
-          userInfo: newUserInfo
-        }),
+        body: JSON.stringify({ answers }),
       })
 
-      if (!response.ok) {
-        throw new Error('Failed to submit test')
+      if (!analysisResponse.ok) {
+        throw new Error('Failed to analyze test results')
       }
 
-      const data = await response.json()
-      setTestResult(data.result)
+      const { result } = await analysisResponse.json()
+      setTestResult(result)
+
+      // 2. Асинхронно отправляем данные в Битрикс
+      if (userInfo) {
+        fetch('/api/create-bitrix-lead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            answers,
+            userInfo
+          }),
+        }).catch(error => {
+          console.error('Error creating Bitrix lead:', error)
+        })
+      }
+
     } catch (error) {
       console.error('Error submitting test:', error)
+      setError('Произошла ошибка при обработке теста. Пожалуйста, попробуйте еще раз.')
     } finally {
-      setIsSubmitting(false)
+      setIsLoading(false)
     }
   }
 
@@ -109,7 +119,7 @@ export function CareerTest() {
           Оставьте контактные данные, чтобы получить подробный анализ и персональные рекомендации
         </p>
         
-        <form onSubmit={handleContactSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
               Ваше имя
@@ -156,9 +166,9 @@ export function CareerTest() {
             <Button
               type="submit"
               className="w-full bg-blue-600 text-white hover:bg-blue-700"
-              disabled={isSubmitting}
+              disabled={isLoading}
             >
-              {isSubmitting ? (
+              {isLoading ? (
                 <div className="flex items-center justify-center">
                   <Loader2 className="animate-spin mr-2" size={18} />
                   Анализируем ваши ответы...

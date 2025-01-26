@@ -7,112 +7,230 @@ import { TestQuestion } from './test-question'
 import { TestResult } from './test-result'
 import { questions } from './questions'
 import { NotificationToast } from '../notification-toast'
+import { ChevronLeft, Loader2 } from 'lucide-react'
 
 type Answer = {
   questionId: number
-  score: number // 1 - далеко, 2 - средне, 3 - близко
+  answer: string
 }
 
 export function CareerTest() {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [currentQuestionId, setCurrentQuestionId] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showError, setShowError] = useState(false)
-  const [result, setResult] = useState<string | null>(null)
+  const [testResult, setTestResult] = useState<string | null>(null)
+  const [userInfo, setUserInfo] = useState<{
+    name: string
+    email: string
+    phone: string
+  } | null>(null)
+  const [showContactForm, setShowContactForm] = useState(false)
 
-  const handleAnswer = (score: number) => {
-    const newAnswer: Answer = {
-      questionId: currentQuestion,
-      score
+  const handleAnswer = async (answer: string) => {
+    const newAnswers = [...answers]
+    newAnswers[currentQuestionId] = {
+      questionId: currentQuestionId,
+      answer
     }
-    
-    setAnswers([...answers, newAnswer])
-    
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1)
+    setAnswers(newAnswers)
+
+    if (currentQuestionId < questions.length - 1) {
+      setCurrentQuestionId(currentQuestionId + 1)
+    } else {
+      setShowContactForm(true)
     }
   }
 
-  const handleSubmit = async () => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    
+    const newUserInfo = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      phone: formData.get('phone') as string
+    }
+    
+    setUserInfo(newUserInfo)
+    
+    setIsSubmitting(true)
     try {
-      setIsSubmitting(true)
-      setShowError(false)
-
       const response = await fetch('/api/analyze-career-test', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ answers }),
+        body: JSON.stringify({
+          answers,
+          userInfo: newUserInfo
+        }),
       })
 
       if (!response.ok) {
-        throw new Error('Failed to analyze test results')
+        throw new Error('Failed to submit test')
       }
 
       const data = await response.json()
-      setResult(data.result)
+      setTestResult(data.result)
     } catch (error) {
       console.error('Error submitting test:', error)
-      setShowError(true)
     } finally {
       setIsSubmitting(false)
     }
   }
 
+  const handleBack = () => {
+    if (currentQuestionId > 0) {
+      setCurrentQuestionId(currentQuestionId - 1)
+    }
+  }
+
   const handleRetake = () => {
-    setCurrentQuestion(0)
+    setCurrentQuestionId(0)
     setAnswers([])
-    setResult(null)
+    setTestResult(null)
+    setUserInfo(null)
+    setShowContactForm(false)
   }
 
-  if (result) {
-    return <TestResult result={result} onRetake={handleRetake} />
+  if (testResult) {
+    return <TestResult result={testResult} onRetake={handleRetake} />
   }
 
-  const progress = ((currentQuestion + 1) / questions.length) * 100
+  if (showContactForm) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-xl mx-auto p-6"
+      >
+        <h2 className="text-2xl font-bold mb-6">Получите ваши результаты</h2>
+        <p className="text-gray-600 mb-6">
+          Оставьте контактные данные, чтобы получить подробный анализ и персональные рекомендации
+        </p>
+        
+        <form onSubmit={handleContactSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              Ваше имя
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Иван Иванов"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+              Телефон
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              placeholder="+7 (999) 123-45-67"
+            />
+          </div>
+
+          <div className="pt-4">
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <div className="flex items-center justify-center">
+                  <Loader2 className="animate-spin mr-2" size={18} />
+                  Анализируем ваши ответы...
+                </div>
+              ) : (
+                'Получить результаты'
+              )}
+            </Button>
+          </div>
+
+          <p className="text-sm text-gray-500 mt-4">
+            Нажимая кнопку, вы соглашаетесь с нашей{' '}
+            <a href="/privacy" className="text-blue-600 hover:underline">
+              политикой конфиденциальности
+            </a>
+          </p>
+        </form>
+
+        <Button
+          variant="ghost"
+          onClick={handleBack}
+          className="mt-4 text-gray-600 hover:text-gray-900"
+        >
+          <ChevronLeft className="w-4 h-4 mr-2" />
+          Вернуться к вопросам
+        </Button>
+      </motion.div>
+    )
+  }
 
   return (
-    <>
-      <NotificationToast
-        isOpen={showError}
-        onClose={() => setShowError(false)}
-        message="Произошла ошибка при обработке результатов. Пожалуйста, попробуйте позже."
-        type="error"
-      />
-
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="mb-6">
-          <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>Вопрос {currentQuestion + 1} из {questions.length}</span>
-            <span>{Math.round(progress)}%</span>
-          </div>
-          <div className="w-full h-2 bg-gray-200 rounded-full">
-            <div 
-              className="h-full bg-blue-600 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
+    <div className="max-w-xl mx-auto p-6">
+      <motion.div
+        key={currentQuestionId}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+      >
+        <div className="mb-8">
+          <div className="h-2 bg-gray-200 rounded-full">
+            <div
+              className="h-2 bg-blue-600 rounded-full transition-all duration-500"
+              style={{
+                width: `${((currentQuestionId + 1) / questions.length) * 100}%`
+              }}
             />
+          </div>
+          <div className="mt-2 text-sm text-gray-600">
+            Вопрос {currentQuestionId + 1} из {questions.length}
           </div>
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentQuestion}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
+        <TestQuestion
+          question={questions[currentQuestionId]}
+          onAnswer={handleAnswer}
+          isLast={currentQuestionId === questions.length - 1}
+          onSubmit={() => setShowContactForm(true)}
+          isSubmitting={isSubmitting}
+          selectedAnswer={answers[currentQuestionId]?.answer}
+        />
+
+        {currentQuestionId > 0 && (
+          <Button
+            variant="ghost"
+            onClick={handleBack}
+            className="mt-4 text-gray-600 hover:text-gray-900"
           >
-            <TestQuestion
-              question={questions[currentQuestion]}
-              onAnswer={handleAnswer}
-              isLast={currentQuestion === questions.length - 1}
-              onSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-            />
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </>
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            Назад
+          </Button>
+        )}
+      </motion.div>
+    </div>
   )
 }

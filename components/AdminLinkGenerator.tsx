@@ -1,369 +1,193 @@
 'use client';
 
 import { useState } from 'react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
-import { useToast } from './ui/use-toast';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import Image from 'next/image';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Select } from '@/components/ui/select';
+import { CreditLinkModal } from '@/components/ui/credit-link-modal';
+import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Plus, Minus } from 'lucide-react';
 
-interface Product {
+interface OrderItem {
   name: string;
   price: number;
   quantity: number;
 }
 
-interface Company {
-  name: string;
-  details: string;
-}
-
-interface CreditLinkModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  link: string;
-}
-
-const CreditLinkModal = ({ isOpen, onClose, link }: CreditLinkModalProps) => {
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Сгенерированная ссылка</DialogTitle>
-        </DialogHeader>
-        <div className="space-y-4 pt-4">
-          <div>
-            <label className="block text-sm mb-2">
-              Ссылка для клиента
-            </label>
-            <Input
-              value={link}
-              readOnly
-              className="bg-[#F8F9FA]"
-            />
-          </div>
-          <div className="flex justify-end gap-4 mt-6">
-            <button
-              onClick={onClose}
-              className="text-sm text-blue-600 hover:text-blue-700"
-            >
-              Закрыть
-            </button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-};
-
 export default function AdminLinkGenerator() {
-  const { toast } = useToast();
-  const [shopName, setShopName] = useState('Технолиум');
-  const [shopUrl, setShopUrl] = useState('https://www.technolium.ru/');
-  const [companyDetails, setCompanyDetails] = useState('');
+  const [shopName] = useState('Технолиум');
+  const [shopUrl] = useState('https://www.technolium.ru/');
   const [orderNumber, setOrderNumber] = useState('');
-  const [creditType, setCreditType] = useState('0-0-3(4,8%) 30001.00-50000.00');
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isAddProductOpen, setIsAddProductOpen] = useState(false);
-  const [newProduct, setNewProduct] = useState<Product>({ name: '', price: 0, quantity: 1 });
-  const [isLoading, setIsLoading] = useState(false);
+  const [items, setItems] = useState<OrderItem[]>([{ name: '', price: 0, quantity: 1 }]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [generatedLink, setGeneratedLink] = useState("");
+  const [generatedLink, setGeneratedLink] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Пример списка компаний
-  const companies: Company[] = [
-    { name: 'ИП БАЛОЯН АРСЕНИЙ РОБЕРТОВИЧ', details: 'АО «ТБанк» р/с 40802810100007449224' },
-    // Добавьте другие компании по необходимости
-  ];
+  const handleAddItem = () => {
+    setItems([...items, { name: '', price: 0, quantity: 1 }]);
+  };
 
-  const handleAddProduct = () => {
-    if (newProduct.name && newProduct.price > 0) {
-      setProducts([...products, newProduct]);
-      setNewProduct({ name: '', price: 0, quantity: 1 });
-      setIsAddProductOpen(false);
-      
-      toast({
-        title: "Товар добавлен",
-        description: `${newProduct.name} добавлен в заказ`,
-      });
+  const handleRemoveItem = (index: number) => {
+    if (items.length > 1) {
+      setItems(items.filter((_, i) => i !== index));
     }
   };
 
-  const removeProduct = (index: number) => {
-    const removedProduct = products[index];
-    const newProducts = [...products];
-    newProducts.splice(index, 1);
-    setProducts(newProducts);
-    
-    toast({
-      title: "Товар удален",
-      description: `${removedProduct.name} удален из заказа`,
-      variant: "destructive",
-    });
+  const handleItemChange = (index: number, field: keyof OrderItem, value: string | number) => {
+    const newItems = [...items];
+    newItems[index] = {
+      ...newItems[index],
+      [field]: field === 'price' || field === 'quantity' ? Number(value) : value,
+    };
+    setItems(newItems);
   };
 
-  const getTotalSum = () => {
-    return products.reduce((sum, product) => sum + product.price * product.quantity, 0);
+  const calculateTotal = () => {
+    return items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   };
 
-  const handleCompanySelect = (company: Company) => {
-    setCompanyDetails(company.name);
-  };
-
-  const generateLink = async () => {
+  const handleSubmit = async () => {
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      
-      const requestData = {
-        items: products.map(product => ({
-          name: product.name,
-          price: product.price,
-          quantity: product.quantity
-        }))
-      };
-
       const response = await fetch('/api/tinkoff/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestData),
+        body: JSON.stringify({
+          orderNumber,
+          items,
+        }),
       });
 
       const data = await response.json();
-      
       if (data.success) {
         setGeneratedLink(data.link);
         setIsModalOpen(true);
-        // Очищаем форму
-        setProducts([]);
-      } else {
-        toast({
-          title: "Ошибка",
-          description: data.error || "Не удалось создать заявку",
-          variant: "destructive",
-        });
       }
     } catch (error) {
-      console.error('Error:', error);
-      toast({
-        title: "Ошибка",
-        description: "Произошла ошибка при создании заявки",
-        variant: "destructive",
-      });
+      console.error('Error generating link:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-8">
-      <div className="flex items-center gap-2 mb-6">
-        <div className="text-xl font-medium">T БАНК</div>
-      </div>
-
-      <div className="mb-4">
-        <button className="text-blue-600 hover:text-blue-700">
-          ← К списку заявок
-        </button>
-      </div>
-
-      <h1 className="text-2xl font-medium mb-8">Заявка на кредит или рассрочку</h1>
-      
-      <div className="space-y-6">
-        <div>
-          <label className="block text-sm mb-2">
-            Интернет-магазин*
-          </label>
-          <Input
-            type="text"
-            value={shopName}
-            onChange={(e) => setShopName(e.target.value)}
-            className="bg-[#F8F9FA]"
-          />
-          <div className="mt-2 text-sm text-gray-500">
-            {shopUrl}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm mb-2">
-            Реквизиты компании*
-          </label>
-          <Select onValueChange={(value) => {
-            const company = companies.find(c => c.name === value);
-            if (company) handleCompanySelect(company);
-          }}>
-            <SelectTrigger className="bg-[#F8F9FA]">
-              <SelectValue placeholder="Выберите компанию" />
-            </SelectTrigger>
-            <SelectContent>
-              {companies.map((company) => (
-                <SelectItem key={company.name} value={company.name}>
-                  {company.name}
-                  <div className="text-sm text-gray-500">{company.details}</div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <label className="block text-sm mb-2">
-            Номер заказа
-          </label>
-          <Input
-            type="text"
-            value={orderNumber}
-            onChange={(e) => setOrderNumber(e.target.value)}
-            className="bg-[#F8F9FA]"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm mb-2">
-            Тип рассрочки
-          </label>
-          <Select onValueChange={setCreditType} value={creditType}>
-            <SelectTrigger className="bg-[#F8F9FA]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="0-0-3(4,8%) 30001.00-50000.00">
-                0-0-3(4,8%) 30001.00-50000.00
-              </SelectItem>
-              {/* Добавьте другие варианты рассрочки */}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-medium">Заказ</h2>
-            {products.length > 0 && (
-              <button className="text-blue-600 hover:text-blue-700 text-sm">
-                Удалить
-              </button>
-            )}
-          </div>
-          
-          {products.map((product, index) => (
-            <div key={index} className="flex items-center justify-between mb-2 p-3 bg-[#F8F9FA] rounded">
-              <span className="text-sm">{product.name}</span>
-              <div className="flex items-center gap-4">
-                <span className="text-sm">x {product.quantity}</span>
-                <span className="text-sm">{product.price} ₽</span>
-                <button
-                  onClick={() => removeProduct(index)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  ✕
-                </button>
+    <div className="space-y-8">
+      <Card className="p-6">
+        <div className="space-y-6">
+          {/* Магазин */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Информация о магазине</h3>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label>Название магазина</Label>
+                <Input value={shopName} disabled />
+              </div>
+              <div className="space-y-2">
+                <Label>URL магазина</Label>
+                <Input value={shopUrl} disabled />
               </div>
             </div>
-          ))}
-          
-          <div className="mt-4">
-            <div className="flex justify-between mb-4">
-              <span className="text-sm">Сумма товаров</span>
-              <span className="text-sm">{getTotalSum()} ₽</span>
-            </div>
-            
-            <button
-              onClick={() => setIsAddProductOpen(true)}
-              className="text-blue-600 hover:text-blue-700 text-sm"
-            >
-              Добавить товар
-            </button>
           </div>
-        </div>
 
-        <div className="flex justify-between items-center">
-          <button className="text-blue-600 hover:text-blue-700 text-sm">
-            Создать шаблон
-          </button>
-          <Button
-            onClick={generateLink}
-            disabled={!shopName || !companyDetails || products.length === 0 || isLoading}
-            className="bg-[#FFD600] hover:bg-[#FFE44D] text-black"
-          >
-            {isLoading ? 'Создание...' : 'Создать заявку'}
-          </Button>
-        </div>
-      </div>
-
-      <Dialog open={isAddProductOpen} onOpenChange={setIsAddProductOpen}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Информация о товаре</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 pt-4">
-            <div>
-              <label className="block text-sm mb-2">
-                Наименование товара*
-              </label>
+          {/* Заказ */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Информация о заказе</h3>
+            <div className="space-y-2">
+              <Label>Номер заказа (опционально)</Label>
               <Input
-                value={newProduct.name}
-                onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                maxLength={255}
-                className="bg-[#F8F9FA]"
+                placeholder="Например: ORDER-123"
+                value={orderNumber}
+                onChange={(e) => setOrderNumber(e.target.value)}
               />
-              <div className="text-right text-sm text-gray-500 mt-1">
-                {newProduct.name.length}/255
-              </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm mb-2">
-                  Цена, ₽*
-                </label>
-                <Input
-                  type="number"
-                  value={newProduct.price || ''}
-                  onChange={(e) => setNewProduct({ ...newProduct, price: Number(e.target.value) })}
-                  className="bg-[#F8F9FA]"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm mb-2">
-                  Количество*
-                </label>
-                <Input
-                  type="number"
-                  value={newProduct.quantity}
-                  onChange={(e) => setNewProduct({ ...newProduct, quantity: Number(e.target.value) })}
-                  min={1}
-                  className="bg-[#F8F9FA]"
-                />
-              </div>
-            </div>
+          </div>
 
-            <div className="flex justify-end gap-4 mt-6">
-              <button
-                onClick={() => setIsAddProductOpen(false)}
-                className="text-sm text-blue-600 hover:text-blue-700"
-              >
-                Отмена
-              </button>
+          {/* Товары */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-medium">Товары</h3>
               <Button
-                onClick={handleAddProduct}
-                className="bg-[#FFD600] hover:bg-[#FFE44D] text-black"
+                variant="outline"
+                size="sm"
+                onClick={handleAddItem}
+                className="flex items-center gap-2"
               >
-                Добавить
+                <Plus className="h-4 w-4" />
+                <span>Добавить товар</span>
               </Button>
             </div>
+
+            <div className="space-y-4">
+              {items.map((item, index) => (
+                <Card key={index} className="p-4">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label>Название товара</Label>
+                      <Input
+                        placeholder="Например: Курс Python"
+                        value={item.name}
+                        onChange={(e) => handleItemChange(index, 'name', e.target.value)}
+                      />
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label>Цена</Label>
+                        <Input
+                          type="number"
+                          min="0"
+                          placeholder="0"
+                          value={item.price || ''}
+                          onChange={(e) => handleItemChange(index, 'price', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Количество</Label>
+                        <div className="flex items-center gap-2">
+                          <Input
+                            type="number"
+                            min="1"
+                            value={item.quantity}
+                            onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+                          />
+                          {items.length > 1 && (
+                            <Button
+                              variant="destructive"
+                              size="icon"
+                              onClick={() => handleRemoveItem(index)}
+                            >
+                              <Minus className="h-4 w-4" />
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
-        </DialogContent>
-      </Dialog>
+
+          {/* Итого */}
+          <div className="flex items-center justify-between pt-4 border-t">
+            <div className="text-lg font-medium">Итого:</div>
+            <div className="text-xl font-bold">{calculateTotal().toLocaleString('ru-RU')} ₽</div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Кнопка создания ссылки */}
+      <div className="flex justify-end">
+        <Button
+          size="lg"
+          onClick={handleSubmit}
+          disabled={isLoading || items.some(item => !item.name || item.price <= 0)}
+        >
+          {isLoading ? 'Создание ссылки...' : 'Создать ссылку'}
+        </Button>
+      </div>
 
       <CreditLinkModal
         isOpen={isModalOpen}

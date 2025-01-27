@@ -1,10 +1,11 @@
 "use client"
 
 import Image from "next/image"
-import { ContactFooter } from "@/components/contact-footer"
-import { ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 
 const container = {
   hidden: { opacity: 0 },
@@ -291,7 +292,8 @@ export default function EducationFormatPage() {
           </div>
         </section>
       </main>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

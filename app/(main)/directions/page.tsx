@@ -2,7 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ContactFooter } from "@/components/contact-footer"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 import { motion } from "framer-motion"
 
 const fadeInUp = {
@@ -252,7 +253,8 @@ export default function DirectionsPage() {
           </div>
         </motion.section>
       </main>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

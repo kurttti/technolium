@@ -1,11 +1,11 @@
 "use client"
 
-import { ContactFooter } from "@/components/contact-footer"
-import { ChevronRight } from "lucide-react"
-import { ArrowLeft } from "lucide-react"
-import { BookOpen } from "lucide-react"
+import { ChevronRight, ArrowLeft, BookOpen } from "lucide-react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 
 const container = {
   hidden: { opacity: 0 },
@@ -225,7 +225,8 @@ export default function LecturesPage() {
           </motion.div>
         </section>
       </main>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

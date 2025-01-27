@@ -2,7 +2,8 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ContactFooter } from "@/components/contact-footer"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -229,7 +230,8 @@ export default function AboutPage() {
           </div>
         </motion.section>
       </main>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

@@ -18,7 +18,8 @@ import {
   Target,
   Clock,
 } from "lucide-react"
-import { ContactFooter } from "@/components/contact-footer"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 import { CourseDetails } from "@/components/course-details"
 import { motion } from "framer-motion"
 
@@ -280,208 +281,210 @@ export default function SpecialtyPage() {
   }
 
   return (
-    <>
-      {/* Hero Section */}
-      <motion.section 
-        className="bg-[#1E4FCD] text-white py-16"
-        initial="hidden"
-        animate="visible"
-        variants={staggerContainer}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.button
-            onClick={() => router.back()}
-            className="flex items-center text-white mb-8 hover:opacity-80 transition-opacity"
-            variants={fadeInUp}
-            whileHover={{ x: -4 }}
-          >
-            <ArrowLeft className="mr-2" />
-            Назад
-          </motion.button>
-          <motion.div 
-            className="flex items-center gap-4 mb-6"
-            variants={fadeInUp}
-          >
-            <motion.div 
-              className="p-3 bg-white/10 rounded-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Icon className="w-8 h-8" />
-            </motion.div>
-            <h1 className="text-4xl font-bold">{specialty.title}</h1>
-          </motion.div>
-          <motion.p 
-            className="text-xl max-w-3xl"
-            variants={fadeInUp}
-          >
-            {specialty.description}
-          </motion.p>
-        </div>
-      </motion.section>
-
-      {/* Key Info Section */}
-      <motion.section 
-        className="py-16 bg-gray-50"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={staggerContainer}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-6">
-            {specialty.stats.map((stat, index) => (
-              <motion.div 
-                key={index} 
-                className="bg-white p-6 shadow-lg text-center"
-                variants={statVariants}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              >
-                <div className="text-3xl font-bold text-[#1E4FCD] mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Course Details */}
-      <motion.section 
-        className="py-12"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={staggerContainer}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="md:col-span-2">
-              <motion.h2 
-                className="text-2xl font-bold mb-6"
-                variants={fadeInUp}
-              >
-                Программа обучения
-              </motion.h2>
-              <div className="space-y-6">
-                {specialty.program.map((module, index) => (
-                  <motion.div 
-                    key={index} 
-                    className="bg-white p-6 shadow-lg"
-                    variants={moduleVariants}
-                    whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center">
-                        {index + 1}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2">{module.title}</h3>
-                        <div className="flex items-center text-gray-600 mb-4">
-                          <Clock className="w-4 h-4 mr-2" />
-                          {module.duration}
-                        </div>
-                        <motion.ul 
-                          className="space-y-2"
-                          variants={staggerContainer}
-                        >
-                          {module.topics.map((topic, i) => (
-                            <motion.li 
-                              key={i} 
-                              className="flex items-center"
-                              variants={fadeInUp}
-                              custom={i}
-                              transition={{ delay: i * 0.1 }}
-                            >
-                              <CheckCircle className="w-4 h-4 text-[#1E4FCD] mr-2" />
-                              {topic}
-                            </motion.li>
-                          ))}
-                        </motion.ul>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            <motion.div
+    <div>
+      <main>
+        {/* Hero Section */}
+        <motion.section 
+          className="bg-[#1E4FCD] text-white py-16"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <motion.button
+              onClick={() => router.back()}
+              className="flex items-center text-white mb-8 hover:opacity-80 transition-opacity"
               variants={fadeInUp}
-              className="sticky top-4"
+              whileHover={{ x: -4 }}
             >
-              <CourseDetails
-                duration={specialty.duration}
-                level={specialty.level}
-                price={specialty.price.replace(" руб.", "")}
-                courseTitle={specialty.title}
-              />
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Skills & Career */}
-      <motion.section 
-        className="py-12 bg-white"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={staggerContainer}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div variants={fadeInUp}>
-              <h2 className="text-2xl font-bold mb-6 flex items-center">
-                <BookOpen className="w-6 h-6 mr-2" />
-                Навыки, которые вы получите
-              </h2>
+              <ArrowLeft className="mr-2" />
+              Назад
+            </motion.button>
+            <motion.div 
+              className="flex items-center gap-4 mb-6"
+              variants={fadeInUp}
+            >
               <motion.div 
-                className="bg-gray-50 p-6 rounded-lg"
-                variants={staggerContainer}
+                className="p-3 bg-white/10 rounded-lg"
+                whileHover={{ scale: 1.05 }}
               >
-                <div className="grid grid-cols-2 gap-4">
-                  {specialty.skills.map((skill, index) => (
+                <Icon className="w-8 h-8" />
+              </motion.div>
+              <h1 className="text-4xl font-bold">{specialty.title}</h1>
+            </motion.div>
+            <motion.p 
+              className="text-xl max-w-3xl"
+              variants={fadeInUp}
+            >
+              {specialty.description}
+            </motion.p>
+          </div>
+        </motion.section>
+
+        {/* Key Info Section */}
+        <motion.section 
+          className="py-16 bg-gray-50"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-6">
+              {specialty.stats.map((stat, index) => (
+                <motion.div 
+                  key={index} 
+                  className="bg-white p-6 shadow-lg text-center"
+                  variants={statVariants}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                >
+                  <div className="text-3xl font-bold text-[#1E4FCD] mb-2">{stat.value}</div>
+                  <div className="text-gray-600">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Course Details */}
+        <motion.section 
+          className="py-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="md:col-span-2">
+                <motion.h2 
+                  className="text-2xl font-bold mb-6"
+                  variants={fadeInUp}
+                >
+                  Программа обучения
+                </motion.h2>
+                <div className="space-y-6">
+                  {specialty.program.map((module, index) => (
                     <motion.div 
                       key={index} 
-                      className="flex items-center"
-                      variants={fadeInUp}
-                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                      className="bg-white p-6 shadow-lg"
+                      variants={moduleVariants}
+                      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
                     >
-                      <CheckCircle className="w-4 h-4 text-[#1E4FCD] mr-2" />
-                      {skill}
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-8 h-8 bg-[#1E4FCD] text-white rounded-full flex items-center justify-center">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold mb-2">{module.title}</h3>
+                          <div className="flex items-center text-gray-600 mb-4">
+                            <Clock className="w-4 h-4 mr-2" />
+                            {module.duration}
+                          </div>
+                          <motion.ul 
+                            className="space-y-2"
+                            variants={staggerContainer}
+                          >
+                            {module.topics.map((topic, i) => (
+                              <motion.li 
+                                key={i} 
+                                className="flex items-center"
+                                variants={fadeInUp}
+                                custom={i}
+                                transition={{ delay: i * 0.1 }}
+                              >
+                                <CheckCircle className="w-4 h-4 text-[#1E4FCD] mr-2" />
+                                {topic}
+                              </motion.li>
+                            ))}
+                          </motion.ul>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
 
-            <motion.div variants={fadeInUp}>
-              <h2 className="text-2xl font-bold mb-6 flex items-center">
-                <Briefcase className="w-6 h-6 mr-2" />
-                Карьерные перспективы
-              </h2>
-              <motion.div 
-                className="bg-gray-50 p-6 rounded-lg"
-                variants={staggerContainer}
+              <motion.div
+                variants={fadeInUp}
+                className="sticky top-4"
               >
-                <div className="grid grid-cols-2 gap-4">
-                  {specialty.career.map((position, index) => (
-                    <motion.div 
-                      key={index} 
-                      className="flex items-center"
-                      variants={fadeInUp}
-                      whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                    >
-                      <Trophy className="w-4 h-4 text-[#1E4FCD] mr-2" />
-                      {position}
-                    </motion.div>
-                  ))}
-                </div>
+                <CourseDetails
+                  duration={specialty.duration}
+                  level={specialty.level}
+                  price={specialty.price.replace(" руб.", "")}
+                  courseTitle={specialty.title}
+                />
               </motion.div>
-            </motion.div>
+            </div>
           </div>
-        </div>
-      </motion.section>
+        </motion.section>
 
-      <ContactFooter />
-    </>
+        {/* Skills & Career */}
+        <motion.section 
+          className="py-12 bg-white"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div variants={fadeInUp}>
+                <h2 className="text-2xl font-bold mb-6 flex items-center">
+                  <BookOpen className="w-6 h-6 mr-2" />
+                  Навыки, которые вы получите
+                </h2>
+                <motion.div 
+                  className="bg-gray-50 p-6 rounded-lg"
+                  variants={staggerContainer}
+                >
+                  <div className="grid grid-cols-2 gap-4">
+                    {specialty.skills.map((skill, index) => (
+                      <motion.div 
+                        key={index} 
+                        className="flex items-center"
+                        variants={fadeInUp}
+                        whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                      >
+                        <CheckCircle className="w-4 h-4 text-[#1E4FCD] mr-2" />
+                        {skill}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              <motion.div variants={fadeInUp}>
+                <h2 className="text-2xl font-bold mb-6 flex items-center">
+                  <Briefcase className="w-6 h-6 mr-2" />
+                  Карьерные перспективы
+                </h2>
+                <motion.div 
+                  className="bg-gray-50 p-6 rounded-lg"
+                  variants={staggerContainer}
+                >
+                  <div className="grid grid-cols-2 gap-4">
+                    {specialty.career.map((position, index) => (
+                      <motion.div 
+                        key={index} 
+                        className="flex items-center"
+                        variants={fadeInUp}
+                        whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                      >
+                        <Trophy className="w-4 h-4 text-[#1E4FCD] mr-2" />
+                        {position}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+      </main>
+      <Contacts />
+      <Footer />
+    </div>
   )
 }

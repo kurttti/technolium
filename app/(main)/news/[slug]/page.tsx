@@ -3,8 +3,9 @@
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { ContactFooter } from "@/components/contact-footer"
 import { motion } from "framer-motion"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 
 const articles = {
   "cybersecurity-courses": {
@@ -234,7 +235,8 @@ export default function ArticlePage() {
           })}
         </motion.div>
       </motion.article>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

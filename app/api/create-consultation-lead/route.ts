@@ -13,11 +13,11 @@ interface UserInfo {
 }
 
 const questionMap: Record<number, string> = {
-  0: 'Направление',
-  1: 'Опыт',
-  2: 'Формат обучения',
-  3: 'Время на обучение',
-  4: 'Планируемый старт'
+  0: 'Возраст',
+  1: 'Уровень владения ПК',
+  2: 'Желаемый доход',
+  3: 'Текущая деятельность',
+  4: 'Гражданство'
 }
 
 function formatAnswers(answers: Answer[]): string {
@@ -50,11 +50,11 @@ export async function POST(request: Request) {
       SOURCE_ID: "Форма консультации",
       SOURCE_DESCRIPTION: "Заполнена форма для получения консультации на сайте",
       UF_CRM_CONSULTATION_FORM: JSON.stringify({
-        direction: answers.find((a: Answer) => a.questionId === 0)?.answer,
-        experience: answers.find((a: Answer) => a.questionId === 1)?.answer,
-        format: answers.find((a: Answer) => a.questionId === 2)?.answer,
-        studyTime: answers.find((a: Answer) => a.questionId === 3)?.answer,
-        startTime: answers.find((a: Answer) => a.questionId === 4)?.answer,
+        age: answers.find((a: Answer) => a.questionId === 0)?.answer,
+        computerSkills: answers.find((a: Answer) => a.questionId === 1)?.answer,
+        desiredIncome: answers.find((a: Answer) => a.questionId === 2)?.answer,
+        currentField: answers.find((a: Answer) => a.questionId === 3)?.answer,
+        citizenship: answers.find((a: Answer) => a.questionId === 4)?.answer,
       })
     }
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ContactFooter } from "@/components/contact-footer"
+import { Footer } from "@/components/footer"
 import InputMask from "react-input-mask"
 import { motion } from "framer-motion"
 import { createBitrixDeal } from "@/actions/bitrix24"
@@ -234,7 +234,7 @@ export default function LandingPage() {
         </div>
       </main>
       
-      <ContactFooter />
+      <Footer />
     </div>
   )
 }

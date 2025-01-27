@@ -162,7 +162,10 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-gray-900">
-                  {isSuccess ? "Заявка отправлена!" : type === "conditions" ? "Условия поступления" : "Оставить заявку"}
+                  {isSuccess ? "Заявка отправлена!" : 
+                   type === "conditions" ? "Условия поступления" : 
+                   type === "application" && courseInfo ? `Заявка на курс "${courseInfo.title}"` : 
+                   "Оставить заявку"}
                 </h2>
                 <button 
                   onClick={handleClose}

@@ -141,7 +141,7 @@ export function ConsultationForm({ onSuccess }: Props) {
   const handleCountrySelect = (country: typeof COUNTRY_CODES[0]) => {
     setSelectedCountry(country)
     setPhoneNumber('')
-    setError('')
+    setError(null)
     setIsOpen(false)
   }
 
@@ -151,9 +151,11 @@ export function ConsultationForm({ onSuccess }: Props) {
     setPhoneNumber(value);
     
     if (digitsOnly.length === selectedCountry.length) {
-      setError('');
+      setError(null);
     } else if (digitsOnly.length > 0) {
       setError(`Номер телефона должен содержать ${selectedCountry.length} цифр`);
+    } else {
+      setError(null);
     }
   }
 
@@ -340,7 +342,7 @@ export function ConsultationForm({ onSuccess }: Props) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
               Телефон
             </label>
             <div className="flex gap-2">
@@ -377,6 +379,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               </div>
               <div className="flex-1">
                 <InputMask
+                  id="phone"
                   mask={selectedCountry.mask}
                   value={phoneNumber}
                   onChange={handlePhoneChange}
@@ -427,9 +430,10 @@ export function ConsultationForm({ onSuccess }: Props) {
 
         {error && (
           <NotificationToast
-            title="Ошибка"
-            description={error}
-            variant="destructive"
+            message={error}
+            type="error"
+            isOpen={!!error}
+            onClose={() => setError(null)}
           />
         )}
       </motion.div>

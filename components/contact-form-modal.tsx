@@ -5,6 +5,18 @@ import { X } from "lucide-react"
 import { createBitrixDeal } from "@/actions/bitrix24"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
+import InputMask from "react-input-mask"
+
+const COUNTRY_CODES = [
+  { code: '+7', country: 'Россия', mask: '(999) 999-99-99', length: 10 },
+  { code: '+7', country: 'Казахстан', mask: '(999) 999-99-99', length: 10 },
+  { code: '+375', country: 'Беларусь', mask: '(99) 999-99-99', length: 9 },
+  { code: '+374', country: 'Армения', mask: '99 999-999', length: 8 },
+  { code: '+992', country: 'Таджикистан', mask: '(99) 999-99-99', length: 9 },
+  { code: '+993', country: 'Туркменистан', mask: '(99) 999-99-99', length: 8 },
+  { code: '+996', country: 'Киргизия', mask: '(999) 999-999', length: 9 },
+  { code: '+998', country: 'Узбекистан', mask: '(99) 999-99-99', length: 9 },
+];
 
 interface ContactFormModalProps {
   isOpen: boolean
@@ -19,280 +31,272 @@ interface ContactFormModalProps {
 
 const overlayVariants = {
   hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      ease: "easeOut"
-    }
-  },
-  exit: { 
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeIn"
-    }
-  }
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
 }
 
 const modalVariants = {
-  hidden: { 
-    opacity: 0,
-    scale: 0.95,
-    y: 20
-  },
-  visible: { 
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.3,
-      ease: [0.22, 1, 0.36, 1]
-    }
-  },
-  exit: { 
-    opacity: 0,
-    scale: 0.95,
-    y: 20,
-    transition: {
-      duration: 0.2,
-      ease: "easeIn"
-    }
-  }
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 20 },
 }
 
 const successVariants = {
-  hidden: { scale: 0.8, opacity: 0 },
-  visible: { 
-    scale: 1, 
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      ease: [0.22, 1, 0.36, 1]
-    }
-  }
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1 },
 }
 
 export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo }: ContactFormModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRY_CODES[0])
+  const [phoneNumber, setPhoneNumber] = useState('')
 
   const handleClose = useCallback(() => {
-    setIsSubmitted(false)
     onClose()
+    // Reset form state after animation completes
+    setTimeout(() => {
+      setIsSuccess(false)
+      setError(null)
+      setPhoneNumber('')
+    }, 300)
   }, [onClose])
 
-  const handleOutsideClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.target === e.currentTarget) {
-        handleClose()
-      }
-    },
-    [handleClose],
-  )
-
-  const titles = {
-    general: "Связаться с нами",
-    conditions: "Запрос условий",
-    application: courseInfo?.title ? `Запись на курс: ${courseInfo.title}` : "Оставить заявку",
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    // Удаляем все нецифровые символы для проверки длины
+    const digitsOnly = value.replace(/\D/g, '');
+    
+    setPhoneNumber(value);
+    
+    // Проверяем длину только цифр
+    if (digitsOnly.length === selectedCountry.length) {
+      setError('');
+    } else if (digitsOnly.length > 0) {
+      setError(`Номер телефона должен содержать ${selectedCountry.length} цифр`);
+    }
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const code = event.target.value;
+    const country = COUNTRY_CODES.find((c) => c.code === code);
+    if (country) {
+      setSelectedCountry(country);
+      setPhoneNumber(''); // Сбрасываем номер при смене страны
+      setError('');
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    
+    // Проверяем валидность номера телефона
+    const digitsOnly = phoneNumber.replace(/\D/g, '');
+    if (digitsOnly.length !== selectedCountry.length) {
+      setError(`Номер телефона должен содержать ${selectedCountry.length} цифр`);
+      return;
+    }
+
     setIsSubmitting(true)
     setError(null)
 
-    const formData = new FormData(e.target as HTMLFormElement)
+    try {
+      const formData = new FormData(e.currentTarget)
+      const fullPhone = selectedCountry.code + digitsOnly;
+      formData.set('phone', fullPhone)
+      
+      if (type === "conditions") {
+        formData.append("type", "conditions")
+        formData.append("buttonType", "Условия поступления")
+      } else if (type === "application") {
+        formData.append("type", "application")
+        formData.append("buttonType", "Оставить заявку")
+        if (courseInfo) {
+          formData.append("courseTitle", courseInfo.title)
+          formData.append("coursePrice", courseInfo.price)
+          formData.append("courseDuration", courseInfo.duration)
+        }
+      } else {
+        formData.append("type", "general")
+        formData.append("buttonType", "Общая форма")
+      }
 
-    if (courseInfo) {
-      formData.append("courseTitle", courseInfo.title)
-      formData.append("coursePrice", courseInfo.price)
-      formData.append("courseDuration", courseInfo.duration)
-    }
+      formData.append("pageUrl", window.location.href)
 
-    formData.append("type", type)
-    const result = await createBitrixDeal(formData)
+      const result = await createBitrixDeal(formData)
 
-    setIsSubmitting(false)
-    if (result.success) {
-      setIsSubmitted(true)
-    } else {
-      setError(result.message)
+      if (result.success) {
+        setIsSuccess(true)
+      } else {
+        setError(result.message)
+      }
+    } catch (error) {
+      setError('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
-  if (!isOpen) return null
+  if (typeof window === "undefined") return null
 
-  const modalContent = (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] p-4"
-          onClick={handleOutsideClick}
+        <motion.div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] p-4 overflow-y-auto"
+          onClick={handleClose}
           variants={overlayVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
         >
           <motion.div
-            className="bg-white p-8 max-w-md w-full m-4 max-h-[90vh] overflow-y-auto relative"
+            className="bg-white w-full max-w-md mx-auto rounded-lg shadow-lg relative my-8 sm:my-0"
             onClick={(e) => e.stopPropagation()}
             variants={modalVariants}
           >
-            <div className="flex justify-between items-center mb-8">
-              <motion.h2 
-                className="text-[24px] text-[#1B324A] font-bold"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-              >
-                {titles[type]}
-              </motion.h2>
-              <motion.button 
-                onClick={handleClose} 
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <X className="w-6 h-6" />
-              </motion.button>
-            </div>
-
-            {isSubmitted ? (
-              <motion.div 
-                className="text-center py-4"
-                variants={successVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                <motion.div 
-                  className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#4CAF50] flex items-center justify-center"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ 
-                    type: "spring",
-                    stiffness: 200,
-                    damping: 15,
-                    delay: 0.2
-                  }}
-                >
-                  <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                  </svg>
-                </motion.div>
-                <motion.h3 
-                  className="text-[24px] font-bold mb-4 text-[#1B324A]"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.3 }}
-                >
-                  Заявка отправлена!
-                </motion.h3>
-                <motion.p 
-                  className="text-[16px] text-[#4A5568] mb-8"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.3 }}
-                >
-                  Мы свяжемся с вами в ближайшее время для обсуждения деталей.
-                </motion.p>
-                <motion.button
+            {/* Добавляем полоску для свайпа на мобильных */}
+            <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4 sm:hidden mt-2" />
+            
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-bold text-gray-900">
+                  {isSuccess ? "Заявка отправлена!" : type === "conditions" ? "Условия поступления" : "Оставить заявку"}
+                </h2>
+                <button 
                   onClick={handleClose}
-                  className="w-full bg-[#0095FF] text-white py-3 text-[16px] hover:bg-[#0080FF] transition-colors"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
                 >
-                  Закрыть
-                </motion.button>
-              </motion.div>
-            ) : (
-              <motion.form 
-                onSubmit={handleSubmit}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.3 }}
-              >
-                {courseInfo && (
-                  <div className="bg-gray-50 p-4 mb-6 space-y-2">
-                    <h3 className="text-[16px] font-semibold text-[#1B324A]">Информация о курсе:</h3>
-                    <p className="text-[16px] text-gray-600">Название: {courseInfo.title}</p>
-                    <p className="text-[16px] text-gray-600">Длительность: {courseInfo.duration}</p>
-                    <p className="text-[16px] text-gray-600">Стоимость: {courseInfo.price} руб.</p>
-                  </div>
-                )}
-
-                <div>
-                  <label htmlFor="name" className="block text-[16px] text-[#1B324A] mb-2">
-                    Имя <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    placeholder="Введите ваше имя"
-                    className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-[16px] text-[#1B324A] mb-2">
-                    Email <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="example@mail.com"
-                    className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-[16px] text-[#1B324A] mb-2">
-                    Телефон <span className="text-[#FF0000]">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    placeholder="+7 (___) ___-__-__"
-                    className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-[16px] text-[#1B324A] mb-2">
-                    Сообщение
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    placeholder="Ваше сообщение..."
-                    className="w-full p-4 border border-[#E5E7EB] text-[16px] placeholder-[#A3A3A3] focus:border-[#0095FF] focus:outline-none transition-colors resize-none"
-                  />
-                </div>
-
-                {error && <p className="text-[#FF0000] text-[16px]">{error}</p>}
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-[#1E4FCD] text-white py-4 text-[16px] hover:bg-[#1733A5] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? "Отправка..." : "Отправить"}
+                  <X className="w-6 h-6" />
                 </button>
-              </motion.form>
-            )}
+              </div>
+
+              {isSuccess ? (
+                <motion.div 
+                  className="text-center py-4"
+                  variants={successVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-gray-600 mb-6">
+                    Мы свяжемся с вами в ближайшее время!
+                  </p>
+                  <button
+                    onClick={handleClose}
+                    className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Закрыть
+                  </button>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Имя <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      placeholder="Введите ваше имя"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Email <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      placeholder="example@mail.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Телефон <span className="text-red-500">*</span>
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2">
+                      <div className="relative">
+                        <select
+                          className="w-full appearance-none p-3 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                          value={selectedCountry.code}
+                          onChange={handleCountryChange}
+                        >
+                          {COUNTRY_CODES.map((country) => (
+                            <option 
+                              key={`${country.code}-${country.country}`} 
+                              value={country.code}
+                              className="py-1"
+                            >
+                              {country.country} {country.code}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          </svg>
+                        </div>
+                      </div>
+                      <InputMask
+                        mask={selectedCountry.mask}
+                        value={phoneNumber}
+                        onChange={handlePhoneChange}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                        placeholder={selectedCountry.mask.replace(/9/g, '_')}
+                        required
+                      >
+                        {(inputProps: any) => (
+                          <input
+                            {...inputProps}
+                            type="tel"
+                            name="phone"
+                            inputMode="numeric"
+                          />
+                        )}
+                      </InputMask>
+                    </div>
+                  </div>
+
+                  {error && (
+                    <p className="text-red-500 text-sm">{error}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Отправка...
+                      </div>
+                    ) : (
+                      "Отправить"
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   )
-
-  return createPortal(modalContent, document.body)
 }

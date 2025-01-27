@@ -117,20 +117,6 @@ export default function LandingPage() {
           />
         </motion.div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 pb-12 pt-6 h-full">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center my-8 relative z-10"
-          >
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Оставьте заявку для связи с приемным менеджером
-            </h1>
-            <p className="text-lg text-white/80">
-              Оставьте заявку, и мы свяжемся с вами для обсуждения деталей обучения
-            </p>
-          </motion.div>
-
           {isSuccess ? (
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
@@ -154,6 +140,14 @@ export default function LandingPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg relative z-10"
             >
+              <div className="mb-8 text-center">
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                  Оставьте заявку для связи с приемным менеджером
+                </h1>
+                <p className="text-base text-gray-600">
+                  Оставьте заявку, и мы свяжемся с вами для обсуждения деталей обучения
+                </p>
+              </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">

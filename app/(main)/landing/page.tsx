@@ -99,7 +99,7 @@ export default function LandingPage() {
             priority
           />
         </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 py-12 h-full">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 pb-12 pt-6 h-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

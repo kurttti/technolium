@@ -145,7 +145,7 @@ export default function LandingPage() {
                   Оставьте заявку для связи с приемным менеджером
                 </h1>
                 <p className="text-base text-gray-600">
-                  Оставьте заявку, и мы свяжемся с вами для обсуждения деталей обучения
+                  Заявка рассматривается в течение 1 рабочего дня.
                 </p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-6">

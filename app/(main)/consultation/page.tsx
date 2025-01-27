@@ -11,9 +11,9 @@ export default function ConsultationPage() {
       <div className="max-w-3xl mx-auto px-4 py-8">
         {!isSubmitted && (
           <div className="text-center mb-8">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Получить консультацию</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-4">Вступительный тест</h1>
             <p className="text-lg text-gray-600">
-              Ответьте на несколько вопросов, и мы поможем подобрать оптимальную программу обучения
+            Оставьте ваши контакты, мы направим вам результаты теста и подберем оптимальную программу
             </p>
           </div>
         )}

@@ -34,11 +34,19 @@ export default function RootLayout({
                 ym(${METRIKA_ID}, "init", {
                   clickmap:true,
                   trackLinks:true,
-                  accurateTrackBounce:true
+                  accurateTrackBounce:true,
+                  webvisor:true
                 });
               `,
             }}
           />
+        )}
+        {METRIKA_ID && (
+          <noscript>
+            <div>
+              <img src={`https://mc.yandex.ru/watch/${METRIKA_ID}`} style={{ position: 'absolute', left: '-9999px' }} alt="" />
+            </div>
+          </noscript>
         )}
         <Script
           id="mail-ru-counter"

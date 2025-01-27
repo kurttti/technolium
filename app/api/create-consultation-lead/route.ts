@@ -12,6 +12,14 @@ interface UserInfo {
   phone: string
 }
 
+interface UtmParams {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
+}
+
 const questionMap: Record<number, string> = {
   0: 'Возраст',
   1: 'Уровень владения ПК',
@@ -26,19 +34,28 @@ function formatAnswers(answers: Answer[]): string {
     .join('\n')
 }
 
+function formatUtmParams(utmParams: UtmParams): string {
+  return Object.entries(utmParams)
+    .filter(([_, value]) => value)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join('\n')
+}
+
 export async function POST(request: Request) {
   try {
-    const { answers, userInfo } = await request.json() as { 
+    const { answers, userInfo, utmParams } = await request.json() as { 
       answers: Answer[]
-      userInfo: UserInfo 
+      userInfo: UserInfo
+      utmParams: UtmParams
     }
     const { name, email, phone } = userInfo
 
     // Create or get contact in Bitrix24
     const contactId = await createOrGetContact(name, email, phone)
 
-    // Format answers for Bitrix24
+    // Format answers and UTM params for Bitrix24
     const formattedAnswers = formatAnswers(answers)
+    const formattedUtm = formatUtmParams(utmParams)
 
     // Create deal in Bitrix24
     const dealData = {
@@ -46,15 +63,21 @@ export async function POST(request: Request) {
       CONTACT_ID: contactId,
       ASSIGNED_BY_ID: process.env.BITRIX24_USER_ID!,
       STAGE_ID: "NEW",
-      COMMENTS: `Результаты опроса:\n\n${formattedAnswers}`,
-      SOURCE_ID: "Форма консультации",
+      COMMENTS: `Результаты опроса:\n\n${formattedAnswers}\n\nUTM метки:\n${formattedUtm}`,
+      SOURCE_ID: utmParams.utm_source || "Форма консультации",
       SOURCE_DESCRIPTION: "Заполнена форма для получения консультации на сайте",
+      UTM_SOURCE: utmParams.utm_source || "",
+      UTM_MEDIUM: utmParams.utm_medium || "",
+      UTM_CAMPAIGN: utmParams.utm_campaign || "",
+      UTM_CONTENT: utmParams.utm_content || "",
+      UTM_TERM: utmParams.utm_term || "",
       UF_CRM_CONSULTATION_FORM: JSON.stringify({
         age: answers.find((a: Answer) => a.questionId === 0)?.answer,
         computerSkills: answers.find((a: Answer) => a.questionId === 1)?.answer,
         desiredIncome: answers.find((a: Answer) => a.questionId === 2)?.answer,
         currentField: answers.find((a: Answer) => a.questionId === 3)?.answer,
         citizenship: answers.find((a: Answer) => a.questionId === 4)?.answer,
+        ...utmParams
       })
     }
 

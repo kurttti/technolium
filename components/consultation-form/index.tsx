@@ -1,11 +1,24 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { TestQuestion } from '@/components/career-test/test-question'
 import { ChevronLeft, Loader2 } from 'lucide-react'
 import { NotificationToast } from '../notification-toast'
+import InputMask from "react-input-mask"
+import { createBitrixDeal } from "@/actions/bitrix24"
+
+const COUNTRY_CODES = [
+  { code: '+7', country: 'Россия', mask: '(999) 999-99-99', length: 10 },
+  { code: '+7', country: 'Казахстан', mask: '(999) 999-99-99', length: 10 },
+  { code: '+375', country: 'Беларусь', mask: '(99) 999-99-99', length: 9 },
+  { code: '+374', country: 'Армения', mask: '99 999-999', length: 8 },
+  { code: '+992', country: 'Таджикистан', mask: '(99) 999-99-99', length: 9 },
+  { code: '+993', country: 'Туркменистан', mask: '(99) 999-99-99', length: 8 },
+  { code: '+996', country: 'Киргизия', mask: '(999) 999-999', length: 9 },
+  { code: '+998', country: 'Узбекистан', mask: '(99) 999-99-99', length: 9 },
+];
 
 type Answer = {
   questionId: number
@@ -90,6 +103,23 @@ export function ConsultationForm({ onSuccess }: Props) {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const [utmParams, setUtmParams] = useState<UtmParams>({})
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRY_CODES[0])
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
+  const selectRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -108,6 +138,25 @@ export function ConsultationForm({ onSuccess }: Props) {
     }
   }, [])
 
+  const handleCountrySelect = (country: typeof COUNTRY_CODES[0]) => {
+    setSelectedCountry(country)
+    setPhoneNumber('')
+    setError('')
+    setIsOpen(false)
+  }
+
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const digitsOnly = value.replace(/\D/g, '');
+    setPhoneNumber(value);
+    
+    if (digitsOnly.length === selectedCountry.length) {
+      setError('');
+    } else if (digitsOnly.length > 0) {
+      setError(`Номер телефона должен содержать ${selectedCountry.length} цифр`);
+    }
+  }
+
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers]
     newAnswers[currentQuestionId] = {
@@ -125,37 +174,33 @@ export function ConsultationForm({ onSuccess }: Props) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    
+    const digitsOnly = phoneNumber.replace(/\D/g, '');
+    if (digitsOnly.length !== selectedCountry.length) {
+      setError(`Номер телефона должен содержать ${selectedCountry.length} цифр`);
+      return;
+    }
+
     setIsLoading(true)
     setError(null)
 
-    const formData = new FormData(event.currentTarget)
-    const userInfo = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string,
-    }
-
     try {
-      const response = await fetch('/api/create-consultation-lead', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          answers,
-          userInfo,
-          utmParams
-        }),
-      })
+      const formData = new FormData(event.currentTarget)
+      const fullPhone = selectedCountry.code + digitsOnly;
+      formData.set('phone', fullPhone)
+      formData.append("type", "consultation")
+      formData.append("buttonType", "Вступительный тест")
+      formData.append("pageUrl", window.location.href)
 
-      if (!response.ok) {
-        throw new Error('Failed to submit form')
+      const result = await createBitrixDeal(formData)
+
+      if (result.success) {
+        setSuccess(true)
+        onSuccess?.()
+      } else {
+        setError(result.message)
       }
-
-      setSuccess(true)
-      onSuccess?.()
     } catch (error) {
-      console.error('Error submitting form:', error)
       setError('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.')
     } finally {
       setIsLoading(false)
@@ -250,7 +295,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               id="name"
               name="name"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Иван Иванов"
             />
           </div>
@@ -264,23 +309,61 @@ export function ConsultationForm({ onSuccess }: Props) {
               id="email"
               name="email"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Телефон
             </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-              placeholder="+7 (999) 123-45-67"
-            />
+            <div className="flex gap-2">
+              <div className="relative shrink-0" ref={selectRef}>
+                <button
+                  type="button"
+                  className="h-[52px] flex items-center justify-between px-3 border border-gray-300 focus:outline-none focus:border-blue-500 text-sm bg-[#F8F8F8] whitespace-nowrap"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  <div className="flex items-center">
+                    <span className="text-gray-700">+</span>
+                    <span className="ml-0.5">{selectedCountry.code.replace('+', '')}</span>
+                  </div>
+                  <svg className="h-4 w-4 text-gray-700 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                  </svg>
+                </button>
+                
+                {isOpen && (
+                  <div className="absolute z-10 w-[200px] mt-1 bg-white border border-gray-300 shadow-lg">
+                    {COUNTRY_CODES.map((country) => (
+                      <button
+                        key={`${country.code}-${country.country}`}
+                        type="button"
+                        className="w-full text-left px-4 py-3 hover:bg-gray-50 focus:outline-none text-sm flex items-center space-x-2"
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <span className="text-gray-700">{country.code}</span>
+                        <span className="text-gray-500">{country.country}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="flex-1">
+                <InputMask
+                  mask={selectedCountry.mask}
+                  value={phoneNumber}
+                  onChange={handlePhoneChange}
+                  className={`w-full h-[52px] px-4 border border-gray-300 focus:border-blue-500 focus:outline-none text-gray-900 text-base bg-white ${
+                    error ? 'border-red-500' : ''
+                  }`}
+                  placeholder="(999) 999-99-99"
+                  required
+                />
+              </div>
+            </div>
+            {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
           </div>
 
           <div className="pt-4">

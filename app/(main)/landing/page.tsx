@@ -133,8 +133,13 @@ export default function LandingPage() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg text-center"
+              className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg text-center flex flex-col items-center"
             >
+              <div className="w-16 h-16 bg-[#0DBB0D] rounded-full flex items-center justify-center mb-4">
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div className="text-2xl font-medium text-gray-900 mb-2">Спасибо за заявку!</div>
               <p className="text-gray-600">Мы свяжемся с вами в ближайшее время.</p>
             </motion.div>

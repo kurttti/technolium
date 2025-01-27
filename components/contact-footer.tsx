@@ -195,7 +195,7 @@ export function ContactFooter() {
               </motion.li>
               <motion.li variants={listItemVariants}>
                 <a 
-                  href="https://drive.google.com/file/d/1_REhKsiMKtuVAf1vTVB2ndwhmcTwQGKO/view?usp=sharing"
+                  href="https://yadi.sk/d/PHn7A1z2g-EfJw"
                   target="_blank"
                   rel="noopener noreferrer" 
                   className="text-gray-600 hover:text-gray-900"

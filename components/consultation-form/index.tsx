@@ -441,7 +441,7 @@ export function ConsultationForm({ onSuccess }: Props) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="w-full">
       <div className="mb-8">
         <motion.div 
           initial={{ width: 0 }}

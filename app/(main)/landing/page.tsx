@@ -83,13 +83,30 @@ export default function LandingPage() {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
-      <div className="bg-[#0095FF] py-6 text-center">
+      <motion.div 
+        className="bg-[#0095FF] py-6 text-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ 
+          duration: 0.8,
+          delay: 0.3,
+          ease: [0.22, 1, 0.36, 1]
+        }}
+      >
         <h2 className="text-4xl text-white">
           Рады вас приветствовать в Технолиум
         </h2>
-      </div>
+      </motion.div>
       <main className="relative flex-1">
-        <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ 
+            duration: 1.2,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
           <Image
             src="/background-landing.png"
             alt="Background"
@@ -98,7 +115,7 @@ export default function LandingPage() {
             quality={100}
             priority
           />
-        </div>
+        </motion.div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 pb-12 pt-6 h-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -107,7 +124,7 @@ export default function LandingPage() {
             className="text-center my-8 relative z-10"
           >
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Заявка на льготное обучение
+            Оставьте заявку для связи с приемным менеджером
             </h1>
             <p className="text-lg text-white/80">
               Оставьте заявку, и мы свяжемся с вами для обсуждения деталей обучения

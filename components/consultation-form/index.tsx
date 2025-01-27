@@ -12,6 +12,10 @@ type Answer = {
   answer: string
 }
 
+type Props = {
+  onSuccess?: () => void
+}
+
 const questions = [
   {
     id: 0,
@@ -65,7 +69,7 @@ const questions = [
   }
 ]
 
-export function ConsultationForm() {
+export function ConsultationForm({ onSuccess }: Props) {
   const [currentQuestionId, setCurrentQuestionId] = useState(0)
   const [answers, setAnswers] = useState<Answer[]>([])
   const [showContactForm, setShowContactForm] = useState(false)
@@ -117,6 +121,7 @@ export function ConsultationForm() {
       }
 
       setSuccess(true)
+      onSuccess?.()
     } catch (error) {
       console.error('Error submitting form:', error)
       setError('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.')

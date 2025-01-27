@@ -192,15 +192,40 @@ export function ConsultationForm({ onSuccess }: Props) {
       formData.append("buttonType", "Вступительный тест")
       formData.append("pageUrl", window.location.href)
 
+      // Добавляем результаты опроса как комментарий
+      const surveyResults = answers.map(answer => 
+        `${questions[answer.questionId].text}: ${answer.answer}`
+      ).join('\n')
+      formData.append("message", surveyResults)
+
+      // Добавляем UTM метки с правильными именами
+      if (utmParams.utm_source) formData.append("utm_source", utmParams.utm_source)
+      if (utmParams.utm_medium) formData.append("utm_medium", utmParams.utm_medium)
+      if (utmParams.utm_campaign) formData.append("utm_campaign", utmParams.utm_campaign)
+      if (utmParams.utm_content) formData.append("utm_content", utmParams.utm_content)
+      if (utmParams.utm_term) formData.append("utm_term", utmParams.utm_term)
+
+      // Логируем данные перед отправкой
+      console.log('Отправляем данные в Bitrix24:')
+      console.log('UTM метки:', utmParams)
+      console.log('Результаты опроса:', surveyResults)
+      console.log('Телефон:', fullPhone)
+      formData.forEach((value, key) => {
+        console.log(`${key}:`, value)
+      })
+
       const result = await createBitrixDeal(formData)
+      console.log('Ответ от Bitrix24:', result)
 
       if (result.success) {
         setSuccess(true)
         onSuccess?.()
       } else {
+        console.error('Ошибка от Bitrix24:', result.message)
         setError(result.message)
       }
     } catch (error) {
+      console.error('Ошибка при отправке формы:', error)
       setError('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.')
     } finally {
       setIsLoading(false)

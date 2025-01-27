@@ -443,17 +443,32 @@ export function ConsultationForm({ onSuccess }: Props) {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8">
-        <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-blue-600 transition-all duration-300 ease-out"
-            style={{ 
+        <motion.div 
+          initial={{ width: 0 }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="h-2 bg-gray-200 rounded-full overflow-hidden"
+        >
+          <motion.div 
+            className="h-full bg-blue-600"
+            initial={{ width: 0 }}
+            animate={{ 
               width: `${((currentQuestionId + 1) / questions.length) * 100}%` 
             }}
+            transition={{ 
+              duration: 0.4,
+              ease: [0.22, 1, 0.36, 1]
+            }}
           />
-        </div>
-        <div className="mt-2 text-sm text-gray-600">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="mt-2 text-sm text-gray-600"
+        >
           Вопрос {currentQuestionId + 1} из {questions.length}
-        </div>
+        </motion.div>
       </div>
 
       <AnimatePresence mode="wait">
@@ -462,21 +477,41 @@ export function ConsultationForm({ onSuccess }: Props) {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.4 }}
           className="mb-6"
         >
-          <h3 className="text-2xl font-semibold mb-3">{questions[currentQuestionId].text}</h3>
-          <div className="text-gray-600 mb-6">
+          <motion.h3 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="text-2xl font-semibold mb-3"
+          >
+            {questions[currentQuestionId].text}
+          </motion.h3>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="text-gray-600 mb-6"
+          >
             {currentQuestionId === 0 && "Выберите вашу возрастную группу"}
             {currentQuestionId === 1 && "Оцените ваш текущий уровень владения компьютером"}
             {currentQuestionId === 2 && "Укажите желаемый уровень дохода после прохождения обучения"}
             {currentQuestionId === 3 && "Укажите вашу текущую или последнюю сферу деятельности"}
             {currentQuestionId === 4 && "Выберите страну вашего гражданства"}
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 gap-3">
             {questions[currentQuestionId].options.map((option, index) => (
-              <button
+              <motion.button
                 key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.3,
+                  delay: 0.2 + index * 0.05,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
                 onClick={() => handleAnswer(option)}
                 className={`w-full py-4 px-6 text-left border rounded-lg transition-all duration-200
                   ${answers[currentQuestionId]?.answer === option
@@ -485,7 +520,7 @@ export function ConsultationForm({ onSuccess }: Props) {
                   }`}
               >
                 {option}
-              </button>
+              </motion.button>
             ))}
           </div>
         </motion.div>

@@ -10,8 +10,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // Здесь должна быть реальная проверка учетных данных администратора
-        // Это только для примера!
         if (credentials?.username === 'admin' && credentials?.password === 'admin') {
           return {
             id: '1',
@@ -40,5 +38,10 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/login',
+  },
+  // Отключаем автоматические сессионные запросы
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 };

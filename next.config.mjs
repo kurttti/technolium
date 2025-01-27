@@ -46,6 +46,23 @@ const nextConfig = {
         ]
       },
       {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'X-Requested-With, Content-Type, Authorization'
+          }
+        ]
+      },
+      {
         source: '/(.*)',
         headers: [
           {
@@ -59,7 +76,7 @@ const nextConfig = {
               "frame-src 'self' https://*.bitrix24.ru",
               "media-src 'self' https://*.bitrix24.ru",
               "worker-src 'self' blob:",
-              "font-src 'self' https://*.bitrix24.ru",
+              "font-src 'self' https://*.bitrix24.ru data:",
               "manifest-src 'self'"
             ].join('; ')
           }

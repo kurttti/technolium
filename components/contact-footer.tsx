@@ -145,11 +145,13 @@ export function ContactFooter() {
             variants={listItemVariants}
           >
             <Image
-              src="/footerlogo.png"
+              src="/TechnoliumLogo.svg"
               width={110}
               height={65}
-              alt="Footer Logo"
+              alt="Технолиум"
               style={{ width: "auto", height: "auto" }}
+              priority={true}
+              className="h-20 w-auto"
             />
           </motion.div>
 

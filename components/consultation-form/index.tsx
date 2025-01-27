@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { TestQuestion } from '@/components/career-test/test-question'
@@ -10,6 +10,14 @@ import { NotificationToast } from '../notification-toast'
 type Answer = {
   questionId: number
   answer: string
+}
+
+interface UtmParams {
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_content?: string
+  utm_term?: string
 }
 
 type Props = {
@@ -81,6 +89,24 @@ export function ConsultationForm({ onSuccess }: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [utmParams, setUtmParams] = useState<UtmParams>({})
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search)
+      const utms: UtmParams = {}
+      
+      const utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+      utmFields.forEach(field => {
+        const value = urlParams.get(field)
+        if (value) {
+          utms[field as keyof UtmParams] = value
+        }
+      })
+
+      setUtmParams(utms)
+    }
+  }, [])
 
   const handleAnswer = (answer: string) => {
     const newAnswers = [...answers]
@@ -117,7 +143,8 @@ export function ConsultationForm({ onSuccess }: Props) {
         },
         body: JSON.stringify({
           answers,
-          userInfo
+          userInfo,
+          utmParams
         }),
       })
 

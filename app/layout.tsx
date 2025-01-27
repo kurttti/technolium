@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Script from 'next/script'
 import '@/styles/globals.css'
+import Bitrix24Widget from '@/components/bitrix24-widget'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 
@@ -73,11 +74,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true} className="bg-white">
         {children}
-        <Script
-          id="b24-integration"
-          strategy="afterInteractive"
-          src="https://cdn-ru.bitrix24.ru/b24593293/crm/site_button/loader_2_87vvqx.js"
-        />
+        <Bitrix24Widget />
       </body>
     </html>
   )

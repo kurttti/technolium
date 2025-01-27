@@ -1,10 +1,11 @@
 "use client"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { ContactFooter } from "@/components/contact-footer"
 import { ApplicationButton } from "@/components/application-button"
 import { Users, BookOpen, MessageCircle, GraduationCap, Calendar, Target, CheckCircle, ArrowLeft } from "lucide-react"
 import { motion } from "framer-motion"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 
 const container = {
   hidden: { opacity: 0 },
@@ -314,7 +315,10 @@ export default function CurrentActivityPage() {
         </div>
       </section>
 
-      <ContactFooter />
+      <main>
+      </main>
+      <Contacts />
+      <Footer />
     </div>
   )
 }

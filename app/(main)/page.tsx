@@ -6,7 +6,8 @@ import { AdmissionPlan } from "@/components/admission-plan"
 import { EducationFormat } from "@/components/education-format"
 import { CommercialViability } from "@/components/commercial-viability"
 import { News } from "@/components/news"
-import { ContactFooter } from "@/components/contact-footer"
+import { Footer } from "@/components/footer"
+import { Contacts } from "@/components/contacts"
 import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useState } from "react"
 
@@ -22,7 +23,7 @@ const fadeInUp = {
   }
 }
 
-export default function Home() {
+export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
 
@@ -51,7 +52,8 @@ export default function Home() {
         <EducationFormat />
         <CommercialViability />
         <News />
-        <ContactFooter />
+        <Contacts />
+        <Footer />
       </main>
     )
   }
@@ -133,7 +135,17 @@ export default function Home() {
         variants={fadeInUp}
         transition={{ delay: staggerDelay * 7 }}
       >
-        <ContactFooter />
+        <Contacts />
+      </motion.div>
+      
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: viewportAmount }}
+        variants={fadeInUp}
+        transition={{ delay: staggerDelay * 8 }}
+      >
+        <Footer />
       </motion.div>
     </main>
   )

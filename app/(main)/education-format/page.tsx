@@ -1,10 +1,11 @@
 "use client"
 
 import Image from "next/image"
-import { ContactFooter } from "@/components/contact-footer"
-import { ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
 import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 
 const container = {
   hidden: { opacity: 0 },
@@ -55,7 +56,7 @@ export default function EducationFormatPage() {
       title: "Материалы",
       description: [
         "Короткие записи простых и понятных лекций от лучших преподавателей на рынке СНГ",
-        "Продолжительность каждой, отдельно взятой лекции - до 1 минуты",
+        "Продолжительность каждой, отдельно взятой лекции - до 15 минуты",
         "Выполнение тестовых и практических заданий от работодателей с первого месяца",
       ],
       image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=400&fit=crop",
@@ -291,7 +292,8 @@ export default function EducationFormatPage() {
           </div>
         </section>
       </main>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

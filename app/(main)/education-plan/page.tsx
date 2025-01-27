@@ -1,9 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import { ContactFooter } from "@/components/contact-footer"
-import { CheckCircle2, Clock } from "lucide-react"
 import { motion } from "framer-motion"
+import { Contacts } from "@/components/contacts"
+import { Footer } from "@/components/footer"
+import { CheckCircle2, Clock } from "lucide-react"
 
 const container = {
   hidden: { opacity: 0 },
@@ -218,7 +219,8 @@ export default function EducationPlanPage() {
           </div>
         </section>
       </main>
-      <ContactFooter />
+      <Contacts />
+      <Footer />
     </div>
   )
 }

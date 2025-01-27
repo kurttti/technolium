@@ -145,11 +145,11 @@ export function ContactFooter() {
             variants={listItemVariants}
           >
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/footerlogo-NLvQaEQZ1RQ0WrvSja42PYCANeUhJf.png"
-              alt="Технолиум"
-              width={311}
-              height={80}
-              className="h-20 w-auto"
+              src="/footerlogo.png"
+              width={110}
+              height={65}
+              alt="Footer Logo"
+              style={{ width: "auto", height: "auto" }}
             />
           </motion.div>
 

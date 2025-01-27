@@ -75,8 +75,9 @@ export default function RootLayout({
         {children}
         <Script
           id="b24-integration"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://cdn-ru.bitrix24.ru/b24593293/crm/site_button/loader_2_87vvqx.js"
+          crossOrigin="anonymous"
         />
       </body>
     </html>

@@ -116,7 +116,7 @@ export default function LandingPage() {
             priority
           />
         </motion.div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 pb-12 pt-6 h-full">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 py-12 h-full">
           {isSuccess ? (
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
@@ -140,7 +140,7 @@ export default function LandingPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg relative z-10"
             >
-              <div className="mb-8 text-center">
+              <div className="mb-8 text-center px-6">
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
                   Оставьте заявку для связи с приемным менеджером
                 </h1>
@@ -148,85 +148,97 @@ export default function LandingPage() {
                   Заявка рассматривается в течение 1 рабочего дня.
                 </p>
               </div>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6 px-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Телефон <span className="text-red-500">*</span>
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2">
-                    <div className="relative">
-                      <select
-                        className="w-full appearance-none p-4 pr-8 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
-                        value={selectedCountry.code}
-                        onChange={handleCountryChange}
-                      >
-                        {COUNTRY_CODES.map((country) => (
-                          <option 
-                            key={`${country.code}-${country.country}`} 
-                            value={country.code}
-                            className="py-1"
-                          >
-                            {country.country} {country.code}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                        </svg>
+                  <div className="px-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Телефон <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                  <div className="px-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2">
+                      <div className="relative">
+                        <select
+                          className="w-full appearance-none p-4 pr-8 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+                          value={selectedCountry.code}
+                          onChange={handleCountryChange}
+                        >
+                          {COUNTRY_CODES.map((country) => (
+                            <option 
+                              key={`${country.code}-${country.country}`} 
+                              value={country.code}
+                              className="py-1"
+                            >
+                              {country.country} {country.code}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          </svg>
+                        </div>
                       </div>
+                      <InputMask
+                        mask={selectedCountry.mask}
+                        value={phoneNumber}
+                        onChange={handlePhoneChange}
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+                        placeholder={selectedCountry.mask.replace(/9/g, '_')}
+                        required
+                      >
+                        {(inputProps: any) => (
+                          <input
+                            {...inputProps}
+                            type="tel"
+                            name="phone"
+                            inputMode="numeric"
+                          />
+                        )}
+                      </InputMask>
                     </div>
-                    <InputMask
-                      mask={selectedCountry.mask}
-                      value={phoneNumber}
-                      onChange={handlePhoneChange}
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
-                      placeholder={selectedCountry.mask.replace(/9/g, '_')}
-                      required
-                    >
-                      {(inputProps: any) => (
-                        <input
-                          {...inputProps}
-                          type="tel"
-                          name="phone"
-                          inputMode="numeric"
-                        />
-                      )}
-                    </InputMask>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
-                    placeholder="Ваш e-mail"
-                  />
+                  <div className="px-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Email <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                  <div className="px-4">
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+                      placeholder="Ваш e-mail"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Имя <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
-                    placeholder="Ваше имя"
-                  />
+                  <div className="px-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Имя <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                  <div className="px-4">
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+                      placeholder="Ваше имя"
+                    />
+                  </div>
                 </div>
 
                 {error && (
                   <p className="text-red-500 text-sm text-center">{error}</p>
                 )}
 
-                <div className="flex justify-center">
+                <div className="flex justify-center px-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}

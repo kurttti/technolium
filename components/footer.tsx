@@ -60,22 +60,22 @@ export function Footer() {
                 <ul className="space-y-3">
                   <motion.li variants={listItemVariants} className="text-center sm:text-left">
                     <Link href="/specialties/machine-learning" className="text-sm sm:text-base text-gray-700 hover:text-gray-900">
-                      Машинное обучение
+                      Нейросети
                     </Link>
                   </motion.li>
                   <motion.li variants={listItemVariants} className="text-center sm:text-left">
                     <Link href="/specialties/software-testing" className="text-sm sm:text-base text-gray-700 hover:text-gray-900">
-                      Автоматизация тестирования ПО
+                      Тестирования ПО
                     </Link>
                   </motion.li>
                   <motion.li variants={listItemVariants} className="text-center sm:text-left">
                     <Link href="/specialties/information-security" className="text-sm sm:text-base text-gray-700 hover:text-gray-900">
-                      Информационная безопасность
+                      Безопасность
                     </Link>
                   </motion.li>
                   <motion.li variants={listItemVariants} className="text-center sm:text-left">
                     <Link href="/specialties/web-development" className="text-sm sm:text-base text-gray-700 hover:text-gray-900">
-                      Серверная веб-разработка
+                      Бекенд-разработка
                     </Link>
                   </motion.li>
                 </ul>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Footer } from "@/components/footer"
 import InputMask from "react-input-mask"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { createBitrixDeal } from "@/actions/bitrix24"
 
 const COUNTRY_CODES = [
@@ -82,18 +83,29 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-grow bg-white">
-        <div className="max-w-4xl mx-auto px-4 py-12 md:py-16">
+      <main className="">
+        <div className="max-w-4xl mx-auto px-4 py-24 relative">
+          <div className="fixed left-0 right-0 -z-10" style={{ height: '800px' }}>
+            <Image
+              src="/background-landing.png"
+              alt="Background"
+              fill
+              className="object-cover"
+              quality={100}
+              priority
+            />
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center my-8 relative z-10"
           >
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Заявка на льготное обучение
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-lg text-white/80">
               Оставьте заявку, и мы свяжемся с вами для обсуждения деталей обучения
             </p>
           </motion.div>
@@ -102,11 +114,11 @@ export default function LandingPage() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg text-center"
+              className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg text-center relative z-10"
             >
               <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Заявка отправлена!</h2>
@@ -119,7 +131,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg"
+              className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg relative z-10"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
@@ -130,8 +142,8 @@ export default function LandingPage() {
                     type="text"
                     name="name"
                     required
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    placeholder="Введите ваше имя"
+                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+                    placeholder="Ваше имя"
                   />
                 </div>
 
@@ -143,8 +155,8 @@ export default function LandingPage() {
                     type="email"
                     name="email"
                     required
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    placeholder="example@mail.com"
+                    className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+                    placeholder="Ваш e-mail"
                   />
                 </div>
 
@@ -155,7 +167,7 @@ export default function LandingPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-2">
                     <div className="relative">
                       <select
-                        className="w-full appearance-none p-3 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                        className="w-full appearance-none p-4 pr-8 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
                         value={selectedCountry.code}
                         onChange={handleCountryChange}
                       >
@@ -179,7 +191,7 @@ export default function LandingPage() {
                       mask={selectedCountry.mask}
                       value={phoneNumber}
                       onChange={handlePhoneChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
                       placeholder={selectedCountry.mask.replace(/9/g, '_')}
                       required
                     >
@@ -195,26 +207,14 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Сообщение
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    placeholder="Введите ваше сообщение"
-                  />
-                </div>
-
                 {error && (
-                  <p className="text-red-500 text-sm">{error}</p>
+                  <p className="text-red-500 text-sm text-center">{error}</p>
                 )}
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[#1E4FCD] text-white py-4 rounded-xl hover:bg-[#1E4FCD]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center justify-center">

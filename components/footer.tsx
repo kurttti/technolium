@@ -29,7 +29,7 @@ const listItemVariants = {
 
 export function Footer() {
   return (
-    <footer className="bg-white text-gray-900">
+    <footer className="bg-white text-gray-900 w-full">
       <motion.div 
         className="w-full py-8 sm:py-12"
         initial="hidden"
@@ -37,27 +37,27 @@ export function Footer() {
         viewport={{ once: true }}
         variants={footerContentVariants}
       >
-        <div className="max-w-5xl mx-auto px-6 sm:px-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
           <motion.div 
-            className="flex flex-col items-center sm:items-start gap-8 sm:gap-12"
+            className="flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-12 w-full"
             variants={listItemVariants}
           >
-            <div className="w-full flex justify-center sm:justify-start">
+            <motion.div className="flex-shrink-0">
               <Image
                 src="/footerlogo.png"
-                width={120}
-                height={43}
+                width={140}
+                height={36}
                 alt="Технолиум"
                 style={{ width: "auto", height: "auto" }}
                 priority={true}
-                className="h-6 sm:h-8 w-auto"
+                className="w-[120px] sm:w-[130px] md:w-[140px] h-auto"
               />
-            </div>
+            </motion.div>
 
-            <div className="w-full grid grid-cols-2 gap-x-8 gap-y-8 sm:gap-12">
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 flex-1 justify-end">
               <div className="text-center sm:text-left">
-                <h4 className="font-medium text-base sm:text-lg mb-4 text-gray-900">Направления</h4>
-                <ul className="space-y-3">
+                <h3 className="font-medium mb-4">Направления</h3>
+                <ul className="space-y-2">
                   <motion.li variants={listItemVariants} className="text-center sm:text-left">
                     <Link href="/specialties/machine-learning" className="text-sm sm:text-base text-gray-700 hover:text-gray-900">
                       Нейросети
@@ -82,8 +82,8 @@ export function Footer() {
               </div>
 
               <div className="text-center sm:text-left">
-                <h4 className="font-medium text-base sm:text-lg mb-4 text-gray-900">Информация</h4>
-                <ul className="space-y-3">
+                <h3 className="font-medium mb-4">Информация</h3>
+                <ul className="space-y-2">
                   <motion.li variants={listItemVariants} className="text-center sm:text-left">
                     <Link href="/professional-distribution" className="text-sm sm:text-base text-gray-700 hover:text-gray-900">
                       Трудоустройство

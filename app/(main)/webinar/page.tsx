@@ -272,6 +272,9 @@ export default function WebinarPage() {
                           onChange={handlePhoneChange}
                           className={`w-full h-[52px] px-4 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:outline-none focus:border-blue-500 bg-[#F8F8F8]`}
                           placeholder={selectedCountry.mask.replace(/9/g, '_')}
+                          type="tel"
+                          inputMode="numeric"
+                          autoComplete="tel"
                         />
                       </div>
                     </div>

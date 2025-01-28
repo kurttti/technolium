@@ -322,7 +322,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               id="name"
               name="name"
               required
-              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-xl"
               placeholder="Иван Иванов"
             />
           </div>
@@ -336,7 +336,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               id="email"
               name="email"
               required
-              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-xl"
               placeholder="you@example.com"
             />
           </div>
@@ -349,7 +349,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               <div className="relative shrink-0" ref={selectRef}>
                 <button
                   type="button"
-                  className="h-[52px] flex items-center justify-between px-3 border border-gray-300 focus:outline-none focus:border-blue-500 text-sm bg-[#F8F8F8] whitespace-nowrap"
+                  className="h-[52px] flex items-center justify-between px-3 border border-gray-300 focus:outline-none focus:border-blue-500 text-sm bg-[#F8F8F8] whitespace-nowrap rounded-xl"
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   <div className="flex items-center">
@@ -383,7 +383,7 @@ export function ConsultationForm({ onSuccess }: Props) {
                   mask={selectedCountry.mask}
                   value={phoneNumber}
                   onChange={handlePhoneChange}
-                  className={`w-full h-[52px] px-4 border border-gray-300 focus:border-blue-500 focus:outline-none text-gray-900 text-base bg-white ${
+                  className={`w-full h-[52px] px-4 border border-gray-300 focus:border-blue-500 focus:outline-none text-gray-900 text-base bg-white rounded-xl ${
                     error ? 'border-red-500' : ''
                   }`}
                   placeholder="(999) 999-99-99"
@@ -397,7 +397,7 @@ export function ConsultationForm({ onSuccess }: Props) {
           <div className="pt-4">
             <Button
               type="submit"
-              className="w-full bg-blue-600 text-white hover:bg-blue-700"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-xl h-[52px]"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -422,7 +422,7 @@ export function ConsultationForm({ onSuccess }: Props) {
         <Button
           variant="ghost"
           onClick={handleBack}
-          className="mt-4 text-gray-600 hover:text-gray-900"
+          className="mt-4 text-gray-600 hover:text-gray-900 rounded-xl"
         >
           <ChevronLeft className="w-4 h-4 mr-2" />
           Вернуться к вопросам
@@ -504,16 +504,15 @@ export function ConsultationForm({ onSuccess }: Props) {
           <div className="grid grid-cols-1 gap-3">
             {questions[currentQuestionId].options.map((option, index) => (
               <motion.button
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                key={`${currentQuestionId}-${option}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ 
                   duration: 0.3,
-                  delay: 0.2 + index * 0.05,
-                  ease: [0.22, 1, 0.36, 1]
+                  delay: index * 0.05
                 }}
                 onClick={() => handleAnswer(option)}
-                className={`w-full py-4 px-6 text-left border rounded-lg transition-all duration-200
+                className={`w-full py-4 px-6 text-left border rounded-xl transition-all duration-200
                   ${answers[currentQuestionId]?.answer === option
                     ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'
                     : 'bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-200'

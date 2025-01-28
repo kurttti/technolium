@@ -47,9 +47,9 @@ export function TestQuestion({
               variant={isSelected ? "default" : "outline"}
               className={`h-auto py-4 px-6 text-left ${
                 isSelected 
-                  ? "bg-blue-600 text-white hover:bg-blue-700" 
-                  : "hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200"
-              } w-full transition-all duration-200`}
+                  ? "bg-blue-600 text-white active:bg-blue-600" 
+                  : "active:bg-transparent md:hover:bg-blue-50 md:hover:text-blue-700 md:hover:border-blue-200"
+              } w-full transition-colors touch-none`}
               onClick={() => handleAnswer(option)}
               disabled={isSubmitting}
             >

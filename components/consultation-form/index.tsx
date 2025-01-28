@@ -380,6 +380,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               <div className="flex-1">
                 <InputMask
                   id="phone"
+                  type="tel"
                   mask={selectedCountry.mask}
                   value={phoneNumber}
                   onChange={handlePhoneChange}

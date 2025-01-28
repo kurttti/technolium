@@ -3,6 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { FaTelegram, FaWhatsapp } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
 
 const footerContentVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -134,32 +136,39 @@ export function Footer() {
                 <h3 className="text-lg font-semibold text-gray-900 text-center md:text-left">
                   Контакты
                 </h3>
-                <ul className="space-y-3">
-                  <motion.li variants={listItemVariants}>
+                <div className="flex flex-col space-y-2">
+                  <div className="flex items-center space-x-2">
+                    <FaTelegram className="text-xl" />
                     <a 
                       href="https://t.me/TechnoliumWeb_bot" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200 flex items-center justify-center md:justify-start gap-2"
+                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
                     >
-                      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.27-.48.74-.74 2.93-1.27 4.88-2.11 5.87-2.51 2.8-1.14 3.37-1.34 3.75-1.34.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06-.01.13-.01.2z"/>
-                      </svg>
                       Telegram
                     </a>
-                  </motion.li>
-                  <motion.li variants={listItemVariants}>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <FaWhatsapp className="text-xl" />
+                    <a 
+                      href="https://wa.me/79952147457" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-green-400 transition-colors duration-200"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <MdEmail className="text-xl" />
                     <a 
                       href="mailto:info@technolium.ru"
-                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200 flex items-center justify-center md:justify-start gap-2"
+                      className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
                     >
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
                       info@technolium.ru
                     </a>
-                  </motion.li>
-                </ul>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </div>

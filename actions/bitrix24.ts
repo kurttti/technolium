@@ -80,13 +80,15 @@ export async function createBitrixDeal(formData: FormData) {
           : "Заявка на льготное обучение"
         : type === "conditions"
           ? "Запрос условий"
-          : "Общий запрос"
+          : type === "webinar"
+            ? "Запись на вебинар"
+            : "Общий запрос"
 
     const dealData: BitrixDealData = {
       TITLE: `${name}: ${leadTitle}`,
       CONTACT_ID: await createOrGetContact(name, email, phone),
       ASSIGNED_BY_ID: process.env.BITRIX24_USER_ID!,
-      STAGE_ID: "NEW",
+      STAGE_ID: type === "webinar" ? "WEBINAR" : "NEW",
       COMMENTS: message || "Без комментария",
     }
 

@@ -322,7 +322,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               id="name"
               name="name"
               required
-              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-xl"
               placeholder="Иван Иванов"
             />
           </div>
@@ -336,7 +336,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               id="email"
               name="email"
               required
-              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full h-[52px] px-4 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-xl"
               placeholder="you@example.com"
             />
           </div>
@@ -349,7 +349,7 @@ export function ConsultationForm({ onSuccess }: Props) {
               <div className="relative shrink-0" ref={selectRef}>
                 <button
                   type="button"
-                  className="h-[52px] flex items-center justify-between px-3 border border-gray-300 focus:outline-none focus:border-blue-500 text-sm bg-[#F8F8F8] whitespace-nowrap"
+                  className="h-[52px] flex items-center justify-between px-3 border border-gray-300 focus:outline-none focus:border-blue-500 text-sm bg-[#F8F8F8] whitespace-nowrap rounded-xl"
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   <div className="flex items-center">
@@ -383,7 +383,7 @@ export function ConsultationForm({ onSuccess }: Props) {
                   mask={selectedCountry.mask}
                   value={phoneNumber}
                   onChange={handlePhoneChange}
-                  className={`w-full h-[52px] px-4 border border-gray-300 focus:border-blue-500 focus:outline-none text-gray-900 text-base bg-white ${
+                  className={`w-full h-[52px] px-4 border border-gray-300 focus:border-blue-500 focus:outline-none text-gray-900 text-base bg-white rounded-xl ${
                     error ? 'border-red-500' : ''
                   }`}
                   placeholder="(999) 999-99-99"
@@ -397,7 +397,7 @@ export function ConsultationForm({ onSuccess }: Props) {
           <div className="pt-4">
             <Button
               type="submit"
-              className="w-full bg-blue-600 text-white hover:bg-blue-700"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-xl h-[52px]"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -422,7 +422,7 @@ export function ConsultationForm({ onSuccess }: Props) {
         <Button
           variant="ghost"
           onClick={handleBack}
-          className="mt-4 text-gray-600 hover:text-gray-900"
+          className="mt-4 text-gray-600 hover:text-gray-900 rounded-xl"
         >
           <ChevronLeft className="w-4 h-4 mr-2" />
           Вернуться к вопросам

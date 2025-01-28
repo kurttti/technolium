@@ -172,7 +172,7 @@ export default function LandingPage() {
             >
               <div className="mb-6 sm:mb-8 text-center px-2 sm:px-6">
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-                  Оставьте заявку для связи с приемным менеджером
+                  Заявка на вступительное интервью
                 </h1>
                 <p className="text-sm sm:text-base text-gray-600">
                   Заявка рассматривается в течение 1 рабочего дня.

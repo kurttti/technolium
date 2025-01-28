@@ -512,7 +512,7 @@ export function ConsultationForm({ onSuccess }: Props) {
                   delay: index * 0.05
                 }}
                 onClick={() => handleAnswer(option)}
-                className={`w-full py-4 px-6 text-left border rounded-lg transition-all duration-200
+                className={`w-full py-4 px-6 text-left border rounded-xl transition-all duration-200
                   ${answers[currentQuestionId]?.answer === option
                     ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700'
                     : 'bg-white border-gray-200 hover:bg-blue-50 hover:border-blue-200'

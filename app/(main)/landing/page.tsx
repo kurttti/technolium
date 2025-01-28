@@ -79,6 +79,26 @@ export default function LandingPage() {
       formData.append("buttonType", "Льготное обучение")
       formData.append("pageUrl", window.location.href)
 
+      // Add UTM parameters from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_content',
+        'utm_term'
+      ];
+
+      // Add all UTM parameters if they exist
+      utmParams.forEach(param => {
+        const value = urlParams.get(param);
+        if (value) formData.append(param, value);
+      });
+
+      // Add referrer if available
+      const referrer = document.referrer;
+      if (referrer) formData.append('utm_referrer', referrer);
+
       const result = await createBitrixDeal(formData)
 
       if (result.success) {

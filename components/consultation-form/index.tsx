@@ -248,7 +248,7 @@ export function ConsultationForm({ onSuccess }: Props) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-xl mx-auto text-center bg-white rounded-2xl shadow-lg p-8"
+        className="w-full max-w-xl mx-auto text-center bg-white rounded-2xl shadow-lg p-6 sm:p-8"
       >
         <div className="mb-6">
           <div className="w-16 h-16 bg-green-100 rounded-full mx-auto flex items-center justify-center mb-4">
@@ -271,28 +271,28 @@ export function ConsultationForm({ onSuccess }: Props) {
             Ваш персональный карьерный консультант с вами свяжется в ближайшее время
           </p>
         </div>
-        <div className="bg-blue-50 rounded-xl p-6">
-          <p className="text-sm text-blue-700">
+        <div className="bg-blue-50 rounded-xl p-4 sm:p-6">
+          <p className="text-sm text-blue-700 mb-3">
             Мы поможем вам:
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-blue-600">
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <ul className="space-y-3 text-sm text-blue-600">
+            <li className="flex items-start">
+              <svg className="w-5 h-5 mr-3 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              Подобрать оптимальную программу обучения
+              <span>Подобрать оптимальную программу обучения</span>
             </li>
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start">
+              <svg className="w-5 h-5 mr-3 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              Составить индивидуальный план развития
+              <span>Составить индивидуальный план развития</span>
             </li>
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start">
+              <svg className="w-5 h-5 mr-3 text-blue-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              Ответить на все ваши вопросы
+              <span>Ответить на все ваши вопросы</span>
             </li>
           </ul>
         </div>

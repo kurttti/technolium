@@ -504,13 +504,12 @@ export function ConsultationForm({ onSuccess }: Props) {
           <div className="grid grid-cols-1 gap-3">
             {questions[currentQuestionId].options.map((option, index) => (
               <motion.button
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                key={`${currentQuestionId}-${option}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ 
                   duration: 0.3,
-                  delay: 0.2 + index * 0.05,
-                  ease: [0.22, 1, 0.36, 1]
+                  delay: index * 0.05
                 }}
                 onClick={() => handleAnswer(option)}
                 className={`w-full py-4 px-6 text-left border rounded-lg transition-all duration-200

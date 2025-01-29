@@ -283,7 +283,7 @@ export function LeadForm() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full pt-4"
       >
         <NotificationToast
-          show={showNotification}
+          isOpen={showNotification}
           onClose={() => setShowNotification(false)}
           message="Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время."
           type="success"

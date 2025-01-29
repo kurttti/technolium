@@ -1,5 +1,17 @@
-import { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions, Session } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { JWT } from 'next-auth/jwt';
+
+interface CustomUser {
+  id: string;
+  email: string;
+  name: string;
+  isAdmin: boolean;
+}
+
+interface CustomSession extends Session {
+  user: CustomUser;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -25,15 +37,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
-        token.isAdmin = user.isAdmin;
+        token.isAdmin = (user as CustomUser).isAdmin;
       }
-      return token;
+      return token as JWT & { isAdmin: boolean };
     },
     session: async ({ session, token }) => {
       if (session?.user) {
-        session.user.isAdmin = token.isAdmin;
+        session.user = {
+          ...session.user,
+          id: '1',
+          isAdmin: (token as JWT & { isAdmin: boolean }).isAdmin
+        } as CustomUser;
       }
-      return session;
+      return session as CustomSession;
     },
   },
   pages: {

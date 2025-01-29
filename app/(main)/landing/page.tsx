@@ -41,18 +41,6 @@ export default function ConsultationPage() {
               >
                 Вступительный тест
               </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ 
-                  duration: 0.3,
-                  delay: 0.3,
-                  ease: [0.22, 1, 0.36, 1]
-                }}
-                className="text-lg text-gray-600"
-              >
-                Оставьте ваши контакты, мы направим вам результаты теста и подберем оптимальную программу
-              </motion.p>
             </motion.div>
           )}
           <ConsultationForm onSuccess={handleSuccess} />

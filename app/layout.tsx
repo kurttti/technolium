@@ -9,12 +9,52 @@ const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 const MAILRU_COUNTER_IDS = ["3605288", "3606029"]
 
 export const metadata: Metadata = {
-  title: 'Технолиум - онлайн университет',
-  description: 'Обучение современным IT-профессиям',
+  title: 'Технолиум - Онлайн университет современных IT-профессий',
+  description: 'Обучаем современным IT-профессиям с нуля. Помогаем освоить востребованные навыки и построить успешную карьеру в IT. Практические занятия, опытные преподаватели, поддержка в обучении.',
+  keywords: 'обучение IT, программирование, разработка, онлайн курсы, IT образование, технологии, карьера в IT',
+  authors: [{ name: 'Технолиум' }],
+  creator: 'Технолиум',
+  publisher: 'Технолиум',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/TechnoliumLogo.svg',
     apple: '/TechnoliumLogo.svg',
-  }
+  },
+  openGraph: {
+    title: 'Технолиум - Онлайн университет современных IT-профессий',
+    description: 'Обучаем современным IT-профессиям с нуля. Помогаем освоить востребованные навыки и построить успешную карьеру в IT.',
+    url: 'https://technolium.ru',
+    siteName: 'Технолиум',
+    images: [
+      {
+        url: '/TechnoliumLogo.svg',
+        width: 800,
+        height: 600,
+        alt: 'Технолиум логотип',
+      }
+    ],
+    locale: 'ru_RU',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+  },
 }
 
 export default function RootLayout({

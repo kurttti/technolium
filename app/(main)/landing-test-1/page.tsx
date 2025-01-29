@@ -3,9 +3,16 @@
 import { ConsultationForm } from '@/components/consultation-form-2'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { MailRuCounter } from '@/components/mail-ru-counter-3606079'
 
 export default function ConsultationPage() {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [showCounter, setShowCounter] = useState(false)
+
+  const handleSuccess = () => {
+    setIsSubmitted(true)
+    setShowCounter(true)
+  }
 
   return (
     <div className="min-h-[100dvh] bg-gray-50 flex flex-col">
@@ -48,7 +55,8 @@ export default function ConsultationPage() {
               </motion.p>
             </motion.div>
           )}
-          <ConsultationForm onSuccess={() => setIsSubmitted(true)} />
+          <ConsultationForm onSuccess={handleSuccess} />
+          {showCounter && <MailRuCounter />}
         </div>
       </div>
     </div>

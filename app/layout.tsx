@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import Script from 'next/script'
 import '@/styles/globals.css'
 import Bitrix24Widget from '@/components/bitrix24-widget'
+import { MailRuCounter } from '@/components/mail-ru-counter-3606079'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 const MAILRU_COUNTER_IDS = ["3605288", "3606029"]
@@ -51,36 +52,10 @@ export default function RootLayout({
             </div>
           </noscript>
         )}
-        {MAILRU_COUNTER_IDS.map((counterId) => (
-          <React.Fragment key={`mail-ru-wrapper-${counterId}`}>
-            <Script
-              key={`mail-ru-counter-${counterId}`}
-              id={`mail-ru-counter-${counterId}`}
-              strategy="lazyOnload"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  var _tmr = window._tmr || (window._tmr = []);
-                  _tmr.push({id: "${counterId}", type: "pageView", start: (new Date()).getTime()});
-                  (function (d, w, id) {
-                    if (d.getElementById(id)) return;
-                    var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
-                    ts.src = "https://top-fwz1.mail.ru/js/code.js";
-                    var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
-                    if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
-                  })(document, window, "tmr-code-${counterId}");
-                `
-              }}
-            />
-            <noscript>
-              <div>
-                <img src={`https://top-fwz1.mail.ru/counter?id=${counterId};js=na`} style={{ position: 'absolute', left: '-9999px' }} alt="Top.Mail.Ru" />
-              </div>
-            </noscript>
-          </React.Fragment>
-        ))}
       </head>
       <body suppressHydrationWarning={true} className="bg-white">
         {children}
+        <MailRuCounter />
         <Bitrix24Widget />
       </body>
     </html>

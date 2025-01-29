@@ -518,11 +518,11 @@ export function ConsultationForm({ onSuccess }: Props) {
             transition={{ duration: 0.3, delay: 0.2 }}
             className="text-gray-600 mb-6"
           >
-            {currentQuestionId === 0 && "Выберите вашу возрастную группу"}
+            {/* {currentQuestionId === 0 && "Выберите вашу возрастную группу"}
             {currentQuestionId === 1 && "Оцените ваш текущий уровень владения компьютером"}
             {currentQuestionId === 2 && "Укажите желаемый уровень дохода после прохождения обучения"}
             {currentQuestionId === 3 && "Укажите вашу текущую или последнюю сферу деятельности"}
-            {currentQuestionId === 4 && "Выберите страну вашего гражданства"}
+            {currentQuestionId === 4 && "Выберите страну вашего гражданства"} */}
           </motion.div>
 
           <div className="grid grid-cols-1 gap-3">

@@ -5,7 +5,7 @@ import Script from 'next/script'
 export function MailRuCounter() {
   return (
     <>
-      <Script id="mail-ru-counter-3606079" strategy="afterInteractive">
+      <Script id="mail-ru-counter-3606079" strategy="lazyOnload">
         {`
           var _tmr = window._tmr || (window._tmr = []);
           _tmr.push({id: "3606079", type: "pageView", start: (new Date()).getTime()});

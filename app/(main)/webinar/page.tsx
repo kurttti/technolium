@@ -6,7 +6,7 @@ import InputMask from "react-input-mask"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { createBitrixDeal } from "@/actions/bitrix24"
-import { MailRuCounter } from "@/components/mail-ru-counter-3606079"
+
 
 const COUNTRY_CODES = [
   { code: '+7', country: 'Россия', mask: '(999) 999-99-99', length: 10 },
@@ -298,7 +298,6 @@ export default function WebinarPage() {
         </div>
       </main>
       <Footer />
-      <MailRuCounter />
     </div>
   )
 }

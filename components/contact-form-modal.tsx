@@ -27,6 +27,9 @@ interface ContactFormModalProps {
     price: string
     duration: string
   }
+  submitButtonProps?: {
+    className?: string
+  }
 }
 
 const overlayVariants = {
@@ -46,7 +49,7 @@ const successVariants = {
   visible: { opacity: 1, scale: 1 },
 }
 
-export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo }: ContactFormModalProps) {
+export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo, submitButtonProps }: ContactFormModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -279,7 +282,7 @@ export function ContactFormModal({ isOpen, onClose, type = "general", courseInfo
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className={submitButtonProps?.className || "w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"}
                   >
                     {isSubmitting ? (
                       <div className="flex items-center justify-center">

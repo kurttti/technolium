@@ -16,8 +16,8 @@ export default function ConsultationPage() {
 
   return (
     <div className="min-h-[100dvh] bg-gray-50 flex flex-col">
-      <div className="flex-1 flex items-start sm:items-center justify-center">
-        <div className="w-full max-w-3xl px-4 sm:px-6 pt-2 sm:py-12">
+      <div className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 p-4 sm:p-6">
+        <div className="w-full max-w-xl">
           {!isSubmitted && (
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
@@ -46,6 +46,19 @@ export default function ConsultationPage() {
           <ConsultationForm onSuccess={handleSuccess} />
           {showCounter && <MailRuCounter />}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-xl lg:w-[49rem] flex items-center justify-center"
+        >
+          <img
+            src="/Group 224.png"
+            alt="Decoration"
+            className="w-full h-auto"
+          />
+        </motion.div>
       </div>
     </div>
   )

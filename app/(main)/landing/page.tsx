@@ -26,7 +26,7 @@ export default function ConsultationPage() {
               delay: 0.1,
               ease: [0.22, 1, 0.36, 1]
             }}
-            className="text-center mt-4 sm:mt-0 lg:-mt-20 mb-8 sm:mb-12 lg:mb-16"
+            className="text-center mb-8"
           >
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export default function ConsultationPage() {
           </motion.div>
         )}
         
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 w-full">
+        <div className="flex flex-col items-center justify-center gap-8 w-full">
           <div className="w-full max-w-xl">
             <ConsultationForm onSuccess={handleSuccess} />
             {showCounter && <MailRuCounter />}
@@ -53,12 +53,12 @@ export default function ConsultationPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-xl lg:w-[49rem] flex items-center justify-center"
+            className="w-full flex items-center justify-center"
           >
             <img
               src="/Group 224.png"
               alt="Decoration"
-              className="w-full h-auto"
+              className="w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] h-auto"
             />
           </motion.div>
         </div>

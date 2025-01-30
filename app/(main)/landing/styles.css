@@ -1,5 +1,4 @@
 body[data-page="/landing"] {
   --header-height: 0 !important;
-  touch-action: pan-y manipulation;
-  overflow-y: auto !important;
+  
 }

@@ -4,8 +4,8 @@ import { ChevronRight, ArrowLeft, Users } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 
 const container = {
   hidden: { opacity: 0 },

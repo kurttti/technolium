@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 import { motion } from "framer-motion"
 
 const fadeInUp = {

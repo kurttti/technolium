@@ -2,8 +2,9 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { ApplicationButton } from "@/components/features/application-button"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },

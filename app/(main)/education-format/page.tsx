@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
 

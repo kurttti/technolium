@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Calendar, Target, GraduationCap } from "lucide-react"
-import { ApplicationModal } from "./application-modal"
+import { ApplicationModal } from "@/components/forms/application-modal"
 
 interface CourseDetailsProps {
   duration: string
@@ -58,4 +58,3 @@ export function CourseDetails({ duration, level, price, className = "", courseTi
     </div>
   )
 }
-

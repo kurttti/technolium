@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { X } from "lucide-react"
 import { createBitrixDeal } from "@/actions/bitrix24"
 import { motion, AnimatePresence } from "framer-motion"
-import { NotificationToast } from "./notification-toast"
+import { NotificationToast } from "@/components/ui/notification-toast"
 import InputMask from 'react-input-mask'
 
 const overlayVariants = {

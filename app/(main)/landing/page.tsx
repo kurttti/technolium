@@ -1,6 +1,6 @@
 'use client'
 
-import { ConsultationForm } from '@/components/consultation-form-2'
+import { ConsultationForm } from '@/components/forms/consultation-form-2'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import './styles.css'

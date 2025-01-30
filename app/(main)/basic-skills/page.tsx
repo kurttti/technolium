@@ -1,11 +1,11 @@
 "use client"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { ApplicationButton } from "@/components/application-button"
+import { ApplicationButton } from "@/components/features/application-button"
 import { CheckCircle, Users, Code, BookOpen, BrainCircuit, ArrowLeft } from "lucide-react"
 import { motion } from "framer-motion"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 
 const container = {
   hidden: { opacity: 0 },

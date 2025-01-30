@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { NewsSearch } from "./news-search"
+import { NewsSearch } from "@/components/features/news-search"
 import { motion } from "framer-motion"
 
 const articles = [

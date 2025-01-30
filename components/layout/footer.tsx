@@ -5,6 +5,8 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { FaTelegram, FaWhatsapp } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import { ApplicationButton } from "@/components/features/application-button"
+import { EmailButton } from "@/components/features/email-button"
 
 const footerContentVariants = {
   hidden: { opacity: 0, y: 20 },

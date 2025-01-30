@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ContactFormModal } from "./contact-form-modal"
+import { ContactFormModal } from "@/components/forms/contact-form-modal"
 
 interface ApplicationModalProps {
   isOpen: boolean
@@ -26,4 +26,3 @@ export function ApplicationModal({ isOpen, onClose, courseInfo }: ApplicationMod
     />
   )
 }
-

@@ -18,9 +18,9 @@ import {
   Target,
   Clock,
 } from "lucide-react"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
-import { CourseDetails } from "@/components/course-details"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
+import { CourseDetails } from "@/components/features/course-details"
 import { motion } from "framer-motion"
 
 const specialties = {

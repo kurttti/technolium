@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ApplicationModal } from "./application-modal"
+import { ApplicationModal } from "@/components/forms/application-modal"
 
 interface ApplicationButtonProps {
   className?: string

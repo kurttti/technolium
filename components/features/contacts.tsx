@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { ContactFormModal } from "./contact-form-modal"
-import { EmailButton } from "./email-button"
+import { ContactFormModal } from "@/components/forms/contact-form-modal"
+import { EmailButton } from "@/components/features/email-button"
 
 const headerVariants = {
   hidden: { opacity: 0, y: -20 },

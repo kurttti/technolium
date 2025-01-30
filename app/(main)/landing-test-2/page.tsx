@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import InputMask from "react-input-mask"
 import { motion } from "framer-motion"
 import Image from "next/image"
@@ -102,6 +102,9 @@ export default function LandingPage() {
       const result = await createBitrixDeal(formData)
 
       if (result.success) {
+        if (window._tmr) {
+          window._tmr.push({ type: 'reachGoal', id: 3606079, goal: 'leadget'});
+        }
         setIsSuccess(true)
       } else {
         setError(result.message)

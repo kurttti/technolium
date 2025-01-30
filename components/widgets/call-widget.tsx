@@ -3,7 +3,7 @@
 import { useState, type MouseEvent } from "react"
 import { Phone, X, Clock, CheckCircle } from "lucide-react"
 import Image from "next/image"
-import { CallbackForm } from "./callback-form"
+import { CallbackForm } from "@/components/forms/callback-form"
 
 export function CallWidget() {
   const [isOpen, setIsOpen] = useState(false)
@@ -140,4 +140,3 @@ export function CallWidget() {
     </>
   )
 }
-

@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { ApplicationForm } from "./application-form"
 import { motion } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { ApplicationForm } from "@/components/forms/application-form"
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },

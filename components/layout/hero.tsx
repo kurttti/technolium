@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { ApplicationModal } from "./application-modal"
+import { ApplicationModal } from "@/components/forms/application-modal"
 import { motion, useReducedMotion } from "framer-motion"
 
 export function Hero() {

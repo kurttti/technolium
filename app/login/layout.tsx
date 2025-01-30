@@ -2,7 +2,7 @@
 
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react';
-import { Providers } from '@/components/providers';
+import { Providers } from '@/components/layout/providers';
 
 export default function LoginLayout({
   children,

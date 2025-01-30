@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ContactFormModal } from "./contact-form-modal"
+import { ContactFormModal } from "@/components/forms/contact-form-modal"
 
 interface ConditionsModalProps {
   isOpen: boolean
@@ -20,4 +20,3 @@ export function ConditionsModal({ isOpen, onClose }: ConditionsModalProps) {
     />
   )
 }
-

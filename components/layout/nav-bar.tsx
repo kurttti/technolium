@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { ContactFormModal } from "@/components/forms/contact-form-modal"
 
 const navVariants = {
   hidden: { opacity: 0, y: -20 },

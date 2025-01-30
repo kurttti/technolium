@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ConditionsModal } from "./conditions-modal"
+import { ConditionsModal } from "@/components/forms/conditions-modal"
 import Image from "next/image"
 import { motion } from "framer-motion"
 

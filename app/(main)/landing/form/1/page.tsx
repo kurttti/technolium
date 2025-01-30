@@ -1,7 +1,8 @@
 "use client"
 
+import '../../styles.css'
 import { useState, useEffect, useRef } from "react"
-import { Footer } from "@/components/footer"
+import { Footer } from "@/components/layout/footer"
 import InputMask from "react-input-mask"
 import { motion } from "framer-motion"
 import Image from "next/image"
@@ -19,7 +20,7 @@ const COUNTRY_CODES = [
   { code: '+998', country: 'Узбекистан', mask: '(99) 999-99-99', length: 9 },
 ];
 
-export default function WebinarPage() {
+export default function LandingPage() {
   const [selectedCountry, setSelectedCountry] = useState(COUNTRY_CODES[0])
   const [phoneNumber, setPhoneNumber] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -76,8 +77,8 @@ export default function WebinarPage() {
       const formData = new FormData(e.currentTarget)
       const fullPhone = selectedCountry.code + digitsOnly;
       formData.set('phone', fullPhone)
-      formData.append("type", "webinar")  // Changed to webinar type
-      formData.append("buttonType", "Регистрация на марафон")
+      formData.append("type", "landing")
+      formData.append("buttonType", "Льготное обучение")
       formData.append("pageUrl", window.location.href)
 
       // Add UTM parameters from URL
@@ -130,7 +131,7 @@ export default function WebinarPage() {
         }}
       >
         <h2 className="text-2xl sm:text-4xl text-white px-4">
-          Регистрация на марафон "Роботы-Telegram" 31.01-02.02
+          Рады вас приветствовать в Технолиум
         </h2>
       </motion.div>
       <main className="relative flex-1">
@@ -159,31 +160,13 @@ export default function WebinarPage() {
               animate={{ opacity: 1, scale: 1 }}
               className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg text-center flex flex-col items-center"
             >
-              <div className="w-20 h-20 bg-[#0DBB0D] rounded-full flex items-center justify-center mb-6">
-                <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-16 h-16 bg-[#0DBB0D] rounded-full flex items-center justify-center mb-4">
+                <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                Спасибо за регистрацию!
-              </h3>
-              <div className="text-gray-600 mb-6">
-                <p className="mb-4">Ваше приглашение будет в Telegram-боте:</p>
-                <a 
-                  href="https://t.me/TechnoliumWeb_bot" 
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center px-6 py-3 bg-[#0095FF] text-white rounded-xl hover:bg-blue-600 transition-colors"
-                >
-                  <svg className="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.27-.48.74-.74 2.93-1.27 4.88-2.11 5.87-2.51 2.8-1.14 3.37-1.34 3.75-1.34.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06-.01.13-.01.2z"/>
-                  </svg>
-                  Перейти в Telegram-бот
-                </a>
-              </div>
-              <div className="text-sm text-gray-500">
-                После перехода, бот автоматически отправит вам приглашение
-              </div>
+              <div className="text-2xl font-medium text-gray-900 mb-2">Спасибо за заявку!</div>
+              <p className="text-gray-600">Мы свяжемся с вами в ближайшее время.</p>
             </motion.div>
           ) : (
             <motion.div
@@ -194,38 +177,13 @@ export default function WebinarPage() {
             >
               <div className="mb-6 sm:mb-8 text-center px-2 sm:px-6">
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
-                  Регистрация на марафон "Роботы-Telegram"
+                  Заявка на вступительное интервью
                 </h1>
+                <p className="text-sm sm:text-base text-gray-600">
+                  Заявка рассматривается в течение 1 рабочего дня.
+                </p>
               </div>
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 px-2 sm:px-6">
-                <div>
-                  <div className="px-2 sm:px-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Имя <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      className="w-full h-[52px] px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 bg-[#F8F8F8]"
-                      placeholder="Ваше имя"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="px-2 sm:px-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Email <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      className="w-full h-[52px] px-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 bg-[#F8F8F8]"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
                 <div>
                   <div className="px-2 sm:px-4">
                     <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -242,54 +200,105 @@ export default function WebinarPage() {
                         >
                           <div className="flex items-center">
                             <span className="text-gray-700">+</span>
-                            <span className="text-gray-900 ml-1">{selectedCountry.code.slice(1)}</span>
+                            <span className="ml-0.5">{selectedCountry.code.replace('+', '')}</span>
                           </div>
-                          <svg className="w-5 h-5 text-gray-400 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                          <svg className="h-4 w-4 text-gray-700 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                           </svg>
                         </button>
+                        
                         {isOpen && (
-                          <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
+                          <div className="absolute z-10 w-[200px] mt-1 bg-white border border-gray-300 rounded-xl shadow-lg overflow-hidden top-full">
                             {COUNTRY_CODES.map((country) => (
                               <button
-                                key={country.country}
+                                key={`${country.code}-${country.country}`}
                                 type="button"
-                                className="w-full px-4 py-2 text-sm text-left hover:bg-gray-100 first:rounded-t-lg last:rounded-b-lg"
+                                className="w-full text-left px-4 py-3 hover:bg-gray-50 focus:outline-none text-sm flex items-center space-x-2"
                                 onClick={() => handleCountrySelect(country)}
                               >
-                                <span className="text-gray-700">+</span>
-                                <span className="text-gray-900 ml-1">{country.code.slice(1)}</span>
-                                <span className="text-gray-500 ml-2">{country.country}</span>
+                                <span className="text-gray-700">{country.code}</span>
+                                <span className="text-gray-500">{country.country}</span>
                               </button>
                             ))}
                           </div>
                         )}
                       </div>
-                      <div className="flex-1">
-                        <InputMask
-                          mask={selectedCountry.mask}
-                          value={phoneNumber}
-                          onChange={handlePhoneChange}
-                          className={`w-full h-[52px] px-4 border ${error ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:outline-none focus:border-blue-500 bg-[#F8F8F8]`}
-                          placeholder={selectedCountry.mask.replace(/9/g, '_')}
-                          type="tel"
-                          inputMode="numeric"
-                          autoComplete="tel"
-                        />
-                      </div>
+                      <InputMask
+                        mask={selectedCountry.mask}
+                        value={phoneNumber}
+                        onChange={handlePhoneChange}
+                        className="flex-1 min-w-0 p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
+                        placeholder={selectedCountry.mask.replace(/9/g, '_')}
+                        required
+                      >
+                        {(inputProps: any) => (
+                          <input
+                            {...inputProps}
+                            type="tel"
+                            name="phone"
+                            inputMode="numeric"
+                          />
+                        )}
+                      </InputMask>
                     </div>
-                    {error && (
-                      <p className="mt-1 text-sm text-red-500">{error}</p>
-                    )}
                   </div>
                 </div>
-                <div className="px-2 sm:px-4">
+
+                <div>
+                  <div className="px-2 sm:px-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Email <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                  <div className="px-2 sm:px-4">
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
+                      placeholder="Ваш e-mail"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="px-2 sm:px-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Имя <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                  <div className="px-2 sm:px-4">
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      className="w-full p-3 sm:p-4 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 text-sm"
+                      placeholder="Ваше имя"
+                    />
+                  </div>
+                </div>
+
+                {error && (
+                  <p className="text-red-500 text-sm text-center">{error}</p>
+                )}
+
+                <div className="flex justify-center px-2 sm:px-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-[52px] bg-[#0095FF] text-white rounded-xl hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full sm:w-auto px-8 sm:px-12 bg-[#1E4FCD] text-white py-3 sm:py-4 rounded-xl hover:bg-[#1E4FCD]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                   >
-                    {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                    {isSubmitting ? (
+                      <div className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Отправка...
+                      </div>
+                    ) : (
+                      "Отправить"
+                    )}
                   </button>
                 </div>
               </form>

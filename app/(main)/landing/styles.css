@@ -1,4 +1,4 @@
-body[data-page="/landing"] {
+body[data-page^="/landing"] {
   --header-height: 0 !important;
   -webkit-touch-action: pan-y manipulation;
   touch-action: pan-y manipulation;

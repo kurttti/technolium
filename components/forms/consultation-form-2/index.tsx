@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ChevronLeft, Loader2 } from 'lucide-react'
-import { NotificationToast } from '../notification-toast'
+import { NotificationToast } from '@/components/ui/notification-toast'
 import InputMask from "react-input-mask"
 import { createBitrixDeal } from "@/actions/bitrix24"
 

@@ -243,6 +243,10 @@ export function ConsultationForm({ onSuccess }: Props) {
       console.log('Ответ от Bitrix24:', result)
 
       if (result.success) {
+        // Push the goal to Mail.ru counter
+        if (typeof window !== 'undefined' && window._tmr) {
+          window._tmr.push({ type: 'reachGoal', id: 3606079, goal: 'leadget'});
+        }
         setSuccess(true)
         onSuccess?.()
       } else {

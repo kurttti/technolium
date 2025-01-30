@@ -46,7 +46,6 @@ export default function ConsultationPage() {
         <div className="flex flex-col items-center justify-center gap-8 w-full">
           <div className="w-full max-w-xl">
             <ConsultationForm onSuccess={handleSuccess} />
-            {showCounter && <MailRuCounter />}
           </div>
 
           <motion.div

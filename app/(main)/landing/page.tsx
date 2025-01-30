@@ -1,13 +1,20 @@
 'use client'
 
 import { ConsultationForm } from '@/components/consultation-form-2'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { MailRuCounter } from '@/components/mail-ru-counter-3606079'
+import './styles.css'
 
 export default function ConsultationPage() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [showCounter, setShowCounter] = useState(false)
+
+  useEffect(() => {
+    document.body.setAttribute('data-page', '/landing');
+    return () => {
+      document.body.removeAttribute('data-page');
+    };
+  }, []);
 
   const handleSuccess = () => {
     setIsSubmitted(true)

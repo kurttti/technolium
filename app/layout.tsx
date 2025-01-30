@@ -68,7 +68,7 @@ export default function RootLayout({
         {METRIKA_ID && (
           <Script
             id="yandex-metrika"
-            strategy="lazyOnload"
+            strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

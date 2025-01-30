@@ -37,6 +37,12 @@ export const metadata: Metadata = {
         width: 800,
         height: 600,
         alt: 'Технолиум логотип',
+      },
+      {
+        url: '/footerlogo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Технолиум - Онлайн университет современных IT-профессий',
       }
     ],
     locale: 'ru_RU',

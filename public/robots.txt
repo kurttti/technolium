@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Sitemap: https://technolium.ru/sitemap.xml
+
+# Запрещаем индексацию административных разделов
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /*?*

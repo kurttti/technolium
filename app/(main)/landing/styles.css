@@ -1,3 +1,9 @@
 body[data-page="/landing"] {
   --header-height: 0 !important;
+  touch-action: none;
+}
+
+/* Разрешаем скролл */
+body[data-page="/landing"] * {
+  touch-action: pan-y pinch-zoom;
 }

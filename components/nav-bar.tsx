@@ -79,6 +79,11 @@ export function NavBar() {
   const menuRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
+  // Не показываем NavBar на странице landing
+  if (pathname === '/landing') {
+    return null
+  }
+
   useEffect(() => {
     if (!isMenuOpen) return
 

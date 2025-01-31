@@ -4,22 +4,22 @@ export const DiscountBlock = () => {
   return (
     <div className="w-full py-8">
       <div className="max-w-[1200px] mx-auto">
-        <div className="relative w-full h-[500px] flex overflow-hidden">
+        <div className="relative w-full h-[600px] flex overflow-hidden">
           {/* Left side with image */}
           <div 
-            className="relative w-1/3 bg-cover bg-center rounded-[18px]" 
+            className="relative w-2/6 bg-cover bg-center rounded-[18px]" 
             style={{ 
               backgroundImage: 'url(/landing/secong/men-with-notebook.png)'
             }}
           />
 
           {/* Right side with content */}
-          <div className="relative w-2/3 flex items-center">
+          <div className="relative w-4/6 flex items-center">
             <Image
               src="/landing/secong/gradient-1.png"
               alt="Background gradient"
               fill
-              className="object-cover"
+              className="object-cover rounded-[18px]"
               priority
             />
             
@@ -53,16 +53,29 @@ export const DiscountBlock = () => {
 
             {/* Python text on the right */}
             <div 
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/10 flex flex-col"
+              className="absolute right-8 flex flex-col justify-between"
               style={{
+                width: '58px',
+                height: '492px',
                 fontFamily: 'BOWLER',
-                fontSize: '42px',
+                fontSize: '70px',
+                lineHeight: '82px',
                 fontWeight: '400',
-                letterSpacing: '0.1em'
+                top: '50%',
+                transform: 'translateY(-50%)'
               }}
             >
               {'PYTHON'.split('').map((letter, index) => (
-                <span key={index} className="text-center">{letter}</span>
+                <span 
+                  key={index} 
+                  className="text-center"
+                  style={{
+                    color: '#000000',
+                    WebkitTextStroke: '1px #FFFFFF',
+                  }}
+                >
+                  {letter}
+                </span>
               ))}
             </div>
           </div>

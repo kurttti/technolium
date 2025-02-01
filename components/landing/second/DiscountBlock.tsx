@@ -45,7 +45,7 @@ export const DiscountBlock = () => {
                 className="text-white text-center md:text-left"
                 style={{
                   fontFamily: 'BOWLER',
-                  fontSize: 'clamp(40px, 5vw, 70px)',
+                  fontSize: 'clamp(36px, 4.5vw, 65px)',
                   lineHeight: '1.2',
                   fontWeight: '400',
                   fontStyle: 'normal',

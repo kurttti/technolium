@@ -27,12 +27,19 @@ export const TeacherBlock = () => {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 lg:items-center">
           {/* Left side - Circle */}
-          <div className="w-full md:w-[400px] aspect-square bg-black rounded-[31px] flex items-center justify-center p-8">
+          <div className="w-full md:w-[400px] aspect-square bg-black rounded-[31px] flex items-center justify-center p-8 relative overflow-hidden">
             <div 
-              className="w-full h-full rounded-full"
+              className="w-full h-full rounded-full absolute z-10"
               style={{
                 background: 'linear-gradient(85.14deg, #594A73 9.35%, #151B4D 91.08%)'
               }}
+            />
+            <Image
+              src="/landing/second/boss.svg"
+              alt="Балоян Назар - Senior Python Developer"
+              width={416}
+              height={370}
+              className="w-full h-full absolute z-20 object-cover"
             />
           </div>
 

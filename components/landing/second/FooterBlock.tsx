@@ -69,7 +69,7 @@ const FooterBlock = () => {
                 <motion.a 
                   variants={linkAnimation}
                   whileHover={{ x: 10, color: '#fff' }}
-                  href="https://wa.me/79999999999" 
+                  href="https://wa.me/79952147457" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block transition-colors"
@@ -79,7 +79,7 @@ const FooterBlock = () => {
                 <motion.a 
                   variants={linkAnimation}
                   whileHover={{ x: 10, color: '#fff' }}
-                  href="https://t.me/+79999999999" 
+                  href="https://t.me/TechnoliumWeb_bot" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block transition-colors"
@@ -89,10 +89,10 @@ const FooterBlock = () => {
                 <motion.a 
                   variants={linkAnimation}
                   whileHover={{ x: 10, color: '#fff' }}
-                  href="mailto:info@python.school"
+                  href="mailto:info@technolium.ru"
                   className="block transition-colors"
                 >
-                  Email: info@python.school
+                  Email: info@technolium.ru
                 </motion.a>
               </motion.div>
             </motion.div>
@@ -113,32 +113,12 @@ const FooterBlock = () => {
                 <motion.a 
                   variants={linkAnimation}
                   whileHover={{ x: 10, color: '#fff' }}
-                  href="https://t.me/pythonschool" 
+                  href="https://t.me/TechnoliumWeb_bot" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="block transition-colors"
                 >
                   Telegram
-                </motion.a>
-                <motion.a 
-                  variants={linkAnimation}
-                  whileHover={{ x: 10, color: '#fff' }}
-                  href="https://vk.com/pythonschool" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block transition-colors"
-                >
-                  VK
-                </motion.a>
-                <motion.a 
-                  variants={linkAnimation}
-                  whileHover={{ x: 10, color: '#fff' }}
-                  href="https://youtube.com/@pythonschool" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block transition-colors"
-                >
-                  YouTube
                 </motion.a>
               </motion.div>
             </motion.div>
@@ -148,7 +128,7 @@ const FooterBlock = () => {
             variants={itemAnimation}
             className="mt-12 text-center text-white/60"
           >
-            <p>2024 Python School. Все права защищены.</p>
+            <p>2024 Technolium. Все права защищены.</p>
           </motion.div>
         </motion.div>
       </motion.div>

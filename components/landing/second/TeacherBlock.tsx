@@ -25,7 +25,7 @@ export const TeacherBlock = () => {
   return (
     <div className="w-full px-4 py-8">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 lg:items-start">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16 lg:items-center">
           {/* Left side - Circle */}
           <div className="w-full md:w-[400px] aspect-square bg-black rounded-[31px] flex items-center justify-center p-8">
             <div 
@@ -40,10 +40,10 @@ export const TeacherBlock = () => {
           <div className="flex-1 md:flex md:items-center lg:block">
             {/* Name and title section */}
             <div className="flex flex-col gap-4 w-full mt-2 md:mt-0">
-              <h2 className="text-[32px] md:text-[40px] text-center leading-none font-bold" style={{ fontFamily: 'BOWLER' }}>
+              <h2 className="text-[32px] md:text-[40px] text-center lg:text-left leading-none font-bold" style={{ fontFamily: 'BOWLER' }}>
                 БАЛОЯН НАЗАР
               </h2>
-              <div className="bg-[#1E1B4B] text-white px-4 py-2 rounded w-fit mx-auto">
+              <div className="bg-[#1E1B4B] text-white px-4 py-2 rounded w-fit mx-auto lg:mx-0">
                 Senior Python Developer
               </div>
 

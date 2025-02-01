@@ -3,6 +3,17 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
+interface Fact {
+  title: string;
+  subtitle: string;
+}
+
+interface FactItemProps {
+  fact: Fact;
+  index: number;
+  isMobile?: boolean;
+}
+
 const facts = [
   {
     title: 'Ведущий преподаватель',
@@ -22,7 +33,7 @@ const facts = [
   }
 ]
 
-const FactItem = ({ fact, index, isMobile = false }) => (
+const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
   <motion.div 
     initial={{ opacity: 0, x: -20 }}
     whileInView={{ opacity: 1, x: 0 }}

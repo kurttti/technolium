@@ -5,6 +5,7 @@ import { TeacherBlock } from '@/components/landing/second/TeacherBlock'
 import { OpportunitiesBlock } from '@/components/landing/second/OpportunitiesBlock'
 import CarouselBlock from '@/components/landing/second/CarouselBlock'
 import EducationPlanBlock from '@/components/landing/second/EducationPlanBlock'
+import ApplicationFormBlock from '@/components/landing/second/ApplicationFormBlock'
 import { NavBarSecond } from '@/components/layout/nav-bar-second'
 import './styles.module.css'
 
@@ -12,11 +13,12 @@ export default function SecondLandingPage() {
   return (
     <main>
       <DiscountBlock />
-      <NavBarSecond />      
+      {/* <NavBarSecond />       */}
       <TeacherBlock />
       <OpportunitiesBlock />
       <CarouselBlock />
       <EducationPlanBlock />
+      <ApplicationFormBlock />
     </main>
   )
 }

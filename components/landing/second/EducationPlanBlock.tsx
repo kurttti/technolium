@@ -16,9 +16,9 @@ const EducationPlanBlock = () => {
         <h2 className="text-[64px] mb-12 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
           ПЛАН ПРИЕМА
         </h2>
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-8">
           {/* Стандартное обучение */}
-          <div className="flex bg-white rounded-3xl overflow-hidden h-[480px]">
+          <div className="flex bg-white rounded-[18px] overflow-hidden h-[480px] border border-[#E5E7EB]">
             <div className="w-[45%] relative">
               <Image
                 src="/landing/secong/sad-notebook.jpg"
@@ -73,7 +73,7 @@ const EducationPlanBlock = () => {
           </div>
 
           {/* Льготное обучение */}
-          <div className="flex bg-[#0A0A2C] rounded-3xl overflow-hidden h-[480px] relative">
+          <div className="flex bg-[#0A0A2C] rounded-[18px] overflow-hidden h-[480px] relative">
             <Image
               src="/landing/secong/gradient-1.png"
               alt="Градиент"

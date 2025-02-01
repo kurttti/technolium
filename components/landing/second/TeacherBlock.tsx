@@ -51,8 +51,8 @@ export const TeacherBlock = () => {
         </div>
 
         {/* Facts section */}
-        <div className="mt-8 md:mt-12">
-          <div className="grid grid-cols-1 gap-y-6">
+        <div className="mt-8 md:mt-12 flex justify-center md:justify-start">
+          <div className="grid grid-cols-1 gap-y-6 w-fit">
             {facts.map((fact, index) => (
               <div key={index} className="flex items-start gap-4">
                 <div className="text-2xl">—</div>

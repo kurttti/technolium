@@ -19,8 +19,8 @@ const EducationPlanBlock = () => {
 
         <div className="grid grid-cols-1 gap-8">
           {/* Стандартное обучение */}
-          <div className="flex flex-col md:flex-row bg-white rounded-[18px] overflow-hidden h-auto md:h-[480px] border border-black">
-            <div className="w-full md:w-[45%] h-[300px] md:h-auto relative border-b md:border-b-0 md:border-r border-black">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="w-full md:w-[45%] h-[300px] md:h-[480px] relative rounded-[18px] border border-black overflow-hidden">
               <Image
                 src="/landing/secong/sad-notebook.jpg"
                 alt="Ноутбук"
@@ -28,7 +28,7 @@ const EducationPlanBlock = () => {
                 className="object-cover"
               />
             </div>
-            <div className="flex-1 p-6 md:p-8 border-l md:border-l-0 md:border-t border-black">
+            <div className="flex-1 p-6 md:p-8 rounded-[18px] border border-black bg-white">
               <div className="flex flex-col gap-5">
                 <h3 className="text-[24px] md:text-[32px] text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
                   СТАНДАРТНОЕ ОБУЧЕНИЕ
@@ -56,7 +56,7 @@ const EducationPlanBlock = () => {
                   </div>
                 </div>
 
-                {/* Languages - Mobile and Desktop */}
+                {/* Languages */}
                 <div className="flex justify-center md:justify-start gap-4 mt-6">
                   {languages.map((lang) => (
                     <div key={lang.name} className="w-12 h-12 relative">
@@ -74,15 +74,8 @@ const EducationPlanBlock = () => {
           </div>
 
           {/* Льготное обучение */}
-          <div className="flex flex-col md:flex-row bg-[#0A0A2C] rounded-[18px] overflow-hidden h-auto md:h-[480px] relative border border-black">
-            <Image
-              src="/landing/secong/gradient-1.png"
-              alt="Градиент"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="w-full md:w-[45%] h-[300px] md:h-auto relative border-b md:border-b-0 md:border-r border-black">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="w-full md:w-[45%] h-[300px] md:h-[480px] relative rounded-[18px] border border-black overflow-hidden">
               <Image
                 src="/landing/secong/two-man-with-notebook.jpg"
                 alt="Студенты за ноутбуком"
@@ -90,34 +83,43 @@ const EducationPlanBlock = () => {
                 className="object-cover"
               />
             </div>
-            <div className="flex-1 p-6 md:p-8 relative z-10 border-l md:border-l-0 md:border-t border-black">
-              <div className="flex flex-col h-full justify-between">
-                <div className="space-y-6">
-                  <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
-                    ЛЬГОТНОЕ ОБУЧЕНИЕ
-                  </h3>
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-white">—</span>
-                      <span className="text-white text-sm md:text-base">Тестирование с менеджером приёма для определения в группу</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-white">—</span>
-                      <span className="text-white text-sm md:text-base">Ограниченный выбор специальностей (уточнить у менеджера приёма)</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-white">—</span>
-                      <span className="text-white text-sm md:text-base">Диплом на базе высшего/средне-специального образования</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-white">—</span>
-                      <span className="text-white text-sm md:text-base">Упрощённое заключение договора</span>
+            <div className="flex-1 p-6 md:p-8 rounded-[18px] border border-black bg-[#0A0A2C] relative overflow-hidden">
+              <Image
+                src="/landing/secong/gradient-1.png"
+                alt="Градиент"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="relative z-10">
+                <div className="flex flex-col h-full justify-between">
+                  <div className="space-y-6">
+                    <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
+                      ЛЬГОТНОЕ ОБУЧЕНИЕ
+                    </h3>
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-center gap-3">
+                        <span className="text-white">—</span>
+                        <span className="text-white text-sm md:text-base">Тестирование с менеджером приёма для определения в группу</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-white">—</span>
+                        <span className="text-white text-sm md:text-base">Ограниченный выбор специальностей (уточнить у менеджера приёма)</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-white">—</span>
+                        <span className="text-white text-sm md:text-base">Диплом на базе высшего/средне-специального образования</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-white">—</span>
+                        <span className="text-white text-sm md:text-base">Упрощённое заключение договора</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="mt-6 md:mt-8">
-                  <div className="text-white text-base md:text-xl font-medium md:max-w-[80%]" style={{ fontFamily: 'BOWLER' }}>
-                    КОМПЕНСАЦИЯ ДО 55% ОТ СТОИМОСТИ ОБУЧЕНИЯ
+                  <div className="mt-6 md:mt-8">
+                    <div className="text-white text-[24px] md:text-[32px] font-bold text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
+                      КОМПЕНСАЦИЯ ДО 55% ОТ СТОИМОСТИ ОБУЧЕНИЯ
+                    </div>
                   </div>
                 </div>
               </div>

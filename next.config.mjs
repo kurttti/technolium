@@ -9,6 +9,7 @@ const allowedOrigins = {
   development: ['http://localhost:3000'],
   production: [
     'https://technolium.ru',
+    'https://www.technolium.ru',
     'https://cdn-ru.bitrix24.ru',
     'https://mc.yandex.ru'
   ]

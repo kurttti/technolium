@@ -3,10 +3,10 @@
 import Image from 'next/image'
 
 const languages = [
-  { name: 'JavaScript', icon: '/landing/secong/language-icon/js.svg' },
-  { name: 'Python', icon: '/landing/secong/language-icon/python.svg' },
-  { name: 'C#', icon: '/landing/secong/language-icon/csharp.svg' },
-  { name: 'Go', icon: '/landing/secong/language-icon/go.svg' },
+  { name: 'JavaScript', icon: '/landing/second/language-icon/js.svg' },
+  { name: 'Python', icon: '/landing/second/language-icon/python.svg' },
+  { name: 'C#', icon: '/landing/second/language-icon/csharp.svg' },
+  { name: 'Go', icon: '/landing/second/language-icon/go.svg' },
 ]
 
 const EducationPlanBlock = () => {
@@ -22,7 +22,7 @@ const EducationPlanBlock = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="w-full md:w-[45%] h-[300px] md:h-[480px] relative rounded-[18px] border border-black overflow-hidden">
               <Image
-                src="/landing/secong/sad-notebook.jpg"
+                src="/landing/second/sad-notebook.jpg"
                 alt="Ноутбук"
                 fill
                 className="object-cover"
@@ -77,7 +77,7 @@ const EducationPlanBlock = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="w-full md:w-[45%] h-[300px] md:h-[480px] relative rounded-[18px] border border-black overflow-hidden">
               <Image
-                src="/landing/secong/two-man-with-notebook.jpg"
+                src="/landing/second/two-man-with-notebook.jpg"
                 alt="Студенты за ноутбуком"
                 fill
                 className="object-cover"
@@ -85,7 +85,7 @@ const EducationPlanBlock = () => {
             </div>
             <div className="flex-1 p-6 md:p-8 rounded-[18px] border border-black bg-[#0A0A2C] relative overflow-hidden">
               <Image
-                src="/landing/secong/gradient-1.png"
+                src="/landing/second/gradient-1.png"
                 alt="Градиент"
                 fill
                 className="object-cover"

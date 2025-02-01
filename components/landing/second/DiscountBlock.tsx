@@ -9,14 +9,14 @@ export const DiscountBlock = () => {
           <div 
             className="relative w-full md:w-2/6 h-[300px] md:h-auto bg-cover bg-center rounded-t-[18px] md:rounded-[18px]" 
             style={{ 
-              backgroundImage: 'url(/landing/secong/men-with-notebook.png)'
+              backgroundImage: 'url(/landing/second/men-with-notebook.png)'
             }}
           />
 
           {/* Right side with content */}
           <div className="relative w-full md:w-4/6 flex items-center bg-[#0A0A2C] md:bg-transparent rounded-b-[18px] md:rounded-none">
             <Image
-              src="/landing/secong/gradient-1.png"
+              src="/landing/second/gradient-1.png"
               alt="Background gradient"
               fill
               className="hidden md:block object-cover rounded-[18px]"

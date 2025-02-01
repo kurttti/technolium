@@ -35,10 +35,8 @@ export const DiscountBlock = () => {
                   letterSpacing: '0.02em'
                 }}
               >
-                ОТКРЫТ<br />
-                НАБОР<br />
-                НА<br />
-                ЛЬГОТНОЕ<br />
+                ОТКРЫТ НАБОР<br />
+                НА ЛЬГОТНОЕ<br />
                 ОБУЧЕНИЕ
               </h2>
 

@@ -74,7 +74,7 @@ export const OpportunitiesBlock = () => {
           </div>
 
           {/* Right side - Image */}
-          <div className="w-full md:hidden lg:block lg:w-[400px] h-[300px] lg:h-auto">
+          <div className="hidden lg:block lg:w-[400px]">
             <Image
               src="/landing/secong/gradient-2.jpg"
               alt="Gradient"

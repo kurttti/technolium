@@ -37,9 +37,9 @@ export const TeacherBlock = () => {
           </div>
 
           {/* Right side - Info */}
-          <div className="flex-1 flex items-center">
+          <div className="flex-1 md:flex md:items-center">
             {/* Name and title section */}
-            <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-4 w-full mt-2 md:mt-0">
               <h2 className="text-[32px] md:text-[40px] text-center leading-none font-bold" style={{ fontFamily: 'BOWLER' }}>
                 БАЛОЯН НАЗАР
               </h2>
@@ -50,9 +50,9 @@ export const TeacherBlock = () => {
           </div>
         </div>
 
-        {/* Facts section - Full width on tablet */}
-        <div className="md:mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+        {/* Facts section */}
+        <div className="mt-8 md:mt-12">
+          <div className="grid grid-cols-1 gap-y-6">
             {facts.map((fact, index) => (
               <div key={index} className="flex items-start gap-4">
                 <div className="text-2xl">—</div>

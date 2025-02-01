@@ -7,6 +7,7 @@ import CarouselBlock from '@/components/landing/second/CarouselBlock'
 import EducationPlanBlock from '@/components/landing/second/EducationPlanBlock'
 import ApplicationFormBlock from '@/components/landing/second/ApplicationFormBlock'
 import { NavBarSecond } from '@/components/layout/nav-bar-second'
+import FooterBlock from "@/components/landing/second/FooterBlock"
 import './styles.module.css'
 
 export default function SecondLandingPage() {
@@ -19,6 +20,7 @@ export default function SecondLandingPage() {
       <CarouselBlock />
       <EducationPlanBlock />
       <ApplicationFormBlock />
+      <FooterBlock />
     </main>
   )
 }

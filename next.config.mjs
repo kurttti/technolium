@@ -23,8 +23,11 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com']
+    unoptimized: false,
+    domains: [
+      'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+      'technolium.ru'
+    ]
   },
   async headers() {
     return [

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { Input } from '@/components/ui/input'
 import { NotificationToast } from '@/components/ui/notification-toast'
 import InputMask from "react-input-mask"
@@ -44,6 +45,7 @@ const ApplicationFormBlock = () => {
   const [success, setSuccess] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [utmParams, setUtmParams] = useState<UtmParams>({})
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 })
   const selectRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -150,6 +152,20 @@ const ApplicationFormBlock = () => {
     }
   }
 
+  const toggleDropdown = () => {
+    setIsOpen((prev) => {
+      const newState = !prev
+      if (newState && selectRef.current) {
+        const rect = selectRef.current.getBoundingClientRect()
+        setDropdownPosition({
+          top: rect.bottom + window.scrollY,
+          left: rect.left + window.scrollX
+        })
+      }
+      return newState
+    })
+  }
+
   if (success) {
     return (
       <div id="application-form" className="w-full px-4 py-8">
@@ -209,7 +225,7 @@ const ApplicationFormBlock = () => {
                 <button
                   type="button"
                   className="h-12 md:h-14 flex items-center justify-between px-3 border border-white/20 focus:outline-none focus:border-white/40 text-sm bg-white/10 backdrop-blur-sm whitespace-nowrap rounded-[18px] text-white min-w-[90px]"
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={toggleDropdown}
                 >
                   <div className="flex items-center">
                     <span className="text-white/80">+</span>
@@ -221,27 +237,6 @@ const ApplicationFormBlock = () => {
                       d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                   </svg>
                 </button>
-                
-                {isOpen && (
-                  <div className="fixed z-50 w-[240px] mt-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden"
-                    style={{
-                      top: selectRef.current?.getBoundingClientRect().bottom ?? 0,
-                      left: selectRef.current?.getBoundingClientRect().left ?? 0,
-                    }}
-                  >
-                    {COUNTRY_CODES.map((country) => (
-                      <button
-                        key={`${country.code}-${country.country}`}
-                        type="button"
-                        className="w-full text-left px-4 py-3 hover:bg-white/20 focus:outline-none text-sm flex items-center justify-between text-white"
-                        onClick={() => handleCountrySelect(country)}
-                      >
-                        <span className="text-white/80">{country.country}</span>
-                        <span className="text-white font-medium">{country.code}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
               <div className="flex-1">
                 <InputMask
@@ -292,6 +287,26 @@ const ApplicationFormBlock = () => {
         </div>
       </div>
 
+      {isOpen && document.body && createPortal(
+        <div className="z-50 w-[240px] mt-1 bg-[#13134E]/90 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden shadow-lg"
+          style={{ position: 'absolute', top: dropdownPosition.top, left: dropdownPosition.left }}
+        >
+          {COUNTRY_CODES.map((country) => (
+            <button
+              key={`${country.code}-${country.country}`}
+              type="button"
+              className="w-full text-left px-4 py-3 hover:bg-white/10 focus:outline-none text-sm flex items-center justify-between text-white"
+              onClick={() => {
+                handleCountrySelect(country)
+                setIsOpen(false)
+              }}
+            >
+              <span className="text-white">{country.country}</span>
+              <span className="text-white font-medium">{country.code}</span>
+            </button>
+          ))}
+        </div>, document.body
+      )}
       {error && (
         <NotificationToast
           message={error}

@@ -52,76 +52,86 @@ const FooterBlock = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="py-16 px-8"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Контакты */}
-            <motion.div variants={itemAnimation}>
-              <motion.h3 
-                variants={itemAnimation}
-                className="text-2xl text-white mb-8" 
-                style={{ fontFamily: 'BOWLER' }}
-              >
-                КОНТАКТЫ
-              </motion.h3>
-              <motion.div 
-                variants={containerAnimation}
-                className="space-y-6 text-white/80"
-              >
-                <motion.a 
-                  variants={linkAnimation}
-                  whileHover={{ x: 10, color: '#fff' }}
-                  href="https://wa.me/79952147457" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block transition-colors"
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-24">
+            {/* Content */}
+            <div>
+              {/* Контакты */}
+              <motion.div variants={itemAnimation}>
+                <motion.h3 
+                  variants={itemAnimation}
+                  className="text-2xl text-white mb-8" 
+                  style={{ fontFamily: 'BOWLER' }}
                 >
-                  WhatsApp
-                </motion.a>
-                <motion.a 
-                  variants={linkAnimation}
-                  whileHover={{ x: 10, color: '#fff' }}
-                  href="https://t.me/TechnoliumWeb_bot" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block transition-colors"
+                  КОНТАКТЫ
+                </motion.h3>
+                <motion.div 
+                  variants={containerAnimation}
+                  className="space-y-6 text-white/80"
                 >
-                  Telegram
-                </motion.a>
-                <motion.a 
-                  variants={linkAnimation}
-                  whileHover={{ x: 10, color: '#fff' }}
-                  href="mailto:info@technolium.ru"
-                  className="block transition-colors"
-                >
-                  Email: info@technolium.ru
-                </motion.a>
+                  <motion.a 
+                    variants={linkAnimation}
+                    whileHover={{ x: 10, color: '#fff' }}
+                    href="https://wa.me/79952147457" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block transition-colors"
+                  >
+                    WhatsApp
+                  </motion.a>
+                  <motion.a 
+                    variants={linkAnimation}
+                    whileHover={{ x: 10, color: '#fff' }}
+                    href="https://t.me/TechnoliumWeb_bot" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block transition-colors"
+                  >
+                    Telegram
+                  </motion.a>
+                  <motion.a 
+                    variants={linkAnimation}
+                    whileHover={{ x: 10, color: '#fff' }}
+                    href="mailto:info@technolium.ru"
+                    className="block transition-colors"
+                  >
+                    Email: info@technolium.ru
+                  </motion.a>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
 
-            {/* Мы в соцсетях */}
-            {/* <motion.div variants={itemAnimation}>
-              <motion.h3 
-                variants={itemAnimation}
-                className="text-2xl text-white mb-8" 
-                style={{ fontFamily: 'BOWLER' }}
-              >
-                МЫ В СОЦСЕТЯХ
-              </motion.h3>
-              <motion.div 
-                variants={containerAnimation}
-                className="space-y-6 text-white/80"
-              >
-                <motion.a 
-                  variants={linkAnimation}
-                  whileHover={{ x: 10, color: '#fff' }}
-                  href="https://t.me/TechnoliumWeb_bot" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block transition-colors"
-                >
-                  Telegram
-                </motion.a>
-              </motion.div>
-            </motion.div> */}
+            {/* Technolium text */}
+            <motion.div 
+              className="hidden lg:flex items-center justify-end"
+              style={{
+                fontFamily: 'BOWLER',
+                fontSize: '64px',
+                lineHeight: '76px',
+                fontWeight: '400',
+                writingMode: 'horizontal-tb',
+              }}
+            >
+              <div className="flex">
+                {['Т', 'Е', 'Х', 'Н', 'О', 'Л', 'И', 'У', 'М'].map((letter, index) => (
+                  <motion.span 
+                    key={index} 
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                    className="text-center"
+                    style={{
+                      color: '#FFFFFF',
+                      opacity: 0.15,
+                      display: 'inline-block',
+                      marginRight: '0.1em'
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
           <motion.div 

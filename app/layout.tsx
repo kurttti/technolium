@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     siteName: 'Технолиум',
     images: [
       {
-        url: '/TechnoliumLogo.svg',
+        url: 'https://technolium.ru/TechnoliumLogo.svg',
         width: 800,
         height: 600,
         alt: 'Технолиум логотип',
       },
       {
-        url: '/footerlogo.png',
+        url: 'https://technolium.ru/footerlogo.png',
         width: 1200,
         height: 630,
         alt: 'Технолиум - Онлайн университет современных IT-профессий',

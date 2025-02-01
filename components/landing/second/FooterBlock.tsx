@@ -56,15 +56,15 @@ const FooterBlock = () => {
             {/* Technolium text - показываем над контактами на мобильном */}
             <div className="block md:hidden">
               <motion.div 
-                className="flex justify-center items-center mb-8"
+                className="flex justify-center items-center mb-8 w-full overflow-x-hidden px-1"
                 style={{
                   fontFamily: 'BOWLER',
-                  fontSize: '32px',
-                  lineHeight: '38px',
+                  fontSize: 'clamp(16px, 6vw, 32px)',
+                  lineHeight: '1.2',
                   fontWeight: '400',
                 }}
               >
-                <div className="flex">
+                <div className="flex flex-nowrap justify-center min-w-0">
                   {['Т', 'Е', 'Х', 'Н', 'О', 'Л', 'И', 'У', 'М'].map((letter, index) => (
                     <motion.span 
                       key={index} 
@@ -77,7 +77,7 @@ const FooterBlock = () => {
                         color: '#FFFFFF',
                         opacity: 0.15,
                         display: 'inline-block',
-                        marginRight: '0.05em'
+                        marginRight: '0.02em'
                       }}
                     >
                       {letter}

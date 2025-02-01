@@ -26,17 +26,17 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div className="w-full px-4 py-16">
+    <div className="w-full px-4 py-8">
       <div className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}>
-        <div className="flex flex-col items-center py-16 px-4">
-          <h2 className="text-[64px] mb-4 text-center tracking-wider text-white" style={{ fontFamily: 'BOWLER' }}>
+        <div className="flex flex-col items-center py-8 px-4">
+          <h2 className="text-[64px] mb-2 text-center tracking-wider text-white" style={{ fontFamily: 'BOWLER' }}>
             ОСТАВИТЬ ЗАЯВКУ
           </h2>
-          <h3 className="text-[32px] mb-12 text-center tracking-wider text-white/80" style={{ fontFamily: 'BOWLER' }}>
+          <h3 className="text-[32px] mb-8 text-center tracking-wider text-white/80" style={{ fontFamily: 'BOWLER' }}>
             НА ЛЬГОТНОЕ ОБУЧЕНИЕ
           </h3>
           
-          <form onSubmit={handleSubmit} className="w-full max-w-[600px] space-y-6">
+          <form onSubmit={handleSubmit} className="w-full max-w-[600px] space-y-4">
             <Input
               type="text"
               name="name"

@@ -9,34 +9,22 @@ const CarouselBlock = () => {
     {
       id: 1,
       title: '01 МАТЕРИАЛЫ',
-      points: [
-        'Короткие записи простых и понятных лекций от лучших преподавателей на рынке СНГ',
-        'Продолжительность каждой, отдельно взятой лекции - до 15 минут',
-        'Выполнение тестовых и практических заданий от работодателей с первого месяца'
-      ]
+      description: 'Все материалы доступны в личном кабинете сразу после оплаты'
     },
     {
       id: 2,
-      title: '02 ЛЕКЦИИ',
-      points: [
-        'Живые встречи с преподавателем, в одном потоке до 22 человек',
-        'Выделенное время под "вопрос-ответ" и знакомство с другими студентами',
-        'Обсуждение коммерческой составляющей профессии'
-      ]
+      title: '02 ПОДДЕРЖКА',
+      description: 'Кураторы и менторы на связи каждый день. Помогут и подскажут'
     },
     {
       id: 3,
-      title: '03 РЕПЕТИТОРЫ',
-      points: [
-        'Дополнительные занятия 1 на 1 с ведущими преподавателями "Технолиум"',
-        'Формат встречи определяется запросом студента',
-        'Репетитор ведёт трудовую деятельность в IT на момент преподавания'
-      ]
+      title: '03 ПРАКТИКА',
+      description: 'Практические задания выполняются на реальных проектах'
     }
   ]
 
   return (
-    <div className={styles['carousel-block']}>
+    <div className="w-full px-4 py-16">
       <div className="max-w-[1200px] mx-auto">
         <h2 className="text-[64px] mb-16 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
           ФОРМАТ ОБУЧЕНИЯ
@@ -57,12 +45,7 @@ const CarouselBlock = () => {
                       {item.title}
                     </h3>
                     <div className="flex flex-col gap-6">
-                      {item.points.map((point, index) => (
-                        <div key={index} className="flex items-start gap-3">
-                          <span className="text-2xl font-light">—</span>
-                          <p className="text-2xl leading-normal">{point}</p>
-                        </div>
-                      ))}
+                      <p className="text-2xl leading-normal">{item.description}</p>
                     </div>
                   </div>
                 </div>

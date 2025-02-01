@@ -11,7 +11,7 @@ const EducationPlanBlock = () => {
   ]
 
   return (
-    <div className="w-full py-16">
+    <div className="w-full px-4 py-16">
       <div className="max-w-[1200px] mx-auto">
         <h2 className="text-[64px] mb-12 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
           ПЛАН ПРИЕМА

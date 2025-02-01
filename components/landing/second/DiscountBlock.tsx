@@ -2,7 +2,7 @@
 
 export const DiscountBlock = () => {
   return (
-    <div className="w-full py-8">
+    <div className="w-full px-4 py-16">
       <div className="max-w-[1200px] mx-auto">
         <div className="relative w-full h-[600px] flex overflow-hidden">
           {/* Left side with image */}

@@ -56,8 +56,8 @@ const EducationPlanBlock = () => {
                   </div>
                 </div>
 
-                {/* Languages - Shown on mobile and tablet */}
-                <div className="flex justify-center gap-4 mt-6 md:hidden">
+                {/* Languages - Mobile and Desktop */}
+                <div className="flex justify-center md:justify-start gap-4 mt-6">
                   {languages.map((lang) => (
                     <div key={lang.name} className="w-12 h-12 relative">
                       <Image
@@ -123,22 +123,6 @@ const EducationPlanBlock = () => {
                 PYTHON
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Languages - Shown on desktop */}
-        <div className="hidden md:block mt-8 md:mt-12">
-          <div className="flex justify-center gap-8">
-            {languages.map((lang) => (
-              <div key={lang.name} className="w-16 h-16 relative">
-                <Image
-                  src={lang.icon}
-                  alt={`${lang.name} icon`}
-                  fill
-                  className="object-contain p-2"
-                />
-              </div>
-            ))}
           </div>
         </div>
       </div>

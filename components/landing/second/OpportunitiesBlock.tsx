@@ -11,10 +11,10 @@ const specializations = [
 
 export const OpportunitiesBlock = () => {
   return (
-    <div className="w-full py-8">
+    <div className="w-full py-8 px-4">
       <div className="max-w-[1200px] mx-auto">
-        <h2 className="text-[28px] md:text-[36px] lg:text-[40px] mb-6 md:mb-8 lg:mb-12 text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
-          ВОЗМОЖНОСТИ ЛЬГОТНОГО<br />ОБУЧЕНИЯ
+        <h2 className="text-[32px] md:text-[64px] mb-8 md:mb-16 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
+          ВОЗМОЖНОСТИ ЛЬГОТНОГО ОБУЧЕНИЯ
         </h2>
 
         <div className="flex flex-col md:flex-row">

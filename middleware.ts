@@ -3,6 +3,13 @@ import { withAuth } from "next-auth/middleware";
 
 export default withAuth(
   function middleware(req) {
+    // Redirect from non-www to www in production
+    if (process.env.NODE_ENV === 'production' && !req.headers.get('host')?.startsWith('www.')) {
+      const url = new URL(req.url);
+      url.host = 'www.' + url.host;
+      return NextResponse.redirect(url);
+    }
+
     // Handle CORS preflight requests
     if (req.method === 'OPTIONS') {
       const response = new NextResponse(null, {

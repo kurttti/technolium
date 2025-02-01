@@ -6,7 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/about</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/about</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -16,7 +26,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/basic-skills</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/career-test</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/career-test</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,7 +46,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/consultation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/current-activity</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/current-activity</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -36,7 +66,17 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/directions</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/education-format</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/education-format</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -46,7 +86,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/education-plan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/lectures</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/lectures</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -56,7 +106,17 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/license</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/materials</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/materials</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -66,7 +126,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/news</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/privacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/privacy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -76,12 +146,27 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/professional-distribution</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/program</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.technolium.ru/program</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://technolium.ru/tutors</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.technolium.ru/tutors</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

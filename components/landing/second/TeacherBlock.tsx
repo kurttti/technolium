@@ -24,8 +24,8 @@ const facts = [
     subtitle: 'разработке'
   },
   {
-    title: 'Более 3х лет в обучении разработке',
-    subtitle: ''
+    title: 'Более 3х лет в обучении',
+    subtitle: 'и разработке'
   },
   {
     title: 'Степень магистра в области',
@@ -46,7 +46,7 @@ const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
       whileInView={{ scaleX: 1 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
       viewport={{ once: true, margin: "-100px" }}
-      className="text-2xl"
+      className="text-2xl min-w-[12px] flex-shrink-0"
     >
       —
     </motion.div>

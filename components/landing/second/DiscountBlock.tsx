@@ -43,8 +43,9 @@ export const DiscountBlock = () => {
               </h2>
 
               <div className="flex flex-col items-center md:items-start gap-4 mt-6">
-                <div className="bg-[#2563EB]/20 text-white px-8 py-4 rounded-full text-base md:text-lg text-center md:text-left">
-                  -55% от стоимости стандартного обучения
+                <div className="max-w-[280px] md:max-w-[320px] group relative overflow-hidden bg-gradient-to-r from-[#2563EB]/30 to-[#2563EB]/10 backdrop-blur-sm text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-sm sm:text-base text-center md:text-left font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:from-[#2563EB]/40 hover:to-[#2563EB]/20">
+                  <div className="relative z-10 whitespace-normal">-55% от стоимости стандартного обучения</div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
                 </div>
 
                 <button className="w-full md:w-auto bg-white text-black px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium">

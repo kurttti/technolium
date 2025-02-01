@@ -18,7 +18,7 @@ import {
 import { motion } from 'framer-motion'
 import { Loader2 } from 'lucide-react'
 import { createBitrixDeal } from '@/actions/bitrix24'
-import { NotificationToast } from './notification-toast'
+import { NotificationToast } from '@/components/ui/notification-toast'
 import InputMask from 'react-input-mask'
 
 const COUNTRY_CODES = [

@@ -23,7 +23,7 @@ const facts = [
 
 export const TeacherBlock = () => {
   return (
-    <div className="w-full px-4 py-16">
+    <div className="w-full px-4 py-8">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
           {/* Left side - Gradient Circle */}

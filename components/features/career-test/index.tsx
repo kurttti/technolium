@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { TestQuestion } from './test-question'
 import { TestResult } from './test-result'
 import { questions } from './questions'
-import { NotificationToast } from '../notification-toast'
+import { NotificationToast } from '@/components/ui/notification-toast'
 import { ChevronLeft, Loader2 } from 'lucide-react'
 
 type Answer = {

@@ -223,7 +223,12 @@ const ApplicationFormBlock = () => {
                 </button>
                 
                 {isOpen && (
-                  <div className="absolute z-10 w-[240px] mt-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden">
+                  <div className="fixed z-50 w-[240px] mt-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden"
+                    style={{
+                      top: selectRef.current?.getBoundingClientRect().bottom ?? 0,
+                      left: selectRef.current?.getBoundingClientRect().left ?? 0,
+                    }}
+                  >
                     {COUNTRY_CODES.map((country) => (
                       <button
                         key={`${country.code}-${country.country}`}

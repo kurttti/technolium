@@ -98,7 +98,7 @@ const FooterBlock = () => {
             </motion.div>
 
             {/* Мы в соцсетях */}
-            <motion.div variants={itemAnimation}>
+            {/* <motion.div variants={itemAnimation}>
               <motion.h3 
                 variants={itemAnimation}
                 className="text-2xl text-white mb-8" 
@@ -121,7 +121,7 @@ const FooterBlock = () => {
                   Telegram
                 </motion.a>
               </motion.div>
-            </motion.div>
+            </motion.div> */}
           </div>
 
           <motion.div 

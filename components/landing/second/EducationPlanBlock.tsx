@@ -91,29 +91,31 @@ const EducationPlanBlock = () => {
               />
             </div>
             <div className="flex-1 p-6 md:p-8 relative z-10">
-              <div className="flex flex-col h-full">
-                <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left mb-6" style={{ fontFamily: 'BOWLER' }}>
-                  ЛЬГОТНОЕ ОБУЧЕНИЕ
-                </h3>
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-white">—</span>
-                    <span className="text-white text-sm md:text-base">Тестирование с менеджером приёма для определения в группу</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-white">—</span>
-                    <span className="text-white text-sm md:text-base">Ограниченный выбор специальностей (уточнить у менеджера приёма)</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-white">—</span>
-                    <span className="text-white text-sm md:text-base">Диплом на базе высшего/средне-специального образования</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-white">—</span>
-                    <span className="text-white text-sm md:text-base">Упрощённое заключение договора</span>
+              <div className="flex flex-col h-full justify-between">
+                <div className="space-y-6">
+                  <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
+                    ЛЬГОТНОЕ ОБУЧЕНИЕ
+                  </h3>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-white">—</span>
+                      <span className="text-white text-sm md:text-base">Тестирование с менеджером приёма для определения в группу</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-white">—</span>
+                      <span className="text-white text-sm md:text-base">Ограниченный выбор специальностей (уточнить у менеджера приёма)</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-white">—</span>
+                      <span className="text-white text-sm md:text-base">Диплом на базе высшего/средне-специального образования</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="text-white">—</span>
+                      <span className="text-white text-sm md:text-base">Упрощённое заключение договора</span>
+                    </div>
                   </div>
                 </div>
-                <div className="mt-auto pt-8 md:pt-12">
+                <div className="mt-6 md:mt-8">
                   <div className="text-white text-base md:text-xl font-medium md:max-w-[80%]" style={{ fontFamily: 'BOWLER' }}>
                     КОМПЕНСАЦИЯ ДО 55% ОТ СТОИМОСТИ ОБУЧЕНИЯ
                   </div>

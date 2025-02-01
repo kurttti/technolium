@@ -51,10 +51,10 @@ export const TeacherBlock = () => {
         </div>
 
         {/* Facts section */}
-        <div className="mt-8 md:mt-12 flex justify-center md:justify-start">
+        <div className="mt-8 md:mt-12 flex justify-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-[800px]">
             {facts.map((fact, index) => (
-              <div key={index} className="flex items-start gap-4">
+              <div key={index} className="flex items-start gap-4 justify-center md:justify-start">
                 <div className="text-2xl">—</div>
                 <div>
                   <div className="text-base md:text-lg font-medium" style={{ fontFamily: 'IBM Plex Sans KR' }}>

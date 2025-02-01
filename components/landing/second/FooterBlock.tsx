@@ -53,6 +53,40 @@ const FooterBlock = () => {
           className="py-16 px-8"
         >
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-24">
+            {/* Technolium text - показываем над контактами на мобильном */}
+            <div className="block md:hidden">
+              <motion.div 
+                className="flex justify-center items-center mb-8"
+                style={{
+                  fontFamily: 'BOWLER',
+                  fontSize: '42px',
+                  lineHeight: '50px',
+                  fontWeight: '400',
+                }}
+              >
+                <div className="flex">
+                  {['Т', 'Е', 'Х', 'Н', 'О', 'Л', 'И', 'У', 'М'].map((letter, index) => (
+                    <motion.span 
+                      key={index} 
+                      initial={{ opacity: 0, y: -20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                      className="text-center"
+                      style={{
+                        color: '#FFFFFF',
+                        opacity: 0.15,
+                        display: 'inline-block',
+                        marginRight: '0.1em'
+                      }}
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
             {/* Content */}
             <div>
               {/* Контакты */}
@@ -100,15 +134,14 @@ const FooterBlock = () => {
               </motion.div>
             </div>
 
-            {/* Technolium text */}
+            {/* Technolium text - показываем справа на планшете и десктопе */}
             <motion.div 
-              className="hidden lg:flex items-center justify-end"
+              className="hidden md:flex items-center justify-end"
               style={{
                 fontFamily: 'BOWLER',
                 fontSize: '64px',
                 lineHeight: '76px',
                 fontWeight: '400',
-                writingMode: 'horizontal-tb',
               }}
             >
               <div className="flex">

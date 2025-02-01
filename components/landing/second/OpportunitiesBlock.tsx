@@ -157,7 +157,7 @@ export const OpportunitiesBlock = () => {
             className="hidden lg:block lg:w-[400px]"
           >
             <Image
-              src="/landing/secong/gradient-2.jpg"
+              src="/landing/second/gradient-2.jpg"
               alt="Gradient"
               width={400}
               height={800}

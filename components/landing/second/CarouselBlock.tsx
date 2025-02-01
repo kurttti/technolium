@@ -38,7 +38,7 @@ const CarouselBlock = () => {
   return (
     <div className={styles['carousel-block']}>
       <div className="max-w-[1200px] mx-auto">
-        <h2 className="text-[40px] mb-12" style={{ fontFamily: 'BOWLER' }}>
+        <h2 className="text-[64px] mb-16 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
           ФОРМАТ ОБУЧЕНИЯ
         </h2>
         <Carousel
@@ -46,21 +46,21 @@ const CarouselBlock = () => {
             align: 'center',
             loop: true,
           }}
-          className="w-full max-w-4xl mx-auto [&_[role=region]]:border-none"
+          className="w-full max-w-5xl mx-auto [&_[role=region]]:border-none relative"
         >
           <CarouselContent className="-ml-4 [&>*]:border-none [&>*]:pl-4">
             {items.map(item => (
               <CarouselItem key={item.id} className="basis-full">
                 <div className="p-1">
-                  <div className="flex flex-col gap-8 p-6">
-                    <h3 className="text-[32px]" style={{ fontFamily: 'BOWLER' }}>
+                  <div className="flex flex-col gap-10 p-8 min-h-[400px]">
+                    <h3 className="text-[40px] tracking-wider" style={{ fontFamily: 'BOWLER' }}>
                       {item.title}
                     </h3>
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-6">
                       {item.points.map((point, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <span className="text-xl">—</span>
-                          <p className="text-xl">{point}</p>
+                        <div key={index} className="flex items-start gap-3">
+                          <span className="text-2xl font-light">—</span>
+                          <p className="text-2xl leading-normal">{point}</p>
                         </div>
                       ))}
                     </div>
@@ -69,8 +69,8 @@ const CarouselBlock = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="border-none" />
-          <CarouselNext className="border-none" />
+          <CarouselPrevious className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute left-[-100px]" />
+          <CarouselNext className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute right-[-100px]" />
         </Carousel>
       </div>
     </div>

@@ -19,7 +19,7 @@ const EducationPlanBlock = () => {
 
         <div className="grid grid-cols-1 gap-8">
           {/* Стандартное обучение */}
-          <div className="flex flex-col md:flex-row bg-white rounded-[18px] overflow-hidden h-auto md:h-[480px] border border-[#E5E7EB]">
+          <div className="flex flex-col md:flex-row bg-white rounded-[18px] overflow-hidden h-auto md:h-[480px] border border-black">
             <div className="w-full md:w-[45%] h-[300px] md:h-auto relative">
               <Image
                 src="/landing/secong/sad-notebook.jpg"

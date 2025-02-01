@@ -1,79 +1,157 @@
+import { motion } from 'framer-motion'
+
+const containerAnimation = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+}
+
+const itemAnimation = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+}
+
+const linkAnimation = {
+  hidden: { opacity: 0, x: -20 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+}
+
 const FooterBlock = () => {
   return (
     <div className="w-full px-4 py-8">
-      <div className="max-w-[1200px] mx-auto rounded-[32px] bg-[#0A0A2C] overflow-hidden">
-        <div className="py-16 px-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1200px] mx-auto rounded-[32px] bg-[#0A0A2C] overflow-hidden"
+      >
+        <motion.div 
+          variants={containerAnimation}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="py-16 px-8"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Контакты */}
-            <div>
-              <h3 className="text-2xl text-white mb-8" style={{ fontFamily: 'BOWLER' }}>
+            <motion.div variants={itemAnimation}>
+              <motion.h3 
+                variants={itemAnimation}
+                className="text-2xl text-white mb-8" 
+                style={{ fontFamily: 'BOWLER' }}
+              >
                 КОНТАКТЫ
-              </h3>
-              <div className="space-y-6 text-white/80">
-                <a 
+              </motion.h3>
+              <motion.div 
+                variants={containerAnimation}
+                className="space-y-6 text-white/80"
+              >
+                <motion.a 
+                  variants={linkAnimation}
+                  whileHover={{ x: 10, color: '#fff' }}
                   href="https://wa.me/79999999999" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-white transition-colors"
+                  className="block transition-colors"
                 >
                   WhatsApp
-                </a>
-                <a 
+                </motion.a>
+                <motion.a 
+                  variants={linkAnimation}
+                  whileHover={{ x: 10, color: '#fff' }}
                   href="https://t.me/+79999999999" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-white transition-colors"
+                  className="block transition-colors"
                 >
                   Telegram
-                </a>
-                <a 
+                </motion.a>
+                <motion.a 
+                  variants={linkAnimation}
+                  whileHover={{ x: 10, color: '#fff' }}
                   href="mailto:info@python.school"
-                  className="block hover:text-white transition-colors"
+                  className="block transition-colors"
                 >
                   Email: info@python.school
-                </a>
-              </div>
-            </div>
+                </motion.a>
+              </motion.div>
+            </motion.div>
 
             {/* Мы в соцсетях */}
-            <div>
-              <h3 className="text-2xl text-white mb-8" style={{ fontFamily: 'BOWLER' }}>
+            <motion.div variants={itemAnimation}>
+              <motion.h3 
+                variants={itemAnimation}
+                className="text-2xl text-white mb-8" 
+                style={{ fontFamily: 'BOWLER' }}
+              >
                 МЫ В СОЦСЕТЯХ
-              </h3>
-              <div className="space-y-6 text-white/80">
-                <a 
+              </motion.h3>
+              <motion.div 
+                variants={containerAnimation}
+                className="space-y-6 text-white/80"
+              >
+                <motion.a 
+                  variants={linkAnimation}
+                  whileHover={{ x: 10, color: '#fff' }}
                   href="https://t.me/pythonschool" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-white transition-colors"
+                  className="block transition-colors"
                 >
                   Telegram
-                </a>
-                <a 
+                </motion.a>
+                <motion.a 
+                  variants={linkAnimation}
+                  whileHover={{ x: 10, color: '#fff' }}
                   href="https://vk.com/pythonschool" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-white transition-colors"
+                  className="block transition-colors"
                 >
                   VK
-                </a>
-                <a 
+                </motion.a>
+                <motion.a 
+                  variants={linkAnimation}
+                  whileHover={{ x: 10, color: '#fff' }}
                   href="https://youtube.com/@pythonschool" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="block hover:text-white transition-colors"
+                  className="block transition-colors"
                 >
                   YouTube
-                </a>
-              </div>
-            </div>
+                </motion.a>
+              </motion.div>
+            </motion.div>
           </div>
 
-          <div className="mt-12 text-center text-white/60">
+          <motion.div 
+            variants={itemAnimation}
+            className="mt-12 text-center text-white/60"
+          >
             <p>2024 Python School. Все права защищены.</p>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }

@@ -37,13 +37,13 @@ export const TeacherBlock = () => {
           </div>
 
           {/* Right side - Info */}
-          <div className="flex-1">
+          <div className="flex-1 flex items-center">
             {/* Name and title section */}
-            <div className="flex flex-col gap-4">
-              <h2 className="text-[32px] md:text-[40px] text-center md:text-left leading-none font-bold" style={{ fontFamily: 'BOWLER' }}>
+            <div className="flex flex-col gap-4 w-full">
+              <h2 className="text-[32px] md:text-[40px] text-center leading-none font-bold" style={{ fontFamily: 'BOWLER' }}>
                 БАЛОЯН НАЗАР
               </h2>
-              <div className="bg-[#1E1B4B] text-white px-4 py-2 rounded w-fit mx-auto md:mx-0">
+              <div className="bg-[#1E1B4B] text-white px-4 py-2 rounded w-fit mx-auto">
                 Senior Python Developer
               </div>
             </div>

@@ -152,7 +152,7 @@ const ApplicationFormBlock = () => {
 
   if (success) {
     return (
-      <div className="w-full px-4 py-8">
+      <div id="application-form" className="w-full px-4 py-8">
         <div className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}>
           <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mx-auto flex items-center justify-center mb-4">
@@ -183,7 +183,7 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div className="w-full px-4 py-8">
+    <div id="application-form" className="w-full px-4 py-16 md:py-24">
       <div className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}>
         <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
           <h2 className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" style={{ fontFamily: 'BOWLER' }}>

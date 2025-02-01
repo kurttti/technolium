@@ -48,7 +48,15 @@ export const DiscountBlock = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
                 </div>
 
-                <button className="w-full md:w-auto bg-white text-black px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium">
+                <button 
+                  onClick={() => {
+                    const form = document.getElementById('application-form');
+                    if (form) {
+                      form.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }} 
+                  className="w-full md:w-auto bg-white text-black px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium"
+                >
                   Оставить заявку
                 </button>
               </div>

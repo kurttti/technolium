@@ -59,8 +59,8 @@ const FooterBlock = () => {
                 className="flex justify-center items-center mb-8"
                 style={{
                   fontFamily: 'BOWLER',
-                  fontSize: '42px',
-                  lineHeight: '50px',
+                  fontSize: '32px',
+                  lineHeight: '38px',
                   fontWeight: '400',
                 }}
               >
@@ -77,7 +77,7 @@ const FooterBlock = () => {
                         color: '#FFFFFF',
                         opacity: 0.15,
                         display: 'inline-block',
-                        marginRight: '0.1em'
+                        marginRight: '0.05em'
                       }}
                     >
                       {letter}

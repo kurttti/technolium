@@ -1,6 +1,7 @@
 'use client'
 
-import { CareerTest } from '@/components/career-test'
+import { CareerTest } from '@/components/features/career-test'
+import { Footer } from '@/components/layout/footer'
 
 export default function CareerTestPage() {
   return (

@@ -2,8 +2,10 @@ import React from 'react'
 import { Metadata } from 'next'
 import Script from 'next/script'
 import '@/styles/globals.css'
-import Bitrix24Widget from '@/components/bitrix24-widget'
-import { MailRuCounter } from '@/components/mail-ru-counter-3606079'
+import { Toaster } from '@/components/ui/toaster'
+import Bitrix24Widget from '@/components/widgets/bitrix24-widget'
+import { MailRuCounter } from '@/components/widgets/mail-ru-counter-3606079'
+import { PageAttribute } from '@/components/layout/page-attribute'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 const MAILRU_COUNTER_IDS = ["3605288", "3606029"]
@@ -35,6 +37,12 @@ export const metadata: Metadata = {
         width: 800,
         height: 600,
         alt: 'Технолиум логотип',
+      },
+      {
+        url: '/footerlogo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Технолиум - Онлайн университет современных IT-профессий',
       }
     ],
     locale: 'ru_RU',
@@ -94,6 +102,7 @@ export default function RootLayout({
         )}
       </head>
       <body suppressHydrationWarning={true} className="bg-white">
+        <PageAttribute />
         {children}
         <MailRuCounter />
         <Bitrix24Widget />

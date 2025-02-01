@@ -1,6 +1,6 @@
-import { NewsArticles } from "@/components/news-articles"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { NewsArticles } from "@/components/features/news-articles"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 import Image from "next/image"
 
 export default function NewsPage() {

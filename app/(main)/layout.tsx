@@ -1,8 +1,10 @@
-import { NavBar } from '@/components/nav-bar';
-import { CallWidget } from '@/components/call-widget';
-import { ScrollManager } from '@/components/scroll-manager';
+import { NavBar } from '@/components/layout/nav-bar';
+import { CallWidget } from '@/components/widgets/call-widget';
+import { ScrollManager } from '@/components/layout/scroll-manager';
+import { Providers } from '@/components/layout/providers';
 import { PageTransitionProvider } from '@/contexts/page-transition-context';
-import { Providers } from '@/components/providers';
+import { Toaster } from '@/components/ui/toaster';
+import { PageAttribute } from '@/components/layout/page-attribute';
 
 export default function MainLayout({
   children,
@@ -11,6 +13,7 @@ export default function MainLayout({
 }) {
   return (
     <>
+      <PageAttribute />
       <NavBar />
       <PageTransitionProvider>
         <ScrollManager />

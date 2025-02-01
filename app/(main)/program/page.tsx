@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ApplicationButton } from "@/components/application-button"
+import { ApplicationButton } from "@/components/features/application-button"
 import {
   BookOpen,
   Clock,
@@ -14,8 +14,8 @@ import {
   Code,
   Briefcase,
 } from "lucide-react"
-import { Contacts } from "@/components/contacts"
-import { Footer } from "@/components/footer"
+import { Contacts } from "@/components/features/contacts"
+import { Footer } from "@/components/layout/footer"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },

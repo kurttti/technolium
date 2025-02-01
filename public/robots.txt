@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.technolium.ru/sitemap.xml
 Sitemap: https://technolium.ru/sitemap.xml
 
 # Запрещаем индексацию административных разделов

@@ -91,11 +91,11 @@ const EducationPlanBlock = () => {
               />
             </div>
             <div className="flex-1 p-6 md:p-8 relative z-10">
-              <div className="flex flex-col gap-5">
-                <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
+              <div className="flex flex-col h-full">
+                <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left mb-6" style={{ fontFamily: 'BOWLER' }}>
                   ЛЬГОТНОЕ ОБУЧЕНИЕ
                 </h3>
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-4 flex-grow">
                   <div className="flex items-center gap-3">
                     <span className="text-white">—</span>
                     <span className="text-white text-sm md:text-base">Тестирование с менеджером приёма для определения в группу</span>
@@ -113,14 +113,9 @@ const EducationPlanBlock = () => {
                     <span className="text-white text-sm md:text-base">Упрощённое заключение договора</span>
                   </div>
                 </div>
-                <div className="mt-3">
+                <div className="mt-auto pt-6">
                   <p className="text-white text-sm md:text-base font-medium">КОМПЕНСАЦИЯ ДО 55% ОТ СТОИМОСТИ ОБУЧЕНИЯ</p>
                 </div>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center items-center px-8 relative z-10 hidden md:block">
-              <div className="text-[64px] [writing-mode:vertical-lr] rotate-180 text-white" style={{ fontFamily: 'BOWLER' }}>
-                PYTHON
               </div>
             </div>
           </div>

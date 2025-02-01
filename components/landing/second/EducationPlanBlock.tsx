@@ -29,42 +29,42 @@ const EducationPlanBlock = () => {
               />
             </div>
             <div className="flex-1 p-6 md:p-8">
-              <div className="flex flex-col md:flex-row justify-between">
-                <div className="flex flex-col gap-5">
-                  <h3 className="text-[24px] md:text-[32px] text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
-                    СТАНДАРТНОЕ ОБУЧЕНИЕ
-                  </h3>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <span>—</span>
-                      <span className="text-sm md:text-base">Полный список специальностей</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span>—</span>
-                      <span className="text-sm md:text-base">Возможность проведения консультации для выбора направления</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span>—</span>
-                      <span className="text-sm md:text-base">Упрощённое заключение договора</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span>—</span>
-                      <span className="text-sm md:text-base">Диплом на базе высшего/средне-специального образования</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span>—</span>
-                      <span className="text-sm md:text-base font-medium">Приобретение доступно по заявке на звонок с менеджером по продажам</span>
-                    </div>
+              <div className="flex flex-col gap-5">
+                <h3 className="text-[24px] md:text-[32px] text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
+                  СТАНДАРТНОЕ ОБУЧЕНИЕ
+                </h3>
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-3">
+                    <span>—</span>
+                    <span className="text-sm md:text-base">Полный список специальностей</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span>—</span>
+                    <span className="text-sm md:text-base">Возможность проведения консультации для выбора направления</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span>—</span>
+                    <span className="text-sm md:text-base">Упрощённое заключение договора</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span>—</span>
+                    <span className="text-sm md:text-base">Диплом на базе высшего/средне-специального образования</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span>—</span>
+                    <span className="text-sm md:text-base font-medium">Приобретение доступно по заявке на звонок с менеджером по продажам</span>
                   </div>
                 </div>
-                <div className="flex flex-col gap-3 ml-6 md:hidden">
+
+                {/* Languages - Shown on mobile and tablet */}
+                <div className="flex justify-center gap-4 mt-6 md:hidden">
                   {languages.map((lang) => (
                     <div key={lang.name} className="w-12 h-12 relative">
                       <Image
                         src={lang.icon}
                         alt={lang.name}
                         fill
-                        className="object-contain"
+                        className="object-contain p-2"
                       />
                     </div>
                   ))}
@@ -126,16 +126,16 @@ const EducationPlanBlock = () => {
           </div>
         </div>
 
-        {/* Languages */}
-        <div className="mt-8 md:mt-12">
-          <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+        {/* Languages - Shown on desktop */}
+        <div className="hidden md:block mt-8 md:mt-12">
+          <div className="flex justify-center gap-8">
             {languages.map((lang) => (
-              <div key={lang.name} className="aspect-square relative">
+              <div key={lang.name} className="w-16 h-16 relative">
                 <Image
                   src={lang.icon}
                   alt={`${lang.name} icon`}
                   fill
-                  className="object-contain p-4"
+                  className="object-contain p-2"
                 />
               </div>
             ))}

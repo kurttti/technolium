@@ -20,7 +20,7 @@ const EducationPlanBlock = () => {
         <div className="grid grid-cols-1 gap-8">
           {/* Стандартное обучение */}
           <div className="flex flex-col md:flex-row bg-white rounded-[18px] overflow-hidden h-auto md:h-[480px] border border-black">
-            <div className="w-full md:w-[45%] h-[300px] md:h-auto relative">
+            <div className="w-full md:w-[45%] h-[300px] md:h-auto relative border-b md:border-b-0 md:border-r border-black">
               <Image
                 src="/landing/secong/sad-notebook.jpg"
                 alt="Ноутбук"
@@ -28,7 +28,7 @@ const EducationPlanBlock = () => {
                 className="object-cover"
               />
             </div>
-            <div className="flex-1 p-6 md:p-8">
+            <div className="flex-1 p-6 md:p-8 border-l md:border-l-0 md:border-t border-black">
               <div className="flex flex-col gap-5">
                 <h3 className="text-[24px] md:text-[32px] text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
                   СТАНДАРТНОЕ ОБУЧЕНИЕ
@@ -74,7 +74,7 @@ const EducationPlanBlock = () => {
           </div>
 
           {/* Льготное обучение */}
-          <div className="flex flex-col md:flex-row bg-[#0A0A2C] rounded-[18px] overflow-hidden h-auto md:h-[480px] relative">
+          <div className="flex flex-col md:flex-row bg-[#0A0A2C] rounded-[18px] overflow-hidden h-auto md:h-[480px] relative border border-black">
             <Image
               src="/landing/secong/gradient-1.png"
               alt="Градиент"
@@ -82,7 +82,7 @@ const EducationPlanBlock = () => {
               className="object-cover"
               priority
             />
-            <div className="w-full md:w-[45%] h-[300px] md:h-auto relative">
+            <div className="w-full md:w-[45%] h-[300px] md:h-auto relative border-b md:border-b-0 md:border-r border-black">
               <Image
                 src="/landing/secong/two-man-with-notebook.jpg"
                 alt="Студенты за ноутбуком"
@@ -90,7 +90,7 @@ const EducationPlanBlock = () => {
                 className="object-cover"
               />
             </div>
-            <div className="flex-1 p-6 md:p-8 relative z-10">
+            <div className="flex-1 p-6 md:p-8 relative z-10 border-l md:border-l-0 md:border-t border-black">
               <div className="flex flex-col h-full justify-between">
                 <div className="space-y-6">
                   <h3 className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>

@@ -28,11 +28,11 @@ const ApplicationFormBlock = () => {
   return (
     <div className="w-full px-4 py-8">
       <div className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}>
-        <div className="flex flex-col items-center py-8 px-4">
-          <h2 className="text-[64px] mb-2 text-center tracking-wider text-white" style={{ fontFamily: 'BOWLER' }}>
+        <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
+          <h2 className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" style={{ fontFamily: 'BOWLER' }}>
             ОСТАВИТЬ ЗАЯВКУ
           </h2>
-          <h3 className="text-[32px] mb-8 text-center tracking-wider text-white/80" style={{ fontFamily: 'BOWLER' }}>
+          <h3 className="text-[24px] md:text-[32px] mb-6 md:mb-8 text-center tracking-wider text-white/80" style={{ fontFamily: 'BOWLER' }}>
             НА ЛЬГОТНОЕ ОБУЧЕНИЕ
           </h3>
           
@@ -43,7 +43,7 @@ const ApplicationFormBlock = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Имя"
-              className="h-14 px-6 rounded-[18px] bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/40 focus-visible:border-white/40 backdrop-blur-sm"
+              className="h-12 md:h-14 px-4 md:px-6 rounded-[18px] bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/40 focus-visible:border-white/40 backdrop-blur-sm text-base md:text-lg"
             />
             
             <Input
@@ -52,7 +52,7 @@ const ApplicationFormBlock = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Номер телефона"
-              className="h-14 px-6 rounded-[18px] bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/40 focus-visible:border-white/40 backdrop-blur-sm"
+              className="h-12 md:h-14 px-4 md:px-6 rounded-[18px] bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/40 focus-visible:border-white/40 backdrop-blur-sm text-base md:text-lg"
             />
             
             <Input
@@ -61,12 +61,12 @@ const ApplicationFormBlock = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="E-mail"
-              className="h-14 px-6 rounded-[18px] bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/40 focus-visible:border-white/40 backdrop-blur-sm"
+              className="h-12 md:h-14 px-4 md:px-6 rounded-[18px] bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/40 focus-visible:border-white/40 backdrop-blur-sm text-base md:text-lg"
             />
             
             <button
               type="submit"
-              className="w-full h-14 bg-white/20 hover:bg-white/30 text-white rounded-[18px] font-medium transition-colors backdrop-blur-sm"
+              className="w-full h-12 md:h-14 bg-white/20 hover:bg-white/30 text-white rounded-[18px] text-base md:text-lg font-medium transition-colors backdrop-blur-sm"
             >
               Оставить заявку
             </button>

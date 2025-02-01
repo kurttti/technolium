@@ -26,9 +26,10 @@ const CarouselBlock = () => {
   return (
     <div className="w-full px-4 py-16">
       <div className="max-w-[1200px] mx-auto">
-        <h2 className="text-[64px] mb-16 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
+        <h2 className="text-[32px] md:text-[64px] mb-8 md:mb-16 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
           ФОРМАТ ОБУЧЕНИЯ
         </h2>
+
         <Carousel
           opts={{
             align: 'center',
@@ -40,20 +41,22 @@ const CarouselBlock = () => {
             {items.map(item => (
               <CarouselItem key={item.id} className="basis-full">
                 <div className="p-1">
-                  <div className="flex flex-col gap-10 p-8 min-h-[400px]">
-                    <h3 className="text-[40px] tracking-wider" style={{ fontFamily: 'BOWLER' }}>
+                  <div className="flex flex-col gap-6 md:gap-10 p-6 md:p-8 min-h-[300px] md:min-h-[400px]">
+                    <h3 className="text-[32px] md:text-[40px] tracking-wider" style={{ fontFamily: 'BOWLER' }}>
                       {item.title}
                     </h3>
-                    <div className="flex flex-col gap-6">
-                      <p className="text-2xl leading-normal">{item.description}</p>
+                    <div className="flex flex-col gap-4 md:gap-6">
+                      <p className="text-xl md:text-2xl leading-normal">{item.description}</p>
                     </div>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute left-[-100px]" />
-          <CarouselNext className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute right-[-100px]" />
+          <div className="hidden md:block">
+            <CarouselPrevious className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute left-[-100px]" />
+            <CarouselNext className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute right-[-100px]" />
+          </div>
         </Carousel>
       </div>
     </div>

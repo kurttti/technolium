@@ -24,7 +24,7 @@ const CarouselBlock = () => {
   ]
 
   return (
-    <div className="w-full px-4 py-16">
+    <div className="w-full px-4 py-8">
       <div className="max-w-[1200px] mx-auto">
         <h2 className="text-[32px] md:text-[64px] mb-8 md:mb-16 text-center tracking-wider" style={{ fontFamily: 'BOWLER' }}>
           ФОРМАТ ОБУЧЕНИЯ

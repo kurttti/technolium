@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { DiscountBlock } from '@/components/landing/second/DiscountBlock'
 import { TeacherBlock } from '@/components/landing/second/TeacherBlock'
 import { OpportunitiesBlock } from '@/components/landing/second/OpportunitiesBlock'
@@ -10,17 +11,57 @@ import { NavBarSecond } from '@/components/layout/nav-bar-second'
 import FooterBlock from "@/components/landing/second/FooterBlock"
 import './styles.module.css'
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+}
+
 export default function SecondLandingPage() {
   return (
-    <main>
-      <DiscountBlock />
+    <motion.main
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div variants={itemVariants}>
+        <DiscountBlock />
+      </motion.div>
       {/* <NavBarSecond />       */}
-      <TeacherBlock />
-      <OpportunitiesBlock />
-      <CarouselBlock />
-      <EducationPlanBlock />
-      <ApplicationFormBlock />
-      <FooterBlock />
-    </main>
+      <motion.div variants={itemVariants}>
+        <TeacherBlock />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <OpportunitiesBlock />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <CarouselBlock />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <EducationPlanBlock />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <ApplicationFormBlock />
+      </motion.div>
+      <motion.div variants={itemVariants}>
+        <FooterBlock />
+      </motion.div>
+    </motion.main>
   )
 }

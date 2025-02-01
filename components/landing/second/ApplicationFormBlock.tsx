@@ -208,14 +208,14 @@ const ApplicationFormBlock = () => {
               <div className="relative shrink-0" ref={selectRef}>
                 <button
                   type="button"
-                  className="h-12 md:h-14 flex items-center justify-between px-3 border border-white/20 focus:outline-none focus:border-white/40 text-sm bg-white/10 backdrop-blur-sm whitespace-nowrap rounded-[18px] text-white"
+                  className="h-12 md:h-14 flex items-center justify-between px-3 border border-white/20 focus:outline-none focus:border-white/40 text-sm bg-white/10 backdrop-blur-sm whitespace-nowrap rounded-[18px] text-white min-w-[90px]"
                   onClick={() => setIsOpen(!isOpen)}
                 >
                   <div className="flex items-center">
-                    <span>+</span>
-                    <span className="ml-0.5">{selectedCountry.code.replace('+', '')}</span>
+                    <span className="text-white/80">+</span>
+                    <span className="ml-0.5 text-white">{selectedCountry.code.replace('+', '')}</span>
                   </div>
-                  <svg className="h-4 w-4 text-white ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <svg className="h-4 w-4 text-white/60 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path 
                       fill="currentColor" 
                       d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
@@ -223,16 +223,16 @@ const ApplicationFormBlock = () => {
                 </button>
                 
                 {isOpen && (
-                  <div className="absolute z-10 w-[200px] mt-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden">
+                  <div className="absolute z-10 w-[240px] mt-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden">
                     {COUNTRY_CODES.map((country) => (
                       <button
                         key={`${country.code}-${country.country}`}
                         type="button"
-                        className="w-full text-left px-4 py-3 hover:bg-white/20 focus:outline-none text-sm flex items-center space-x-2 text-white"
+                        className="w-full text-left px-4 py-3 hover:bg-white/20 focus:outline-none text-sm flex items-center justify-between text-white"
                         onClick={() => handleCountrySelect(country)}
                       >
-                        <span>{country.code}</span>
-                        <span className="opacity-80">{country.country}</span>
+                        <span className="text-white/80">{country.country}</span>
+                        <span className="text-white font-medium">{country.code}</span>
                       </button>
                     ))}
                   </div>

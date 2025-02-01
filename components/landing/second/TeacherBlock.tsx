@@ -87,7 +87,7 @@ export const TeacherBlock = () => {
                 ease: [0.16, 1, 0.3, 1],
                 delay: 0.3
               }}
-              className="absolute inset-0 rounded-[31px] overflow-hidden bg-[#151B4D]"
+              className="absolute inset-0 rounded-[31px] overflow-hidden bg-black"
             >
               {/* Круглая маска */}
               <motion.div

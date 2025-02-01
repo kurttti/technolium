@@ -35,7 +35,7 @@ const CarouselBlock = () => {
             align: 'center',
             loop: true,
           }}
-          className="w-full max-w-5xl mx-auto [&_[role=region]]:border-none relative"
+          className="w-full max-w-5xl mx-auto [&_[role=region]]:border-none relative overflow-hidden"
         >
           <CarouselContent className="-ml-4 [&>*]:border-none [&>*]:pl-4">
             {items.map(item => (
@@ -54,8 +54,8 @@ const CarouselBlock = () => {
             ))}
           </CarouselContent>
           <div className="hidden md:block">
-            <CarouselPrevious className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute left-[-100px]" />
-            <CarouselNext className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute right-[-100px]" />
+            <CarouselPrevious className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute -translate-x-full left-4" />
+            <CarouselNext className="border-none w-14 h-14 bg-transparent hover:bg-transparent text-black absolute translate-x-full right-4" />
           </div>
         </Carousel>
       </div>

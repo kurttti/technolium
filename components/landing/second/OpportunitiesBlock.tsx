@@ -11,7 +11,7 @@ const specializations = [
 
 export const OpportunitiesBlock = () => {
   return (
-    <div className="w-full border-b py-12">
+    <div className="w-full py-12">
       <div className="max-w-[1200px] mx-auto">
         <h2 className="text-[40px] mb-12" style={{ fontFamily: 'BOWLER' }}>
           ВОЗМОЖНОСТИ ЛЬГОТНОГО ОБУЧЕНИЯ

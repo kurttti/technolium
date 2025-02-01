@@ -3,6 +3,11 @@ import { withAuth } from "next-auth/middleware";
 
 export default withAuth(
   function middleware(req) {
+    // Не применяем редирект для robots.txt и sitemap.xml
+    if (req.nextUrl.pathname === '/robots.txt' || req.nextUrl.pathname === '/sitemap.xml') {
+      return NextResponse.next();
+    }
+
     // Redirect from www to non-www in production
     if (process.env.NODE_ENV === 'production' && req.headers.get('host')?.startsWith('www.')) {
       const url = new URL(req.url);

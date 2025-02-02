@@ -5,13 +5,15 @@ import '@/styles/globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import Bitrix24Widget from '@/components/widgets/bitrix24-widget'
 import { MailRuCounter } from '@/components/widgets/mail-ru-counter-3606079'
-import { PageAttribute } from '@/components/layout/page-attribute'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 const MAILRU_COUNTER_IDS = ["3605288", "3606029"]
 
 export const metadata: Metadata = {
-  title: 'Технолиум',
+  title: {
+    default: 'Технолиум - IT Образование',
+    template: '%s | Технолиум',
+  },
   description: 'Обучаем современным IT-профессиям с нуля. Помогаем освоить востребованные навыки и построить успешную карьеру в IT. Практические занятия, опытные преподаватели, поддержка в обучении.',
   keywords: 'обучение IT, программирование, разработка, онлайн курсы, IT образование, технологии, карьера в IT',
   authors: [{ name: 'Технолиум' }],
@@ -27,22 +29,16 @@ export const metadata: Metadata = {
     apple: '/TechnoliumLogo.svg',
   },
   openGraph: {
-    title: 'Технолиум - Онлайн университет современных IT-профессий',
+    title: 'Технолиум - Онлайн университет IT-профессий',
     description: 'Обучаем современным IT-профессиям с нуля. Помогаем освоить востребованные навыки и построить успешную карьеру в IT.',
     url: 'https://technolium.ru',
     siteName: 'Технолиум',
     images: [
       {
-        url: 'https://technolium.ru/TechnoliumLogo.svg',
-        width: 800,
-        height: 600,
-        alt: 'Технолиум логотип',
-      },
-      {
-        url: 'https://technolium.ru/footerlogo.png',
+        url: 'https://technolium.ru/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Технолиум - Онлайн университет современных IT-профессий',
+        alt: 'Технолиум - Обучение IT профессиям',
       }
     ],
     locale: 'ru_RU',
@@ -102,7 +98,6 @@ export default function RootLayout({
         )}
       </head>
       <body suppressHydrationWarning={true} className="bg-white">
-        <PageAttribute />
         {children}
         <MailRuCounter />
         <Bitrix24Widget />

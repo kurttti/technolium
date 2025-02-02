@@ -1,27 +1,24 @@
-// components/layout/main-layout.tsx
-import { NavBar } from '@/components/layout/nav-bar';
-import { CallWidget } from '@/components/widgets/call-widget';
-import { ScrollManager } from '@/components/layout/scroll-manager';
-import { Providers } from '@/components/layout/providers';
-import { PageTransitionProvider } from '@/contexts/page-transition-context';
-import { Toaster } from '@/components/ui/toaster';
-import { PageAttribute } from '@/components/layout/page-attribute';
+// app/layout.tsx
+import { MainLayout } from '@/components/layout/main-layout';
 
-export default function MainLayout({
+export const metadata = {
+  title: "Технолиум - онлайн университет",
+  description: "Описание по умолчанию для SEO",
+  openGraph: {
+    images: ['/og-image.jpg']
+  }
+};
+
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <PageAttribute /> {/* SEO-метаданные здесь */}
-      <NavBar />
-      <PageTransitionProvider>
-        <ScrollManager />
-        <main>
-          <Providers>{children}</Providers>
-        </main>
-      </PageTransitionProvider>
-    </>
-  );
+    <html lang="ru">
+      <body>
+        <MainLayout>{children}</MainLayout>
+      </body>
+    </html>
+  )
 }

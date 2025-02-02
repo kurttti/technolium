@@ -1,3 +1,4 @@
+// components/layout/main-layout.tsx
 import { NavBar } from '@/components/layout/nav-bar';
 import { CallWidget } from '@/components/widgets/call-widget';
 import { ScrollManager } from '@/components/layout/scroll-manager';
@@ -13,7 +14,7 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <PageAttribute />
+      <PageAttribute /> {/* SEO-метаданные здесь */}
       <NavBar />
       <PageTransitionProvider>
         <ScrollManager />

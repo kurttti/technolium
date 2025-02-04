@@ -21,6 +21,8 @@ export default function MainLayout({
           <Providers>{children}</Providers>
         </main>
       </PageTransitionProvider>
+      {/* <CallWidget />
+      <Toaster /> */}
     </>
   );
 }

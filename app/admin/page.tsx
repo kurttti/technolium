@@ -54,12 +54,12 @@ export default function AdminPage() {
                     Создание ссылок для оформления кредита или рассрочки
                   </CardDescription>
                 </div>
-                <Button variant="outline" size="sm" asChild>
+                {/* <Button variant="outline" size="sm" asChild>
                   <Link href="/admin/links" className="gap-2">
                     <ArrowLeft className="h-4 w-4" />
                     К списку ссылок
                   </Link>
-                </Button>
+                </Button> */}
               </div>
             </CardHeader>
             <CardContent>

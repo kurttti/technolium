@@ -94,6 +94,19 @@ export async function POST(request: Request): Promise<NextResponse> {
     // months: 12, commission: 14.5
     const [type, firstPayment, monthlyPayment, months, commission] = body.creditType.split('_');
     
+    // Определяем промокод в зависимости от срока
+    let promoCode;
+    switch (months) {
+      case "18":
+        promoCode = "installment_0_0_18_20,2_3";
+        break;
+      case "24":
+        promoCode = "installment_0_0_24_25,5_3,5";
+        break;
+      default: // 12 месяцев по умолчанию
+        promoCode = "installment_0_0_12_14,5_2,6";
+    }
+
     const tinkoffRequest = {
       shopId: process.env.TINKOFF_SHOP_ID,
       showcaseId: process.env.TINKOFF_SHOWCASE_ID,
@@ -104,6 +117,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         quantity: item.quantity,
         price: item.price
       })),
+      promoCode: promoCode,
       values: {
         installmentParams: {
           term: Number(months),

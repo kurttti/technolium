@@ -127,7 +127,7 @@ const EducationPlanBlock = () => {
                 {/* Languages */}
                 <motion.div 
                   variants={containerAnimation}
-                  className="flex justify-center md:justify-start gap-4 mt-6"
+                  className="flex justify-center md:justify-start gap-4 mt-auto pt-16 md:pt-23"
                 >
                   {languages.map((lang) => (
                     <motion.div 
@@ -224,9 +224,9 @@ const EducationPlanBlock = () => {
                   </div>
                   <motion.div 
                     variants={listItemAnimation}
-                    className="mt-6 md:mt-8"
+                    className="mt-auto pt-16 md:pt-24"
                   >
-                    <div className="text-white text-[24px] md:text-[32px] font-bold text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
+                    <div className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
                       КОМПЕНСАЦИЯ ДО 55% ОТ СТОИМОСТИ ОБУЧЕНИЯ
                     </div>
                   </motion.div>

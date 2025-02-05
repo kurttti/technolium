@@ -79,9 +79,9 @@ export const OpportunitiesBlock = () => {
                 <motion.li 
                   key={index} 
                   variants={itemAnimation}
-                  className="flex items-start gap-2"
+                  className="flex items-center gap-2"
                 >
-                  <span className="text-lg md:text-xl mt-1 shrink-0">•</span>
+                  <span className="text-lg md:text-xl shrink-0">•</span>
                   <span className="text-sm md:text-base text-gray-700 break-words hyphens-auto">{spec}</span>
                 </motion.li>
               ))}
@@ -154,14 +154,13 @@ export const OpportunitiesBlock = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="hidden lg:block lg:w-[400px]"
+            className="hidden lg:block lg:w-[600px] relative"
           >
             <Image
               src="/landing/second/gradient-2.jpg"
               alt="Gradient"
-              width={400}
-              height={800}
-              className="w-full h-full object-cover rounded-[31px]"
+              fill
+              className="object-cover rounded-[31px]"
               priority
             />
           </motion.div>

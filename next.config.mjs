@@ -8,7 +8,7 @@ try {
 const allowedOrigins = {
   development: ['http://localhost:3000'],
   production: [
-    'https://technolium.ru',
+    'https://technolium.ru', // Основной домен
     'https://cdn-ru.bitrix24.ru',
     'https://mc.yandex.ru'
   ]
@@ -16,6 +16,29 @@ const allowedOrigins = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Добавлены редиректы для www и HTTP
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          { type: 'host', value: 'www.technolium.ru' }
+        ],
+        destination: 'https://technolium.ru/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          { type: 'host', value: 'technolium.ru' },
+          { type: 'header', key: 'x-forwarded-proto', value: 'http' }
+        ],
+        destination: 'https://technolium.ru/:path*',
+        permanent: true,
+      }
+    ]
+  },
+
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -31,7 +54,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'technolium.ru'
+        hostname: 'technolium.ru' // Основной домен
       },
       {
         protocol: 'https',
@@ -46,7 +69,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: allowedOrigins.production.join(', ') // Использование белого списка
           },
           {
             key: 'Access-Control-Allow-Methods',
@@ -63,7 +86,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Access-Control-Allow-Origin',
-            value: '*'
+            value: allowedOrigins.production.join(', ')
           },
           {
             key: 'Access-Control-Allow-Methods',
@@ -92,6 +115,11 @@ const nextConfig = {
               "font-src 'self' https://*.bitrix24.ru data:",
               "manifest-src 'self'"
             ].join('; ')
+          },
+          // Добавлен HSTS header
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload'
           }
         ]
       }

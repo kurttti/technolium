@@ -10,6 +10,7 @@ import ApplicationFormBlock from '@/components/landing/second/ApplicationFormBlo
 import { NavBarSecond } from '@/components/layout/nav-bar-second'
 import FooterBlock from "@/components/landing/second/FooterBlock"
 import './styles.module.css'
+import '../styles.css'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -39,6 +40,7 @@ export default function SecondLandingPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      className="main-container pt-8"
     >
       <motion.div variants={itemVariants}>
         <DiscountBlock />

@@ -169,9 +169,27 @@ const FooterBlock = () => {
 
           <motion.div 
             variants={itemAnimation}
-            className="mt-12 text-center text-white/60"
+            className="mt-12 text-white/60"
           >
-            <p>2024 Technolium. Все права защищены.</p>
+            {/* Основная информация */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 text-left">
+              <motion.div variants={itemAnimation} className="space-y-2">
+                <h4 className="font-medium text-white/80">Регистрационные данные</h4>
+                <p>ИП БАЛОЯН АРСЕНИЙ РОБЕРТОВИЧ</p>
+                <p>ОГРНИП: 324237500502599</p>
+                <p>ИНН: 233608758888</p>
+              </motion.div>
+              
+              <motion.div variants={itemAnimation} className="space-y-2">
+                <h4 className="font-medium text-white/80">Регистрирующий орган</h4>
+                <p>Межрайонная инспекция Федеральной налоговой службы № 16 по Краснодарскому краю</p>
+              </motion.div>
+            </div>
+
+            {/* Копирайт */}
+            <div className="text-center pt-6 border-t border-white/10">
+              <p>© 2024 Technolium. Все права защищены.</p>
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>

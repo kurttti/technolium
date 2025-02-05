@@ -16,17 +16,16 @@ const allowedOrigins = {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Добавлены редиректы для www и HTTP
   async redirects() {
     return [
+      // Редирект с www на чистый домен
       {
         source: '/:path*',
-        has: [
-          { type: 'host', value: 'www.technolium.ru' }
-        ],
+        has: [{ type: 'host', value: 'www.technolium.ru' }],
         destination: 'https://technolium.ru/:path*',
         permanent: true,
       },
+      // Принудительный HTTPS для основного домена
       {
         source: '/:path*',
         has: [

@@ -39,17 +39,11 @@ const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
     viewport={{ once: true, margin: "-100px" }}
-    className={`flex items-start max-w-[300px] ${isMobile ? 'w-full' : ''}`}
+    className={`flex items-start max-w-[300px] ${isMobile ? 'w-full pl-8' : ''}`}
   >
-    <motion.div 
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      transition={{ duration: 0.3, delay: index * 0.1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className="w-[20px] text-center flex-shrink-0"
-    >
+    <div className="w-[20px] text-left flex-shrink-0">
       —
-    </motion.div>
+    </div>
     <div className="flex-1">
       <motion.div className="text-base md:text-lg font-medium">
         {fact.title}

@@ -12,7 +12,7 @@ const MAILRU_COUNTER_IDS = ["3605288", "3606029"]
 export const metadata: Metadata = {
   title: {
     default: 'Технолиум - IT Образование',
-    template: '%s | Технолиум',
+    template: '%s | Технолиум', // Фиксированный шаблон для всех страниц
   },
   description: 'Обучаем современным IT-профессиям с нуля. Помогаем освоить востребованные навыки и построить успешную карьеру в IT. Практические занятия, опытные преподаватели, поддержка в обучении.',
   keywords: 'обучение IT, программирование, разработка, онлайн курсы, IT образование, технологии, карьера в IT',
@@ -28,14 +28,15 @@ export const metadata: Metadata = {
     icon: '/TechnoliumLogo.svg',
     apple: '/TechnoliumLogo.svg',
   },
+  metadataBase: new URL('https://technolium.ru'), // Добавлена база для URL
   openGraph: {
     title: 'Технолиум - Онлайн университет IT-профессий',
     description: 'Обучаем современным IT-профессиям с нуля. Помогаем освоить востребованные навыки и построить успешную карьеру в IT.',
-    url: 'https://technolium.ru',
+    url: '/', // Относительный путь благодаря metadataBase
     siteName: 'Технолиум',
     images: [
       {
-        url: 'https://technolium.ru/og-image.jpg',
+        url: '/og-image.jpg', // Относительный путь
         width: 1200,
         height: 630,
         alt: 'Технолиум - Обучение IT профессиям',
@@ -69,6 +70,9 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning={true}>
       <head>
+        {/* Каноническая ссылка */}
+        <link rel="canonical" href="https://technolium.ru" />
+        
         {METRIKA_ID && (
           <Script
             id="yandex-metrika"

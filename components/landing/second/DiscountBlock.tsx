@@ -1,4 +1,4 @@
- import Image from 'next/image'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export const DiscountBlock = () => {
@@ -16,7 +16,7 @@ export const DiscountBlock = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full md:w-2/6 h-[300px] md:h-auto bg-cover bg-center rounded-t-[18px] md:rounded-[18px]" 
+            className="relative w-full md:w-2/6 h-[300px] md:h-auto bg-cover bg-center md:bg-center bg-[center_top_-50px] rounded-t-[18px] md:rounded-[18px]" 
             style={{ 
               backgroundImage: 'url(/landing/second/men-with-notebook.png)'
             }}

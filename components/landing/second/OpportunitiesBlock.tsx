@@ -79,9 +79,9 @@ export const OpportunitiesBlock = () => {
                 <motion.li 
                   key={index} 
                   variants={itemAnimation}
-                  className="flex items-start gap-2"
+                  className="flex items-center gap-2"
                 >
-                  <span className="text-lg md:text-xl mt-1 shrink-0">•</span>
+                  <span className="text-lg md:text-xl shrink-0">•</span>
                   <span className="text-sm md:text-base text-gray-700 break-words hyphens-auto">{spec}</span>
                 </motion.li>
               ))}

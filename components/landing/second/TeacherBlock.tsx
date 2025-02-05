@@ -53,14 +53,12 @@ const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
     <div>
       <motion.div 
         className="text-base md:text-lg font-medium"
-        style={{ fontFamily: 'IBM Plex Sans KR' }}
       >
         {fact.title}
       </motion.div>
       {fact.subtitle && (
         <motion.div 
           className="text-base md:text-lg"
-          style={{ fontFamily: 'IBM Plex Sans KR' }}
         >
           {fact.subtitle}
         </motion.div>

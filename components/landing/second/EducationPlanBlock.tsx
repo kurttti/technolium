@@ -224,7 +224,7 @@ const EducationPlanBlock = () => {
                   </div>
                   <motion.div 
                     variants={listItemAnimation}
-                    className="mt-6 md:mt-8"
+                    className="mt-auto pt-16 md:pt-24"
                   >
                     <div className="text-[24px] md:text-[32px] text-white text-center md:text-left" style={{ fontFamily: 'BOWLER' }}>
                       КОМПЕНСАЦИЯ ДО 55% ОТ СТОИМОСТИ ОБУЧЕНИЯ

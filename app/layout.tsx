@@ -8,7 +8,7 @@ import { MailRuCounter } from '@/components/widgets/mail-ru-counter-3606079'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 const MAILRU_COUNTER_IDS = ["3605288", "3606029"]
-
+export const dynamic = 'force-static'
 export const metadata: Metadata = {
   title: {
     default: 'Технолиум - IT Образование',
@@ -67,11 +67,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Добавить canonical URL с динамическим протоколом
+  const canonicalUrl = process.env.NODE_ENV === 'production' 
+    ? 'https://technolium.ru' 
+    : 'http://localhost:3000'
+
   return (
     <html lang="ru" suppressHydrationWarning={true}>
       <head>
-        {/* Каноническая ссылка */}
-        <link rel="canonical" href="https://technolium.ru" />
+        {/* Обновленная каноническая ссылка */}
+        <link rel="canonical" href={canonicalUrl} />
         
         {METRIKA_ID && (
           <Script

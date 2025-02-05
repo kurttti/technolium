@@ -39,7 +39,7 @@ const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
     viewport={{ once: true, margin: "-100px" }}
-    className={`flex items-start ${isMobile ? 'justify-center md:justify-start' : ''}`}
+    className={`flex items-start max-w-[300px] ${isMobile ? 'w-full' : ''}`}
   >
     <motion.div 
       initial={{ scaleX: 0 }}
@@ -51,15 +51,11 @@ const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
       —
     </motion.div>
     <div className="flex-1">
-      <motion.div 
-        className="text-base md:text-lg font-medium"
-      >
+      <motion.div className="text-base md:text-lg font-medium">
         {fact.title}
       </motion.div>
       {fact.subtitle && (
-        <motion.div 
-          className="text-base md:text-lg"
-        >
+        <motion.div className="text-base md:text-lg">
           {fact.subtitle}
         </motion.div>
       )}
@@ -185,9 +181,9 @@ export const TeacherBlock = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 md:mt-12 flex justify-center lg:hidden"
+          className="mt-8 md:mt-12 lg:hidden"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-[800px]">
+          <div className="flex flex-col items-center gap-6 w-full">
             {facts.map((fact, index) => (
               <FactItem key={index} fact={fact} index={index} isMobile={true} />
             ))}

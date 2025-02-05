@@ -127,7 +127,7 @@ const EducationPlanBlock = () => {
                 {/* Languages */}
                 <motion.div 
                   variants={containerAnimation}
-                  className="flex justify-center md:justify-start gap-4 mt-auto pt-16 md:pt-24"
+                  className="flex justify-center md:justify-start gap-4 mt-auto pt-16 md:pt-23"
                 >
                   {languages.map((lang) => (
                     <motion.div 

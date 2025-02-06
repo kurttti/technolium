@@ -2,12 +2,18 @@ body[data-page^="/"] {
   --header-height: 0 !important;
   -webkit-touch-action: pan-y manipulation;
   touch-action: pan-y manipulation;
-  overflow-y: auto !important;
+  overflow: hidden auto !important;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   scrollbar-width: auto;
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  -webkit-margin-before: 0 !important;
-  margin-block-start: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-container {
+  position: relative;
+  z-index: 1;
+  transform: none !important;
 }

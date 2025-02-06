@@ -35,8 +35,11 @@ const fadeInUp = {
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
+    setIsLoaded(true)
+    
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -68,34 +71,38 @@ export default function MainPage() {
   // }
 
   const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
+    initial: { opacity: 0 },
+    animate: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3
+        staggerChildren: 0.3,
+        when: "beforeChildren"
       }
     }
   }
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
+    initial: { opacity: 0 },
+    animate: {
       opacity: 1,
-      y: 0,
       transition: {
-        duration: 0.5,
-        ease: "easeOut"
+        duration: 0.5
       }
     }
   }
 
   return (
     <main>
-         <motion.main
+      {isLoaded && (
+        <motion.main
           variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+          initial="initial"
+          animate="animate"
           className="main-container pt-8"
+          style={{ 
+            position: 'relative',
+            transformStyle: 'preserve-3d'
+          }}
         >
           <motion.div variants={itemVariants}>
             <DiscountBlock />
@@ -120,6 +127,7 @@ export default function MainPage() {
             <FooterBlock />
           </motion.div>
         </motion.main>
+      )}
       {/* <motion.div
         initial="hidden"
         animate="visible"

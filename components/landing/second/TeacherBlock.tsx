@@ -12,6 +12,7 @@ interface FactItemProps {
   fact: Fact;
   index: number;
   isMobile?: boolean;
+  className?: string;
 }
 
 const facts = [
@@ -33,13 +34,13 @@ const facts = [
   }
 ]
 
-const FactItem = ({ fact, index, isMobile = false }: FactItemProps) => (
+const FactItem = ({ fact, index, isMobile = false, className }: FactItemProps) => (
   <motion.div 
     initial={{ opacity: 0, x: -20 }}
     whileInView={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
     viewport={{ once: true, margin: "-100px" }}
-    className={`flex items-start max-w-[300px] ${isMobile ? 'w-full pl-8' : ''}`}
+    className={`flex items-start max-w-[300px] ${isMobile ? 'w-full pl-8' : ''} ${className || ''}`}
   >
     <div className="w-[20px] text-left flex-shrink-0">
       —
@@ -177,9 +178,15 @@ export const TeacherBlock = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-8 md:mt-12 lg:hidden"
         >
-          <div className="flex flex-col items-center gap-6 w-full">
+          <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-6 items-center gap-6 w-full">
             {facts.map((fact, index) => (
-              <FactItem key={index} fact={fact} index={index} isMobile={true} />
+              <FactItem 
+                key={index} 
+                fact={fact} 
+                index={index} 
+                isMobile={true} 
+                className={`md:pl-0`}
+              />
             ))}
           </div>
         </motion.div>

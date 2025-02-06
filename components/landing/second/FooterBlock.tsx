@@ -115,12 +115,12 @@ const FooterBlock = () => {
                   <motion.a 
                     variants={linkAnimation}
                     whileHover={{ x: 10, color: '#fff' }}
-                    href="https://t.me/NazarBaloyanNe_bot" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="https://drive.google.com/file/d/1iSuWjqFDrmVxz7ruW9SxuMNn6qnTRW4Z/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer" 
                     className="block transition-colors"
                   >
-                    Telegram
+                    Публичная оферта
                   </motion.a>
                   <motion.a 
                     variants={linkAnimation}

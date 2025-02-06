@@ -74,7 +74,7 @@ const EducationPlanBlock = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full md:w-[45%] h-[300px] md:h-[480px] relative rounded-[18px] border border-black overflow-hidden"
+              className="w-full md:w-[45%] h-[300px] md:h-auto relative rounded-[18px] overflow-hidden"
             >
               <Image
                 src="/landing/second/sad-notebook.jpg"
@@ -162,7 +162,7 @@ const EducationPlanBlock = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full md:w-[45%] h-[300px] md:h-[480px] relative rounded-[18px] border border-black overflow-hidden"
+              className="w-full md:w-[45%] h-[300px] md:h-auto relative rounded-[18px] overflow-hidden"
             >
               <Image
                 src="/landing/second/two-man-with-notebook.jpg"
@@ -170,7 +170,6 @@ const EducationPlanBlock = () => {
                 fill
                 className="object-cover"
                 style={{ 
-                  transform: 'scale(1.1)',
                   objectFit: 'cover'
                 }}
                 sizes="(max-width: 768px) 100vw, 45vw"

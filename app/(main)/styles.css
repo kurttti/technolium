@@ -1,0 +1,19 @@
+body[data-page^="/"] {
+  --header-height: 0 !important;
+  -webkit-touch-action: pan-y manipulation;
+  touch-action: pan-y manipulation;
+  overflow: hidden auto !important;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  scrollbar-width: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-container {
+  position: relative;
+  z-index: 1;
+  transform: none !important;
+}

@@ -10,6 +10,15 @@ import { Footer } from "@/components/layout/footer"
 import { Contacts } from "@/components/features/contacts"
 import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useState } from "react"
+import ApplicationFormBlock from "@/components/landing/second/ApplicationFormBlock"
+import { DiscountBlock } from "@/components/landing/second/DiscountBlock"
+import CarouselBlock from "@/components/landing/second/CarouselBlock"
+import { TeacherBlock } from "@/components/landing/second/TeacherBlock"
+import { OpportunitiesBlock } from "@/components/landing/second/OpportunitiesBlock"
+import EducationPlanBlock from "@/components/landing/second/EducationPlanBlock"
+import FooterBlock from "@/components/landing/second/FooterBlock"
+import './styles.module.css'
+import './styles.css'
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 15 },
@@ -26,8 +35,11 @@ const fadeInUp = {
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
+    setIsLoaded(true)
+    
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
@@ -41,26 +53,82 @@ export default function MainPage() {
   const viewportAmount = isMobile ? 0.1 : 0.2
   const staggerDelay = isMobile ? 0.05 : 0.1
 
-  // Если пользователь предпочитает уменьшенное движение, отключаем анимации
-  if (prefersReducedMotion) {
-    return (
-      <main>
-        <Hero />
-        <Specialties />
-        <Regions />
-        <AdmissionPlan />
-        <EducationFormat />
-        <CommercialViability />
-        <News />
-        <Contacts />
-        <Footer />
-      </main>
-    )
+  // // Если пользователь предпочитает уменьшенное движение, отключаем анимации
+  // if (prefersReducedMotion) {
+  //   return (
+  //     <main>
+  //       <Hero />
+  //       <Specialties />
+  //       <Regions />
+  //       <AdmissionPlan />
+  //       <EducationFormat />
+  //       <CommercialViability />
+  //       <News />
+  //       <Contacts />
+  //       <Footer />
+  //     </main>
+  //   )
+  // }
+
+  const containerVariants = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        when: "beforeChildren"
+      }
+    }
+  }
+  
+  const itemVariants = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
   }
 
   return (
     <main>
-      <motion.div
+      {isLoaded && (
+        <motion.main
+          variants={containerVariants}
+          initial="initial"
+          animate="animate"
+          className="main-container pt-8"
+          style={{ 
+            position: 'relative',
+            transformStyle: 'preserve-3d'
+          }}
+        >
+          <motion.div variants={itemVariants}>
+            <DiscountBlock />
+          </motion.div>
+          {/* <NavBarSecond />       */}
+          <motion.div variants={itemVariants}>
+            <TeacherBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <OpportunitiesBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <CarouselBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <EducationPlanBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <ApplicationFormBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <FooterBlock />
+          </motion.div>
+        </motion.main>
+      )}
+      {/* <motion.div
         initial="hidden"
         animate="visible"
         variants={fadeInUp}
@@ -146,7 +214,7 @@ export default function MainPage() {
         transition={{ delay: staggerDelay * 8 }}
       >
         <Footer />
-      </motion.div>
+      </motion.div> */}
     </main>
   )
 }

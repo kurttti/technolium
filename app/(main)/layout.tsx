@@ -13,14 +13,14 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <PageAttribute />
+      {/* <PageAttribute />
       <NavBar />
       <PageTransitionProvider>
-        <ScrollManager />
+        <ScrollManager /> */}
         <main>
           <Providers>{children}</Providers>
         </main>
-      </PageTransitionProvider>
+      {/* </PageTransitionProvider> */}
       {/* <CallWidget />
       <Toaster /> */}
     </>

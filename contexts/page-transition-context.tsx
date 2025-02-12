@@ -15,17 +15,14 @@ export function PageTransitionProvider({ children }: { children: React.ReactNode
 
   return (
     <PageTransitionContext.Provider value={{ isTransitioning: false }}>
-      <div className="min-h-screen flex flex-col">
-        <motion.div
-          key={pathname}
-          className="flex-grow"
-          initial={{ opacity: 0.95 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.15 }}
-        >
-          {children}
-        </motion.div>
-      </div>
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0.95 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.15 }}
+      >
+        {children}
+      </motion.div>
     </PageTransitionContext.Provider>
   )
 }

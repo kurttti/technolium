@@ -1,13 +1,5 @@
 "use client"
-import { Hero } from "@/components/layout/hero"
-import { Specialties } from "@/components/features/specialties"
-import { Regions } from "@/components/features/regions"
-import { AdmissionPlan } from "@/components/features/admission-plan"
-import { EducationFormat } from "@/components/features/education-format"
-import { CommercialViability } from "@/components/features/commercial-viability"
-import { News } from "@/components/features/news"
-import { Footer } from "@/components/layout/footer"
-import { Contacts } from "@/components/features/contacts"
+
 import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useState } from "react"
 import ApplicationFormBlock from "@/components/landing/second/ApplicationFormBlock"
@@ -92,15 +84,14 @@ export default function MainPage() {
   }
 
   return (
-    <main>
+    <div className="flex-1 relative">
       {isLoaded && (
-        <motion.main
+        <motion.div
           variants={containerVariants}
           initial="initial"
           animate="animate"
-          className="main-container pt-8"
+          className="w-full"
           style={{ 
-            position: 'relative',
             transformStyle: 'preserve-3d'
           }}
         >
@@ -126,7 +117,7 @@ export default function MainPage() {
           <motion.div variants={itemVariants}>
             <FooterBlock />
           </motion.div>
-        </motion.main>
+        </motion.div>
       )}
       {/* <motion.div
         initial="hidden"
@@ -215,6 +206,6 @@ export default function MainPage() {
       >
         <Footer />
       </motion.div> */}
-    </main>
+    </div>
   )
 }

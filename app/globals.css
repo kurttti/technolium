@@ -17,7 +17,7 @@
   --min-gap-button-text: 1rem; /* 16px минимальный зазор между кнопками и текстом */
 
   /* Размер шрифта (Font Size) */
-  --font-size-heading: 2.5rem;     /* Заголовки – 40px */
+  --font-size-heading: 3.625rem;     /* Заголовки – 58px */
   --font-size-subheading: 1.5rem;    /* Подзаголовки – 24px */
   --font-size-body: 1rem;            /* Основной текст – 16px */
   --font-size-quote: 1.25rem;        /* Цитаты основателей – 20px */
@@ -33,7 +33,7 @@
   /* Цвета (Primary, Secondary, Accent) */
   --color-darkblue: #1A365D;   /* Темно-синий фон для текстовых блоков */
   --color-white: #FFFFFF;      /* Белый текст */
-  --color-cta: #9EFF6B;        /* Салатовый для кнопок CTA */
+  --color-cta: #6B5BFF;        /* Фиолетовый для кнопок CTA (заменен зеленый #9EFF6B) */
   --color-warning: #FF6B35;    /* Оранжевый для предупреждений/гарантий */
 
   /* Сетка (Grid Columns/Gutters) */
@@ -69,7 +69,7 @@
   --border-width-divider: 1px;
   --border-width-active: 2px;
   --border-color-divider: #1A365D;
-  --border-color-active: #9EFF6B;
+  --border-color-active: #6B5BFF;  /* Фиолетовый для активных элементов (заменен зеленый #9EFF6B) */
 
   /* Z-index */
   --z-modal: 1000;
@@ -89,6 +89,9 @@
   /* Трекинг (Tracking) */
   --tracking-tariff: 0.8px;
   --tracking-banner: 1.2px;
+
+  /* Максимальная ширина контента */
+  --max-content-width: 1600px;
 }
 
 body {
@@ -98,53 +101,6 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-}
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-  html {
-    scroll-behavior: smooth;
-    height: 100%;
-    overflow: visible;
-  }
-  body {
-    height: 100%;
-    overflow: visible;
   }
 }
 
@@ -166,5 +122,3 @@ body {
   letter-spacing: var(--letter-spacing-button);
   opacity: var(--opacity-hover);
 }
-
-/* Дополнительные классы и стили для реализации дизайна согласно описанию можно добавлять ниже */

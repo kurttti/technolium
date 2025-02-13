@@ -61,7 +61,7 @@ const FactItem = ({ fact, index, isMobile = false, className }: FactItemProps) =
 export const TeacherBlock = () => {
   return (
     <div className="w-full px-4 py-8">
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[var(--max-content-width)] mx-auto">
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

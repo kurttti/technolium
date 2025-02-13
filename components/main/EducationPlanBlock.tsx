@@ -183,7 +183,7 @@ const EducationPlanBlock = () => {
               className="flex-1 p-6 md:p-8 rounded-[18px] border border-black bg-[#0A0A2C] relative overflow-hidden"
             >
               <Image
-                src="/main/gradient-1.png"
+                src="/main/gradient-1.jpg"
                 alt="Градиент"
                 fill
                 className="object-cover"

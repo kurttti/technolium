@@ -1,6 +1,5 @@
 'use client';
 
-import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react';
 import { Providers } from '@/components/layout/providers';
 

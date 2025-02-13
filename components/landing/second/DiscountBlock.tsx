@@ -9,7 +9,7 @@ export const DiscountBlock = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative w-full h-[600px] md:h-[600px] flex flex-col md:flex-row overflow-hidden"
+          className="relative w-full h-[600px] md:h-[600px] flex flex-col md:flex-row"
         >
           {/* Left side with image */}
           <motion.div 
@@ -65,7 +65,7 @@ export const DiscountBlock = () => {
               >
                 <motion.div 
                   whileHover={{ scale: 1.02 }}
-                  className="max-w-[280px] md:max-w-[320px] group relative overflow-hidden bg-gradient-to-r from-[#2563EB]/30 to-[#2563EB]/10 backdrop-blur-sm text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-sm sm:text-base text-center md:text-left font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:from-[#2563EB]/40 hover:to-[#2563EB]/20"
+                  className="max-w-[280px] md:max-w-[320px] group relative bg-gradient-to-r from-[#2563EB]/30 to-[#2563EB]/10 backdrop-blur-sm text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-sm sm:text-base text-center md:text-left font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:from-[#2563EB]/40 hover:to-[#2563EB]/20"
                 >
                   <div className="relative z-10 whitespace-normal">-55% от стоимости стандартного обучения</div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>

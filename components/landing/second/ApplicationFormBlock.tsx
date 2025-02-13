@@ -195,10 +195,11 @@ const ApplicationFormBlock = () => {
   const toggleDropdown = () => {
     if (!isOpen && selectRef.current) {
       const rect = selectRef.current.getBoundingClientRect()
+      const parentRect = selectRef.current.offsetParent?.getBoundingClientRect() || { top: 0, left: 0 }
       
       setDropdownPosition({
-        top: rect.bottom,
-        left: rect.left
+        top: rect.height,
+        left: 0
       })
     }
     setIsOpen(!isOpen)
@@ -211,7 +212,7 @@ const ApplicationFormBlock = () => {
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+          className={`max-w-[1200px] mx-auto rounded-[32px] ${styles.gradientBackground}`}
         >
           <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <motion.div 
@@ -267,7 +268,7 @@ const ApplicationFormBlock = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+        className={`max-w-[1200px] mx-auto rounded-[32px] ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}
@@ -327,6 +328,57 @@ const ApplicationFormBlock = () => {
                       d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                   </svg>
                 </motion.button>
+
+                {isOpen && (
+                  <div
+                    ref={dropdownRef}
+                    style={{
+                      position: 'absolute',
+                      top: `${dropdownPosition.top}px`,
+                      left: `${dropdownPosition.left}px`,
+                      zIndex: 9999,
+                      background: 'rgba(19, 19, 78, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '18px',
+                      width: '240px',
+                      marginTop: '4px',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                      color: 'white'
+                    }}
+                  >
+                    {COUNTRY_CODES.map((country) => (
+                      <button
+                        key={`${country.code}-${country.country}`}
+                        type="button"
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '100%',
+                          padding: '12px 16px',
+                          color: 'white',
+                          cursor: 'pointer',
+                          background: 'none',
+                          border: 'none',
+                          transition: 'background-color 0.2s',
+                          fontSize: '14px',
+                          fontWeight: '400'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent'
+                        }}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <span>{country.country}</span>
+                        <span style={{ fontWeight: '500' }}>{country.code}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="flex-1">
                 <InputMask
@@ -384,58 +436,6 @@ const ApplicationFormBlock = () => {
           </motion.form>
         </motion.div>
       </motion.div>
-
-      {isOpen && createPortal(
-        <div
-          ref={dropdownRef}
-          style={{
-            position: 'fixed',
-            top: `${dropdownPosition.top}px`,
-            left: `${dropdownPosition.left}px`,
-            zIndex: 9999,
-            background: 'rgba(19, 19, 78, 0.95)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-            borderRadius: '18px',
-            width: '240px',
-            marginTop: '4px',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-            color: 'white'
-          }}
-        >
-          {COUNTRY_CODES.map((country) => (
-            <button
-              key={`${country.code}-${country.country}`}
-              type="button"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%',
-                padding: '12px 16px',
-                color: 'white',
-                cursor: 'pointer',
-                background: 'none',
-                border: 'none',
-                transition: 'background-color 0.2s',
-                fontSize: '14px',
-                fontWeight: '400'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent'
-              }}
-              onClick={() => handleCountrySelect(country)}
-            >
-              <span>{country.country}</span>
-              <span style={{ fontWeight: '500' }}>{country.code}</span>
-            </button>
-          ))}
-        </div>,
-        document.body
-      )}
 
       {error && (
         <NotificationToast

@@ -1,16 +1,31 @@
-/* body[data-page^="/"] {
-  --header-height: 0 !important;
-  -webkit-touch-action: pan-y manipulation;
-  touch-action: pan-y manipulation;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  scrollbar-width: auto;
-  margin: 0 !important;
-  padding: 0 !important;
-} */
+@font-face {
+  font-family: 'BOWLER';
+  src: url('/fonts/BOWLER.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-.main-container {
-  position: relative;
-  z-index: 1;
-  transform: none !important;
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  src: url('/fonts/IBMPlexSansKR-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  src: url('/fonts/IBMPlexSansKR-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  src: url('/fonts/IBMPlexSansKR-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }

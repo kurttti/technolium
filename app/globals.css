@@ -2,6 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Детализация параметров UX/UI для "Технолиума" */
+:root {
+  /* Размеры элементов (Width/Height) */
+  --btn-width-desktop: 240px;
+  --btn-height-desktop: 56px;
+  --btn-width-mobile: 90vw;
+  --card-width: 320px;
+  --card-height: 420px;
+
+  /* Отступы (Margin/Padding) */
+  --section-margin: 2.5rem;   /* 40px между секциями */
+  --card-padding: 1.5rem;     /* 24px внутри карточек */
+  --min-gap-button-text: 1rem; /* 16px минимальный зазор между кнопками и текстом */
+
+  /* Размер шрифта (Font Size) */
+  --font-size-heading: 2.5rem;     /* Заголовки – 40px */
+  --font-size-subheading: 1.5rem;    /* Подзаголовки – 24px */
+  --font-size-body: 1rem;            /* Основной текст – 16px */
+  --font-size-quote: 1.25rem;        /* Цитаты основателей – 20px */
+
+  /* Межстрочный интервал (Line Height) */
+  --line-height-body: 1.6;
+  --line-height-quote: 1.8;
+
+  /* Межбуквенный интервал (Letter Spacing) */
+  --letter-spacing-heading: 0.5px;
+  --letter-spacing-button: 1px;
+
+  /* Цвета (Primary, Secondary, Accent) */
+  --color-darkblue: #1A365D;   /* Темно-синий фон для текстовых блоков */
+  --color-white: #FFFFFF;      /* Белый текст */
+  --color-cta: #9EFF6B;        /* Салатовый для кнопок CTA */
+  --color-warning: #FF6B35;    /* Оранжевый для предупреждений/гарантий */
+
+  /* Сетка (Grid Columns/Gutters) */
+  --grid-columns-desktop: 12;
+  --grid-gutter-desktop: 24px;
+  --grid-padding-mobile: 12px;
+
+  /* Радиус скругления (Border Radius) */
+  --btn-border-radius: 8px;
+  --card-border-radius: 12px;
+
+  /* Тени (Box/Text Shadow) */
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --banner-text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+
+  /* Прозрачность (Opacity) */
+  --opacity-bg-photo: 0.2;
+  --opacity-hover: 0.9;
+
+  /* Соотношение сторон (Aspect Ratio) */
+  --aspect-ratio-media: 16 / 9;
+
+  /* Точки останова (Breakpoints) */
+  --bp-mobile: 768px;
+  --bp-tablet: 1024px;
+  --bp-desktop: 1025px;
+
+  /* Длительность анимации (Animation Duration) */
+  --anim-duration-button: 300ms;
+  --anim-duration-tariff: 500ms;
+
+  /* Толщина границ (Border Width) */
+  --border-width-divider: 1px;
+  --border-width-active: 2px;
+  --border-color-divider: #1A365D;
+  --border-color-active: #9EFF6B;
+
+  /* Z-index */
+  --z-modal: 1000;
+  --z-header: 100;
+
+  /* Толщина шрифта (Font Weight) */
+  --font-weight-heading: 600;
+  --font-weight-quote: 400;
+
+  /* Размер иконок (Icon Size) */
+  --icon-size-social: 24px;
+  --icon-size-menu: 32px;
+
+  /* Кернинг (Kerning) */
+  --kerning-heading: -0.5px;
+
+  /* Трекинг (Tracking) */
+  --tracking-tariff: 0.8px;
+  --tracking-banner: 1.2px;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -48,48 +137,14 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
   html {
     scroll-behavior: smooth;
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
   body {
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
 }
 
@@ -101,3 +156,15 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Пример использования переменных (например, для кнопки "Оставить заявку") */
+.btn-apply {
+  width: var(--btn-width-desktop);
+  height: var(--btn-height-desktop);
+  border-radius: var(--btn-border-radius);
+  font-size: var(--font-size-heading);
+  letter-spacing: var(--letter-spacing-button);
+  opacity: var(--opacity-hover);
+}
+
+/* Дополнительные классы и стили для реализации дизайна согласно описанию можно добавлять ниже */

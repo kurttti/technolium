@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster'
 import Bitrix24Widget from '@/components/widgets/bitrix24-widget'
 import { MailRuCounter } from '@/components/widgets/mail-ru-counter-3606079'
 import { PageAttribute } from '@/components/layout/page-attribute'
+import './globals.css'
 
 const METRIKA_ID = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID
 const MAILRU_COUNTER_IDS = ["3605288", "3606029"]

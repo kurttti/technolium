@@ -10,7 +10,6 @@ import { OpportunitiesBlock } from "@/components/main/OpportunitiesBlock"
 import EducationPlanBlock from "@/components/main/EducationPlanBlock"
 import FooterBlock from "@/components/main/FooterBlock"
 import { TariffBlock } from "@/components/main/TariffBlock"
-import './styles.module.css'
 import './styles.css'
 
 const fadeInUp = {

@@ -11,29 +11,29 @@ export const DiscountBlock = () => {
           transition={{ duration: 0.5 }}
           className="relative w-full h-[600px] md:h-[600px] flex flex-col md:flex-row overflow-hidden"
         >
-          {/* Left side with image */}
+          {/* Левая сторона с изображением */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full md:w-2/6 h-[300px] md:h-auto bg-cover bg-center md:bg-[center_top] bg-[center_top_-20px] rounded-t-[18px] md:rounded-[18px]" 
+            className="relative w-full md:w-2/6 h-[300px] md:h-auto bg-cover bg-center md:bg-[center_top] bg-[center_top_-20px]" 
             style={{ 
               backgroundImage: 'url(/landing/second/men-with-notebook.png)'
             }}
           />
 
-          {/* Right side with content */}
+          {/* Правая сторона с содержимым */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative w-full md:w-4/6 flex items-center bg-[#0A0A2C] md:bg-transparent rounded-b-[18px] md:rounded-none"
+            className="relative w-full md:w-4/6 flex items-center bg-[var(--color-darkblue)] md:bg-transparent "
           >
             <Image
               src="/landing/second/gradient-1.png"
               alt="Background gradient"
               fill
-              className="hidden md:block object-cover rounded-[18px]"
+              className="hidden md:block object-cover"
               priority
             />
             
@@ -42,7 +42,7 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
-                className="text-white text-center md:text-left"
+                className="text-[var(--color-white)] text-center md:text-left"
                 style={{
                   fontFamily: 'BOWLER',
                   fontSize: 'clamp(36px, 4.5vw, 65px)',
@@ -65,7 +65,7 @@ export const DiscountBlock = () => {
               >
                 <motion.div 
                   whileHover={{ scale: 1.02 }}
-                  className="max-w-[280px] md:max-w-[320px] group relative overflow-hidden bg-gradient-to-r from-[#2563EB]/30 to-[#2563EB]/10 backdrop-blur-sm text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-sm sm:text-base text-center md:text-left font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:from-[#2563EB]/40 hover:to-[#2563EB]/20"
+                  className="max-w-[280px] md:max-w-[320px] group relative overflow-hidden bg-gradient-to-r from-[#2563EB]/30 to-[#2563EB]/10 backdrop-blur-sm text-[var(--color-white)] px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl text-sm sm:text-base text-center md:text-left font-medium transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:from-[#2563EB]/40 hover:to-[#2563EB]/20"
                 >
                   <div className="relative z-10 whitespace-normal">-55% от стоимости стандартного обучения</div>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
@@ -80,13 +80,13 @@ export const DiscountBlock = () => {
                       form.scrollIntoView({ behavior: 'smooth' });
                     }
                   }} 
-                  className="w-full md:w-auto bg-white text-black px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium"
+                  className="w-full md:w-auto bg-[var(--color-white)] text-[hsl(var(--foreground))] px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium"
                 >
                   Оставить заявку
                 </motion.button>
               </motion.div>
 
-              {/* Python text on the right */}
+              {/* Текст Python справа */}
               <div 
                 className="hidden md:flex absolute right-8 flex-col justify-between"
                 style={{
@@ -108,8 +108,8 @@ export const DiscountBlock = () => {
                     transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                     className="text-center"
                     style={{
-                      color: '#000000',
-                      WebkitTextStroke: '1px #FFFFFF',
+                      color: 'hsl(var(--foreground))',
+                      WebkitTextStroke: '1px var(--color-white)',
                     }}
                   >
                     {letter}

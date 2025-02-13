@@ -4,10 +4,10 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const languages = [
-  { name: 'JavaScript', icon: '/landing/second/language-icon/js.svg' },
-  { name: 'Python', icon: '/landing/second/language-icon/python.svg' },
-  { name: 'C#', icon: '/landing/second/language-icon/csharp.svg' },
-  { name: 'Go', icon: '/landing/second/language-icon/go.svg' },
+  { name: 'JavaScript', icon: '/main/language-icon/js.svg' },
+  { name: 'Python', icon: '/main/language-icon/python.svg' },
+  { name: 'C#', icon: '/main/language-icon/csharp.svg' },
+  { name: 'Go', icon: '/main/language-icon/go.svg' },
 ]
 
 const listItemAnimation = {
@@ -77,7 +77,7 @@ const EducationPlanBlock = () => {
               className="w-full md:w-[45%] h-[300px] md:h-auto relative rounded-[18px] overflow-hidden"
             >
               <Image
-                src="/landing/second/sad-notebook.jpg"
+                src="/main/sad-notebook.jpg"
                 alt="Ноутбук"
                 fill
                 className="object-cover"
@@ -165,7 +165,7 @@ const EducationPlanBlock = () => {
               className="w-full md:w-[45%] h-[300px] md:h-auto relative rounded-[18px] overflow-hidden"
             >
               <Image
-                src="/landing/second/two-man-with-notebook.jpg"
+                src="/main/two-man-with-notebook.jpg"
                 alt="Студенты за ноутбуком"
                 fill
                 className="object-cover"
@@ -183,7 +183,7 @@ const EducationPlanBlock = () => {
               className="flex-1 p-6 md:p-8 rounded-[18px] border border-black bg-[#0A0A2C] relative overflow-hidden"
             >
               <Image
-                src="/landing/second/gradient-1.png"
+                src="/main/gradient-1.png"
                 alt="Градиент"
                 fill
                 className="object-cover"

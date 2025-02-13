@@ -2,13 +2,14 @@
 
 import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useState } from "react"
-import ApplicationFormBlock from "@/components/landing/second/ApplicationFormBlock"
-import { DiscountBlock } from "@/components/landing/second/DiscountBlock"
-import CarouselBlock from "@/components/landing/second/CarouselBlock"
-import { TeacherBlock } from "@/components/landing/second/TeacherBlock"
-import { OpportunitiesBlock } from "@/components/landing/second/OpportunitiesBlock"
-import EducationPlanBlock from "@/components/landing/second/EducationPlanBlock"
-import FooterBlock from "@/components/landing/second/FooterBlock"
+import ApplicationFormBlock from "@/components/main/ApplicationFormBlock"
+import { DiscountBlock } from "@/components/main/DiscountBlock"
+import CarouselBlock from "@/components/main/CarouselBlock"
+import { TeacherBlock } from "@/components/main/TeacherBlock"
+import { OpportunitiesBlock } from "@/components/main/OpportunitiesBlock"
+import EducationPlanBlock from "@/components/main/EducationPlanBlock"
+import FooterBlock from "@/components/main/FooterBlock"
+import { TariffBlock } from "@/components/main/TariffBlock"
 import './styles.module.css'
 import './styles.css'
 
@@ -41,26 +42,6 @@ export default function MainPage() {
     
     return () => window.removeEventListener('resize', checkIfMobile)
   }, [])
-
-  const viewportAmount = isMobile ? 0.1 : 0.2
-  const staggerDelay = isMobile ? 0.05 : 0.1
-
-  // // Если пользователь предпочитает уменьшенное движение, отключаем анимации
-  // if (prefersReducedMotion) {
-  //   return (
-  //     <main>
-  //       <Hero />
-  //       <Specialties />
-  //       <Regions />
-  //       <AdmissionPlan />
-  //       <EducationFormat />
-  //       <CommercialViability />
-  //       <News />
-  //       <Contacts />
-  //       <Footer />
-  //     </main>
-  //   )
-  // }
 
   const containerVariants = {
     initial: { opacity: 0 },
@@ -98,12 +79,15 @@ export default function MainPage() {
           <motion.div variants={itemVariants}>
             <DiscountBlock />
           </motion.div>
-          {/* <NavBarSecond />       */}
+            {/* <NavBarSecond />       */}
           <motion.div variants={itemVariants}>
             <TeacherBlock />
           </motion.div>
           <motion.div variants={itemVariants}>
             <OpportunitiesBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <TariffBlock />
           </motion.div>
           <motion.div variants={itemVariants}>
             <CarouselBlock />
@@ -119,93 +103,6 @@ export default function MainPage() {
           </motion.div>
         </motion.div>
       )}
-      {/* <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-      >
-        <Hero />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay }}
-      >
-        <Specialties />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 2 }}
-      >
-        <Regions />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 3 }}
-      >
-        <AdmissionPlan />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 4 }}
-      >
-        <EducationFormat />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 5 }}
-      >
-        <CommercialViability />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 6 }}
-      >
-        <News />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 7 }}
-      >
-        <Contacts />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 8 }}
-      >
-        <Footer />
-      </motion.div> */}
     </div>
   )
 }

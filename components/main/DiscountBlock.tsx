@@ -9,7 +9,7 @@ export const DiscountBlock = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative w-full h-[600px] md:h-[600px] flex flex-col md:flex-row overflow-hidden rounded-[var(--card-border-radius)]"
+          className="relative w-full h-[600px] md:h-[600px] flex flex-col md:flex-row overflow-hidden"
         >
           {/* Левая сторона с изображением */}
           <motion.div 
@@ -18,8 +18,7 @@ export const DiscountBlock = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative w-full md:w-2/6 h-[300px] md:h-auto bg-cover bg-center md:bg-[center_top] bg-[center_top_-20px]"
             style={{ 
-              // Используем изображение из /main (папка public/main)
-              backgroundImage: "url(/main/two-man-with-notebook.jpg)"
+              backgroundImage: "url('/main/men-with-notebook.jpg')"
             }}
           />
 
@@ -31,7 +30,7 @@ export const DiscountBlock = () => {
             className="relative w-full md:w-4/6 flex items-center bg-[var(--color-darkblue)] md:bg-transparent"
           >
             <Image
-              src="/main/gradient-1.png"
+              src="/main/gradient-1.jpg"
               alt="Background gradient"
               fill
               className="hidden md:block object-cover"

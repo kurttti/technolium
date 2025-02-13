@@ -5,24 +5,11 @@ import { useEffect, useState } from "react"
 import ApplicationFormBlock from "@/components/main/ApplicationFormBlock"
 import { DiscountBlock } from "@/components/main/DiscountBlock"
 import CarouselBlock from "@/components/main/CarouselBlock"
-import { TeacherBlock } from "@/components/main/TeacherBlock"
 import { OpportunitiesBlock } from "@/components/main/OpportunitiesBlock"
 import EducationPlanBlock from "@/components/main/EducationPlanBlock"
 import FooterBlock from "@/components/main/FooterBlock"
 import { TariffBlock } from "@/components/main/TariffBlock"
-import './styles.css'
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1]  
-    }
-  }
-}
+import FoundersBlock from "@/components/main/FoundersBlock"
 
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
@@ -64,7 +51,7 @@ export default function MainPage() {
   }
 
   return (
-    <div className="flex-1 relative">
+    <>
       {isLoaded && (
         <motion.div
           variants={containerVariants}
@@ -80,7 +67,7 @@ export default function MainPage() {
           </motion.div>
             {/* <NavBarSecond />       */}
           <motion.div variants={itemVariants}>
-            <TeacherBlock />
+            <FoundersBlock />
           </motion.div>
           <motion.div variants={itemVariants}>
             <OpportunitiesBlock />
@@ -102,6 +89,6 @@ export default function MainPage() {
           </motion.div>
         </motion.div>
       )}
-    </div>
+    </>
   )
 }

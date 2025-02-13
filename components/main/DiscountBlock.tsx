@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 export const DiscountBlock = () => {
   return (
     <div className="w-full">
-      <div className="max-w-[var(--max-content-width)] mx-auto">
+      <div className="max-w-content mx-auto">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -27,7 +27,7 @@ export const DiscountBlock = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative w-full md:w-4/6 flex items-start md:items-center bg-[var(--color-darkblue)] md:bg-transparent py-[var(--section-margin)] md:py-0"
+            className="relative w-full md:w-4/6 flex items-start md:items-center bg-darkblue md:bg-transparent py-section-margin md:py-0"
           >
             <Image
               src="/main/gradient-1.jpg"
@@ -37,22 +37,14 @@ export const DiscountBlock = () => {
               priority
             />
             
-            <div className="relative z-10 w-full px-6 md:pl-16 flex flex-col items-center md:items-start gap-[var(--min-gap-button-text)]">
+            <div className="relative z-modal w-full px-6 md:pl-16 flex flex-col items-center md:items-start gap-min-gap-button-text">
               {/* Подпись */}
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
-                className="text-center md:text-left"
-                style={{
-                  fontFamily: 'BOWLER',
-                  fontSize: 'var(--font-size-heading)',
-                  lineHeight: 'var(--line-height-body)',
-                  fontWeight: 'var(--font-weight-heading)',
-                  letterSpacing: 'var(--letter-spacing-heading)',
-                  color: 'var(--color-white)',
-                  marginBottom: 'var(--min-gap-button-text)'
-                }}
+                className="text-center md:text-left text-block leading-body tracking-heading text-white mb-min-gap-button-text"
+                style={{ fontFamily: 'BOWLER' }}
               >
                 ТЕХНОЛИУМ
               </motion.h1>
@@ -62,15 +54,8 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="text-[var(--color-white)] text-center md:text-left max-w-[800px]"
-                style={{
-                  fontFamily: 'BOWLER',
-                  fontSize: 'var(--font-size-subheading)',
-                  lineHeight: 'var(--line-height-body)',
-                  fontWeight: 'var(--font-weight-heading)',
-                  letterSpacing: 'var(--letter-spacing-heading)',
-                  marginBottom: 'var(--section-margin)'
-                }}
+                className=" text-white text-center md:text-left max-w-[800px] text-subheading leading-body tracking-heading mb-section-margin"
+                style={{ fontFamily: 'BOWLER' }}
               >
                 Онлайн-университет языков программирования,
                 предлагающий гибкую и высокоэффективную
@@ -85,18 +70,18 @@ export const DiscountBlock = () => {
               >
                 {/* Добавляем теги */}
                 <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Javascript</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Python</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Нейросети</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">GO</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">C#</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Подобрать профессию</span>
+                  {['Javascript', 'Python', 'Нейросети', 'GO', 'C#', 'Подобрать профессию'].map((tag) => (
+                    <span key={tag} className="px-4 py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">10 месяцев</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Коммерческая деятельность</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Центр карьеры</span>
-                  <span className="px-4 py-1.5 bg-black/[var(--opacity-bg-photo)] rounded-full text-[var(--color-white)] border border-white cursor-pointer hover:bg-white/20 transition-colors">Выбор специализации</span>
+                  {['10 месяцев', 'Коммерческая деятельность', 'Центр карьеры', 'Выбор специализации'].map((tag) => (
+                    <span key={tag} className="px-4 py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
                 
                 <motion.button 
@@ -108,7 +93,7 @@ export const DiscountBlock = () => {
                       form.scrollIntoView({ behavior: 'smooth' })
                     }
                   }} 
-                  className="mt-[var(--section-margin)] w-full md:w-auto bg-[var(--color-white)] text-[hsl(var(--foreground))] px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium"
+                  className="mt-section-margin w-full md:w-auto bg-white text-foreground px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium"
                 >
                   Оставить заявку
                 </motion.button>

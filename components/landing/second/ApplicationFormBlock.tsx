@@ -83,10 +83,14 @@ const ApplicationFormBlock = () => {
   const [utmParams, setUtmParams] = useState<UtmParams>({})
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 })
   const selectRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current && !selectRef.current.contains(event.target as Node) &&
+        (!dropdownRef.current || !dropdownRef.current.contains(event.target as Node))
+      ) {
         setIsOpen(false)
       }
     }
@@ -189,17 +193,15 @@ const ApplicationFormBlock = () => {
   }
 
   const toggleDropdown = () => {
-    setIsOpen((prev) => {
-      const newState = !prev
-      if (newState && selectRef.current) {
-        const rect = selectRef.current.getBoundingClientRect()
-        setDropdownPosition({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX
-        })
-      }
-      return newState
-    })
+    if (!isOpen && selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect()
+      
+      setDropdownPosition({
+        top: rect.bottom,
+        left: rect.left
+      })
+    }
+    setIsOpen(!isOpen)
   }
 
   if (success) {
@@ -383,35 +385,57 @@ const ApplicationFormBlock = () => {
         </motion.div>
       </motion.div>
 
-      <AnimatePresence>
-        {isOpen && document.body && createPortal(
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="z-50 w-[240px] mt-1 bg-[#13134E]/90 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden shadow-lg"
-            style={{ position: 'absolute', top: dropdownPosition.top, left: dropdownPosition.left }}
-          >
-            {COUNTRY_CODES.map((country) => (
-              <motion.button
-                key={`${country.code}-${country.country}`}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
-                type="button"
-                className="w-full text-left px-4 py-3 focus:outline-none text-sm flex items-center justify-between text-white"
-                onClick={() => {
-                  handleCountrySelect(country)
-                  setIsOpen(false)
-                }}
-              >
-                <span className="text-white">{country.country}</span>
-                <span className="text-white font-medium">{country.code}</span>
-              </motion.button>
-            ))}
-          </motion.div>, 
-          document.body
-        )}
-      </AnimatePresence>
+      {isOpen && createPortal(
+        <div
+          ref={dropdownRef}
+          style={{
+            position: 'fixed',
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`,
+            zIndex: 9999,
+            background: 'rgba(19, 19, 78, 0.95)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            borderRadius: '18px',
+            width: '240px',
+            marginTop: '4px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+            color: 'white'
+          }}
+        >
+          {COUNTRY_CODES.map((country) => (
+            <button
+              key={`${country.code}-${country.country}`}
+              type="button"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%',
+                padding: '12px 16px',
+                color: 'white',
+                cursor: 'pointer',
+                background: 'none',
+                border: 'none',
+                transition: 'background-color 0.2s',
+                fontSize: '14px',
+                fontWeight: '400'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent'
+              }}
+              onClick={() => handleCountrySelect(country)}
+            >
+              <span>{country.country}</span>
+              <span style={{ fontWeight: '500' }}>{country.code}</span>
+            </button>
+          ))}
+        </div>,
+        document.body
+      )}
 
       {error && (
         <NotificationToast

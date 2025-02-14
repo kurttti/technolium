@@ -103,9 +103,9 @@ export default function MainPage() {
           <motion.div variants={itemVariants}>
             <ApplicationFormBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          {/* <motion.div variants={itemVariants}>
             <FooterBlock />
-          </motion.div>
+          </motion.div> */}
             {/* <NavBarSecond />       */}
           {/* <motion.div variants={itemVariants}>
             <FoundersBlock />

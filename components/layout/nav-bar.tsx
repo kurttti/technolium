@@ -64,7 +64,7 @@ export function NavBar() {
             className="md:hidden p-2 rounded-md text-black focus:outline-none"
           >
             <span className="sr-only">Открыть меню</span>
-            <div className="w-6 h-5 flex flex-col justify-between">
+            <div className="w-6 h-[1.15rem] flex flex-col justify-between">
               <span className={`w-full h-0.5 bg-black transform transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`} />
               <span className={`w-full h-0.5 bg-black transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`} />
               <span className={`w-full h-0.5 bg-black transform transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`} />

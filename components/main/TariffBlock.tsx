@@ -79,16 +79,16 @@ export function TariffBlock() {
   }
 
   return (
-    <section className="w-full py-24 bg-gradient-to-b">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="w-full py-8 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b px-4 sm:px-6 md:px-8">
+      <div className="max-w-7xl mx-auto">
         <h2 
-          className="text-[64px] leading-none font-h1 text-center mb-16 tracking-banner"
+          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[64px] leading-tight font-h1 text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 tracking-banner"
           style={{ fontFamily: 'BOWLER' }}
         >
           ТАРИФЫ ОБУЧЕНИЯ
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-8 md:grid-cols-2">
           {tariffPlans.map((plan) => {
             const monthlyPayment = calculateMonthlyPayment(plan.basePrice, selectedMonths[plan.title])
             const isDark = plan.title === "ИНДИВИДУАЛЬНОЕ ВЕДЕНИЕ"
@@ -103,21 +103,21 @@ export function TariffBlock() {
                 }`}
               >
                 <div className="flex flex-col h-full">
-                  <CardHeader className="border-b border-gray-200 dark:border-gray-800 p-6">
+                  <CardHeader className="border-b border-gray-200 dark:border-gray-800 p-4 sm:p-6">
                     <CardTitle 
-                      className="text-[50px] leading-none tracking-banner text-center"
+                      className="text-[28px] sm:text-[34px] md:text-[40px] lg:text-[50px] leading-tight tracking-banner text-center"
                       style={{ fontFamily: 'BOWLER' }}
                     >
                       {plan.title}
                     </CardTitle>
                   </CardHeader>
                   
-                  <CardContent className="p-6 flex flex-col flex-1">
+                  <CardContent className="p-4 sm:p-6 flex flex-col flex-1">
                     <div className="flex-1 space-y-2">
                       {plan.features.map((feature, index) => (
                         <div key={index} className="flex items-center gap-4">
-                          <span className="text-[25px] leading-none">—</span>
-                          <span className="text-[25px] leading-normal">{feature.name}</span>
+                          <span className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[25px] leading-tight">—</span>
+                          <span className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[25px] leading-normal">{feature.name}</span>
                         </div>
                       ))}
                     </div>
@@ -126,7 +126,7 @@ export function TariffBlock() {
                       <p className="text-sm mb-2 text-gray-500 dark:text-gray-400">
                         Рассчитать ежемесячный платеж
                       </p>
-                      <div className="text-4xl font-bold mb-4 h-[48px] relative">
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 h-[48px] relative">
                         <AnimatePresence mode="wait" initial={false}>
                           <motion.div
                             key={monthlyPayment}
@@ -163,7 +163,7 @@ export function TariffBlock() {
                               [plan.title]: values[0]
                             }))
                           }}
-                          className={`${
+                          className={`$${
                             isDark 
                               ? `
                                 [&_[role=slider]]:bg-cta 

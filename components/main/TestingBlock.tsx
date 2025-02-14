@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const TestingBlock = () => {
   return (
-    <section className="w-full min-h-screen bg-white flex items-center justify-center px-4">
+    <section className="w-full bg-white flex items-center justify-center px-4">
       <div className="max-w-content w-full relative">
         {/* JS и таймер как отдельные блоки */}
         <div className="absolute left-20 top-20 flex gap-4 rotate-[-15deg]">
@@ -57,7 +57,7 @@ const TestingBlock = () => {
         </div>
 
         {/* Центральный контент */}
-        <div className="flex flex-col items-center text-center my-40">
+        <div className="flex flex-col items-center text-center">
           <h1 
             className="text-h1 leading-h1 font-h1 mb-4 tracking-banner"
             style={{ fontFamily: 'BOWLER' }}

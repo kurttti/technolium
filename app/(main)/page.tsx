@@ -63,7 +63,7 @@ export default function MainPage() {
           variants={containerVariants}
           initial="initial"
           animate="animate"
-          className="w-full"
+          className="w-full space-y-section-spacing-sm md:space-y-section-spacing-md lg:space-y-section-spacing-lg"
           style={{ 
             transformStyle: 'preserve-3d'
           }}

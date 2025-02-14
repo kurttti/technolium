@@ -82,24 +82,24 @@ const ProfessionBlock = () => {
   const [activeLanguage, setActiveLanguage] = useState(languages[0])
 
   return (
-    <section className="w-full min-h-screen bg-white flex items-center justify-center px-4">
+    <section className="w-full bg-white flex items-center justify-center">
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
           <h1 
-            className="text-h1 leading-h1 font-h1 text-center mb-4 tracking-banner"
+            className="text-h1 leading-h1 font-h1 text-center tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ВЫБИРАЙ ПРОФЕССИЮ
           </h1>
           <h1 
-            className="text-h2 leading-h2 font-h2 text-center mb-section-margin tracking-banner"
+            className="text-h2 leading-h2 font-h2 text-center tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ПО ДУШЕ
           </h1>
 
-          <div className="bg-white rounded-card p-card-padding shadow-card w-full max-w-content">
-            <div className="flex flex-wrap justify-center gap-btns-gap mb-16">
+          <div className="bg-white rounded-card p-block-padding-md shadow-card w-full max-w-content mt-block-spacing-xl">
+            <div className="flex flex-wrap justify-center gap-btns-gap">
               {languages.map((lang) => (
                 <button
                   key={lang.name}
@@ -129,8 +129,8 @@ const ProfessionBlock = () => {
               ))}
             </div>
 
-            <div className="flex flex-col lg:flex-row items-center justify-center">
-              <div className="w-full lg:w-2/3 space-y-8 px-8 py-8">
+            <div className="flex flex-col lg:flex-row items-center justify-center mt-block-spacing-lg">
+              <div className="w-full lg:w-2/3 px-8">
                 {activeLanguage.content.description.map((text, index) => (
                   <h4
                     key={index} 
@@ -140,7 +140,7 @@ const ProfessionBlock = () => {
                   </h4>
                 ))}
                 
-                <div className="flex flex-col sm:flex-row gap-btn-gap pt-14 justify-center lg:justify-start">
+                <div className="flex flex-col sm:flex-row gap-btn-gap mt-block-spacing-lg justify-center lg:justify-start">
                   <button className="flex-1 max-w-btn-max-width h-btn-height bg-black text-white text-base leading-body font-text rounded-full hover:bg-black/90 transition-all duration-300">
                     Смотреть программу обучения
                   </button>

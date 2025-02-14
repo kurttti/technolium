@@ -38,8 +38,8 @@ const NewsBlock = () => {
   const [activeIndex, setActiveIndex] = useState<number | undefined>(undefined)
 
   return (
-    <section className="w-full bg-white py-20">
-      <div className="max-w-content mx-auto px-4">
+    <section className="w-full bg-white">
+      <div className="max-w-content mx-auto px-block-padding-xs md:px-block-padding-md">
         <h1 
           className="text-h1 leading-h1 font-h1 text-center mb-16 tracking-banner"
           style={{ fontFamily: 'BOWLER' }}

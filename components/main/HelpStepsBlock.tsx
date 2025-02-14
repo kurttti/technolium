@@ -40,7 +40,7 @@ const HelpStepsBlock = () => {
   const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section className="w-full min-h-screen bg-white flex items-center justify-center px-4">
+    <section className="w-full bg-white flex items-center justify-center px-4">
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
           <h1 

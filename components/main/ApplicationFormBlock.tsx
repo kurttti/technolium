@@ -204,7 +204,7 @@ const ApplicationFormBlock = () => {
 
   if (success) {
     return (
-      <div id="application-form" className="w-full px-4 py-8">
+      <div id="application-form" className="w-full px-block-padding-xs md:px-block-padding-md py-section-spacing-sm md:py-section-spacing-md lg:py-section-spacing-lg">
         <motion.div 
           variants={successAnimation}
           initial="hidden"
@@ -258,7 +258,7 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div id="application-form" className="w-full px-4 py-8 mobile:pt-24">
+    <div id="application-form" className="w-full px-block-padding-xs md:px-block-padding-md py-section-spacing-sm md:py-section-spacing-md lg:py-section-spacing-lg">
       <motion.div 
         variants={formAnimation}
         initial="hidden"

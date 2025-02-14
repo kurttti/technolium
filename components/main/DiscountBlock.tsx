@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 export const DiscountBlock = () => {
   return (
     <div className="w-full">
-      <div className="max-w-content mx-auto">
+      <div className="max-w-content mx-auto ">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

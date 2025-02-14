@@ -104,13 +104,15 @@ const HelpStepsBlock = () => {
               </div>
 
               <div className="w-full lg:w-[600px] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-black rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden flex items-center justify-center">
-                <Image
-                  src={steps[activeStep].image}
-                  alt={`Этап ${steps[activeStep].number}`}
-                  fill
-                  className="w-full h-full object-cover"
-                  priority
-                />
+                <div className="relative w-[80%] h-[80%]">
+                  <Image
+                    src={steps[activeStep].image}
+                    alt={`Этап ${steps[activeStep].number}`}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -16,7 +16,7 @@ export const DiscountBlock = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full lg:w-2/6 h-[250px] sm:h-[300px] lg:h-auto bg-cover bg-center"
+            className="relative w-full lg:w-2/6 h-[250px] sm:h-[300px] lg:h-auto bg-cover bg-bottom"
             style={{ 
               backgroundImage: "url('/main/men-with-notebook.jpg')"
             }}
@@ -28,15 +28,12 @@ export const DiscountBlock = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="relative w-full lg:w-4/6 flex items-start lg:items-center bg-darkblue lg:bg-transparent py-8 sm:py-12 lg:py-0"
+            style={{ 
+              backgroundImage: "url('/main/gradient-1.jpg')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
           >
-            <Image
-              src="/main/gradient-1.jpg"
-              alt="Background gradient"
-              fill
-              className="hidden lg:block object-cover"
-              priority
-            />
-            
             <div className="relative z-modal w-full px-4 sm:px-6 lg:px-16 flex flex-col items-center lg:items-start gap-4 sm:gap-6 lg:gap-8">
               {/* Подпись */}
               <motion.h1 

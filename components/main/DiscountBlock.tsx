@@ -43,23 +43,23 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
-                className="text-h1 leading-h1 font-h1 tracking-heading text-white mb-min-gap-button-text"
+                className="text-h1 leading-h1 font-h1 tracking-heading text-white"
                 style={{ fontFamily: 'BOWLER' }}
               >
                 ТЕХНОЛИУМ
               </motion.h1>
 
               {/* Основной заголовок */}
-              <motion.h2 
+              <motion.h4 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="text-h3 leading-h3 font-h3 tracking-heading text-white mb-section-margin"
+                className="text-h4 leading-h4 font-h4 tracking-heading text-white mt-[30px] mb-[58px]"
               >
                 Онлайн-университет языков программирования,
                 предлагающий гибкую и высокоэффективную
                 образовательную модель
-              </motion.h2>
+              </motion.h4>
 
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -82,20 +82,6 @@ export const DiscountBlock = () => {
                     </span>
                   ))}
                 </div>
-                
-                <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    const form = document.getElementById('application-form')
-                    if (form) {
-                      form.scrollIntoView({ behavior: 'smooth' })
-                    }
-                  }} 
-                  className="mt-section-margin w-full md:w-auto bg-white text-foreground px-10 py-4 rounded-full hover:bg-gray-100 transition-colors text-base md:text-lg font-medium"
-                >
-                  Оставить заявку
-                </motion.button>
               </motion.div>
             </div>
           </motion.div>

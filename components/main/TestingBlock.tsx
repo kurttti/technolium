@@ -8,17 +8,17 @@ const TestingBlock = () => {
     <section className="w-full bg-white flex items-center justify-center px-4">
       <div className="max-w-content w-full relative">
         {/* JS и таймер как отдельные блоки */}
-        <div className="absolute left-20 top-20 flex gap-4 rotate-[-15deg]">
+        {/* <div className="absolute left-20 top-20 flex gap-4 rotate-[-15deg]">
           <div className="bg-black text-white rounded-3xl p-8 transform transition-transform hover:rotate-6 hover:scale-110">
             <span className="text-5xl">JS</span>
           </div>
           <div className="bg-black text-white rounded-3xl p-8 transform transition-transform hover:rotate-6 hover:scale-110">
             <span className="text-6xl font-bold">5'</span>
           </div>
-        </div>
+        </div> */}
 
         {/* Python логотип */}
-        <div className="absolute right-20 top-0 rotate-12">
+        {/* <div className="absolute right-20 top-0 rotate-12">
           <div className="bg-black rounded-3xl p-8 transform transition-transform hover:rotate-12 hover:scale-110">
             <Image
               src="/main/language-icon/python.svg"
@@ -28,10 +28,10 @@ const TestingBlock = () => {
               className="brightness-0 invert"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* C# логотип */}
-        <div className="absolute right-20 bottom-20 rotate-[-10deg]">
+        {/* <div className="absolute right-20 bottom-20 rotate-[-10deg]">
           <div className="bg-black rounded-3xl p-8 transform transition-transform hover:rotate-12 hover:scale-110">
             <Image
               src="/main/language-icon/csharp.svg"
@@ -41,10 +41,10 @@ const TestingBlock = () => {
               className="brightness-0 invert"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Golang логотип */}
-        <div className="absolute right-96 bottom-40 rotate-[15deg]">
+        {/* <div className="absolute right-96 bottom-40 rotate-[15deg]">
           <div className="bg-black rounded-3xl p-8 transform transition-transform hover:rotate-12 hover:scale-110">
             <Image
               src="/main/language-icon/go.svg"
@@ -54,16 +54,16 @@ const TestingBlock = () => {
               className="brightness-0 invert"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Центральный контент */}
-        <div className="flex flex-col items-center text-center">
-          <h1 
-            className="text-h1 leading-h1 font-h1 mb-4 tracking-banner"
+        <div className="flex flex-col items-center text-center py-[250px]">
+          <h4 
+            className="text-h4 leading-h4 font-h4 mb-4 tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             НАЧНИ НОВУЮ ПРОФЕССИЮ С НАМИ
-          </h1>
+          </h4>
           
           <div className="space-y-1 mb-8">
             <p className="text-base leading-body font-text">

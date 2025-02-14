@@ -83,10 +83,14 @@ const ApplicationFormBlock = () => {
   const [utmParams, setUtmParams] = useState<UtmParams>({})
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 })
   const selectRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current && !selectRef.current.contains(event.target as Node) &&
+        (!dropdownRef.current || !dropdownRef.current.contains(event.target as Node))
+      ) {
         setIsOpen(false)
       }
     }
@@ -189,29 +193,28 @@ const ApplicationFormBlock = () => {
   }
 
   const toggleDropdown = () => {
-    setIsOpen((prev) => {
-      const newState = !prev
-      if (newState && selectRef.current) {
-        const rect = selectRef.current.getBoundingClientRect()
-        setDropdownPosition({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX
-        })
-      }
-      return newState
-    })
+    if (!isOpen && selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect()
+      const parentRect = selectRef.current.offsetParent?.getBoundingClientRect() || { top: 0, left: 0 }
+      
+      setDropdownPosition({
+        top: rect.height,
+        left: 0
+      })
+    }
+    setIsOpen(!isOpen)
   }
 
   if (success) {
     return (
-      <div id="application-form" className="w-full px-block-padding-xs md:px-block-padding-md py-section-spacing-sm md:py-section-spacing-md lg:py-section-spacing-lg">
+      <div id="application-form" className="w-full px-4 py-8">
         <motion.div 
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`max-w-content mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+          className={`max-w-[1200px] mx-auto rounded-[32px] ${styles.gradientBackground}`}
         >
-          <div className="flex flex-col items-center py-8 mobile:py-16 px-4 mobile:px-8">
+          <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <motion.div 
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -239,7 +242,8 @@ const ApplicationFormBlock = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-h1 leading-h1 font-h1 mb-4 text-center tracking-banner text-white"
+              className="text-[32px] md:text-[48px] mb-4 text-center tracking-wider text-white" 
+              style={{ fontFamily: 'BOWLER' }}
             >
               СПАСИБО ЗА ЗАЯВКУ!
             </motion.h2>
@@ -247,7 +251,7 @@ const ApplicationFormBlock = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-base leading-body font-text text-white/80 text-center max-w-[600px]"
+              className="text-xl text-white/80 text-center max-w-[600px]"
             >
               Ваш персональный карьерный консультант с вами свяжется в ближайшее время
             </motion.p>
@@ -258,27 +262,35 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <section id="application-form" className="w-full px-block-padding-xs md:px-block-padding-md py-section-spacing-sm md:py-section-spacing-md lg:py-section-spacing-lg">
+    <div id="application-form" className="w-full px-4 py-8 md:pt-24">
       <motion.div 
         variants={formAnimation}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={`max-w-[1280px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+        className={`max-w-[1200px] mx-auto rounded-[32px] ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col items-center py-8 mobile:py-16 px-4 mobile:px-8"
+          className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8"
         >
           <motion.h2 
             variants={formAnimation}
-            className="text-h1 leading-h1 font-h1 mb-4 text-center tracking-banner text-white"
+            className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" 
+            style={{ fontFamily: 'BOWLER' }}
           >
             ОСТАВИТЬ ЗАЯВКУ
           </motion.h2>
+          <motion.h3 
+            variants={formAnimation}
+            className="text-[24px] md:text-[32px] mb-6 md:mb-8 text-center tracking-wider text-white/80" 
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            НА ЛЬГОТНОЕ ОБУЧЕНИЕ
+          </motion.h3>
           
           <motion.form 
             variants={containerAnimation}
@@ -316,6 +328,57 @@ const ApplicationFormBlock = () => {
                       d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                   </svg>
                 </motion.button>
+
+                {isOpen && (
+                  <div
+                    ref={dropdownRef}
+                    style={{
+                      position: 'absolute',
+                      top: `${dropdownPosition.top}px`,
+                      left: `${dropdownPosition.left}px`,
+                      zIndex: 9999,
+                      background: 'rgba(19, 19, 78, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '18px',
+                      width: '240px',
+                      marginTop: '4px',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                      color: 'white'
+                    }}
+                  >
+                    {COUNTRY_CODES.map((country) => (
+                      <button
+                        key={`${country.code}-${country.country}`}
+                        type="button"
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '100%',
+                          padding: '12px 16px',
+                          color: 'white',
+                          cursor: 'pointer',
+                          background: 'none',
+                          border: 'none',
+                          transition: 'background-color 0.2s',
+                          fontSize: '14px',
+                          fontWeight: '400'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent'
+                        }}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <span>{country.country}</span>
+                        <span style={{ fontWeight: '500' }}>{country.code}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="flex-1">
                 <InputMask
@@ -349,7 +412,7 @@ const ApplicationFormBlock = () => {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={isLoading}
-              className="w-full h-btn-height-desktop bg-white/20 hover:bg-white/30 disabled:bg-white/10 disabled:cursor-not-allowed text-white rounded-btn text-body font-medium transition-button backdrop-blur-sm flex items-center justify-center"
+              className="w-full h-12 md:h-14 bg-white/20 hover:bg-white/30 disabled:bg-white/10 disabled:cursor-not-allowed text-white rounded-[18px] text-base md:text-lg font-medium transition-colors backdrop-blur-sm flex items-center justify-center"
             >
               {isLoading ? (
                 <>
@@ -374,36 +437,6 @@ const ApplicationFormBlock = () => {
         </motion.div>
       </motion.div>
 
-      <AnimatePresence>
-        {isOpen && document.body && createPortal(
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="z-50 w-[240px] mt-1 bg-[#13134E]/90 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden shadow-lg"
-            style={{ position: 'absolute', top: dropdownPosition.top, left: dropdownPosition.left }}
-          >
-            {COUNTRY_CODES.map((country) => (
-              <motion.button
-                key={`${country.code}-${country.country}`}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
-                type="button"
-                className="w-full text-left px-4 py-3 focus:outline-none text-sm flex items-center justify-between text-white"
-                onClick={() => {
-                  handleCountrySelect(country)
-                  setIsOpen(false)
-                }}
-              >
-                <span className="text-white">{country.country}</span>
-                <span className="text-white font-medium">{country.code}</span>
-              </motion.button>
-            ))}
-          </motion.div>, 
-          document.body
-        )}
-      </AnimatePresence>
-
       {error && (
         <NotificationToast
           message={error}
@@ -412,7 +445,7 @@ const ApplicationFormBlock = () => {
           onClose={() => setError(null)}
         />
       )}
-    </section>
+    </div>
   )
 }
 

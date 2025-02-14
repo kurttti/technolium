@@ -10,13 +10,7 @@ export default function MainLayout({
 }) {
   return (
     <main className="min-h-screen">
-      <header className="text-h6 leading-h6 font-h6">
-        // ... header content
-      </header>
       <Providers>{children}</Providers>
-      <footer className="text-base leading-body font-text">
-        // ... footer content
-      </footer>
     </main>
   );
 }

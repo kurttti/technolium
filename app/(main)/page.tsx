@@ -13,6 +13,7 @@ import FoundersBlock from "@/components/main/FoundersBlock"
 import HistoryBlock from "@/components/main/HistoryBlock"
 import ProfessionBlock from "@/components/main/ProfessionBlock"
 import StudentsBlock from "@/components/main/StudentsBlock"
+import EducationFormatBlock from "@/components/main/EducationFormatBlock"
 
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
@@ -79,6 +80,9 @@ export default function MainPage() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <StudentsBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <EducationFormatBlock />
           </motion.div>
             {/* <NavBarSecond />       */}
           {/* <motion.div variants={itemVariants}>

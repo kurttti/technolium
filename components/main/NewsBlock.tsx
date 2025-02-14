@@ -46,67 +46,61 @@ const news: NewsItem[] = [
 
 const NewsBlock = () => {
   return (
-    <section className="w-full overflow-visible py-section-margin">
+    <section className="w-full overflow-hidden py-section-margin">
       <div className="max-w-content mx-auto px-block-padding-xs md:px-block-padding-md">
-        <div className="py-20">
-          <div className="flex space-x-6 relative">
+        <div className="relative flex flex-nowrap overflow-x-auto hide-scrollbar">
+          <div className="flex">
             {news.map((item, index) => (
               <motion.div
                 key={index}
-                className={`relative flex-shrink-0 w-[400px] min-h-[300px] rounded-[32px] p-8
+                className={`
+                  relative flex-none w-[600px] rounded-[32px] p-8
                   ${index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-black'}
-                  cursor-pointer
+                  transform-gpu overflow-hidden
                 `}
-                initial={{ marginLeft: index !== 0 ? '-100px' : '0' }}
+                initial={{ x: 0 }}
                 whileHover={{
-                  zIndex: 50,
-                  scale: 1.1,
-                  marginLeft: '0px',
-                  marginRight: '0px',
-                  transition: { 
-                    duration: 0.3,
-                    marginLeft: { duration: 0 },
-                    marginRight: { duration: 0 }
-                  }
+                  scale: 1.02,
+                  zIndex: 20,
+                  transition: { duration: 0.2 }
                 }}
                 style={{
-                  marginLeft: index !== 0 ? '-100px' : '0',
+                  marginLeft: index === 0 ? '0' : '-100px',
                   boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                  zIndex: index
                 }}
               >
-                <Link href={`/news/${index}`} className="absolute inset-0 z-10">
-                  <span className="sr-only">Читать новость</span>
-                </Link>
+                <div className="relative h-full">
+                  <Link href={`/news/${index}`} className="absolute inset-0 z-10 rounded-[32px]">
+                    <span className="sr-only">Читать новость</span>
+                  </Link>
 
-                <div className="flex flex-col h-full relative z-20">
-                  {/* Тег категории */}
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-sm font-medium">
-                      {item.category}
-                    </span>
-                    <span className={`px-4 py-1 rounded-full text-xs ${item.tagColor} text-white`}>
-                      {item.tag}
-                    </span>
-                  </div>
+                  <div className="flex flex-col h-full">
+                    <div className="flex justify-between items-center mb-6">
+                      <span className="text-sm font-medium">
+                        {item.category}
+                      </span>
+                      <span className={`px-4 py-1 rounded-full text-xs ${item.tagColor} text-white`}>
+                        {item.tag}
+                      </span>
+                    </div>
 
-                  {/* Заголовок */}
-                  <h3 className="text-2xl font-bold mb-4">
-                    {item.title}
-                  </h3>
+                    <h3 className="text-2xl font-bold mb-4 line-clamp-3">
+                      {item.title}
+                    </h3>
 
-                  {/* Контент */}
-                  <p className="text-base opacity-80">
-                    {item.content}
-                  </p>
+                    <p className="text-base opacity-80 line-clamp-4">
+                      {item.content}
+                    </p>
 
-                  {/* Кнопка "Читать полностью" */}
-                  <div className="mt-auto pt-6">
-                    <span className={`inline-block text-base
-                      ${index % 2 === 0 ? 'text-white' : 'text-black'}
-                      hover:opacity-80 transition-opacity
-                    `}>
-                      Читать полностью...
-                    </span>
+                    <div className="mt-auto pt-6">
+                      <span className={`inline-block text-base
+                        ${index % 2 === 0 ? 'text-white' : 'text-black'}
+                        hover:opacity-80 transition-opacity
+                      `}>
+                        Читать полностью...
+                      </span>
+                    </div>
                   </div>
                 </div>
               </motion.div>

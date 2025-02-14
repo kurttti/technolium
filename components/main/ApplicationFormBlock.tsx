@@ -258,7 +258,7 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div id="application-form" className="w-full px-block-padding-xs md:px-block-padding-md py-section-spacing-sm md:py-section-spacing-md lg:py-section-spacing-lg">
+    <section id="application-form" className="w-full px-block-padding-xs md:px-block-padding-md py-section-spacing-sm md:py-section-spacing-md lg:py-section-spacing-lg">
       <motion.div 
         variants={formAnimation}
         initial="hidden"
@@ -418,7 +418,7 @@ const ApplicationFormBlock = () => {
           onClose={() => setError(null)}
         />
       )}
-    </div>
+    </section>
   )
 }
 

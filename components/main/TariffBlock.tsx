@@ -71,6 +71,13 @@ export function TariffBlock() {
     return Math.round(basePrice / months)
   }
 
+  const scrollToApplicationForm = () => {
+    const applicationForm = document.getElementById('application-form')
+    if (applicationForm) {
+      applicationForm.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="w-full py-24 bg-gradient-to-b">
       <div className="max-w-7xl mx-auto px-4">
@@ -245,11 +252,12 @@ export function TariffBlock() {
                         </p>
 
                         <Button 
-                          className={`w-full py-6 text-lg ${
-                            isDark 
-                              ? 'bg-cta hover:bg-cta/90 text-white'
-                              : 'bg-black hover:bg-black/90 text-white'
-                          }`}
+                          onClick={scrollToApplicationForm}
+                          className={`w-full py-4 rounded-full text-lg font-medium transition-colors
+                            ${isDark 
+                              ? 'bg-cta text-white hover:bg-cta/90' 
+                              : 'bg-black text-white hover:bg-black/90'
+                            }`}
                         >
                           Оформить заявку
                         </Button>

@@ -48,13 +48,20 @@ const NewsBlock = () => {
   return (
     <section className="w-full overflow-hidden py-section-margin">
       <div className="max-w-content mx-auto px-block-padding-xs md:px-block-padding-md">
-        <div className="relative flex flex-nowrap overflow-x-auto hide-scrollbar">
-          <div className="flex">
+        <h2 
+          className="text-h1 leading-h1 font-h1 text-center mb-20 tracking-banner"
+          style={{ fontFamily: 'BOWLER' }}
+        >
+          НОВОСТИ
+        </h2>
+
+        <div className="relative">
+          <div className="flex justify-center">
             {news.map((item, index) => (
               <motion.div
                 key={index}
                 className={`
-                  relative flex-none w-[600px] rounded-[32px] p-8
+                  relative flex-none w-[500px] rounded-[32px] p-8
                   ${index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-black'}
                   transform-gpu overflow-hidden
                 `}
@@ -67,7 +74,8 @@ const NewsBlock = () => {
                 style={{
                   marginLeft: index === 0 ? '0' : '-100px',
                   boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-                  zIndex: index
+                  zIndex: index,
+                  transform: `translateX(${index === 0 ? '50px' : '0px'})`
                 }}
               >
                 <div className="relative h-full">
@@ -77,7 +85,10 @@ const NewsBlock = () => {
 
                   <div className="flex flex-col h-full">
                     <div className="flex justify-between items-center mb-6">
-                      <span className="text-sm font-medium">
+                      <span className={`px-4 py-1 rounded-full text-xs 
+                        ${index % 2 === 0 ? 'bg-[#1A1A1A]' : 'bg-[#2B076E]'} 
+                        text-white`}
+                      >
                         {item.category}
                       </span>
                       <span className={`px-4 py-1 rounded-full text-xs ${item.tagColor} text-white`}>
@@ -85,15 +96,15 @@ const NewsBlock = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-4 line-clamp-3">
+                    <h3 className="text-[30px] leading-normal font-normal mb-4">
                       {item.title}
                     </h3>
 
-                    <p className="text-base opacity-80 line-clamp-4">
+                    <p className="text-base opacity-80 mb-6">
                       {item.content}
                     </p>
 
-                    <div className="mt-auto pt-6">
+                    <div className="mt-auto">
                       <span className={`inline-block text-base
                         ${index % 2 === 0 ? 'text-white' : 'text-black'}
                         hover:opacity-80 transition-opacity

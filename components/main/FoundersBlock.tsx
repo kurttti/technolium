@@ -44,22 +44,22 @@ const founders: Founder[] = [
 
 const FoundersBlock = () => {
   return (
-    <section className="w-full py-section-margin">
+    <section className="w-full py-[40px] lg:py-section-margin px-4 xl:px-0">
       <div className="max-w-content mx-auto">
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-h1 leading-h1 font-h1 text-center mb-[70px] tracking-banner"
+          className="text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
           style={{ fontFamily: 'BOWLER' }}
         >
           ОСНОВАТЕЛИ ТЕХНОЛИУМ
         </motion.h1>
 
         {/* Блок с Назаром */}
-        <div className="flex mb-[50px] items-center">
+        <div className="flex flex-col lg:flex-row mb-[30px] lg:mb-[50px] items-center max-w-[1200px] mx-auto">
           {/* Блок с фоновой фигурой */}
-          <div className="h-[550px] flex-shrink-0">
+          <div className="hidden lg:block w-[10%] xl:w-[150px] h-[550px] flex-shrink-0">
             <Image
               src="/main/naz-founder-figure.jpg"
               alt="Декоративный элемент"
@@ -71,11 +71,11 @@ const FoundersBlock = () => {
           </div>
 
           {/* Блок с Назаром */}
-          <div className="relative w-[550px] h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-none rounded-tr-[20px] rounded-br-[20px] p-8">
+          <div className="relative w-full sm:w-[80%] lg:w-[45%] h-auto lg:h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-[20px] lg:rounded-none lg:rounded-tr-[20px] lg:rounded-br-[20px] p-6 sm:p-8">
             <div className="flex flex-col items-center justify-center h-full">
               {/* Фото */}
               <div 
-                className="relative w-[200px] h-[200px] mb-8 rounded-full overflow-hidden"
+                className="relative w-[150px] h-[150px] sm:w-[180px] sm:h-[180px] lg:w-[200px] lg:h-[200px] mb-6 lg:mb-8 rounded-full overflow-hidden"
                 style={{ background: 'linear-gradient(85.14deg, #594A73 9.35%, #151B4D 91.08%)' }}
               >
                 <Image
@@ -87,13 +87,13 @@ const FoundersBlock = () => {
               </div>
 
               {/* Роль */}
-              <div className="bg-black text-white px-10 py-3 rounded-[32px] mb-8">
-                <span className="text-[36px] leading-normal font-text">Python Developer Senior</span>
+              <div className="bg-black text-white px-4 sm:px-8 lg:px-10 py-2 lg:py-3 rounded-[32px] mb-6 lg:mb-8">
+                <span className="text-[20px] sm:text-[28px] lg:text-[36px] leading-normal font-text whitespace-nowrap">Python Developer Senior</span>
               </div>
 
               {/* Имя */}
               <h2 
-                className="text-[32px] leading-none tracking-wider"
+                className="text-[24px] sm:text-[28px] lg:text-[32px] leading-none tracking-wider text-center"
                 style={{ fontFamily: 'BOWLER' }}
               >
                 БАЛОЯН НАЗАР
@@ -101,27 +101,27 @@ const FoundersBlock = () => {
             </div>
           </div>
 
-          {/* Достижения справа от серого блока */}
-          <div className="ml-8 space-y-4">
-            <p className="text-[30px] leading-normal font-text">
+          {/* Достижения */}
+          <div className="w-full sm:w-[80%] lg:w-[45%] mt-6 lg:mt-0 lg:ml-8 space-y-3 lg:space-y-4 px-4 lg:px-0">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Ведущий преподаватель и основатель Университета Технолиум
             </p>
-            <p className="text-[30px] leading-normal font-text">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Более 6 лет в коммерческой разработке
             </p>
-            <p className="text-[30px] leading-normal font-text">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Более 3х лет в обучении и разработке
             </p>
-            <p className="text-[30px] leading-normal font-text">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Степень магистра в области математики и computer science
             </p>
           </div>
         </div>
 
-        {/* Блок с Арсением */}
-        <div className="flex flex-row-reverse items-center">
+        {/* Блок с Арсением - аналогичные изменения */}
+        <div className="flex flex-col lg:flex-row-reverse items-center max-w-[1200px] mx-auto">
           {/* Блок с фоновой фигурой */}
-          <div className="h-[550px] flex-shrink-0">
+          <div className="hidden lg:block w-[10%] xl:w-[150px] h-[550px] flex-shrink-0">
             <Image
               src="/main/ars-founder-figure.jpg"
               alt="Декоративный элемент"
@@ -133,11 +133,10 @@ const FoundersBlock = () => {
           </div>
 
           {/* Блок с Арсением */}
-          <div className="relative w-[550px] h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-none rounded-tl-[20px] rounded-bl-[20px] p-8">
+          <div className="relative w-full sm:w-[80%] lg:w-[45%] h-auto lg:h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-[20px] lg:rounded-none lg:rounded-tl-[20px] lg:rounded-bl-[20px] p-6 sm:p-8">
             <div className="flex flex-col items-center justify-center h-full">
-              {/* Фото */}
               <div 
-                className="relative w-[200px] h-[200px] mb-8 rounded-full overflow-hidden"
+                className="relative w-[150px] h-[150px] sm:w-[180px] sm:h-[180px] lg:w-[200px] lg:h-[200px] mb-6 lg:mb-8 rounded-full overflow-hidden"
                 style={{ background: 'linear-gradient(85.14deg, #594A73 9.35%, #151B4D 91.08%)' }}
               >
                 <Image
@@ -148,14 +147,12 @@ const FoundersBlock = () => {
                 />
               </div>
 
-              {/* Роль */}
-              <div className="bg-black text-white px-10 py-3 rounded-[32px] mb-8">
-                <span className="text-[36px] leading-normal font-text">Business Analyst</span>
+              <div className="bg-black text-white px-4 sm:px-8 lg:px-10 py-2 lg:py-3 rounded-[32px] mb-6 lg:mb-8">
+                <span className="text-[20px] sm:text-[28px] lg:text-[36px] leading-normal font-text whitespace-nowrap">Business Analyst</span>
               </div>
 
-              {/* Имя */}
               <h2 
-                className="text-[32px] leading-none tracking-wider"
+                className="text-[24px] sm:text-[28px] lg:text-[32px] leading-none tracking-wider text-center"
                 style={{ fontFamily: 'BOWLER' }}
               >
                 БАЛОЯН АРСЕНИЙ
@@ -163,18 +160,18 @@ const FoundersBlock = () => {
             </div>
           </div>
 
-          {/* Достижения слева от серого блока */}
-          <div className="mr-8 space-y-4">
-            <p className="text-[30px] leading-normal font-text">
+          {/* Достижения */}
+          <div className="w-full sm:w-[80%] lg:w-[45%] mt-6 lg:mt-0 lg:mr-8 space-y-3 lg:space-y-4 px-4 lg:px-0">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Основатель Университета Технолиум
             </p>
-            <p className="text-[30px] leading-normal font-text">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Призер олимпиады «Я профессионал» по направлению «Бизнес-информатика»
             </p>
-            <p className="text-[30px] leading-normal font-text">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Получатель гранта президента Российский Федерации
             </p>
-            <p className="text-[30px] leading-normal font-text">
+            <p className="text-[18px] sm:text-[24px] lg:text-[30px] leading-normal font-text">
               — Высшее образование СПбГЭУ, ВШЭ
             </p>
           </div>

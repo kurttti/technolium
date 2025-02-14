@@ -124,7 +124,20 @@ export const FlowingShape = ({
       />
       <pointLight position={[-10, -10, -10]} intensity={0.5} />
 
+      {/* Основное кольцо */}
       <TwistedShape color={color} reverse={reverse} />
+
+      {/* Дополнительные кольца, взаимопереплетенные за счет поворотов */}
+      <group>
+        {/* Кольцо, повернутое на 90° вокруг оси X */}
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <TwistedShape color={color} reverse={reverse} />
+        </group>
+        {/* Кольцо, повернутое на 90° вокруг оси Y */}
+        <group rotation={[0, Math.PI / 2, 0]}>
+          <TwistedShape color={color} reverse={reverse} />
+        </group>
+      </group>
 
       <Preload all />
     </Canvas>

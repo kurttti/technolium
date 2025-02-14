@@ -73,8 +73,8 @@ const FoundersBlock = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="rounded-card p-8 relative overflow-hidden text-black"
-              style={{ maxWidth: '800px' }}
+              className="rounded-card p-8 relative overflow-hidden text-black w-full"
+              // style={{ maxWidth: '800px' }}
             >
               <div className="relative z-10">
                 <div className="flex items-center gap-8">
@@ -120,7 +120,7 @@ const FoundersBlock = () => {
                     {founders[0].achievements.map((achievement, index) => (
                       <li key={index} className="flex items-start gap-3 text-body">
                         <span className="text-black/60">—</span>
-                        <span>{achievement}</span>
+                        <span className="text-subheading">{achievement}</span>
                       </li>
                     ))}
                   </ul>
@@ -136,8 +136,8 @@ const FoundersBlock = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="rounded-card p-8 relative overflow-hidden text-black"
-              style={{ maxWidth: '800px' }}
+              className="rounded-card p-8 relative overflow-hidden text-black w-full"
+              // style={{ maxWidth: '800px' }}
             >
               <div className="relative z-10">
                 <div className="flex items-center gap-8">
@@ -146,7 +146,7 @@ const FoundersBlock = () => {
                     {founders[1].achievements.map((achievement, index) => (
                       <li key={index} className="flex items-start gap-3 text-body">
                         <span className="text-black/60">—</span>
-                        <span>{achievement}</span>
+                        <span className="text-subheading">{achievement}</span>
                       </li>
                     ))}
                   </ul>

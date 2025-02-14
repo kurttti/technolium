@@ -107,7 +107,7 @@ const config: Config = {
   		fontSize: {
   			'heading': '3.625rem',
   			'block': '64px',
-  			'subheading': '1.5rem',
+  			'subheading': '1.75rem',
   			'body': '1rem',
   			'quote': '1.25rem',
   		},

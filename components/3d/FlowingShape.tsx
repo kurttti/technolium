@@ -10,17 +10,21 @@ interface FlowingShapeProps {
   reverse?: boolean
 }
 
+interface TwistedShapeProps {
+  color?: string
+  reverse?: boolean
+  renderOrder?: number
+}
+
 const TwistedShape = ({
   color = '#4f4fd6',
   reverse = false,
-}: {
-  color?: string
-  reverse?: boolean
-}) => {
+  renderOrder = 0,
+}: TwistedShapeProps) => {
   const mesh = useRef<THREE.Mesh>(null)
   const geometryRef = useRef<THREE.TorusKnotGeometry>(null)
 
-  // Материал с металлическим блеском и иридисцентным эффектом
+  // Создаём материал с индивидуальными значениями offset в зависимости от renderOrder
   const material = new MeshPhysicalMaterial({
     color,
     metalness: 0.9,
@@ -37,14 +41,18 @@ const TwistedShape = ({
     sheenRoughness: 0.1,
     sheenColor: new THREE.Color('#aa44ff').multiplyScalar(1.2),
     transmission: 0,
+    // Настройка polygonOffset для предотвращения наложения текстур
+    polygonOffset: true,
+    // Чем выше renderOrder, тем сильнее смещение – подбирайте значение по вкусу
+    polygonOffsetFactor: (renderOrder + 1) * 1.5,
+    polygonOffsetUnits: 1,
   })
 
-  // Добавляем небольшую асимметрию путем случайной деформации вершин
+  // Добавляем небольшую асимметрию посредством деформации вершин
   useEffect(() => {
     if (geometryRef.current) {
       const positions = geometryRef.current.attributes.position.array as Float32Array
       for (let i = 0; i < positions.length; i += 3) {
-        // Если координата X положительная, слегка сдвигаем Y и Z
         if (positions[i] > 0) {
           positions[i + 1] += (Math.random() - 0.5) * 0.02
           positions[i + 2] += (Math.random() - 0.5) * 0.02
@@ -64,15 +72,19 @@ const TwistedShape = ({
     }
   })
 
-  // Вычисляем EdgesGeometry для отрисовки линий (паутина)
+  // Вычисляем EdgesGeometry для отрисовки wireframe
   const edgesGeometry = useMemo(() => {
     return geometryRef.current ? new THREE.EdgesGeometry(geometryRef.current) : null
   }, [geometryRef.current])
 
   return (
     <>
-      <mesh ref={mesh} scale={1.2} material={material}>
-        {/* Передаем ref для дальнейшей деформации */}
+      <mesh
+        ref={mesh}
+        scale={1.2}
+        material={material}
+        renderOrder={renderOrder}
+      >
         <torusKnotGeometry
           ref={geometryRef}
           args={[
@@ -85,11 +97,17 @@ const TwistedShape = ({
           ]}
         />
       </mesh>
-      {/* Если геометрия готова, добавляем wireframe-оверлей */}
       {edgesGeometry && (
-        <lineSegments>
+        <lineSegments renderOrder={renderOrder + 0.5}>
           <primitive object={edgesGeometry} attach="geometry" />
-          <lineBasicMaterial attach="material" color="#ffffff" linewidth={1} />
+          <lineBasicMaterial
+            attach="material"
+            color="#ffffff"
+            linewidth={1}
+            polygonOffset={true}
+            polygonOffsetFactor={(renderOrder + 1) * 1.5}
+            polygonOffsetUnits={1}
+          />
         </lineSegments>
       )}
     </>
@@ -107,7 +125,7 @@ export const FlowingShape = ({
       style={{
         position: 'absolute',
         top: 0,
-        [reverse ? 'right' : 'left']: 0,
+        left: 0,
         width: '300px',
         height: '300px',
         pointerEvents: 'none',
@@ -125,17 +143,17 @@ export const FlowingShape = ({
       <pointLight position={[-10, -10, -10]} intensity={0.5} />
 
       {/* Основное кольцо */}
-      <TwistedShape color={color} reverse={reverse} />
+      <TwistedShape color={color} reverse={reverse} renderOrder={1} />
 
-      {/* Дополнительные кольца, взаимопереплетенные за счет поворотов */}
+      {/* Дополнительные кольца с разными renderOrder – их материалы получат разные смещения */}
       <group>
         {/* Кольцо, повернутое на 90° вокруг оси X */}
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <TwistedShape color={color} reverse={reverse} />
+          <TwistedShape color={color} reverse={reverse} renderOrder={2} />
         </group>
         {/* Кольцо, повернутое на 90° вокруг оси Y */}
         <group rotation={[0, Math.PI / 2, 0]}>
-          <TwistedShape color={color} reverse={reverse} />
+          <TwistedShape color={color} reverse={reverse} renderOrder={3} />
         </group>
       </group>
 

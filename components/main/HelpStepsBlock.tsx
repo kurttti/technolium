@@ -8,31 +8,31 @@ const steps = [
     number: 1,
     title: 'Этап 1',
     content: 'Наш эксперт познакомится с вами лично, вместе опередите цель перехода в IT и поможет с выбором профессии',
-    image: '/main/help-1-step.jpg'
+    image: '/main/help-you/first.jpg'
   },
   {
     number: 2,
     title: 'Этап 2',
     content: 'Составим индивидуальный план обучения, учитывая ваш опыт и время на изучение материала',
-    image: '/main/help-1-step.jpg'
+    image: '/main/help-you/second.png'
   },
   {
     number: 3,
     title: 'Этап 3',
     content: 'Начнем обучение с опытным наставником, который будет сопровождать вас на протяжении всего курса',
-    image: '/main/help-1-step.jpg'
+    image: '/main/help-you/third.png'
   },
   {
     number: 4,
     title: 'Этап 4',
     content: 'Выполните реальные проекты под руководством ментора, получите практический опыт разработки',
-    image: '/main/help-1-step.jpg'
+    image: '/main/help-you/fourth.png'
   },
   {
     number: 5,
     title: 'Этап 5',
     content: 'Подготовим ваше резюме, портфолио и поможем с трудоустройством в ведущие IT-компании',
-    image: '/main/help-1-step.jpg'
+    image: '/main/help-you/fifth.png'
   }
 ]
 

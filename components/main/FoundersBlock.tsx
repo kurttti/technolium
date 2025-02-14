@@ -81,9 +81,9 @@ const FoundersBlock = () => {
                   {/* Фото и информация */}
                   <div className="flex flex-col items-center text-center">
                     <div className="w-[300px] h-[300px] rounded-full overflow-hidden mb-6 relative">
-                      {/* Градиентный фон */}
+                      {/* Градиентный фон для Назара */}
                       <div 
-                        className="absolute inset-0 bg-gradient-to-br from-[#6B5BFF]/20 to-[#6B5BFF]/80 z-0"
+                        className="absolute inset-0 bg-gradient-to-br from-[#000288]/90 to-black/90 z-0"
                         style={{
                           borderRadius: '50%',
                         }}
@@ -154,9 +154,9 @@ const FoundersBlock = () => {
                   {/* Фото и информация */}
                   <div className="flex flex-col items-center text-center">
                     <div className="w-[300px] h-[300px] rounded-full overflow-hidden mb-6 relative">
-                      {/* Градиентный фон */}
+                      {/* Градиентный фон для Арсения */}
                       <div 
-                        className="absolute inset-0 bg-gradient-to-br from-[#1A365D]/20 to-[#1A365D]/80 z-0"
+                        className="absolute inset-0 bg-gradient-to-br from-gray-800/90 to-gray-900/90 z-0"
                         style={{
                           borderRadius: '50%',
                         }}

@@ -213,12 +213,28 @@ export function TariffBlock() {
                           </div>
                         </Slider>
 
+                        {/* Кликабельные цифры месяцев */}
                         <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mt-6">
-                          <span>24</span>
-                          <span>18</span>
-                          <span>12</span>
-                          <span>6</span>
-                          <span>0 мес</span>
+                          {[24, 18, 12, 6, 0].map((month) => (
+                            <button
+                              key={month}
+                              onClick={() => {
+                                setSelectedMonths(prev => ({
+                                  ...prev,
+                                  [plan.title]: 24 - month
+                                }))
+                              }}
+                              className={`
+                                hover:text-black dark:hover:text-white transition-colors cursor-pointer
+                                ${(24 - selectedMonths[plan.title]) === month 
+                                  ? isDark ? 'text-white' : 'text-black' 
+                                  : ''
+                                }
+                              `}
+                            >
+                              {month} {month === 0 ? 'мес' : ''}
+                            </button>
+                          ))}
                         </div>
                       </div>
 

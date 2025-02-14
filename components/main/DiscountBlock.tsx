@@ -9,25 +9,25 @@ export const DiscountBlock = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] flex flex-col lg:flex-row overflow-hidden"
+          className="relative w-full min-h-[300px] sm:min-h-[400px] lg:min-h-[700px] flex flex-col lg:flex-row overflow-hidden"
         >
-          {/* Левая сторона с изображением */}
+          {/* Левая сторона с изображением - скрыта на мобильных и планшетах */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full lg:w-2/6 h-[250px] sm:h-[300px] lg:h-auto bg-cover bg-bottom"
+            className="relative hidden lg:block w-full lg:w-2/6 h-[250px] sm:h-[300px] lg:h-auto bg-cover bg-bottom"
             style={{ 
               backgroundImage: "url('/main/men-with-notebook.jpg')"
             }}
           />
 
-          {/* Правая сторона с содержимым */}
+          {/* Правая сторона с содержимым - занимает всю ширину на мобильных */}
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative w-full lg:w-4/6 flex items-start lg:items-center bg-darkblue lg:bg-transparent py-8 sm:py-12 lg:py-0"
+            className="relative w-full flex items-start lg:items-center bg-darkblue lg:bg-transparent py-8 sm:py-12 lg:py-0"
             style={{ 
               backgroundImage: "url('/main/gradient-1.jpg')",
               backgroundSize: 'cover',

@@ -41,7 +41,7 @@ const EducationFormatBlock = () => {
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
           <h1 
-            className="text-block text-center mb-section-margin font-semibold tracking-banner"
+            className="text-h1 leading-h1 font-h1 text-center mb-section-margin tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ФОРМАТ ОБУЧЕНИЯ
@@ -53,13 +53,12 @@ const EducationFormatBlock = () => {
                 key={format.number}
                 className="bg-[#F8F8F8] rounded-card p-card-padding"
               >
-                <h2 className="flex gap-2 text-2xl font-semibold mb-6" style={{ fontFamily: 'BOWLER' }}>
+                <h2 className="text-h4 leading-h4 font-h4 mb-6">
                   {format.number} {format.title}
                 </h2>
                 <div className="space-y-4">
                   {format.points.map((point, index) => (
-                    <p key={index} className="flex items-start gap-2 text-quote leading-quote">
-                      <span className="text-black">—</span>
+                    <p key={index} className="text-base leading-body font-text">
                       {point}
                     </p>
                   ))}
@@ -70,12 +69,12 @@ const EducationFormatBlock = () => {
 
           <div className="bg-gradient-dark text-white rounded-card p-card-padding w-full">
             <h2 
-              className="text-center text-2xl mb-4"
+              className="text-h4 leading-h4 font-h4 text-center mb-4"
               style={{ fontFamily: 'BOWLER' }}
             >
               КОММЕРЧЕСКАЯ ДЕЯТЕЛЬНОТЬ
             </h2>
-            <p className="text-center text-quote leading-quote">
+            <p className="text-center text-base leading-body font-text">
               Выполнение тестовых и практических заданий<br />
               от работодателей с третьего месяца
             </p>

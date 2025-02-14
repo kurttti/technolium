@@ -44,7 +44,7 @@ const HelpStepsBlock = () => {
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
           <h1 
-            className="text-block text-center mb-16 font-semibold tracking-banner"
+            className="text-h1 leading-h1 font-h1 text-center mb-16 tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ПОМОЖЕМ ВАМ<br />
@@ -74,7 +74,7 @@ const HelpStepsBlock = () => {
                 {/* Центрированный текст */}
                 <div className="flex-1 flex items-center justify-center">
                   <div className="max-w-2xl">
-                    <p className="text-2xl leading-relaxed text-center">
+                    <p className="text-h4 leading-h4 font-h4 text-center">
                       {steps[activeStep].content}
                     </p>
                   </div>

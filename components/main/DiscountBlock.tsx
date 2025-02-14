@@ -43,7 +43,7 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
-                className="text-center md:text-left text-block leading-body tracking-heading text-white mb-min-gap-button-text"
+                className="text-h1 leading-h1 font-h1 tracking-heading text-white mb-min-gap-button-text"
                 style={{ fontFamily: 'BOWLER' }}
               >
                 ТЕХНОЛИУМ
@@ -54,8 +54,7 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className=" text-white text-center md:text-left max-w-[800px] text-subheading leading-body tracking-heading mb-section-margin"
-                style={{ fontFamily: 'BOWLER' }}
+                className="text-h3 leading-h3 font-h3 tracking-heading text-white mb-section-margin"
               >
                 Онлайн-университет языков программирования,
                 предлагающий гибкую и высокоэффективную
@@ -72,14 +71,14 @@ export const DiscountBlock = () => {
                 <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                   {['Javascript', 'Python', 'Нейросети', 'GO', 'C#', 'Подобрать профессию'].map((tag) => (
                     <span key={tag} className="px-4 py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors">
-                      {tag}
+                      <span className="text-sm leading-body font-text">{tag}</span>
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
                   {['10 месяцев', 'Коммерческая деятельность', 'Центр карьеры', 'Выбор специализации'].map((tag) => (
                     <span key={tag} className="px-4 py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors">
-                      {tag}
+                      <span className="text-sm leading-body font-text">{tag}</span>
                     </span>
                   ))}
                 </div>

@@ -37,160 +37,27 @@ const linkAnimation = {
 
 const FooterBlock = () => {
   return (
-    <div className="w-full px-4 pb-2">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-content mx-auto rounded-[32px] bg-darkblue overflow-hidden"
-      >
-        <motion.div 
-          variants={containerAnimation}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="py-16 px-8"
-        >
-          <div className="grid grid-cols-1 mobile:grid-cols-[1fr_auto] gap-12 mobile:gap-24">
-            {/* Мобильный логотип */}
-            <div className="block mobile:hidden">
-              <motion.div 
-                className="flex justify-center items-center mb-8 w-full overflow-x-hidden px-1"
-                style={{
-                  fontFamily: 'BOWLER',
-                  fontSize: 'clamp(16px, 6vw, 32px)',
-                  lineHeight: '1.2',
-                  fontWeight: '400',
-                }}
-              >
-                <div className="flex flex-nowrap justify-center min-w-0">
-                  {['Т', 'Е', 'Х', 'Н', 'О', 'Л', 'И', 'У', 'М'].map((letter, index) => (
-                    <motion.span 
-                      key={index} 
-                      initial={{ opacity: 0, y: -20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                      className="text-center"
-                      style={{
-                        color: '#FFFFFF',
-                        opacity: 0.15,
-                        display: 'inline-block',
-                        marginRight: '0.02em'
-                      }}
-                    >
-                      {letter}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Контакты */}
-            <div>
-              <motion.div variants={itemAnimation}>
-                <motion.h3 
-                  variants={itemAnimation}
-                  className="text-subheading text-white mb-8 font-bowler"
-                >
-                  КОНТАКТЫ
-                </motion.h3>
-                <motion.div 
-                  variants={containerAnimation}
-                  className="space-y-6 text-white/80"
-                >
-                  <motion.a 
-                    variants={linkAnimation}
-                    whileHover={{ x: 10, color: '#fff' }}
-                    href="https://wa.me/79952147457" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="block transition-colors"
-                  >
-                    WhatsApp
-                  </motion.a>
-                  <motion.a 
-                    variants={linkAnimation}
-                    whileHover={{ x: 10, color: '#fff' }}
-                    href="https://drive.google.com/file/d/1XSNDoXgKSJjg_hGyUo_BSFulX8Du-Q5b/view?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer" 
-                    className="block transition-colors"
-                  >
-                    Публичная оферта
-                  </motion.a>
-                  <motion.a 
-                    variants={linkAnimation}
-                    whileHover={{ x: 10, color: '#fff' }}
-                    href="mailto:info@technolium.ru"
-                    className="block transition-colors"
-                  >
-                    Email: info@technolium.ru
-                  </motion.a>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            {/* Десктопный логотип */}
-            <motion.div 
-              className="hidden mobile:flex items-center justify-end"
-              style={{
-                fontFamily: 'BOWLER',
-                fontSize: 'text-block',
-                lineHeight: '1.2',
-                fontWeight: '400',
-              }}
-            >
-              <div className="flex">
-                {['Т', 'Е', 'Х', 'Н', 'О', 'Л', 'И', 'У', 'М'].map((letter, index) => (
-                  <motion.span 
-                    key={index} 
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                    className="text-center"
-                    style={{
-                      color: '#FFFFFF',
-                      opacity: 0.15,
-                      display: 'inline-block',
-                      marginRight: '0.1em'
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
+    <footer className="bg-black text-white py-16">
+      <div className="max-w-content mx-auto px-4">
+        <h2 className="text-h4 leading-h4 font-h4 mb-8">
+          Технолиум
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="space-y-4">
+            <h3 className="text-h6 leading-h6 font-h6">Контакты</h3>
+            <p className="text-base leading-body font-text">
+              info@tehnolium.ru
+            </p>
           </div>
-
-          {/* Футер информация */}
-          <motion.div 
-            variants={itemAnimation}
-            className="mt-12 text-white/60"
-          >
-            <div className="grid grid-cols-1 mobile:grid-cols-2 tablet:grid-cols-3 gap-6 mb-6 text-left">
-              <motion.div variants={itemAnimation} className="space-y-2">
-                <h4 className="font-medium text-white/80">Регистрационные данные</h4>
-                <p>ИП БАЛОЯН АРСЕНИЙ РОБЕРТОВИЧ</p>
-                <p>ОГРНИП: 324237500502599</p>
-                <p>ИНН: 233608758888</p>
-              </motion.div>
-              
-              <motion.div variants={itemAnimation} className="space-y-2">
-                <h4 className="font-medium text-white/80">Регистрирующий орган</h4>
-                <p>Межрайонная инспекция Федеральной налоговой службы № 16 по Краснодарскому краю</p>
-              </motion.div>
-            </div>
-
-            <div className="text-center pt-6 border-t border-white/10">
-              <p className="text-body">© 2024 Technolium. Все права защищены.</p>
-            </div>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-    </div>
+          {/* ... остальные секции */}
+        </div>
+        
+        <p className="text-sm leading-body font-text mt-8 text-white/60">
+          © 2024 Технолиум. Все права защищены
+        </p>
+      </div>
+    </footer>
   )
 }
 

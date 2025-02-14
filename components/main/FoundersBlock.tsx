@@ -46,159 +46,37 @@ const FoundersBlock = () => {
   return (
     <section className="w-full py-section-margin">
       <div className="max-w-content mx-auto px-4">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-block text-center mb-16 tracking-banner text-black"
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="text-h1 leading-h1 font-h1 text-center mb-section-margin tracking-banner"
           style={{ fontFamily: 'BOWLER' }}
         >
-          ОСНОВАТЕЛИ ТЕХНОЛИУМ
-        </motion.h2>
+          ОСНОВАТЕЛИ
+        </motion.h1>
 
-        <div className="grid grid-cols-1 gap-8">
-          {/* Блок Назара */}
-          <div className="flex items-center gap-8">
-            <div className="hidden md:block w-[300px] h-[300px] relative">
-              <FlowingShape
-                position={[0, 0, 0]}
-                color="#6B5BFF"
-                reverse={false}
-              />
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="rounded-card p-8 relative overflow-hidden text-black w-full"
-              // style={{ maxWidth: '800px' }}
-            >
-              <div className="relative z-10">
-                <div className="flex items-center gap-8">
-                  {/* Фото и информация */}
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden mb-6 relative">
-                      {/* Градиентный фон для Назара */}
-                      <div 
-                        className="absolute inset-0 bg-gradient-to-br from-[#000288]/90 to-black/90 z-0"
-                        style={{
-                          borderRadius: '50%',
-                        }}
-                      />
-                      <div className="w-full h-full relative z-10">
-                        <Image
-                          src={founders[0].photo}
-                          alt={`${founders[0].name} ${founders[0].surname}`}
-                          fill
-                          className="object-cover object-top"
-                          sizes="300px"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                          {founders[0].name}
-                        </h3>
-                        <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                          {founders[0].surname}
-                        </h3>
-                      </div>
-                      
-                      <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
-                        {founders[0].role}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Список достижений справа */}
-                  <ul className="space-y-4 flex-1 self-center">
-                    {founders[0].achievements.map((achievement, index) => (
-                      <li key={index} className="flex items-start gap-3 text-body">
-                        <span className="text-black/60">—</span>
-                        <span className="text-subheading">{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {founders.map((founder) => (
+            <div key={founder.name} className="space-y-4">
+              <h2 className="text-h3 leading-h3 font-h3">
+                {founder.name}
+              </h2>
+              <p className="text-base leading-body font-text">
+                {founder.surname}
+              </p>
+              <div className="space-y-2">
+                {founder.achievements.map((achievement, index) => (
+                  <p key={index} className="text-sm leading-body font-text">
+                    {achievement}
+                  </p>
+                ))}
               </div>
-            </motion.div>
-          </div>
-
-          {/* Блок Арсения */}
-          <div className="flex items-center gap-8 justify-end">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="rounded-card p-8 relative overflow-hidden text-black w-full"
-              // style={{ maxWidth: '800px' }}
-            >
-              <div className="relative z-10">
-                <div className="flex items-center gap-8">
-                  {/* Список достижений слева */}
-                  <ul className="space-y-4 flex-1 self-center">
-                    {founders[1].achievements.map((achievement, index) => (
-                      <li key={index} className="flex items-start gap-3 text-body">
-                        <span className="text-black/60">—</span>
-                        <span className="text-subheading">{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Фото и информация */}
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden mb-6 relative">
-                      {/* Градиентный фон для Арсения */}
-                      <div 
-                        className="absolute inset-0 bg-gradient-to-br from-gray-800/90 to-gray-900/90 z-0"
-                        style={{
-                          borderRadius: '50%',
-                        }}
-                      />
-                      <div className="w-full h-full relative z-10">
-                        <Image
-                          src={founders[1].photo}
-                          alt={`${founders[1].name} ${founders[1].surname}`}
-                          fill
-                          className="object-cover object-top"
-                          sizes="300px"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                          {founders[1].name}
-                        </h3>
-                        <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                          {founders[1].surname}
-                        </h3>
-                      </div>
-                      
-                      <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
-                        {founders[1].role}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="text-base leading-body font-text bg-black text-white px-6 py-2 rounded-full">
+                {founder.role}
               </div>
-            </motion.div>
-
-            <div className="hidden md:block w-[300px] h-[300px] relative">
-              <FlowingShape
-                position={[0, 0, 0]}
-                color="#1A365D"
-                reverse={true}
-              />
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

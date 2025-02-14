@@ -59,21 +59,20 @@ const TestingBlock = () => {
         {/* Центральный контент */}
         <div className="flex flex-col items-center text-center my-40">
           <h1 
-            className="text-block mb-4 font-semibold tracking-banner"
+            className="text-h1 leading-h1 font-h1 mb-4 tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
-            НАЧНИ НОВУЮ<br />
-            ПРОФЕССИЮ С НАМИ
+            НАЧНИ НОВУЮ ПРОФЕССИЮ С НАМИ
           </h1>
           
           <div className="space-y-1 mb-8">
-            <p className="text-quote leading-quote">
+            <p className="text-base leading-body font-text">
               Пройди тестирование и поймешь,
             </p>
-            <p className="text-quote leading-quote">
+            <p className="text-base leading-body font-text">
               какая профессия тебе подходит.
             </p>
-            <p className="text-quote leading-quote">
+            <p className="text-base leading-body font-text">
               Время прохождения - 5 минут
             </p>
           </div>

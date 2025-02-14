@@ -86,29 +86,29 @@ const ProfessionBlock = () => {
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
           <h1 
-            className="text-block text-center mb-4 font-semibold tracking-banner" 
+            className="text-h1 leading-h1 font-h1 text-center mb-4 tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ВЫБИРАЙ ПРОФЕССИЮ
           </h1>
-          <h2 
-            className="text-heading text-center mb-section-margin tracking-banner" 
+          <h1 
+            className="text-h2 leading-h2 font-h2 text-center mb-section-margin tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ПО ДУШЕ
-          </h2>
+          </h1>
 
           <div className="bg-white rounded-card p-card-padding shadow-card w-full max-w-content">
-            <div className="flex flex-wrap justify-center gap-min-gap-button-text mb-section-margin">
+            <div className="flex flex-wrap justify-center gap-btns-gap mb-16">
               {languages.map((lang) => (
                 <button
                   key={lang.name}
                   onClick={() => setActiveLanguage(lang)}
-                  className={`flex items-center gap-3 px-8 py-3 rounded-full text-subheading transition-button
+                  className={`flex items-center gap-btn-gap px-btn-padding-x py-btn-padding-y rounded-full text-base leading-body font-text transition-all duration-300
                     ${lang === activeLanguage 
                       ? lang.name === 'Javascript'
-                        ? 'bg-white text-black border-2 border-black' 
-                        : 'bg-black text-white border-2 border-black'
+                        ? 'bg-white text-black border-2 border-black hover:bg-black/5' 
+                        : 'bg-black text-white border-2 border-black hover:bg-black/90'
                       : 'bg-white text-black border-2 border-black/10 hover:border-black/30'}`}
                 >
                   <Image 
@@ -116,7 +116,7 @@ const ProfessionBlock = () => {
                     alt={`${lang.name} icon`}
                     width={24}
                     height={24}
-                    className={`w-icon-menu h-icon-menu ${
+                    className={`w-btn-icon-size h-btn-icon-size ${
                       lang === activeLanguage 
                         ? lang.name === 'Javascript'
                           ? 'brightness-0'
@@ -129,19 +129,22 @@ const ProfessionBlock = () => {
               ))}
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-16 items-center">
-              <div className="flex-1 space-y-min-gap-button-text">
+            <div className="flex flex-col lg:flex-row items-center justify-center">
+              <div className="w-full lg:w-2/3 space-y-8 px-8 py-8">
                 {activeLanguage.content.description.map((text, index) => (
-                  <p key={index} className="text-quote leading-quote">
+                  <h4
+                    key={index} 
+                    className="text-h4 leading-h4 font-h4 text-center lg:text-left"
+                  >
                     {text}
-                  </p>
+                  </h4>
                 ))}
                 
-                <div className="flex flex-col sm:flex-row gap-min-gap-button-text mt-section-margin">
-                  <button className="w-btn-width-desktop h-btn-height-desktop bg-black text-white text-subheading rounded-full hover:bg-black/90 transition-button">
+                <div className="flex flex-col sm:flex-row gap-btn-gap pt-14 justify-center lg:justify-start">
+                  <button className="flex-1 max-w-btn-max-width h-btn-height bg-black text-white text-base leading-body font-text rounded-full hover:bg-black/90 transition-all duration-300">
                     Смотреть программу обучения
                   </button>
-                  <button className="w-btn-width-desktop h-btn-height-desktop bg-white text-black text-subheading border-2 border-black/10 rounded-full hover:border-black/30 transition-button">
+                  <button className="flex-1 max-w-btn-max-width h-btn-height bg-white text-black text-base leading-body font-text border-2 border-black/10 rounded-full hover:border-black/30 transition-all duration-300">
                     Начать учиться
                   </button>
                 </div>
@@ -158,7 +161,7 @@ const ProfessionBlock = () => {
                   damping: 20,
                   duration: 0.5
                 }}
-                className="w-48 h-48 relative"
+                className="w-48 h-48 relative shrink-0 mt-8 lg:mt-0 lg:ml-16"
               >
                 <Image
                   src={activeLanguage.content.logo}

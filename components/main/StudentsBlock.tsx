@@ -8,7 +8,7 @@ const StudentsBlock = () => {
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
           <h1 
-            className="text-block text-center mb-section-margin font-semibold tracking-banner" 
+            className="text-h1 leading-h1 font-h1 text-center mb-section-margin tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             НАШИ УЧЕНИКИ

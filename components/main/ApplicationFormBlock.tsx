@@ -239,7 +239,7 @@ const ApplicationFormBlock = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-[32px] mobile:text-block mb-4 text-center tracking-banner text-white font-bowler"
+              className="text-h1 leading-h1 font-h1 mb-4 text-center tracking-banner text-white"
             >
               СПАСИБО ЗА ЗАЯВКУ!
             </motion.h2>
@@ -247,7 +247,7 @@ const ApplicationFormBlock = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-subheading text-white/80 text-center max-w-[600px]"
+              className="text-base leading-body font-text text-white/80 text-center max-w-[600px]"
             >
               Ваш персональный карьерный консультант с вами свяжется в ближайшее время
             </motion.p>
@@ -275,13 +275,13 @@ const ApplicationFormBlock = () => {
         >
           <motion.h2 
             variants={formAnimation}
-            className="text-[32px] mobile:text-block mb-2 mobile:mb-4 text-center tracking-banner text-white font-bowler"
+            className="text-h1 leading-h1 font-h1 mb-4 text-center tracking-banner text-white"
           >
             ОСТАВИТЬ ЗАЯВКУ
           </motion.h2>
           <motion.h3 
             variants={formAnimation}
-            className="text-[24px] mobile:text-subheading mb-6 mobile:mb-8 text-center tracking-banner text-white/80 font-bowler"
+            className="text-h3 leading-h3 font-h3 mb-8 text-center tracking-banner text-white/80"
           >
             НА ЛЬГОТНОЕ ОБУЧЕНИЕ
           </motion.h3>

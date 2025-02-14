@@ -41,7 +41,7 @@ const NewsBlock = () => {
     <section className="w-full bg-white py-20">
       <div className="max-w-content mx-auto px-4">
         <h1 
-          className="text-block text-center mb-16 font-semibold tracking-banner"
+          className="text-h1 leading-h1 font-h1 text-center mb-16 tracking-banner"
           style={{ fontFamily: 'BOWLER' }}
         >
           НОВОСТИ
@@ -62,11 +62,11 @@ const NewsBlock = () => {
                 </span>
               </div>
 
-              <h2 className="text-xl font-bold mb-6">
+              <h2 className="text-h4 leading-h4 font-h4 mb-6">
                 {item.title}
               </h2>
 
-              <p className="text-gray-400 text-sm mb-6 flex-grow">
+              <p className="text-base leading-body font-text text-gray-400">
                 {item.content}
               </p>
 
@@ -103,11 +103,11 @@ const NewsBlock = () => {
               </button>
             </div>
 
-            <h2 className="text-2xl font-bold mb-6">
+            <h2 className="text-subheading font-bold mb-6">
               {news[activeIndex].title}
             </h2>
 
-            <p className="text-gray-800 leading-relaxed">
+            <p className="text-quote leading-relaxed text-gray-800">
               {news[activeIndex].content}
             </p>
           </div>

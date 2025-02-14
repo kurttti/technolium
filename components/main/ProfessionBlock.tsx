@@ -19,13 +19,13 @@ const languages: Language[] = [
   {
     name: 'Python',
     link: '#python',
-    icon: '/main/language-icon/python.png',
+    icon: 'main/language-icon/python.svg',
     content: {
       description: [
-        'Python — высокоуровневый язык программирования общего назначения. Его философия делает упор на читаемость кода.',
-        'Средняя зарплата: 180.000 ₽\nОпыт: не требуется'
+        'Python — это мощный и универсальный язык программирования, который открывает дверив самые разные сферы IT. ',
+        'На курсе по Python вы сможете освоить не только базовые навыки программирования, но и специализированные технологии, которые помогут вам стать востребованным специалистом.'
       ],
-      logo: '/main/python-master.png'
+      logo: '/main/language-icon/python.png'
     }
   },
   {
@@ -37,7 +37,7 @@ const languages: Language[] = [
         'JavaScript — мультипарадигменный язык программирования. Поддерживает объектно-ориентированный, императивный и функциональный стили.',
         'Средняя зарплата: 150.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/js-master.png'
+      logo: '/main/language-icon/js.png'
     }
   },
   {
@@ -49,7 +49,7 @@ const languages: Language[] = [
         'Go — компилируемый язык программирования, разработанный внутри компании Google.',
         'Средняя зарплата: 250.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/go-master.png'
+      logo: '/main/language-icon/go.png'
     }
   },
   {
@@ -61,7 +61,7 @@ const languages: Language[] = [
         'C# — объектно-ориентированный язык программирования общего назначения.',
         'Средняя зарплата: 200.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/csharp-master.png'
+      logo: '/main/language-icon/csharp.png'
     }
   },
   { 
@@ -73,7 +73,7 @@ const languages: Language[] = [
         'Бесплатный курс по использованию нейросетей поможет вам понять, как составить запрос таким образом, чтобы вы получили наилучший результат от своего помощника.',
         'Длительность: 3 дня\nФормат: Теория + конспект + практика с обратной связью'
       ],
-      logo: '/prompt-master.png' // Убедитесь, что у вас есть это изображение
+      logo: '/main/language-icon/python.svg' // Убедитесь, что у вас есть это изображение
     }
   }
 ]
@@ -109,11 +109,7 @@ const ProfessionBlock = () => {
                       ? 'bg-black text-white border-2 border-black hover:bg-black/90'
                       : 'bg-white text-black border-2 border-black/10 hover:border-black/30'}`}
                 >
-                  <div className={`relative w-btn-icon-size h-btn-icon-size ${
-                    (lang.name === 'Javascript' || lang.name === 'Python') && lang === activeLanguage
-                      ? `after:content-["${lang.name === 'Javascript' ? 'JS' : ''}"] after:absolute after:inset-0 after:text-black after:flex after:items-center after:justify-center after:text-[10px] after:font-bold`
-                      : ''
-                  }`}>
+                  <div className={`relative w-btn-icon-size h-btn-icon-size`}>
                     <Image 
                       src={lang.icon}
                       alt={`${lang.name} icon`}
@@ -121,11 +117,7 @@ const ProfessionBlock = () => {
                       height={24}
                       className={`w-btn-icon-size h-btn-icon-size ${
                         lang === activeLanguage 
-                          ? lang.name === 'Javascript'
-                            ? 'brightness-0 invert'
-                            : lang.name === 'Python'
-                              ? 'brightness-0 invert'
-                              : 'brightness-0 invert'
+                          ? 'brightness-0 invert'
                           : 'brightness-100'
                       }`}
                     />
@@ -140,7 +132,7 @@ const ProfessionBlock = () => {
                 {activeLanguage.content.description.map((text, index) => (
                   <h4
                     key={index} 
-                    className="text-h4 leading-h4 font-h4 text-center lg:text-left"
+                    className="text-[30px] leading-normal font-normal text-center lg:text-left"
                   >
                     {text}
                   </h4>

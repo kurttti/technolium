@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ChevronRight } from "lucide-react"
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,8 +23,8 @@ export default function HistoryBlock() {
       viewport={{ once: true }}
       variants={containerVariants}
     >
-      <div className="bg-gradient-dark max-w-content mx-auto px-4 py-24">
-        <div className="max-w-4xl mx-auto text-white">
+      <div className="bg-gradient-dark max-w-content mx-auto px-24 py-24">
+        <div className="text-white">
           <h2 
             className="text-[96px] font-bold mb-12 text-center uppercase tracking-banner"
             style={{ fontFamily: 'BOWLER' }}

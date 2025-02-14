@@ -21,7 +21,10 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": [
+      "three"
+    ]
   },
   "include": [
     "next-env.d.ts",

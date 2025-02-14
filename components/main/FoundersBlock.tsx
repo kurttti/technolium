@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { FlowingShape } from '../3d/FlowingShape'
 
 interface Founder {
   id: number
@@ -57,26 +58,30 @@ const FoundersBlock = () => {
         </motion.h2>
 
         <div className="grid grid-cols-1 gap-8">
-          {founders.map((founder) => (
+          {/* Блок Назара */}
+          <div className="flex items-center gap-8">
+            <div className="hidden md:block w-[300px] h-[300px] relative">
+              <FlowingShape
+                position={[0, 0, 0]}
+                color="#6B5BFF"
+                reverse={false}
+              />
+            </div>
+
             <motion.div
-              key={founder.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className={`rounded-card p-8 relative overflow-hidden text-black ${
-                founder.id === 1 ? 'mr-auto' : 'ml-auto'
-              }`}
-              style={{
-                maxWidth: '600px'  // Ограничиваем ширину карточки
-              }}
+              className="rounded-card p-8 relative overflow-hidden text-black"
+              style={{ maxWidth: '600px' }}
             >
               <div className="relative z-10">
                 <div className="flex flex-col items-center text-center mb-8">
                   <div className="w-[200px] h-[200px] rounded-full overflow-hidden mb-6">
                     <Image
-                      src={founder.photo}
-                      alt={`${founder.name} ${founder.surname}`}
+                      src={founders[0].photo}
+                      alt={`${founders[0].name} ${founders[0].surname}`}
                       width={200}
                       height={200}
                       className="object-cover"
@@ -86,21 +91,21 @@ const FoundersBlock = () => {
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                        {founder.name}
+                        {founders[0].name}
                       </h3>
                       <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                        {founder.surname}
+                        {founders[0].surname}
                       </h3>
                     </div>
                     
                     <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
-                      {founder.role}
+                      {founders[0].role}
                     </div>
                   </div>
                 </div>
 
                 <ul className="space-y-4">
-                  {founder.achievements.map((achievement, index) => (
+                  {founders[0].achievements.map((achievement, index) => (
                     <li key={index} className="flex items-start gap-3 text-body">
                       <span className="text-black/60">—</span>
                       <span>{achievement}</span>
@@ -109,7 +114,65 @@ const FoundersBlock = () => {
                 </ul>
               </div>
             </motion.div>
-          ))}
+          </div>
+
+          {/* Блок Арсения */}
+          <div className="flex items-center gap-8 justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="rounded-card p-8 relative overflow-hidden text-black"
+              style={{ maxWidth: '600px' }}
+            >
+              <div className="relative z-10">
+                <div className="flex flex-col items-center text-center mb-8">
+                  <div className="w-[200px] h-[200px] rounded-full overflow-hidden mb-6">
+                    <Image
+                      src={founders[1].photo}
+                      alt={`${founders[1].name} ${founders[1].surname}`}
+                      width={200}
+                      height={200}
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="space-y-2">
+                      <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
+                        {founders[1].name}
+                      </h3>
+                      <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
+                        {founders[1].surname}
+                      </h3>
+                    </div>
+                    
+                    <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
+                      {founders[1].role}
+                    </div>
+                  </div>
+                </div>
+
+                <ul className="space-y-4">
+                  {founders[1].achievements.map((achievement, index) => (
+                    <li key={index} className="flex items-start gap-3 text-body">
+                      <span className="text-black/60">—</span>
+                      <span>{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            <div className="hidden md:block w-[300px] h-[300px] relative">
+              <FlowingShape
+                position={[0, 0, 0]}
+                color="#1A365D"
+                reverse={true}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

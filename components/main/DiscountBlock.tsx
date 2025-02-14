@@ -4,19 +4,19 @@ import { motion } from 'framer-motion'
 export const DiscountBlock = () => {
   return (
     <div className="w-full">
-      <div className="max-w-content mx-auto ">
+      <div className="max-w-content mx-auto">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="relative w-full h-[500px] md:h-[700px] flex flex-col md:flex-row overflow-hidden"
+          className="relative w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] flex flex-col lg:flex-row overflow-hidden"
         >
           {/* Левая сторона с изображением */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full md:w-2/6 h-[250px] md:h-auto bg-cover bg-center"
+            className="relative w-full lg:w-2/6 h-[250px] sm:h-[300px] lg:h-auto bg-cover bg-center"
             style={{ 
               backgroundImage: "url('/main/men-with-notebook.jpg')"
             }}
@@ -27,23 +27,23 @@ export const DiscountBlock = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="relative w-full md:w-4/6 flex items-start md:items-center bg-darkblue md:bg-transparent py-section-margin md:py-0"
+            className="relative w-full lg:w-4/6 flex items-start lg:items-center bg-darkblue lg:bg-transparent py-8 sm:py-12 lg:py-0"
           >
             <Image
               src="/main/gradient-1.jpg"
               alt="Background gradient"
               fill
-              className="hidden md:block object-cover"
+              className="hidden lg:block object-cover"
               priority
             />
             
-            <div className="relative z-modal w-full px-6 md:pl-16 flex flex-col items-center md:items-start gap-min-gap-button-text">
+            <div className="relative z-modal w-full px-4 sm:px-6 lg:px-16 flex flex-col items-center lg:items-start gap-4 sm:gap-6 lg:gap-8">
               {/* Подпись */}
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
-                className="text-h1 leading-h1 font-h1 tracking-heading text-white"
+                className="text-[32px] sm:text-[40px] lg:text-h1 leading-tight lg:leading-h1 font-h1 tracking-banner text-white text-center lg:text-left"
                 style={{ fontFamily: 'BOWLER' }}
               >
                 ТЕХНОЛИУМ
@@ -54,7 +54,7 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="text-h4 leading-h4 font-h4 tracking-heading text-white mt-[30px] mb-[58px]"
+                className="text-[20px] sm:text-[24px] lg:text-h4 leading-normal lg:leading-h4 font-h4 tracking-heading text-white text-center lg:text-left max-w-[90%] lg:max-w-none"
               >
                 Онлайн-университет языков программирования,
                 предлагающий гибкую и высокоэффективную
@@ -65,20 +65,26 @@ export const DiscountBlock = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="flex flex-col items-center md:items-start"
+                className="flex flex-col items-center lg:items-start w-full"
               >
-                {/* Добавляем теги */}
-                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                {/* Теги */}
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start w-full max-w-[90%] lg:max-w-none">
                   {['Javascript', 'Python', 'Нейросети', 'GO', 'C#', 'Подобрать профессию'].map((tag) => (
-                    <span key={tag} className="px-4 py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors">
-                      <span className="text-sm leading-body font-text">{tag}</span>
+                    <span 
+                      key={tag} 
+                      className="px-3 sm:px-4 py-1 sm:py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors"
+                    >
+                      <span className="text-xs sm:text-sm leading-body font-text whitespace-nowrap">{tag}</span>
                     </span>
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
+                <div className="flex flex-wrap gap-2 justify-center lg:justify-start mt-2 w-full max-w-[90%] lg:max-w-none">
                   {['10 месяцев', 'Коммерческая деятельность', 'Центр карьеры', 'Выбор специализации'].map((tag) => (
-                    <span key={tag} className="px-4 py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors">
-                      <span className="text-sm leading-body font-text">{tag}</span>
+                    <span 
+                      key={tag} 
+                      className="px-3 sm:px-4 py-1 sm:py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors"
+                    >
+                      <span className="text-xs sm:text-sm leading-body font-text whitespace-nowrap">{tag}</span>
                     </span>
                   ))}
                 </div>

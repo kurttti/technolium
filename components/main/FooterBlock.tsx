@@ -43,7 +43,7 @@ const FooterBlock = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-[1200px] mx-auto rounded-[32px] bg-[#0A0A2C] overflow-hidden"
+        className="max-w-content mx-auto rounded-[32px] bg-darkblue overflow-hidden"
       >
         <motion.div 
           variants={containerAnimation}
@@ -52,9 +52,9 @@ const FooterBlock = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="py-16 px-8"
         >
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-24">
-            {/* Technolium text - показываем над контактами на мобильном */}
-            <div className="block md:hidden">
+          <div className="grid grid-cols-1 mobile:grid-cols-[1fr_auto] gap-12 mobile:gap-24">
+            {/* Мобильный логотип */}
+            <div className="block mobile:hidden">
               <motion.div 
                 className="flex justify-center items-center mb-8 w-full overflow-x-hidden px-1"
                 style={{
@@ -87,14 +87,12 @@ const FooterBlock = () => {
               </motion.div>
             </div>
 
-            {/* Content */}
+            {/* Контакты */}
             <div>
-              {/* Контакты */}
               <motion.div variants={itemAnimation}>
                 <motion.h3 
                   variants={itemAnimation}
-                  className="text-2xl text-white mb-8" 
-                  style={{ fontFamily: 'BOWLER' }}
+                  className="text-subheading text-white mb-8 font-bowler"
                 >
                   КОНТАКТЫ
                 </motion.h3>
@@ -134,13 +132,13 @@ const FooterBlock = () => {
               </motion.div>
             </div>
 
-            {/* Technolium text - показываем справа на планшете и десктопе */}
+            {/* Десктопный логотип */}
             <motion.div 
-              className="hidden md:flex items-center justify-end"
+              className="hidden mobile:flex items-center justify-end"
               style={{
                 fontFamily: 'BOWLER',
-                fontSize: '64px',
-                lineHeight: '76px',
+                fontSize: 'text-block',
+                lineHeight: '1.2',
                 fontWeight: '400',
               }}
             >
@@ -167,12 +165,12 @@ const FooterBlock = () => {
             </motion.div>
           </div>
 
+          {/* Футер информация */}
           <motion.div 
             variants={itemAnimation}
             className="mt-12 text-white/60"
           >
-            {/* Основная информация */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 text-left">
+            <div className="grid grid-cols-1 mobile:grid-cols-2 tablet:grid-cols-3 gap-6 mb-6 text-left">
               <motion.div variants={itemAnimation} className="space-y-2">
                 <h4 className="font-medium text-white/80">Регистрационные данные</h4>
                 <p>ИП БАЛОЯН АРСЕНИЙ РОБЕРТОВИЧ</p>
@@ -186,9 +184,8 @@ const FooterBlock = () => {
               </motion.div>
             </div>
 
-            {/* Копирайт */}
             <div className="text-center pt-6 border-t border-white/10">
-              <p>© 2024 Technolium. Все права защищены.</p>
+              <p className="text-body">© 2024 Technolium. Все права защищены.</p>
             </div>
           </motion.div>
         </motion.div>

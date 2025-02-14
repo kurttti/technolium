@@ -95,6 +95,12 @@ export default function MainPage() {
           <motion.div variants={itemVariants}>
             <NewsBlock />
           </motion.div>
+          <motion.div variants={itemVariants}>
+            <ApplicationFormBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <FooterBlock />
+          </motion.div>
             {/* <NavBarSecond />       */}
           {/* <motion.div variants={itemVariants}>
             <FoundersBlock />
@@ -117,6 +123,7 @@ export default function MainPage() {
           <motion.div variants={itemVariants}>
             <FooterBlock />
           </motion.div> */}
+
         </motion.div>
       )}
     </>

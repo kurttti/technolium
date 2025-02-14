@@ -209,9 +209,9 @@ const ApplicationFormBlock = () => {
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+          className={`max-w-content mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
         >
-          <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
+          <div className="flex flex-col items-center py-8 mobile:py-16 px-4 mobile:px-8">
             <motion.div 
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -239,8 +239,7 @@ const ApplicationFormBlock = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-[32px] md:text-[48px] mb-4 text-center tracking-wider text-white" 
-              style={{ fontFamily: 'BOWLER' }}
+              className="text-[32px] mobile:text-block mb-4 text-center tracking-banner text-white font-bowler"
             >
               СПАСИБО ЗА ЗАЯВКУ!
             </motion.h2>
@@ -248,7 +247,7 @@ const ApplicationFormBlock = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-xl text-white/80 text-center max-w-[600px]"
+              className="text-subheading text-white/80 text-center max-w-[600px]"
             >
               Ваш персональный карьерный консультант с вами свяжется в ближайшее время
             </motion.p>
@@ -259,32 +258,30 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div id="application-form" className="w-full px-4 py-8 md:pt-24">
+    <div id="application-form" className="w-full px-4 py-8 mobile:pt-24">
       <motion.div 
         variants={formAnimation}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={`max-w-[1200px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+        className={`max-w-content mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8"
+          className="flex flex-col items-center py-8 mobile:py-16 px-4 mobile:px-8"
         >
           <motion.h2 
             variants={formAnimation}
-            className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" 
-            style={{ fontFamily: 'BOWLER' }}
+            className="text-[32px] mobile:text-block mb-2 mobile:mb-4 text-center tracking-banner text-white font-bowler"
           >
             ОСТАВИТЬ ЗАЯВКУ
           </motion.h2>
           <motion.h3 
             variants={formAnimation}
-            className="text-[24px] md:text-[32px] mb-6 md:mb-8 text-center tracking-wider text-white/80" 
-            style={{ fontFamily: 'BOWLER' }}
+            className="text-[24px] mobile:text-subheading mb-6 mobile:mb-8 text-center tracking-banner text-white/80 font-bowler"
           >
             НА ЛЬГОТНОЕ ОБУЧЕНИЕ
           </motion.h3>
@@ -358,7 +355,7 @@ const ApplicationFormBlock = () => {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={isLoading}
-              className="w-full h-12 md:h-14 bg-white/20 hover:bg-white/30 disabled:bg-white/10 disabled:cursor-not-allowed text-white rounded-[18px] text-base md:text-lg font-medium transition-colors backdrop-blur-sm flex items-center justify-center"
+              className="w-full h-btn-height-desktop bg-white/20 hover:bg-white/30 disabled:bg-white/10 disabled:cursor-not-allowed text-white rounded-btn text-body font-medium transition-button backdrop-blur-sm flex items-center justify-center"
             >
               {isLoading ? (
                 <>

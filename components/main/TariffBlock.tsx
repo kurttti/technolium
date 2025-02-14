@@ -144,30 +144,82 @@ export function TariffBlock() {
                         </AnimatePresence>
                       </div>
                       
-                      <Slider
-                        value={[selectedMonths[plan.title]]}
-                        min={0}
-                        max={24}
-                        step={6}
-                        onValueChange={(values) => {
-                          setSelectedMonths(prev => ({
-                            ...prev,
-                            [plan.title]: values[0]
-                          }))
-                        }}
-                        className={`${
-                          isDark 
-                            ? '[&_[role=slider]]:bg-cta [&_[role=slider]]:border-cta [&_[role=slider]]:h-4 [&_[role=slider]]:w-4 [&_[role=track]]:bg-gray-700' 
-                            : '[&_[role=slider]]:bg-black [&_[role=slider]]:border-black [&_[role=slider]]:h-4 [&_[role=slider]]:w-4 [&_[role=track]]:bg-gray-200'
-                        }`}
-                      />
+                      <div className="relative pt-6">
+                        <Slider
+                          value={[selectedMonths[plan.title]]}
+                          min={0}
+                          max={24}
+                          step={6}
+                          onValueChange={(values) => {
+                            setSelectedMonths(prev => ({
+                              ...prev,
+                              [plan.title]: values[0]
+                            }))
+                          }}
+                          className={`${
+                            isDark 
+                              ? `
+                                [&_[role=slider]]:bg-cta 
+                                [&_[role=slider]]:border-cta 
+                                [&_[role=slider]]:h-5 
+                                [&_[role=slider]]:w-5 
+                                [&_[role=track]]:bg-gray-700 
+                                [&_[role=track]]:h-3
+                                [&_[role=track].bg-cta]:h-3
+                                [&_[role=track].bg-cta]:bg-cta
+                              ` 
+                              : `
+                                [&_[role=slider]]:bg-black 
+                                [&_[role=slider]]:border-black 
+                                [&_[role=slider]]:h-5 
+                                [&_[role=slider]]:w-5 
+                                [&_[role=track]]:bg-gray-200 
+                                [&_[role=track]]:h-3
+                                [&_[role=track].bg-black]:h-3
+                                [&_[role=track].bg-black]:bg-black
+                              `
+                          }`}
+                        >
+                          {/* Точки на слайдере */}
+                          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 pointer-events-none">
+                            {[0, 6, 12, 18, 24].map((month) => (
+                              <button
+                                key={month}
+                                onClick={() => {
+                                  setSelectedMonths(prev => ({
+                                    ...prev,
+                                    [plan.title]: 24 - month
+                                  }))
+                                }}
+                                className={`
+                                  absolute h-5 w-5 
+                                  -translate-x-1/2 
+                                  rounded-full 
+                                  transition-colors 
+                                  pointer-events-auto
+                                  border-2
+                                  ${isDark 
+                                    ? (24 - selectedMonths[plan.title]) === month
+                                      ? 'bg-cta border-cta' 
+                                      : 'bg-gray-800 border-gray-700 hover:border-cta'
+                                    : (24 - selectedMonths[plan.title]) === month
+                                      ? 'bg-black border-black' 
+                                      : 'bg-white border-gray-300 hover:border-black'
+                                  }
+                                `}
+                                style={{ left: `${(month / 24) * 100}%` }}
+                              />
+                            ))}
+                          </div>
+                        </Slider>
 
-                      <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400">
-                        <span>24</span>
-                        <span>18</span>
-                        <span>12</span>
-                        <span>6</span>
-                        <span>0 мес</span>
+                        <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mt-6">
+                          <span>24</span>
+                          <span>18</span>
+                          <span>12</span>
+                          <span>6</span>
+                          <span>0 мес</span>
+                        </div>
                       </div>
 
                       <div className="space-y-4">

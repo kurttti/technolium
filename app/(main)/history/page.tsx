@@ -62,12 +62,12 @@ export default function HistoryPage() {
             priority
           />
         </div>
-        <div className="relative z-10 py-32 px-4">
+        <div className="relative z-10 py-16 sm:py-24 md:py-32 px-4">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-[64px] leading-none text-white font-bold text-center tracking-wider"
+            className="text-[32px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-tight text-white font-bold text-center tracking-wider"
             style={{ fontFamily: 'BOWLER' }}
           >
             О НАС
@@ -76,18 +76,18 @@ export default function HistoryPage() {
       </div>
 
       {/* Основной контент */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
         >
           {founderCards.map((founder, index) => (
             <motion.div
               key={founder.name}
               variants={itemVariants}
-              className="relative bg-[#0A0A0A] rounded-[32px] p-8 overflow-hidden"
+              className="relative bg-[#0A0A0A] rounded-[20px] sm:rounded-[24px] md:rounded-[32px] p-4 sm:p-6 md:p-8 overflow-hidden"
             >
               {/* Градиентный фон для карточки */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] to-[#1A1A3A] opacity-50" />
@@ -96,7 +96,7 @@ export default function HistoryPage() {
                 {/* Центрированный блок */}
                 <div className="flex flex-col items-center text-center">
                   {/* Фото */}
-                  <div className="w-[200px] h-[200px] relative rounded-full overflow-hidden mb-4">
+                  <div className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] relative rounded-full overflow-hidden mb-4">
                     <Image
                       src={founder.image}
                       alt={founder.name.replace('\n', ' ')}
@@ -106,13 +106,13 @@ export default function HistoryPage() {
                   </div>
 
                   {/* Роль */}
-                  <div className="inline-block px-4 py-1 bg-white rounded-full text-black text-sm mb-4">
+                  <div className="inline-block px-3 sm:px-4 py-1 bg-white rounded-full text-black text-xs sm:text-sm mb-3 sm:mb-4">
                     {founder.role}
                   </div>
 
                   {/* Имя */}
                   <h2 
-                    className="text-[32px] leading-tight text-gray-400 mb-6 whitespace-pre-line"
+                    className="text-[24px] sm:text-[28px] md:text-[32px] leading-tight text-gray-400 mb-4 sm:mb-6 whitespace-pre-line"
                     style={{ fontFamily: 'BOWLER' }}
                   >
                     {founder.name}
@@ -120,11 +120,11 @@ export default function HistoryPage() {
                 </div>
 
                 {/* Достижения (выравнивание по левому краю) */}
-                <ul className="space-y-4">
+                <ul className="space-y-3 sm:space-y-4">
                   {founder.achievements.map((achievement, i) => (
                     <li key={i} className="flex items-start gap-2 text-white">
                       <span className="text-gray-400 shrink-0">—</span>
-                      <span className="text-left">{achievement}</span>
+                      <span className="text-left text-sm sm:text-base md:text-lg">{achievement}</span>
                     </li>
                   ))}
                 </ul>
@@ -136,14 +136,14 @@ export default function HistoryPage() {
         {/* История */}
         <motion.div 
           variants={itemVariants}
-          className="mt-16 prose prose-lg max-w-none"
+          className="mt-8 sm:mt-12 md:mt-16 prose prose-sm sm:prose-base md:prose-lg max-w-none"
         >
-          <h2 className="text-2xl font-bold mb-6">Становление Университета Технолиум</h2>
-          <p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Становление Университета Технолиум</h2>
+          <p className="text-base sm:text-lg md:text-xl">
             Это история о том, как разные таланты и подходы к жизни могут привести к успешному сотрудничеству, 
             если за действиями стоит искреннее желание развиваться и учиться друг у друга.
           </p>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Началось все с мечты, которая была достигнута за счет 100 потов. Когда Назар был школьником, 
             взял как подработку разработку сайта на html и css. Как и у всех, получалось криво, но ему нравилось 
             и он пошел учиться на специальность «Математика и компьютерные науки» и параллельно изучал Java, 
@@ -151,29 +151,29 @@ export default function HistoryPage() {
             Так перешел на Python. Само образование не сильно помогло в заработке, рынок труда был жесток, 
             а его знания не приносили желаемых результатов.
           </p>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Время от времени жил на сухарях и воде, поэтому стал искать стажировки. Первая улыбнувшаяся удача - 
             отбор в СимбирСофт, прошел не без труда, но ему удалось за все лето подкопить опыт на практике в этой компании. 
             Взяли на работу не сразу, пришлось побегать по собеседованиям, в результате попал на Python разработчика 
             по должности Junior. Со временем проекты давались легче, сложные работы захватывали интерес, мог сидеть днями 
             и ночами, чтобы ни единой ошибки и все по срокам сдать заказчику.
           </p>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Назар говорит: "Арсений мне напоминает, что я технарь до мозга костей. Кстати Сеня тоже разработчик, 
             но пошел на бизнес-аналитика. Он более предприимчивый и коммуникабельный. Мы хоть и братья, но очень разные, 
             он больше про бизнес-процессы, я же люблю задачи, где нужно копать вглубь: оптимизация запросов, настройка 
             мониторинга через Grafana, интеграция аутентификации."
           </p>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Арсений в свое время выбрал экономику и управление в СПбГЭУ, а также ВШЭ. Ему нравилось анализировать данные, 
             строить бизнес-модели, но ближе к выпуску осознал, что без технической базы в IT не выжить. Параллельно начал 
             карьеру: сначала как системный аналитик, потом перешел в управление проектами.
           </p>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Чтобы монетизировать знания, пришла идея выставлять объявление на Авито, чтобы зарабатывать, искали заказчиков 
             самостоятельно. Арсений много изучал продвижение и поиск самих заказов. Делали чат-боты, далее уже на сайты перешли.
           </p>
-          <p>
+          <p className="text-base sm:text-lg md:text-xl">
             Арсений делится: "Мне интересно познавать все новое, у нас разные взгляды с Назаром, но вместе мы отличная команда. 
             Был момент, когда заказчик попросился к нам в ученики. Мы тогда посмеялись, думали, что он шутит. Так появилась идея 
             создать свою методику обучения, чтобы она была простой и легкой в освоении."
@@ -183,15 +183,15 @@ export default function HistoryPage() {
         {/* Наши ученики */}
         <motion.div 
           variants={itemVariants}
-          className="mt-16"
+          className="mt-8 sm:mt-12 md:mt-16"
         >
-          <h2 className="text-2xl font-bold mb-6">Наши ученики</h2>
-          <p className="text-lg mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Наши ученики</h2>
+          <p className="text-base sm:text-lg md:text-xl mb-4">
             Изначально, взяли фокус-группу из 12 студентов, которых провели экстерном через обучение. 
             Все ребята дошли до конца и получили свои первые работы. Это было непросто: за 2 месяца пролететь программу 
             7 месяцев. Сейчас уже учится порядка 72 студентов. Планируется единовременно учить 500-600 человек.
           </p>
-          <p className="text-lg">
+          <p className="text-base sm:text-lg md:text-xl">
             Наш университет — не про лекции в Zoom, а про живое общение. Кураторы — senior-разработчики и аналитики из топовых 
             компаний — проводят код-ревью, разбирают реальные кейсы, помогают с трудоустройством. Мы сделали ставку на два 
             языка — Python и Go. Например, на курсе по Python студенты сразу погружаются в разработку Telegram-ботов: от простой 
@@ -203,16 +203,16 @@ export default function HistoryPage() {
         {/* О будущем */}
         <motion.div 
           variants={itemVariants}
-          className="mt-16"
+          className="mt-8 sm:mt-12 md:mt-16"
         >
-          <h2 className="text-2xl font-bold mb-6">Немного о будущем университета</h2>
-          <p className="text-lg mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">Немного о будущем университета</h2>
+          <p className="text-base sm:text-lg md:text-xl mb-4">
             Мы не хотим конкурировать за звание самого огромного университета на рынке, нет цели взлетать в космос и становится 
             одной из самых громких школ на рынке. Нас интересует сделать ламповое место с упором на качество обучения.
             Также есть запросы от компаний, для которых Назар и Арсений выполняли проекты. Поэтому для студентов будет помощь 
             в трудоустройстве и рекомендации от наших преподавателей.
           </p>
-          <p className="text-lg">
+          <p className="text-base sm:text-lg md:text-xl">
             Сейчас весь фокус внимания на главную цель - это 5000-10000 студентов, которым мы поможем получить достойный заработок и новую жизнь.
           </p>
         </motion.div>

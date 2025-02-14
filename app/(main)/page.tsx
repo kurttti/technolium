@@ -12,6 +12,8 @@ import { TariffBlock } from "@/components/main/TariffBlock"
 import FoundersBlock from "@/components/main/FoundersBlock"
 import HistoryBlock from "@/components/main/HistoryBlock"
 import ProfessionBlock from "@/components/main/ProfessionBlock"
+import StudentsBlock from "@/components/main/StudentsBlock"
+
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
@@ -74,6 +76,9 @@ export default function MainPage() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <ProfessionBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StudentsBlock />
           </motion.div>
             {/* <NavBarSecond />       */}
           {/* <motion.div variants={itemVariants}>

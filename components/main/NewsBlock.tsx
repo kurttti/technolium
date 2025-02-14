@@ -55,8 +55,8 @@ const NewsBlock = () => {
           НОВОСТИ
         </h2>
 
-        <div className="relative">
-          <div className="flex justify-center">
+        <div className="relative overflow-x-auto hide-scrollbar">
+          <div className="flex">
             {news.map((item, index) => (
               <motion.div
                 key={index}
@@ -65,20 +65,18 @@ const NewsBlock = () => {
                   ${index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-black'}
                   transform-gpu overflow-hidden
                 `}
-                initial={{ x: 0 }}
                 whileHover={{
-                  scale: 1.02,
+                  scale: 1.05,
                   zIndex: 20,
                   transition: { duration: 0.2 }
                 }}
                 style={{
                   marginLeft: index === 0 ? '0' : '-100px',
                   boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-                  zIndex: index,
-                  transform: `translateX(${index === 0 ? '50px' : '0px'})`
+                  zIndex: index
                 }}
               >
-                <div className="relative h-full">
+                <div className="relative h-full py-4">
                   <Link href={`/news/${index}`} className="absolute inset-0 z-10 rounded-[32px]">
                     <span className="sr-only">Читать новость</span>
                   </Link>

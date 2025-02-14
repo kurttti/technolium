@@ -56,7 +56,7 @@ const FoundersBlock = () => {
           ОСНОВАТЕЛИ ТЕХНОЛИУМ
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {founders.map((founder) => (
             <motion.div
               key={founder.id}
@@ -64,7 +64,12 @@ const FoundersBlock = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="rounded-card p-8 relative overflow-hidden text-black"
+              className={`rounded-card p-8 relative overflow-hidden text-black ${
+                founder.id === 1 ? 'mr-auto' : 'ml-auto'
+              }`}
+              style={{
+                maxWidth: '600px'  // Ограничиваем ширину карточки
+              }}
             >
               <div className="relative z-10">
                 <div className="flex flex-col items-center text-center mb-8">

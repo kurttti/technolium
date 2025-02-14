@@ -46,22 +46,22 @@ const news: NewsItem[] = [
 
 const NewsBlock = () => {
   return (
-    <section className="w-full overflow-hidden py-section-margin">
-      <div className="max-w-content mx-auto px-block-padding-xs md:px-block-padding-md">
+    <section className="w-full overflow-hidden">
+      <div className="max-w-content mx-auto">
         <h2 
-          className="text-h1 leading-h1 font-h1 text-center mb-20 tracking-banner"
+          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-tight font-h1 text-center mb-8 sm:mb-10 md:mb-12 lg:mb-20 tracking-banner"
           style={{ fontFamily: 'BOWLER' }}
         >
           НОВОСТИ
         </h2>
 
-        <div className="relative overflow-x-auto hide-scrollbar">
-          <div className="flex">
+        <div className="relative overflow-x-auto hide-scrollbar py-14 px-4">
+          <div className="flex gap-4">
             {news.map((item, index) => (
               <motion.div
                 key={index}
                 className={`
-                  relative flex-none w-[500px] rounded-[32px] p-8
+                  relative flex-none w-[300px] sm:w-[400px] md:w-[450px] lg:w-[500px] rounded-[24px] p-6 sm:p-8
                   ${index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-black'}
                   transform-gpu overflow-hidden
                 `}
@@ -77,33 +77,33 @@ const NewsBlock = () => {
                 }}
               >
                 <div className="relative h-full py-4">
-                  <Link href={`/news/${index}`} className="absolute inset-0 z-10 rounded-[32px]">
+                  <Link href={`/news/${index}`} className="absolute inset-0 z-10 rounded-[24px]">
                     <span className="sr-only">Читать новость</span>
                   </Link>
 
                   <div className="flex flex-col h-full">
-                    <div className="flex justify-between items-center mb-6">
-                      <span className={`px-4 py-1 rounded-full text-xs 
+                    <div className="flex justify-between items-center mb-4 sm:mb-6">
+                      <span className={`px-3 sm:px-4 py-1 rounded-full text-xs 
                         ${index % 2 === 0 ? 'bg-[#1A1A1A]' : 'bg-[#2B076E]'} 
                         text-white`}
                       >
                         {item.category}
                       </span>
-                      <span className={`px-4 py-1 rounded-full text-xs ${item.tagColor} text-white`}>
+                      <span className={`px-3 sm:px-4 py-1 rounded-full text-xs ${item.tagColor} text-white`}>
                         {item.tag}
                       </span>
                     </div>
 
-                    <h3 className="text-[30px] leading-normal font-normal mb-4">
+                    <h3 className="text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px] leading-tight font-normal mb-4">
                       {item.title}
                     </h3>
 
-                    <p className="text-base opacity-80 mb-6">
+                    <p className="text-sm sm:text-base opacity-80 mb-4 sm:mb-6">
                       {item.content}
                     </p>
 
                     <div className="mt-auto">
-                      <span className={`inline-block text-base
+                      <span className={`inline-block text-sm sm:text-base
                         ${index % 2 === 0 ? 'text-white' : 'text-black'}
                         hover:opacity-80 transition-opacity
                       `}>

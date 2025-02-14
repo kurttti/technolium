@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 interface NewsItem {
   category: string
@@ -13,21 +15,29 @@ interface NewsItem {
 const news: NewsItem[] = [
   {
     category: 'КИБЕРБЕЗОПАСНОСТЬ',
-    title: 'Технолиум запускает курсы по кибербезопасности для всех',
-    content: 'Онлайн-университет Технолиум объявил о запуске новой инициативы в области кибербезопасности. С учетом уровня знаний студентов, курсы по основам кибербезопасности станут доступны всем студентам университета системы для защиты личной информации и профессионального развития.',
+    title: 'Технолиум запускает курсы по кибербезопасности для всех студентов',
+    content: 'Онлайн-университет Технолиум объявил о запуске новой инициативы, направленной на повышение уровня знаний студентов в области кибербезопасности. С этого месяца все студенты университета смогут пройти курсы по защите информации и предотвращению кибератак.',
     tag: 'НОВАЯ ПРОГРАММА',
     tagColor: 'bg-[#2B076E]'
+    
   },
   {
     category: 'JAVA',
-    title: 'Технолиум провел опрос среди студентов и работодателей о востребованности языка Java',
-    content: 'Исследование направлено на выявление актуальности старых версий Java по сравнению с более современными технологиями. По результатам исследования университет планирует обновить учебные программы с учетом текущих тенденций и потребностей рынка.',
+    title: 'Онлайн-университет Технолиум запустил опрос среди студентов и работодателей о востребованности языка Java',
+    content: 'Исследование направлено на выявление актуальности старых версий Java по сравнению с более новыми и современными технологиями. В рамках этого исследования университет стремится понять текущие тенденции и потребности рынка труда.....',
     tag: 'ИССЛЕДОВАНИЕ',
     tagColor: 'bg-[#2B076E]'
   },
   {
+    category: 'Новая программа',
+    title: 'Онлайн-университет Технолиум запустил инновационную программу "Технолиум.Специалитеты"',
+    content: 'В рамках новой образовательной инициативы онлайн-университет Технолиум представил уникальную программу "Технолиум.Специалитеты". Эта программа предоставляет студентам возможность после освоения базовой части курса самостоятельно выбирать направление для дальнейшего углубленного изучения.',
+    tag: 'ОБНОВЛЕНИЕ',
+    tagColor: 'bg-[#2B076E]'
+  },
+  {
     category: 'GO',
-    title: 'Онлайн-университет Технолиум объявил о приостановке набора на обучающие курсы по направлению Go',
+    title: 'Онлайн-университет Технолиум объявило приостановке набора на обучающие курсы по направлению Go',
     content: 'Это решение связано с обновлением учебной программы, что позволит предложить студентам более современные и актуальные знания и навыки. Университет сообщил, что все студенты, которые уже проходят обучение по данной программе или завершают ее, смогут воспользоваться новыми учебными материалами абсолютно бесплатно.',
     tag: 'ОБНОВЛЕНИЕ',
     tagColor: 'bg-[#2B076E]'
@@ -35,84 +45,75 @@ const news: NewsItem[] = [
 ]
 
 const NewsBlock = () => {
-  const [activeIndex, setActiveIndex] = useState<number | undefined>(undefined)
-
   return (
-    <section className="w-full bg-white">
+    <section className="w-full overflow-visible py-section-margin">
       <div className="max-w-content mx-auto px-block-padding-xs md:px-block-padding-md">
-        <h1 
-          className="text-h1 leading-h1 font-h1 text-center mb-16 tracking-banner"
-          style={{ fontFamily: 'BOWLER' }}
-        >
-          НОВОСТИ
-        </h1>
-
-        <div className="grid grid-cols-3 gap-6">
-          {news.map((item, index) => (
-            <div 
-              key={index}
-              className="bg-black text-white rounded-[20px] p-8 flex flex-col min-h-[420px]"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <span className="px-4 py-2 bg-[#1a1a1a] rounded-full text-sm">
-                  {item.category}
-                </span>
-                <span className={`px-4 py-2 ${item.tagColor} rounded-full text-sm`}>
-                  {item.tag}
-                </span>
-              </div>
-
-              <h2 className="text-h4 leading-h4 font-h4 mb-6">
-                {item.title}
-              </h2>
-
-              <p className="text-base leading-body font-text text-gray-400">
-                {item.content}
-              </p>
-
-              <button 
-                onClick={() => setActiveIndex(index)}
-                className="self-start text-white bg-transparent hover:bg-white/10 px-6 py-2 rounded-full transition-colors text-sm"
+        <div className="py-20">
+          <div className="flex space-x-6 relative">
+            {news.map((item, index) => (
+              <motion.div
+                key={index}
+                className={`relative flex-shrink-0 w-[400px] min-h-[300px] rounded-[32px] p-8
+                  ${index % 2 === 0 ? 'bg-black text-white' : 'bg-white text-black'}
+                  cursor-pointer
+                `}
+                initial={{ marginLeft: index !== 0 ? '-100px' : '0' }}
+                whileHover={{
+                  zIndex: 50,
+                  scale: 1.1,
+                  marginLeft: '0px',
+                  marginRight: '0px',
+                  transition: { 
+                    duration: 0.3,
+                    marginLeft: { duration: 0 },
+                    marginRight: { duration: 0 }
+                  }
+                }}
+                style={{
+                  marginLeft: index !== 0 ? '-100px' : '0',
+                  boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+                }}
               >
-                Читать полностью...
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+                <Link href={`/news/${index}`} className="absolute inset-0 z-10">
+                  <span className="sr-only">Читать новость</span>
+                </Link>
 
-      {/* Модальное окно */}
-      {typeof activeIndex === 'number' && (
-        <div 
-          className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
-          onClick={() => setActiveIndex(undefined)}
-        >
-          <div 
-            className="bg-white rounded-[20px] p-8 max-w-2xl max-h-[80vh] overflow-y-auto"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="flex justify-between items-start mb-6">
-              <span className="px-4 py-2 bg-black text-white rounded-full text-sm">
-                {news[activeIndex].category}
-              </span>
-              <button
-                onClick={() => setActiveIndex(undefined)}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
-              >
-                ✕
-              </button>
-            </div>
+                <div className="flex flex-col h-full relative z-20">
+                  {/* Тег категории */}
+                  <div className="flex justify-between items-center mb-6">
+                    <span className="text-sm font-medium">
+                      {item.category}
+                    </span>
+                    <span className={`px-4 py-1 rounded-full text-xs ${item.tagColor} text-white`}>
+                      {item.tag}
+                    </span>
+                  </div>
 
-            <h2 className="text-subheading font-bold mb-6">
-              {news[activeIndex].title}
-            </h2>
+                  {/* Заголовок */}
+                  <h3 className="text-2xl font-bold mb-4">
+                    {item.title}
+                  </h3>
 
-            <p className="text-quote leading-relaxed text-gray-800">
-              {news[activeIndex].content}
-            </p>
+                  {/* Контент */}
+                  <p className="text-base opacity-80">
+                    {item.content}
+                  </p>
+
+                  {/* Кнопка "Читать полностью" */}
+                  <div className="mt-auto pt-6">
+                    <span className={`inline-block text-base
+                      ${index % 2 === 0 ? 'text-white' : 'text-black'}
+                      hover:opacity-80 transition-opacity
+                    `}>
+                      Читать полностью...
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </section>
   )
 }

@@ -262,7 +262,7 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div id="application-form" className="w-full px-4 py-8 md:pt-24">
+    <div id="application-form" className="w-full px-4 py-8">
       <motion.div 
         variants={formAnimation}
         initial="hidden"

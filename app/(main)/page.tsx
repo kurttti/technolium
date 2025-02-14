@@ -16,7 +16,7 @@ import StudentsBlock from "@/components/main/StudentsBlock"
 import EducationFormatBlock from "@/components/main/EducationFormatBlock"
 import TestingBlock from "@/components/main/TestingBlock"
 import HelpStepsBlock from "@/components/main/HelpStepsBlock"
-
+import NewsBlock from "@/components/main/NewsBlock"
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)
@@ -91,6 +91,9 @@ export default function MainPage() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <HelpStepsBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <NewsBlock />
           </motion.div>
             {/* <NavBarSecond />       */}
           {/* <motion.div variants={itemVariants}>

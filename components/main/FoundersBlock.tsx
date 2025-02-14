@@ -74,18 +74,21 @@ const FoundersBlock = () => {
           <div className="relative w-[550px] h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-none rounded-tr-[20px] rounded-br-[20px] p-8">
             <div className="flex flex-col items-center justify-center h-full">
               {/* Фото */}
-              <div className="relative w-[200px] h-[200px] mb-8">
+              <div 
+                className="relative w-[200px] h-[200px] mb-8 rounded-full overflow-hidden"
+                style={{ background: 'linear-gradient(85.14deg, #594A73 9.35%, #151B4D 91.08%)' }}
+              >
                 <Image
                   src="/main/nazar.png"
                   alt="Назар Балоян"
                   fill
-                  className="rounded-full object-cover"
+                  className="object-cover"
                 />
               </div>
 
               {/* Роль */}
               <div className="bg-black text-white px-10 py-3 rounded-[32px] mb-8">
-                <span className="text-lg leading-body font-text">Python Developer Senior</span>
+                <span className="text-[36px] leading-normal font-text">Python Developer Senior</span>
               </div>
 
               {/* Имя */}
@@ -116,7 +119,7 @@ const FoundersBlock = () => {
         </div>
 
         {/* Блок с Арсением */}
-        <div className="flex flex-row-reverse">
+        <div className="flex flex-row-reverse items-center">
           {/* Блок с фоновой фигурой */}
           <div className="h-[550px] flex-shrink-0">
             <Image
@@ -130,22 +133,24 @@ const FoundersBlock = () => {
           </div>
 
           {/* Блок с Арсением */}
-          <div className="relative w-[550px] bg-[#F8F8F8] rounded-none rounded-tl-[20px] rounded-bl-[20px] p-8">
-            {/* Контент */}
+          <div className="relative w-[550px] h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-none rounded-tl-[20px] rounded-bl-[20px] p-8">
             <div className="flex flex-col items-center justify-center h-full">
               {/* Фото */}
-              <div className="relative w-[200px] h-[200px] mb-8">
+              <div 
+                className="relative w-[200px] h-[200px] mb-8 rounded-full overflow-hidden"
+                style={{ background: 'linear-gradient(85.14deg, #594A73 9.35%, #151B4D 91.08%)' }}
+              >
                 <Image
                   src="/main/arseniy.png"
                   alt="Арсений Балоян"
                   fill
-                  className="rounded-full object-cover"
+                  className="object-cover"
                 />
               </div>
 
               {/* Роль */}
               <div className="bg-black text-white px-10 py-3 rounded-[32px] mb-8">
-                <span className="text-lg leading-body font-text">Business Analyst</span>
+                <span className="text-[36px] leading-normal font-text">Business Analyst</span>
               </div>
 
               {/* Имя */}
@@ -156,6 +161,22 @@ const FoundersBlock = () => {
                 БАЛОЯН АРСЕНИЙ
               </h2>
             </div>
+          </div>
+
+          {/* Достижения слева от серого блока */}
+          <div className="mr-8 space-y-4">
+            <p className="text-[30px] leading-normal font-text">
+              — Основатель Университета Технолиум
+            </p>
+            <p className="text-[30px] leading-normal font-text">
+              — Призер олимпиады «Я профессионал» по направлению «Бизнес-информатика»
+            </p>
+            <p className="text-[30px] leading-normal font-text">
+              — Получатель гранта президента Российский Федерации
+            </p>
+            <p className="text-[30px] leading-normal font-text">
+              — Высшее образование СПбГЭУ, ВШЭ
+            </p>
           </div>
         </div>
       </div>

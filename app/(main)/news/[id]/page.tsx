@@ -21,7 +21,7 @@ export default function NewsArticlePage() {
   return (
     <div className="min-h-screen pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4">
-        <motion.div
+        <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -40,21 +40,25 @@ export default function NewsArticlePage() {
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-black">
+          <h1 className="text-3xl md:text-4xl font-bold mb-8 text-black">
             {article.title}
           </h1>
 
           <div className="prose prose-lg max-w-none">
-            <p className="text-gray-600 text-lg leading-relaxed">
-              {article.content}
-            </p>
-            
-            {/* Здесь можно добавить дополнительный контент статьи */}
-            <p className="text-gray-600 text-lg leading-relaxed mt-4">
-              Мы постоянно работаем над улучшением нашего образовательного контента и стремимся предоставить нашим студентам самые актуальные и качественные материалы для обучения.
-            </p>
+            {article.fullContent ? (
+              <div 
+                className="text-gray-600 text-lg leading-relaxed whitespace-pre-line"
+                style={{ whiteSpace: 'pre-line' }}
+              >
+                {article.fullContent}
+              </div>
+            ) : (
+              <p className="text-gray-600 text-lg leading-relaxed">
+                {article.content}
+              </p>
+            )}
           </div>
-        </motion.div>
+        </motion.article>
       </div>
     </div>
   )

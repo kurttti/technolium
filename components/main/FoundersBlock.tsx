@@ -74,44 +74,57 @@ const FoundersBlock = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="rounded-card p-8 relative overflow-hidden text-black"
-              style={{ maxWidth: '600px' }}
+              style={{ maxWidth: '800px' }}
             >
               <div className="relative z-10">
-                <div className="flex flex-col items-center text-center mb-8">
-                  <div className="w-[200px] h-[200px] rounded-full overflow-hidden mb-6">
-                    <Image
-                      src={founders[0].photo}
-                      alt={`${founders[0].name} ${founders[0].surname}`}
-                      width={200}
-                      height={200}
-                      className="object-cover"
-                    />
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                        {founders[0].name}
-                      </h3>
-                      <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                        {founders[0].surname}
-                      </h3>
+                <div className="flex items-center gap-8">
+                  {/* Фото и информация */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden mb-6 relative">
+                      {/* Градиентный фон */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-br from-[#6B5BFF]/20 to-[#6B5BFF]/80 z-0"
+                        style={{
+                          borderRadius: '50%',
+                        }}
+                      />
+                      <div className="w-full h-full relative z-10">
+                        <Image
+                          src={founders[0].photo}
+                          alt={`${founders[0].name} ${founders[0].surname}`}
+                          fill
+                          className="object-cover object-top"
+                          sizes="300px"
+                        />
+                      </div>
                     </div>
                     
-                    <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
-                      {founders[0].role}
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
+                          {founders[0].name}
+                        </h3>
+                        <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
+                          {founders[0].surname}
+                        </h3>
+                      </div>
+                      
+                      <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
+                        {founders[0].role}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <ul className="space-y-4">
-                  {founders[0].achievements.map((achievement, index) => (
-                    <li key={index} className="flex items-start gap-3 text-body">
-                      <span className="text-black/60">—</span>
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
+                  {/* Список достижений справа */}
+                  <ul className="space-y-4 flex-1 self-center">
+                    {founders[0].achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-start gap-3 text-body">
+                        <span className="text-black/60">—</span>
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -124,44 +137,57 @@ const FoundersBlock = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="rounded-card p-8 relative overflow-hidden text-black"
-              style={{ maxWidth: '600px' }}
+              style={{ maxWidth: '800px' }}
             >
               <div className="relative z-10">
-                <div className="flex flex-col items-center text-center mb-8">
-                  <div className="w-[200px] h-[200px] rounded-full overflow-hidden mb-6">
-                    <Image
-                      src={founders[1].photo}
-                      alt={`${founders[1].name} ${founders[1].surname}`}
-                      width={200}
-                      height={200}
-                      className="object-cover"
-                    />
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                        {founders[1].name}
-                      </h3>
-                      <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
-                        {founders[1].surname}
-                      </h3>
+                <div className="flex items-center gap-8">
+                  {/* Список достижений слева */}
+                  <ul className="space-y-4 flex-1 self-center">
+                    {founders[1].achievements.map((achievement, index) => (
+                      <li key={index} className="flex items-start gap-3 text-body">
+                        <span className="text-black/60">—</span>
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Фото и информация */}
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-[300px] h-[300px] rounded-full overflow-hidden mb-6 relative">
+                      {/* Градиентный фон */}
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-br from-[#1A365D]/20 to-[#1A365D]/80 z-0"
+                        style={{
+                          borderRadius: '50%',
+                        }}
+                      />
+                      <div className="w-full h-full relative z-10">
+                        <Image
+                          src={founders[1].photo}
+                          alt={`${founders[1].name} ${founders[1].surname}`}
+                          fill
+                          className="object-cover object-top"
+                          sizes="300px"
+                        />
+                      </div>
                     </div>
                     
-                    <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
-                      {founders[1].role}
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <h3 className="text-body tracking-heading" style={{ fontFamily: 'BOWLER' }}>
+                          {founders[1].name}
+                        </h3>
+                        <h3 className="text-heading tracking-heading" style={{ fontFamily: 'BOWLER' }}>
+                          {founders[1].surname}
+                        </h3>
+                      </div>
+                      
+                      <div className="bg-black text-white px-6 py-2 rounded-full inline-block">
+                        {founders[1].role}
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <ul className="space-y-4">
-                  {founders[1].achievements.map((achievement, index) => (
-                    <li key={index} className="flex items-start gap-3 text-body">
-                      <span className="text-black/60">—</span>
-                      <span>{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </motion.div>
 

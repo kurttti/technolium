@@ -264,7 +264,7 @@ const ApplicationFormBlock = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={`max-w-content mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+        className={`max-w-[1280px] mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}
@@ -279,12 +279,6 @@ const ApplicationFormBlock = () => {
           >
             ОСТАВИТЬ ЗАЯВКУ
           </motion.h2>
-          <motion.h3 
-            variants={formAnimation}
-            className="text-h3 leading-h3 font-h3 mb-8 text-center tracking-banner text-white/80"
-          >
-            НА ЛЬГОТНОЕ ОБУЧЕНИЕ
-          </motion.h3>
           
           <motion.form 
             variants={containerAnimation}

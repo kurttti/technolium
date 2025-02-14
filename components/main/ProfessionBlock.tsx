@@ -16,52 +16,52 @@ type Language = {
 }
 
 const languages: Language[] = [
-  { 
-    name: 'Python', 
+  {
+    name: 'Python',
     link: '#python',
-    icon: '/main/language-icon/python.svg',
+    icon: '/main/language-icon/python.png',
     content: {
       description: [
-        'Python — это мощный и универсальный язык программирования, который открывает двери в самые разные сферы IT.',
-        'На курсе по Python вы сможете освоить не только базовые навыки программирования, но и специализированные технологии, которые помогут вам стать востребованным специалистом.'
+        'Python — высокоуровневый язык программирования общего назначения. Его философия делает упор на читаемость кода.',
+        'Средняя зарплата: 180.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/language-icon/python.svg'
+      logo: '/main/python-master.png'
     }
   },
-  { 
-    name: 'Javascript', 
+  {
+    name: 'Javascript',
     link: '#javascript',
-    icon: '/main/language-icon/js.svg',
+    icon: '/main/language-icon/js.png',
     content: {
       description: [
-        'JavaScript — это один из самых популярных языков программирования, который используется для создания интерактивных веб-сайтов, мобильных приложений, серверных решений и даже игр.',
-        'На курсе по JavaScript вы освоите не только основы программирования, но и современные технологии, которые помогут вам стать востребованным разработчиком.'
+        'JavaScript — мультипарадигменный язык программирования. Поддерживает объектно-ориентированный, императивный и функциональный стили.',
+        'Средняя зарплата: 150.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/language-icon/js.svg'
+      logo: '/main/js-master.png'
     }
   },
-  { 
-    name: 'Golang', 
+  {
+    name: 'Golang',
     link: '#golang',
-    icon: '/main/language-icon/go.svg',
+    icon: '/main/language-icon/go.png',
     content: {
       description: [
-        'Go — это современный язык программирования, разработанный Google, который сочетает в себе простоту, производительность и мощь. Он идеально подходит для создания высоконагруженных приложений, микросервисов, облачных решений и многого другого.',
-        'На курсе по Go вы освоите ключевые навыки, которые помогут вам стать востребованным разработчиком.'
+        'Go — компилируемый язык программирования, разработанный внутри компании Google.',
+        'Средняя зарплата: 250.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/language-icon/go.svg'
+      logo: '/main/go-master.png'
     }
   },
-  { 
-    name: 'C#', 
+  {
+    name: 'C#',
     link: '#csharp',
-    icon: '/main/language-icon/csharp.svg',
+    icon: '/main/language-icon/csharp.png',
     content: {
       description: [
-        'C# (CSharp) — это мощный и универсальный язык программирования, разработанный Microsoft. Он широко используется для создания desktop-приложений, веб-сервисов, игр и мобильных приложений.',
-        'На курсе по C# вы освоите ключевые навыки, которые помогут вам стать востребованным разработчиком.'
+        'C# — объектно-ориентированный язык программирования общего назначения.',
+        'Средняя зарплата: 200.000 ₽\nОпыт: не требуется'
       ],
-      logo: '/main/language-icon/csharp.svg'
+      logo: '/main/csharp-master.png'
     }
   },
   { 
@@ -98,7 +98,7 @@ const ProfessionBlock = () => {
             ПО ДУШЕ
           </h1>
 
-          <div className="bg-white rounded-card p-block-padding-md shadow-card w-full max-w-content mt-block-spacing-xl">
+          <div className="bg-white rounded-card py-[100px] p-block-padding-md shadow-card w-full max-w-content mt-block-spacing-xl">
             <div className="flex flex-wrap justify-center gap-btns-gap">
               {languages.map((lang) => (
                 <button
@@ -106,24 +106,30 @@ const ProfessionBlock = () => {
                   onClick={() => setActiveLanguage(lang)}
                   className={`flex items-center gap-btn-gap px-btn-padding-x py-btn-padding-y rounded-full text-base leading-body font-text transition-all duration-300
                     ${lang === activeLanguage 
-                      ? lang.name === 'Javascript'
-                        ? 'bg-white text-black border-2 border-black hover:bg-black/5' 
-                        : 'bg-black text-white border-2 border-black hover:bg-black/90'
+                      ? 'bg-black text-white border-2 border-black hover:bg-black/90'
                       : 'bg-white text-black border-2 border-black/10 hover:border-black/30'}`}
                 >
-                  <Image 
-                    src={lang.icon}
-                    alt={`${lang.name} icon`}
-                    width={24}
-                    height={24}
-                    className={`w-btn-icon-size h-btn-icon-size ${
-                      lang === activeLanguage 
-                        ? lang.name === 'Javascript'
-                          ? 'brightness-0'
-                          : 'brightness-0 invert'
-                        : ''
-                    }`}
-                  />
+                  <div className={`relative w-btn-icon-size h-btn-icon-size ${
+                    (lang.name === 'Javascript' || lang.name === 'Python') && lang === activeLanguage
+                      ? `after:content-["${lang.name === 'Javascript' ? 'JS' : ''}"] after:absolute after:inset-0 after:text-black after:flex after:items-center after:justify-center after:text-[10px] after:font-bold`
+                      : ''
+                  }`}>
+                    <Image 
+                      src={lang.icon}
+                      alt={`${lang.name} icon`}
+                      width={24}
+                      height={24}
+                      className={`w-btn-icon-size h-btn-icon-size ${
+                        lang === activeLanguage 
+                          ? lang.name === 'Javascript'
+                            ? 'brightness-0 invert'
+                            : lang.name === 'Python'
+                              ? 'brightness-0 invert'
+                              : 'brightness-0 invert'
+                          : 'brightness-100'
+                      }`}
+                    />
+                  </div>
                   {lang.name}
                 </button>
               ))}
@@ -141,10 +147,10 @@ const ProfessionBlock = () => {
                 ))}
                 
                 <div className="flex flex-col sm:flex-row gap-btn-gap mt-block-spacing-lg justify-center lg:justify-start">
-                  <button className="flex-1 max-w-btn-max-width h-btn-height bg-black text-white text-base leading-body font-text rounded-full hover:bg-black/90 transition-all duration-300">
+                  <button className="flex-1 max-w-[500px] h-[80px] bg-black text-white text-[30px] leading-normal font-text rounded-full hover:bg-black/90 transition-all duration-300 whitespace-nowrap px-10">
                     Смотреть программу обучения
                   </button>
-                  <button className="flex-1 max-w-btn-max-width h-btn-height bg-white text-black text-base leading-body font-text border-2 border-black/10 rounded-full hover:border-black/30 transition-all duration-300">
+                  <button className="flex-1 max-w-[500px] h-[80px] bg-white text-black text-[30px] leading-normal font-text border-2 border-black/10 rounded-full hover:border-black/30 transition-all duration-300 whitespace-nowrap px-10">
                     Начать учиться
                   </button>
                 </div>

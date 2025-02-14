@@ -93,6 +93,9 @@ export default function MainPage() {
             <HelpStepsBlock />
           </motion.div>
           <motion.div variants={itemVariants}>
+            <TariffBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
             <NewsBlock />
           </motion.div>
           <motion.div variants={itemVariants}>

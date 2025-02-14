@@ -118,7 +118,7 @@ const config: Config = {
   			'banner': '1px 1px 4px rgba(0, 0, 0, 0.2)',
   		},
   		maxWidth: {
-  			'content': '1750px',
+  			'content': '1550px',
   			'text-content': '780px',
   		},
   		screens: {

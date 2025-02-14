@@ -5,81 +5,98 @@ import Link from 'next/link'
 
 const TestingBlock = () => {
   return (
-    <section className="w-full bg-white flex items-center justify-center px-4">
-      <div className="max-w-content w-full relative">
-        {/* JS и таймер как отдельные блоки */}
-        {/* <div className="absolute left-20 top-20 flex gap-4 rotate-[-15deg]">
-          <div className="bg-black text-white rounded-3xl p-8 transform transition-transform hover:rotate-6 hover:scale-110">
-            <span className="text-5xl">JS</span>
-          </div>
-          <div className="bg-black text-white rounded-3xl p-8 transform transition-transform hover:rotate-6 hover:scale-110">
-            <span className="text-6xl font-bold">5'</span>
-          </div>
-        </div> */}
+    <section className="w-full">
+      <div className="max-w-content mx-auto relative">
+        {/* Python логотип - самый большой */}
+        <div className="absolute top-[50px] right-[50px] rotate-[15deg] transform hover:rotate-[30deg] transition-all duration-300">
+          <Image
+            src="/main/language-icon/python.png"
+            alt="Python"
+            width={170}
+            height={170}
+            className="w-[120px] h-[120px] md:w-[170px] md:h-[170px]"
+          />
+        </div>
 
-        {/* Python логотип */}
-        {/* <div className="absolute right-20 top-0 rotate-12">
-          <div className="bg-black rounded-3xl p-8 transform transition-transform hover:rotate-12 hover:scale-110">
+        {/* JS и таймер */}
+        <div className="absolute top-[80px] left-[50px] flex gap-2 md:gap-4 -rotate-[15deg]">
+          <div className="transform hover:rotate-[15deg] transition-all duration-300">
             <Image
-              src="/main/language-icon/python.svg"
-              alt="Python"
-              width={120}
-              height={120}
-              className="brightness-0 invert"
+              src="/main/language-icon/js.png"
+              alt="JavaScript"
+              width={85}
+              height={85}
+              className="w-[60px] h-[60px] md:w-[85px] md:h-[85px]"
             />
           </div>
-        </div> */}
+          {/* <div className="transform hover:rotate-[15deg] transition-all duration-300">
+            <span className="text-black text-[24px] md:text-[36px] font-bold">5'</span>
+          </div> */}
+        </div>
 
-        {/* C# логотип */}
-        {/* <div className="absolute right-20 bottom-20 rotate-[-10deg]">
-          <div className="bg-black rounded-3xl p-8 transform transition-transform hover:rotate-12 hover:scale-110">
-            <Image
-              src="/main/language-icon/csharp.svg"
-              alt="C#"
-              width={140}
-              height={140}
-              className="brightness-0 invert"
-            />
-          </div>
-        </div> */}
+        {/* Golang логотип - средний размер */}
+        <div className="absolute bottom-[150px] left-[150px] rotate-[15deg] transform hover:rotate-[30deg] transition-all duration-300">
+          <Image
+            src="/main/language-icon/go.png"
+            alt="Golang"
+            width={120}
+            height={120}
+            className="w-[90px] h-[90px] md:w-[120px] md:h-[120px]"
+          />
+        </div>
 
-        {/* Golang логотип */}
-        {/* <div className="absolute right-96 bottom-40 rotate-[15deg]">
-          <div className="bg-black rounded-3xl p-8 transform transition-transform hover:rotate-12 hover:scale-110">
-            <Image
-              src="/main/language-icon/go.svg"
-              alt="Golang"
-              width={120}
-              height={120}
-              className="brightness-0 invert"
-            />
-          </div>
-        </div> */}
+        {/* C# логотип - маленький размер */}
+        <div className="absolute bottom-[300px] right-[50px] -rotate-[10deg] transform hover:rotate-[15deg] transition-all duration-300">
+          <Image
+            src="/main/language-icon/csharp.png"
+            alt="C#"
+            width={85}
+            height={85}
+            className="w-[60px] h-[60px] md:w-[85px] md:h-[85px]"
+          />
+        </div>
 
-        {/* Центральный контент */}
-        <div className="flex flex-col items-center text-center py-[250px]">
-          <h4 
-            className="text-h4 leading-h4 font-h4 mb-4 tracking-banner"
-            style={{ fontFamily: 'BOWLER' }}
+        <div className="flex flex-col items-center pt-[330px] pb-[380px]">
+          <h1 
+            className="text-[48px] leading-none font-normal text-center tracking-banner"
+            style={{ 
+              fontFamily: 'BOWLER',
+              background: 'linear-gradient(88.66deg, #666666 0.96%, #000000 104.15%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
           >
-            НАЧНИ НОВУЮ ПРОФЕССИЮ С НАМИ
-          </h4>
-          
-          <div className="space-y-1 mb-8">
-            <p className="text-base leading-body font-text">
+            НАЧНИ НОВУЮ
+          </h1>
+          <h1 
+            className="text-[48px] leading-none font-normal text-center tracking-banner mb-[36px]"
+            style={{ 
+              fontFamily: 'BOWLER',
+              background: 'linear-gradient(88.66deg, #666666 0.96%, #000000 104.15%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
+          >
+            ПРОФЕССИЮ С НАМИ
+          </h1>
+
+          <div className="text-center mb-[90px]">
+            <p className="text-[30px] leading-normal">
               Пройди тестирование и поймешь,
             </p>
-            <p className="text-base leading-body font-text">
+            <p className="text-[30px] leading-normal">
               какая профессия тебе подходит.
             </p>
-            <p className="text-base leading-body font-text">
+            <p className="text-[30px] leading-normal">
               Время прохождения - 5 минут
             </p>
           </div>
 
           <Link 
             href="/testing"
-            className="bg-[#2B076E] text-white px-16 py-4 rounded-full text-xl hover:bg-[#2B076E]/90 transition-colors"
+            className="bg-[#2B076E] text-white text-[30px] leading-normal px-[67px] py-[20px] rounded-full hover:bg-[#2B076E]/90 transition-colors"
           >
             Пройти тестирование
           </Link>

@@ -43,7 +43,7 @@ const FooterBlock = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-content mx-auto rounded-[20px] bg-[#0A0A2C] overflow-hidden"
+        className="max-w-content mx-auto rounded-t-[20px] bg-[#0A0A2C] overflow-hidden"
       >
         <motion.div 
           variants={containerAnimation}

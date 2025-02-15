@@ -7,16 +7,21 @@ import { Providers } from '@/components/layout/providers';
 import { NavBar } from '@/components/layout/nav-bar';
 import FooterBlock from '@/components/main/FooterBlock';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const showNavbar = pathname !== '/landing';
+  const mainClassName = `flex-grow ${showNavbar ? 'pt-16' : ''}`;
+
   return (
     <div className="flex flex-col min-h-screen">
-      <NavBar />
-      <main className="flex-grow pt-16">      
+      {showNavbar && <NavBar />}
+      <main className={mainClassName}>      
         <Providers>{children}</Providers>
       </main>
       <motion.div 

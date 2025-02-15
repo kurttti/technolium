@@ -9,9 +9,9 @@ import clsx from 'clsx';
 
 const navItems = [
   { name: 'История Университета', href: '/history' },
-  { name: 'Профессии', href: '/professions' },
-  { name: 'Формат обучения', href: '/education' },
-  { name: 'Тарифы', href: '/pricing' },
+  // { name: 'Профессии', href: '/professions' },
+  // { name: 'Формат обучения', href: '/education' },
+  // { name: 'Тарифы', href: '/pricing' },
   { name: 'Новости', href: '/news' },
 ];
 

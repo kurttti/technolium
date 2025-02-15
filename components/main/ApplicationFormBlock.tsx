@@ -149,6 +149,7 @@ const ApplicationFormBlock = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    e.stopPropagation()
     
     const digitsOnly = phoneNumber.replace(/\D/g, '');
     if (digitsOnly.length !== selectedCountry.length) {
@@ -296,6 +297,7 @@ const ApplicationFormBlock = () => {
             variants={containerAnimation}
             onSubmit={handleSubmit} 
             className="w-full max-w-[600px] space-y-4"
+            noValidate
           >
             <motion.div variants={formAnimation}>
               <Input

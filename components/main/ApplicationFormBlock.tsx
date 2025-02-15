@@ -213,7 +213,7 @@ const ApplicationFormBlock = () => {
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`max-w-[1200px] mx-auto rounded-[32px] ${styles.gradientBackground}`}
+          className={`max-w-content mx-auto rounded-[32px] ${styles.gradientBackground}`}
         >
           <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <motion.div 
@@ -269,7 +269,7 @@ const ApplicationFormBlock = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={`max-w-[1200px] mx-auto rounded-[32px] ${styles.gradientBackground}`}
+        className={`max-w-content mx-auto rounded-[20px] ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}

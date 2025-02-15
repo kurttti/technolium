@@ -37,13 +37,13 @@ const linkAnimation = {
 
 const FooterBlock = () => {
   return (
-    <div className="w-full px-4 pb-2">
+    <div className="w-full ">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-[1200px] mx-auto rounded-[32px] bg-[#0A0A2C] overflow-hidden"
+        className="max-w-content mx-auto rounded-[20px] bg-[#0A0A2C] overflow-hidden"
       >
         <motion.div 
           variants={containerAnimation}

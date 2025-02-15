@@ -118,8 +118,8 @@ const FoundersBlock = () => {
           </div>
         </div>
 
-        {/* Блок с Арсением - аналогичные изменения */}
-        <div className="flex flex-col lg:flex-row-reverse items-center max-w-content pl-10 mx-auto">
+        {/* Блок с Арсением */}
+        <div className="flex flex-col lg:flex-row-reverse items-center max-w-content mx-auto">
           {/* Блок с фоновой фигурой */}
           <div className="hidden lg:block w-[10%] xl:w-[150px] h-[550px] flex-shrink-0">
             <Image
@@ -132,7 +132,7 @@ const FoundersBlock = () => {
             />
           </div>
 
-          {/* Блок с Арсением */}
+          {/* Блок с контентом */}
           <div className="relative w-full sm:w-[80%] lg:w-[45%] h-auto lg:h-[550px] flex-shrink-0 bg-[#F8F8F8] rounded-[20px] lg:rounded-none lg:rounded-tl-[20px] lg:rounded-bl-[20px] p-6 sm:p-8">
             <div className="flex flex-col items-center justify-center h-full">
               <div 

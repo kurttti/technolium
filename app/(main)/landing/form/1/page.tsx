@@ -2,7 +2,6 @@
 
 import '../../styles.css'
 import { useState, useEffect, useRef } from "react"
-import { Footer } from "@/components/layout/footer"
 import InputMask from "react-input-mask"
 import { motion } from "framer-motion"
 import Image from "next/image"
@@ -134,7 +133,7 @@ export default function LandingPage() {
           Рады вас приветствовать в Технолиум
         </h2>
       </motion.div>
-      <main className="relative flex-1">
+      <div className="relative flex-1">
         <motion.div 
           className="absolute inset-0"
           initial={{ opacity: 0, scale: 1.1 }}
@@ -305,8 +304,7 @@ export default function LandingPage() {
             </motion.div>
           )}
         </div>
-      </main>
-      <Footer />
+      </div>
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Metadata } from 'next'
 import Script from 'next/script'
-import '@/styles/globals.css'
 import { Toaster } from '@/components/ui/toaster'
 import Bitrix24Widget from '@/components/widgets/bitrix24-widget'
 import { MailRuCounter } from '@/components/widgets/mail-ru-counter-3606079'

@@ -11,61 +11,19 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			},
-  			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			darkblue: '#1A365D',
+  			cta: '#6B5BFF',
+  			warning: '#FF6B35',
+  		},
+  		backgroundImage: {
+  			'gradient-dark': 'linear-gradient(to bottom right, rgb(0, 2, 136, 0.9), rgb(0, 0, 0, 0.9))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			sm: 'calc(var(--radius) - 4px)',
+  			btn: '8px',
+  			card: '12px',
   		},
   		keyframes: {
   			'accordion-down': {
@@ -88,7 +46,111 @@ const config: Config = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+  		spacing: {
+  			'btn-width-desktop': '240px',
+  			'btn-height-desktop': '56px',
+  			'btn-width-mobile': '90vw',
+  			'card-width': '320px',
+  			'card-height': '420px',
+  			'block-spacing-xs': '16px',
+  			'block-spacing-sm': '24px',
+  			'block-spacing-md': '32px',
+  			'block-spacing-lg': '48px',
+  			'block-spacing-xl': '64px',
+  			'block-spacing-2xl': '80px',
+  			'block-padding-xs': '16px',
+  			'block-padding-sm': '24px',
+  			'block-padding-md': '32px',
+  			'block-padding-lg': '48px',
+  			'section-spacing-sm': '48px',
+  			'section-spacing-md': '64px',
+  			'section-spacing-lg': '96px',
+  			'content-spacing-xs': '8px',
+  			'content-spacing-sm': '16px',
+  			'content-spacing-md': '24px',
+  			'content-spacing-lg': '32px',
+  			'btn-padding-x': '2.5rem',
+  			'btn-padding-y': '1rem',
+  			'btn-gap': '1rem',
+  			'btn-icon-size': '1.25rem',
+  			'btn-max-width': '280px',
+  			'btn-height': '56px',
+  			'btns-gap': '1.5rem',
+  		},
+  		fontSize: {
+  			'h1': '4.052rem',
+  			'h2': '3.441rem',
+  			'h3': '2.953rem',
+  			'h4': '2.25rem',
+  			'h5': '1.563rem',
+  			'h6': '1.25rem',
+  			'text-lg': '1.125rem',
+  			'text-base': '1rem',
+  			'text-sm': '0.875rem',
+  			'text-xs': '0.75rem',
+  			'heading': '4.052rem',
+  			'block': '3.441rem',
+  			'subheading': '2.953rem',
+  			'body': '2.25rem',
+  			'quote': '1rem',
+  		},
+  		lineHeight: {
+  			'h1': '1.2',
+  			'h2': '1.3',
+  			'h3': '1.4',
+  			'h4': '1.5',
+  			'h5': '1.6',
+  			'h6': '1.7',
+  			'body': '1.6',
+  			'quote': '1.8',
+  		},
+  		letterSpacing: {
+  			'heading': '0.5px',
+  			'button': '1px',
+  			'tariff': '0.8px',
+  			'banner': '1.2px',
+  		},
+  		boxShadow: {
+  			'card': '0 4px 12px rgba(0, 0, 0, 0.1)',
+  		},
+  		textShadow: {
+  			'banner': '1px 1px 4px rgba(0, 0, 0, 0.2)',
+  		},
+  		maxWidth: {
+  			'content': '1550px',
+  			'text-content': '780px',
+  		},
+  		screens: {
+  			'mobile': '768px',
+  			'tablet': '1024px',
+  			'desktop': '1025px',
+  		},
+  		transitionDuration: {
+  			'button': '300ms',
+  			'tariff': '500ms',
+  		},
+  		zIndex: {
+  			'modal': '1000',
+  			'header': '100',
+  		},
+  		width: {
+  			'icon-social': '24px',
+  			'icon-menu': '32px',
+  		},
+  		height: {
+  			'icon-social': '24px',
+  			'icon-menu': '32px',
+  		},
+  		fontWeight: {
+  			'h1': '400',
+  			'h2': '400',
+  			'h3': '400',
+  			'h4': '400',
+  			'h5': '400',
+  			'h6': '400',
+  			'text': '400',
+  		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

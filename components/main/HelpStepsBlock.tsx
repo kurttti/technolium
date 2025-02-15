@@ -1,0 +1,125 @@
+'use client'
+
+import Image from 'next/image'
+import { useState } from 'react'
+
+const steps = [
+  {
+    number: 1,
+    title: 'Этап 1',
+    content: 'Наш эксперт познакомится с вами лично, вместе опередите цель перехода в IT и поможет с выбором профессии',
+    image: '/main/help-you/first.jpg'
+  },
+  {
+    number: 2,
+    title: 'Этап 2',
+    content: 'Составим индивидуальный план обучения, учитывая ваш опыт и время на изучение материала',
+    image: '/main/help-you/second.png'
+  },
+  {
+    number: 3,
+    title: 'Этап 3',
+    content: 'Начнем обучение с опытным наставником, который будет сопровождать вас на протяжении всего курса',
+    image: '/main/help-you/third.png'
+  },
+  {
+    number: 4,
+    title: 'Этап 4',
+    content: 'Выполните реальные проекты под руководством ментора, получите практический опыт разработки',
+    image: '/main/help-you/fourth.png'
+  },
+  {
+    number: 5,
+    title: 'Этап 5',
+    content: 'Подготовим ваше резюме, портфолио и поможем с трудоустройством в ведущие IT-компании',
+    image: '/main/help-you/fifth.png'
+  }
+]
+
+const HelpStepsBlock = () => {
+  const [activeStep, setActiveStep] = useState(0)
+
+  return (
+    <section className="w-full bg-white flex items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
+      <div className="max-w-content w-full">
+        <div className="flex flex-col items-center">
+          <h1 
+            className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-tight lg:leading-h1 font-h1 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-16 tracking-banner"
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            ПОМОЖЕМ ВАМ<br />
+            НА КАЖДОМ ЭТАПЕ
+          </h1>
+
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full p-4 sm:p-6 md:p-8 lg:p-12">
+            {/* Навигация по этапам */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 md:mb-12 lg:mb-16">
+              {steps.map((step, index) => (
+                <button
+                  key={step.number}
+                  onClick={() => setActiveStep(index)}
+                  className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-base sm:text-lg md:text-xl font-medium transition-all duration-300
+                    ${activeStep === index 
+                      ? 'bg-black text-white' 
+                      : 'bg-[#F4F4F4] text-black hover:bg-[#E8E8E8]'}`}
+                >
+                  {step.title}
+                </button>
+              ))}
+            </div>
+
+            {/* Контент этапа */}
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 md:gap-12 lg:gap-24 relative">
+              <div className="flex-1 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:h-[600px] flex flex-col w-full">
+                {/* Центрированный текст */}
+                <div className="flex-1 flex items-center justify-center">
+                  <div className="max-w-2xl px-4">
+                    <p className="text-[18px] sm:text-[22px] md:text-[26px] lg:text-h4 leading-normal lg:leading-h4 font-h4 text-center lg:text-left">
+                      {steps[activeStep].content}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Кнопки навигации внизу */}
+                <div className="flex gap-2 sm:gap-3 mt-auto pb-4 justify-center lg:justify-start">
+                  <button
+                    onClick={() => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length)}
+                    className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-black rounded-full text-white hover:bg-black/90 transition-colors"
+                    aria-label="Предыдущий этап"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setActiveStep((prev) => (prev + 1) % steps.length)}
+                    className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-black rounded-full text-white hover:bg-black/90 transition-colors"
+                    aria-label="Следующий этап"
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div className="w-full lg:w-[600px] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-black rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden flex items-center justify-center">
+                <div className="relative w-[80%] h-[80%]">
+                  <Image
+                    src={steps[activeStep].image}
+                    alt={`Этап ${steps[activeStep].number}`}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default HelpStepsBlock 

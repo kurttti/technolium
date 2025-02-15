@@ -1,36 +1,23 @@
 "use client"
-import { Hero } from "@/components/layout/hero"
-import { Specialties } from "@/components/features/specialties"
-import { Regions } from "@/components/features/regions"
-import { AdmissionPlan } from "@/components/features/admission-plan"
-import { EducationFormat } from "@/components/features/education-format"
-import { CommercialViability } from "@/components/features/commercial-viability"
-import { News } from "@/components/features/news"
-import { Footer } from "@/components/layout/footer"
-import { Contacts } from "@/components/features/contacts"
+
 import { motion, useReducedMotion } from "framer-motion"
 import { useEffect, useState } from "react"
-import ApplicationFormBlock from "@/components/landing/second/ApplicationFormBlock"
-import { DiscountBlock } from "@/components/landing/second/DiscountBlock"
-import CarouselBlock from "@/components/landing/second/CarouselBlock"
-import { TeacherBlock } from "@/components/landing/second/TeacherBlock"
-import { OpportunitiesBlock } from "@/components/landing/second/OpportunitiesBlock"
-import EducationPlanBlock from "@/components/landing/second/EducationPlanBlock"
-import FooterBlock from "@/components/landing/second/FooterBlock"
-import './styles.module.css'
-import './styles.css'
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1]  
-    }
-  }
-}
+import ApplicationFormBlock from "@/components/main/ApplicationFormBlock"
+import { DiscountBlock } from "@/components/main/DiscountBlock"
+import CarouselBlock from "@/components/main/CarouselBlock"
+import { OpportunitiesBlock } from "@/components/main/OpportunitiesBlock"
+import EducationPlanBlock from "@/components/main/EducationPlanBlock"
+import FooterBlock from "@/components/main/FooterBlock"
+import { TariffBlock } from "@/components/main/TariffBlock"
+import FoundersBlock from "@/components/main/FoundersBlock"
+import HistoryBlock from "@/components/main/HistoryBlock"
+import ProfessionBlock from "@/components/main/ProfessionBlock"
+import StudentsBlock from "@/components/main/StudentsBlock"
+import EducationFormatBlock from "@/components/main/EducationFormatBlock"
+import TestingBlock from "@/components/main/TestingBlock"
+import HelpStepsBlock from "@/components/main/HelpStepsBlock"
+import NewsBlock from "@/components/main/NewsBlock"
+import { NavBar } from "@/components/layout/nav-bar"
 
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
@@ -49,26 +36,6 @@ export default function MainPage() {
     
     return () => window.removeEventListener('resize', checkIfMobile)
   }, [])
-
-  const viewportAmount = isMobile ? 0.1 : 0.2
-  const staggerDelay = isMobile ? 0.05 : 0.1
-
-  // // Если пользователь предпочитает уменьшенное движение, отключаем анимации
-  // if (prefersReducedMotion) {
-  //   return (
-  //     <main>
-  //       <Hero />
-  //       <Specialties />
-  //       <Regions />
-  //       <AdmissionPlan />
-  //       <EducationFormat />
-  //       <CommercialViability />
-  //       <News />
-  //       <Contacts />
-  //       <Footer />
-  //     </main>
-  //   )
-  // }
 
   const containerVariants = {
     initial: { opacity: 0 },
@@ -92,27 +59,62 @@ export default function MainPage() {
   }
 
   return (
-    <main>
+    <>
       {isLoaded && (
-        <motion.main
+        <motion.div
           variants={containerVariants}
           initial="initial"
           animate="animate"
-          className="main-container pt-8"
+          className="w-full space-y-section-spacing-sm md:space-y-section-spacing-md lg:space-y-section-spacing-lg"
           style={{ 
-            position: 'relative',
             transformStyle: 'preserve-3d'
           }}
         >
           <motion.div variants={itemVariants}>
             <DiscountBlock />
           </motion.div>
-          {/* <NavBarSecond />       */}
           <motion.div variants={itemVariants}>
-            <TeacherBlock />
+            <FoundersBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <HistoryBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <ProfessionBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <StudentsBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <EducationFormatBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <TestingBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <HelpStepsBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <TariffBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <NewsBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <ApplicationFormBlock />
+          </motion.div>
+          {/* <motion.div variants={itemVariants}>
+            <FooterBlock />
+          </motion.div> */}
+            {/* <NavBarSecond />       */}
+          {/* <motion.div variants={itemVariants}>
+            <FoundersBlock />
           </motion.div>
           <motion.div variants={itemVariants}>
             <OpportunitiesBlock />
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <TariffBlock />
           </motion.div>
           <motion.div variants={itemVariants}>
             <CarouselBlock />
@@ -125,96 +127,10 @@ export default function MainPage() {
           </motion.div>
           <motion.div variants={itemVariants}>
             <FooterBlock />
-          </motion.div>
-        </motion.main>
+          </motion.div> */}
+
+        </motion.div>
       )}
-      {/* <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-      >
-        <Hero />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay }}
-      >
-        <Specialties />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 2 }}
-      >
-        <Regions />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 3 }}
-      >
-        <AdmissionPlan />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 4 }}
-      >
-        <EducationFormat />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 5 }}
-      >
-        <CommercialViability />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 6 }}
-      >
-        <News />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 7 }}
-      >
-        <Contacts />
-      </motion.div>
-      
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: viewportAmount }}
-        variants={fadeInUp}
-        transition={{ delay: staggerDelay * 8 }}
-      >
-        <Footer />
-      </motion.div> */}
-    </main>
+    </>
   )
 }

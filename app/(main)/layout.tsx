@@ -1,10 +1,12 @@
-import { NavBar } from '@/components/layout/nav-bar';
-import { CallWidget } from '@/components/widgets/call-widget';
-import { ScrollManager } from '@/components/layout/scroll-manager';
+'use client';
+
+import '../styles/variables.css'
+import '../styles/global.css'
+import '../styles/fonts.css'
 import { Providers } from '@/components/layout/providers';
-import { PageTransitionProvider } from '@/contexts/page-transition-context';
-import { Toaster } from '@/components/ui/toaster';
-import { PageAttribute } from '@/components/layout/page-attribute';
+import { NavBar } from '@/components/layout/nav-bar';
+import FooterBlock from '@/components/main/FooterBlock';
+import { motion } from 'framer-motion';
 
 export default function MainLayout({
   children,
@@ -12,17 +14,20 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      {/* <PageAttribute />
+    <div className="flex flex-col min-h-screen">
       <NavBar />
-      <PageTransitionProvider>
-        <ScrollManager /> */}
-        <main>
-          <Providers>{children}</Providers>
-        </main>
-      {/* </PageTransitionProvider> */}
-      {/* <CallWidget />
-      <Toaster /> */}
-    </>
+      <main className="flex-grow pt-16">      
+        <Providers>{children}</Providers>
+      </main>
+      <motion.div 
+        className="w-full"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <FooterBlock />
+      </motion.div>
+    </div>
   );
 }

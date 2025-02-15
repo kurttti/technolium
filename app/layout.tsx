@@ -24,8 +24,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/TechnoliumLogo.svg',
-    apple: '/TechnoliumLogo.svg',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
   metadataBase: new URL('https://technolium.ru'), // Добавлена база для URL
   openGraph: {

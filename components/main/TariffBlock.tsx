@@ -79,14 +79,17 @@ export function TariffBlock() {
   }
 
   return (
-    <section className="w-full py-8 sm:py-12 md:py-16 lg:py-24 bg-gradient-to-b px-4 sm:px-6 md:px-8">
+    <section className="w-full bg-gradient-to-b px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 
-          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[64px] leading-tight font-h1 text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 tracking-banner"
-          style={{ fontFamily: 'BOWLER' }}
-        >
-          ТАРИФЫ ОБУЧЕНИЯ
-        </h2>
+        <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            ТАРИФЫ ОБУЧЕНИЯ
+        </motion.h1>
         
         <div className="grid gap-8 md:grid-cols-2">
           {tariffPlans.map((plan) => {

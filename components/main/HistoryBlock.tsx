@@ -32,11 +32,11 @@ export default function HistoryBlock() {
             История университета
           </h2>
 
-          <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-[80px] max-w-[1000px] mx-auto">
-            <p className="text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-normal text-center sm:text-left">
+          <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-[80px] mx-auto">
+            <p className="text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-normal text-left">
               Становление Университета Технолиум. Это история о том, как разные таланты и подходы к жизни могут привести к успешному сотрудничеству, если за действиями стоит искреннее желание развиваться и учиться друг у друга.
             </p>
-            <p className="text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-normal mt-4 text-center sm:text-left">
+            <p className="text-[20px] sm:text-[24px] md:text-[26px] lg:text-[30px] leading-normal mt-4 text-left">
               Началось все с мечты, которая была достигнута за счет 100 потов. Когда Назар был школьником, взял как подработку разработку сайта на html и css. Как и у всех, получалось криво, но ему нравилось и он пошел учиться на специальность «Математика и компьютерные науки» и параллельно изучал Java, на стажировке делал проекты именно по...
             </p>
           </div>

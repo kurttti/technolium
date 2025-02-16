@@ -17,7 +17,7 @@ const containerVariants = {
 export default function HistoryBlock() {
   return (
     <motion.section
-      className="w-full min-h-screen rounded-card px-4 sm:px-6 md:px-8"
+      className="w-full rounded-card px-4 sm:px-6 md:px-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

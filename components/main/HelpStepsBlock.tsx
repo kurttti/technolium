@@ -84,7 +84,7 @@ const HelpStepsBlock = () => {
   }
 
   return (
-    <section className="w-full min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
+    <section className="w-full mt-40 min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
       <div className="max-w-content w-full flex flex-col items-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -98,7 +98,7 @@ const HelpStepsBlock = () => {
           НА КАЖДОМ ЭТАПЕ
         </motion.h1>
 
-        <div className="bg-white rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full flex flex-col lg:flex-row items-center justify-between p-4 sm:p-6 md:p-8 lg:p-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+        <div className="bg-[#F5F5F5] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full flex flex-col lg:flex-row items-center justify-between p-4 sm:p-6 md:p-8 lg:p-12 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
           {/* Левая колонка: текст, кнопки и индикаторы */}
           <div className="flex-1 lg:w-1/2 h-full min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:h-[600px] flex flex-col justify-between order-2 lg:order-1">
             {/* Контейнер текста занимает всё доступное пространство */}

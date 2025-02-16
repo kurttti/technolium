@@ -41,7 +41,7 @@ const HelpStepsBlock = () => {
   const [activeStep, setActiveStep] = useState(0)
 
   return (
-    <section className="w-full min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
+    <section className="w-full min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 md:px-8 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
       <div className="max-w-content w-full flex flex-col items-center">
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}

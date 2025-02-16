@@ -2,6 +2,13 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 export const DiscountBlock = () => {
+  const scrollToForm = () => {
+    const formElement = document.getElementById('application-form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="max-w-content mx-auto">
@@ -66,7 +73,7 @@ export const DiscountBlock = () => {
               >
                 {/* Теги */}
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start w-full max-w-[90%] lg:max-w-none">
-                  {['Javascript', 'Python', 'Нейросети', 'GO', 'C#', 'Подобрать профессию'].map((tag) => (
+                  {['Javascript', 'Python', 'Нейросети', 'GO', 'C#'].map((tag) => (
                     <span 
                       key={tag} 
                       className="px-3 sm:px-4 py-1 sm:py-1.5 bg-black/20 rounded-full text-white border border-white cursor-pointer hover:bg-white/20 transition-colors"
@@ -74,6 +81,12 @@ export const DiscountBlock = () => {
                       <span className="text-xs sm:text-sm leading-body font-text whitespace-nowrap">{tag}</span>
                     </span>
                   ))}
+                  <span 
+                    onClick={scrollToForm}
+                    className="px-3 sm:px-4 py-1 sm:py-1.5 bg-white text-black rounded-full border border-white cursor-pointer hover:bg-gray-200 transition-colors"
+                  >
+                    <span className="text-xs sm:text-sm leading-body font-text whitespace-nowrap">Подобрать профессию</span>
+                  </span>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start mt-2 w-full max-w-[90%] lg:max-w-none">
                   {['10 месяцев', 'Коммерческая деятельность', 'Центр карьеры', 'Выбор специализации'].map((tag) => (

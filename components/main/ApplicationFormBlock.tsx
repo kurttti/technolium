@@ -209,7 +209,7 @@ const ApplicationFormBlock = () => {
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+          className={`max-w-content mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
         >
           <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <motion.div 

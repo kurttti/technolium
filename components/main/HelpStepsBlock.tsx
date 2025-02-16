@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -43,13 +44,16 @@ const HelpStepsBlock = () => {
     <section className="w-full bg-white flex items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
       <div className="max-w-content w-full">
         <div className="flex flex-col items-center">
-          <h1 
-            className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-tight lg:leading-h1 font-h1 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-16 tracking-banner"
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             ПОМОЖЕМ ВАМ<br />
             НА КАЖДОМ ЭТАПЕ
-          </h1>
+          </motion.h1>
 
           <div className="bg-white rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full p-4 sm:p-6 md:p-8 lg:p-12">
             {/* Навигация по этапам */}

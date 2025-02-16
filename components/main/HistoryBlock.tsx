@@ -25,12 +25,15 @@ export default function HistoryBlock() {
     >
       <div className="bg-gradient-dark max-w-content mx-auto rounded-[32px] px-4 sm:px-6 md:px-8 lg:px-[150px] py-8 sm:py-12 md:py-16 lg:py-[150px] flex items-center">
         <div className="text-white text-center">
-          <h2 
-            className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] leading-tight lg:leading-h2 font-h2 uppercase tracking-banner mb-6 sm:mb-8 md:mb-10 lg:mb-[64px]"
-            style={{ fontFamily: 'BOWLER' }}
-          >
+          <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
+          style={{ fontFamily: 'BOWLER' }}
+        >
             История университета
-          </h2>
+          </motion.h1>
 
           <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-[80px] max-w-full lg:max-w-[900px] xl:max-w-[1200px] text-justify">
             <p className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] xl:text-[26px] leading-normal">

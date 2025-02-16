@@ -85,18 +85,24 @@ const ProfessionBlock = () => {
     <section className="w-full bg-white px-4 sm:px-6 md:px-8">
       <div className="max-w-content w-full mx-auto">
         <div className="flex flex-col items-center">
-          <h1 
-            className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-tight lg:leading-h1 font-h1 text-center tracking-banner"
-            style={{ fontFamily: 'BOWLER' }}
+          <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center  tracking-banner"
+          style={{ fontFamily: 'BOWLER' }}
           >
             ВЫБИРАЙ ПРОФЕССИЮ
-          </h1>
-          <h1 
-            className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-h2 leading-tight lg:leading-h2 font-h2 text-center tracking-banner"
-            style={{ fontFamily: 'BOWLER' }}
+          </motion.h1>
+          <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center tracking-banner"
+          style={{ fontFamily: 'BOWLER' }}
           >
             ПО ДУШЕ
-          </h1>
+          </motion.h1>
 
           <div className="bg-white rounded-[32px] py-8 sm:py-12 md:py-16 lg:py-[100px] p-4 sm:p-6 md:p-8 lg:p-block-padding-md shadow-card w-full max-w-content mt-8 sm:mt-12 md:mt-16 lg:mt-block-spacing-xl">
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-btns-gap">

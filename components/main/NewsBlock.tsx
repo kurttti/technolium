@@ -47,13 +47,16 @@ const news: NewsItem[] = [
 const NewsBlock = () => {
   return (
     <section className="w-full overflow-hidden">
-      <div className="max-w-content mx-auto">
-        <h2 
-          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h1 leading-tight font-h1 text-center mb-8 sm:mb-10 md:mb-12 lg:mb-20 tracking-banner"
-          style={{ fontFamily: 'BOWLER' }}
-        >
-          НОВОСТИ
-        </h2>
+      <div className="max-w-content mx-auto">        
+        <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            НОВОСТИ
+        </motion.h1>
 
         <div className="relative overflow-x-auto hide-scrollbar py-14 px-4">
           <div className="flex gap-4">

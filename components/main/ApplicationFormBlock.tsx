@@ -274,13 +274,22 @@ const ApplicationFormBlock = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8"
         >
-          <motion.h2 
+          {/* <motion.h2 
             variants={formAnimation}
             className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" 
             style={{ fontFamily: 'BOWLER' }}
           >
             ОСТАВИТЬ ЗАЯВКУ
-          </motion.h2>
+          </motion.h2> */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-white text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center tracking-banner"
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            ОСТАВИТЬ ЗАЯВКУ
+          </motion.h1>
           <motion.h3 
             variants={formAnimation}
             className="text-[24px] md:text-[32px] mb-6 md:mb-8 text-center tracking-wider text-white/80" 

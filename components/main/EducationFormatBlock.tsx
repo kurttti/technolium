@@ -1,17 +1,21 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const EducationFormatBlock = () => {
   return (
-    <section className="w-full py-8 sm:py-12 md:py-16 lg:py-section-margin px-4 sm:px-6 md:px-8">
+    <section className="w-full lg:py-section-margin px-4 sm:px-6 md:px-8">
       <div className="max-w-content mx-auto">
-        <h2 
-          className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-h2 leading-tight lg:leading-h2 font-h2 text-center uppercase tracking-banner mb-8 sm:mb-10 md:mb-12 lg:mb-[70px]"
-          style={{ fontFamily: 'BOWLER' }}
-        >
-          Формат обучения
-        </h2>
+        <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            Формат обучения
+        </motion.h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-10 md:mb-12 lg:mb-[70px]">
           {/* 01 МАТЕРИАЛЫ */}

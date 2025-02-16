@@ -56,24 +56,20 @@ const HelpStepsBlock = () => {
           </motion.h1>
 
           <div className="bg-white rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full p-4 sm:p-6 md:p-8 lg:p-12">
-            {/* Навигация по этапам */}
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8 md:mb-12 lg:mb-16">
-              {steps.map((step, index) => (
-                <button
-                  key={step.number}
-                  onClick={() => setActiveStep(index)}
-                  className={`px-4 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded-full text-base sm:text-lg md:text-xl font-medium transition-all duration-300
-                    ${activeStep === index 
-                      ? 'bg-black text-white' 
-                      : 'bg-[#F4F4F4] text-black hover:bg-[#E8E8E8]'}`}
-                >
-                  {step.title}
-                </button>
-              ))}
-            </div>
-
             {/* Контент этапа */}
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 md:gap-12 lg:gap-24 relative">
+            <div className="flex flex-col items-center justify-between gap-6 sm:gap-8 md:gap-12 lg:gap-24 relative">
+              <div className="w-full lg:w-[600px] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-black rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden flex items-center justify-center">
+                <div className="relative w-full h-full rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden">
+                  <Image
+                    src={steps[activeStep].image}
+                    alt={`Этап ${steps[activeStep].number}`}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+
               <div className="flex-1 min-h-[300px] sm:min-h-[400px] md:min-h-[500px] lg:h-[600px] flex flex-col w-full">
                 {/* Центрированный текст */}
                 <div className="flex-1 flex items-center justify-center">
@@ -104,18 +100,6 @@ const HelpStepsBlock = () => {
                       <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </button>
-                </div>
-              </div>
-
-              <div className="w-full lg:w-[600px] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-black rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden flex items-center justify-center">
-                <div className="relative w-full h-full rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden">
-                  <Image
-                    src={steps[activeStep].image}
-                    alt={`Этап ${steps[activeStep].number}`}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
                 </div>
               </div>
             </div>

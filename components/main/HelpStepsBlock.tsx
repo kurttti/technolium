@@ -55,7 +55,7 @@ const HelpStepsBlock = () => {
             НА КАЖДОМ ЭТАПЕ
           </motion.h1>
 
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full p-4 sm:p-6 md:p-8 lg:p-12">
+          <div className="bg-[#F8F8F8] rounded-[20px] sm:rounded-[24px] md:rounded-[28px] lg:rounded-[32px] shadow-xl w-full p-4 sm:p-6 md:p-8 lg:p-12">
             {/* Контент этапа */}
             <div className="flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 md:gap-12 lg:gap-24 relative">
               <div className="w-full lg:w-1/2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-black rounded-[16px] sm:rounded-[20px] md:rounded-[24px] overflow-hidden flex items-center justify-center">

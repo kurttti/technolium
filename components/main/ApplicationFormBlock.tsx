@@ -265,7 +265,7 @@ const ApplicationFormBlock = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={` mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+        className={` max-w-content  mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}

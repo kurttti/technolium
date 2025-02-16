@@ -16,6 +16,7 @@ export default function MainLayout({
 }) {
   const pathname = usePathname();
   const showNavbar = pathname !== '/landing';
+  const showFooter = pathname !== '/landing';
   const mainClassName = `flex-grow ${showNavbar ? 'pt-16' : ''}`;
 
   return (
@@ -24,15 +25,17 @@ export default function MainLayout({
       <main className={mainClassName}>      
         <Providers>{children}</Providers>
       </main>
-      <motion.div 
-        className="w-full"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+      {showFooter && (
+        <motion.div 
+          className="w-full"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <FooterBlock />
-      </motion.div>
+          <FooterBlock />
+        </motion.div>
+      )}
     </div>
   );
 }

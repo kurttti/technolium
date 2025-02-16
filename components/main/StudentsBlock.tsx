@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const StudentsBlock = () => {
@@ -7,14 +8,17 @@ const StudentsBlock = () => {
     <section className="w-full flex items-center justify-center">
       <div className="max-w-content w-full px-block-padding-xs md:px-block-padding-md">
         <div className="flex flex-col items-center">
-          <h1 
-            className="text-h1 leading-h1 font-h1 text-center tracking-banner"
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center mb-[40px] lg:mb-[70px] tracking-banner"
             style={{ fontFamily: 'BOWLER' }}
           >
             НАШИ УЧЕНИКИ
-          </h1>
+          </motion.h1>
 
-          <div className="w-full max-w-content mt-block-spacing-xl">
+          <div className="w-full max-w-content">
             <div className="relative w-full aspect-video">
               <Image
                 src="/main/naz-response.png"

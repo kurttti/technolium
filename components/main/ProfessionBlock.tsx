@@ -82,7 +82,7 @@ const ProfessionBlock = () => {
   const [activeLanguage, setActiveLanguage] = useState(languages[0])
 
   return (
-    <section className="w-full bg-white px-4 sm:px-6 md:px-8">
+    <section id="profession-block" className="w-full bg-white px-4 sm:px-6 md:px-8">
       <div className="max-w-content w-full mx-auto">
         <div className="flex flex-col items-center">
           <motion.h1 

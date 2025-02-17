@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const TestingBlock = () => {
   return (
-    <section className="w-full px-4 sm:px-6 md:px-8">
+    <section id="testing-block" className="w-full px-4 sm:px-6 md:px-8">
       <div className="max-w-content mx-auto relative">
         {/* Python логотип - самый большой */}
         <div className="absolute top-[10px] sm:top-[20px] md:top-[30px] lg:top-[40px] right-[10px] sm:right-[20px] md:right-[30px] lg:right-[40px] rotate-[15deg] transform hover:rotate-[30deg] transition-all duration-300">

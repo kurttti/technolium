@@ -2,23 +2,39 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import clsx from 'clsx';
 
 const navItems = [
   { name: 'История Университета', href: '/history' },
-  { name: 'Профессии', href: '/professions' },
-  { name: 'Формат обучения', href: '/education' },
-  { name: 'Тарифы', href: '/pricing' },
-  { name: 'Тестирование', href: '/testing' },
+  { name: 'Профессии', href: '#profession-block' },
+  { name: 'Формат обучения', href: '#education-format-block' },
+  { name: 'Тарифы', href: '#tariff-block' },
+  { name: 'Тестирование', href: '#testing-block' },
   { name: 'Новости', href: '/news' },
 ];
 
 export function NavBar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      if (pathname !== '/') {
+        router.push(`/${href}`);
+      } else {
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      setIsOpen(false);
+    }
+  };
 
   return (
     <motion.nav 
@@ -44,9 +60,10 @@ export function NavBar() {
           {/* Десктопное меню */}
           <div className="hidden md:ml-6 md:flex md:space-x-8">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
+                onClick={(e) => handleScroll(e, item.href)}
                 className={clsx(
                   'inline-flex items-center px-1 pt-1 text-sm font-medium transition-all duration-200',
                   pathname === item.href
@@ -55,7 +72,7 @@ export function NavBar() {
                 )}
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -86,10 +103,10 @@ export function NavBar() {
           >
             <div className="px-4 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <Link
+                <a
                   key={item.href}
                   href={item.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleScroll(e, item.href)}
                   className={clsx(
                     'block px-3 py-2 text-base font-medium rounded-md transition-all duration-200',
                     pathname === item.href
@@ -98,7 +115,7 @@ export function NavBar() {
                   )}
                 >
                   {item.name}
-                </Link>
+                </a>
               ))}
             </div>
           </motion.div>

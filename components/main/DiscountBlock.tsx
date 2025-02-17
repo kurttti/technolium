@@ -54,7 +54,7 @@ export const DiscountBlock = () => {
           {/* Левая колонка: фоновое изображение, отображаемое на больших экранах */}
           <motion.div
             variants={leftImageVariants}
-            className="hidden lg:block lg:w-1/2 xl:w-2/5 h-[300px] sm:h-[400px] lg:h-auto bg-cover bg-center"
+            className="hidden lg:block lg:w-1/2 xl:w-2/5 h-[300px] sm:h-[400px] lg:h-auto bg-cover"
             style={{ backgroundImage: "url('/main/men-with-notebook.jpg')" }}
           />
 

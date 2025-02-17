@@ -82,7 +82,7 @@ const TariffBlock = () => {
   }
 
   return (
-    <section className="w-full bg-gradient-to-b px-4 sm:px-6 md:px-8">
+    <section id="tariff-block" className="w-full bg-gradient-to-b px-4 sm:px-6 md:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.h1 
             initial={{ opacity: 0, y: 30 }}

@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const EducationFormatBlock = () => {
   return (
-    <section className="w-full lg:py-section-margin px-4 sm:px-6 md:px-8">
+    <section id="education-format-block" className="w-full lg:py-section-margin px-4 sm:px-6 md:px-8">
       <div className="max-w-content mx-auto">
         <motion.h1
             initial={{ opacity: 0, y: 30 }}

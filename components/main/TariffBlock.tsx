@@ -5,6 +5,7 @@ import { Slider } from "@/components/ui/slider"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react"
 
 interface TariffFeature {
   name: string
@@ -55,8 +56,10 @@ const tariffPlans: TariffPlan[] = [
   },
 ]
 
-export function TariffBlock() {
-  const [selectedMonths, setSelectedMonths] = React.useState<{ [key: string]: number }>({
+type TariffTitle = "СТАНДАРТНЫЙ ТАРИФ" | "ИНДИВИДУАЛЬНОЕ ВЕДЕНИЕ";
+
+const TariffBlock = () => {
+  const [selectedMonths, setSelectedMonths] = useState<Record<TariffTitle, number>>({
     "СТАНДАРТНЫЙ ТАРИФ": 0,
     "ИНДИВИДУАЛЬНОЕ ВЕДЕНИЕ": 0,
   })
@@ -93,16 +96,16 @@ export function TariffBlock() {
         
         <div className="grid gap-8 md:grid-cols-2">
           {tariffPlans.map((plan) => {
-            const monthlyPayment = calculateMonthlyPayment(plan.basePrice, selectedMonths[plan.title])
+            const monthlyPayment = calculateMonthlyPayment(plan.basePrice, selectedMonths[plan.title as TariffTitle])
             const isDark = plan.title === "ИНДИВИДУАЛЬНОЕ ВЕДЕНИЕ"
 
             return (
               <Card 
                 key={plan.title}
-                className={`relative overflow-hidden border-0 h-full ${
+                className={`relative overflow-hidden border-0 h-full rounded-[20px] ${
                   isDark 
                     ? 'bg-[#14161F] text-white' 
-                    : 'bg-white'
+                    : 'bg-[#F8F8F8]'
                 }`}
               >
                 <div className="flex flex-col h-full">
@@ -140,7 +143,7 @@ export function TariffBlock() {
                             className="absolute"
                           >
                             {monthlyPayment.toLocaleString('ru-RU')} ₽
-                            {(24 - selectedMonths[plan.title]) !== 0 && (
+                            {(24 - selectedMonths[plan.title as TariffTitle]) !== 0 && (
                               <motion.span
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -156,14 +159,14 @@ export function TariffBlock() {
                       
                       <div className="relative pt-6">
                         <Slider
-                          value={[selectedMonths[plan.title]]}
+                          value={[selectedMonths[plan.title as TariffTitle]]}
                           min={0}
                           max={24}
                           step={6}
                           onValueChange={(values) => {
                             setSelectedMonths(prev => ({
                               ...prev,
-                              [plan.title]: values[0]
+                              [plan.title as TariffTitle]: values[0]
                             }))
                           }}
                           className={`$${
@@ -198,7 +201,7 @@ export function TariffBlock() {
                                 onClick={() => {
                                   setSelectedMonths(prev => ({
                                     ...prev,
-                                    [plan.title]: 24 - month
+                                    [plan.title as TariffTitle]: 24 - month
                                   }))
                                 }}
                                 className={`
@@ -209,10 +212,10 @@ export function TariffBlock() {
                                   pointer-events-auto
                                   border-2
                                   ${isDark 
-                                    ? (24 - selectedMonths[plan.title]) === month
+                                    ? (24 - selectedMonths[plan.title as TariffTitle]) === month
                                       ? 'bg-cta border-cta' 
                                       : 'bg-gray-800 border-gray-700 hover:border-cta'
-                                    : (24 - selectedMonths[plan.title]) === month
+                                    : (24 - selectedMonths[plan.title as TariffTitle]) === month
                                       ? 'bg-black border-black' 
                                       : 'bg-white border-gray-300 hover:border-black'
                                   }
@@ -231,12 +234,12 @@ export function TariffBlock() {
                               onClick={() => {
                                 setSelectedMonths(prev => ({
                                   ...prev,
-                                  [plan.title]: 24 - month
+                                  [plan.title as TariffTitle]: 24 - month
                                 }))
                               }}
                               className={`
                                 hover:text-black dark:hover:text-white transition-colors cursor-pointer
-                                ${(24 - selectedMonths[plan.title]) === month 
+                                ${(24 - selectedMonths[plan.title as TariffTitle]) === month 
                                   ? isDark ? 'text-white' : 'text-black' 
                                   : ''
                                 }
@@ -256,7 +259,7 @@ export function TariffBlock() {
 
                         <Button 
                           onClick={scrollToApplicationForm}
-                          className={`w-full py-4 rounded-full text-lg font-medium transition-colors
+                          className={`w-full py-7 rounded-full text-lg font-medium transition-colors 
                             ${isDark 
                               ? 'bg-cta text-white hover:bg-cta/90' 
                               : 'bg-black text-white hover:bg-black/90'
@@ -276,3 +279,5 @@ export function TariffBlock() {
     </section>
   )
 }
+
+export default TariffBlock

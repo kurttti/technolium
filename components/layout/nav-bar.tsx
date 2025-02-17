@@ -14,6 +14,7 @@ const navItems = [
   { name: 'Тарифы', href: '#tariff-block' },
   { name: 'Тестирование', href: '#testing-block' },
   { name: 'Новости', href: '/news' },
+  { name: 'Контакты', href: '#footer' },
 ];
 
 export function NavBar() {

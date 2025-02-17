@@ -37,7 +37,7 @@ const linkAnimation = {
 
 const FooterBlock = () => {
   return (
-    <div className="w-full ">
+    <div id="footer" className="w-full">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -111,6 +111,24 @@ const FooterBlock = () => {
                     className="block transition-colors"
                   >
                     WhatsApp
+                  </motion.a>
+                  <motion.a 
+                    variants={linkAnimation}
+                    whileHover={{ x: 10, color: '#fff' }}
+                    href="tel:+74993253146"
+                    className="block transition-colors"
+                  >
+                    +7 (499) 325-31-46
+                  </motion.a>
+                  <motion.a 
+                    variants={linkAnimation}
+                    whileHover={{ x: 10, color: '#fff' }}
+                    href="https://t.me/technoliumwrite"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block transition-colors"
+                  >
+                    Telegram
                   </motion.a>
                   <motion.a 
                     variants={linkAnimation}

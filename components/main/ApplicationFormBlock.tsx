@@ -83,10 +83,14 @@ const ApplicationFormBlock = () => {
   const [utmParams, setUtmParams] = useState<UtmParams>({})
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 })
   const selectRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current && !selectRef.current.contains(event.target as Node) &&
+        (!dropdownRef.current || !dropdownRef.current.contains(event.target as Node))
+      ) {
         setIsOpen(false)
       }
     }
@@ -189,27 +193,26 @@ const ApplicationFormBlock = () => {
   }
 
   const toggleDropdown = () => {
-    setIsOpen((prev) => {
-      const newState = !prev
-      if (newState && selectRef.current) {
-        const rect = selectRef.current.getBoundingClientRect()
-        setDropdownPosition({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX
-        })
-      }
-      return newState
-    })
+    if (!isOpen && selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect()
+      const parentRect = selectRef.current.offsetParent?.getBoundingClientRect() || { top: 0, left: 0 }
+      
+      setDropdownPosition({
+        top: rect.height,
+        left: 0
+      })
+    }
+    setIsOpen(!isOpen)
   }
 
   if (success) {
     return (
-      <div id="application-form" className="w-full pb-4 py-8">
+      <div id="application-form" className="w-full px-4 py-8">
         <motion.div 
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`max-w-content mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+          className={`max-w-content mx-auto rounded-[32px] ${styles.gradientBackground}`}
         >
           <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <motion.div 
@@ -259,13 +262,13 @@ const ApplicationFormBlock = () => {
   }
 
   return (
-    <div id="application-form" className="w-full pb-4 py-8">
+    <div id="application-form" className="w-full px-4 py-8 md:pt-24">
       <motion.div 
         variants={formAnimation}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={` max-w-content  mx-auto rounded-[32px] overflow-hidden ${styles.gradientBackground}`}
+        className={`max-w-content mx-auto rounded-[32px] ${styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}
@@ -274,22 +277,13 @@ const ApplicationFormBlock = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8"
         >
-          {/* <motion.h2 
+          <motion.h2 
             variants={formAnimation}
             className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" 
             style={{ fontFamily: 'BOWLER' }}
           >
             ОСТАВИТЬ ЗАЯВКУ
-          </motion.h2> */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-white text-[32px] sm:text-[40px] lg:text-h1 leading-none lg:leading-h1 font-h1 text-center tracking-banner"
-            style={{ fontFamily: 'BOWLER' }}
-          >
-            ОСТАВИТЬ ЗАЯВКУ
-          </motion.h1>
+          </motion.h2>
           <motion.h3 
             variants={formAnimation}
             className="text-[24px] md:text-[32px] mb-6 md:mb-8 text-center tracking-wider text-white/80" 
@@ -334,6 +328,57 @@ const ApplicationFormBlock = () => {
                       d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                   </svg>
                 </motion.button>
+
+                {isOpen && (
+                  <div
+                    ref={dropdownRef}
+                    style={{
+                      position: 'absolute',
+                      top: `${dropdownPosition.top}px`,
+                      left: `${dropdownPosition.left}px`,
+                      zIndex: 9999,
+                      background: 'rgba(19, 19, 78, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      borderRadius: '18px',
+                      width: '240px',
+                      marginTop: '4px',
+                      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+                      color: 'white'
+                    }}
+                  >
+                    {COUNTRY_CODES.map((country) => (
+                      <button
+                        key={`${country.code}-${country.country}`}
+                        type="button"
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '100%',
+                          padding: '12px 16px',
+                          color: 'white',
+                          cursor: 'pointer',
+                          background: 'none',
+                          border: 'none',
+                          transition: 'background-color 0.2s',
+                          fontSize: '14px',
+                          fontWeight: '400'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent'
+                        }}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <span>{country.country}</span>
+                        <span style={{ fontWeight: '500' }}>{country.code}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="flex-1">
                 <InputMask
@@ -391,36 +436,6 @@ const ApplicationFormBlock = () => {
           </motion.form>
         </motion.div>
       </motion.div>
-
-      <AnimatePresence>
-        {isOpen && document.body && createPortal(
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="z-50 w-[240px] mt-1 bg-[#13134E]/90 backdrop-blur-sm border border-white/20 rounded-[18px] overflow-hidden shadow-lg"
-            style={{ position: 'absolute', top: dropdownPosition.top, left: dropdownPosition.left }}
-          >
-            {COUNTRY_CODES.map((country) => (
-              <motion.button
-                key={`${country.code}-${country.country}`}
-                whileHover={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
-                type="button"
-                className="w-full text-left px-4 py-3 focus:outline-none text-sm flex items-center justify-between text-white"
-                onClick={() => {
-                  handleCountrySelect(country)
-                  setIsOpen(false)
-                }}
-              >
-                <span className="text-white">{country.country}</span>
-                <span className="text-white font-medium">{country.code}</span>
-              </motion.button>
-            ))}
-          </motion.div>, 
-          document.body
-        )}
-      </AnimatePresence>
 
       {error && (
         <NotificationToast

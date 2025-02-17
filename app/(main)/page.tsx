@@ -18,6 +18,7 @@ import TestingBlock from "@/components/main/TestingBlock"
 import HelpStepsBlock from "@/components/main/HelpStepsBlock"
 import NewsBlock from "@/components/main/NewsBlock"
 
+
 export default function MainPage() {
   const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(false)

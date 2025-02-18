@@ -42,18 +42,32 @@ export default function MainPage() {
     animate: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3,
-        when: "beforeChildren"
+        staggerChildren: prefersReducedMotion ? 0 : 0.2,
+        when: "beforeChildren",
+        duration: 0.6
       }
     }
   }
-  
+
   const itemVariants = {
-    initial: { opacity: 0 },
+    initial: { 
+      opacity: 0,
+      y: prefersReducedMotion ? 0 : 20
+    },
     animate: {
       opacity: 1,
+      y: 0,
       transition: {
-        duration: 0.5
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.6
+      }
+    },
+    hover: {
+      scale: prefersReducedMotion ? 1 : 1.02,
+      transition: {
+        duration: 0.2
       }
     }
   }
@@ -65,69 +79,89 @@ export default function MainPage() {
           variants={containerVariants}
           initial="initial"
           animate="animate"
-          className="w-full space-y-section-spacing-sm md:space-y-section-spacing-md lg:space-y-section-spacing-lg"
+          className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 lg:space-y-16"
           style={{ 
             transformStyle: 'preserve-3d'
           }}
         >
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <DiscountBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <FoundersBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <HistoryBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <ProfessionBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <StudentsBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <EducationFormatBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <TestingBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <HelpStepsBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <TariffBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <NewsBlock />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div
+            variants={itemVariants}
+            whileHover="hover"
+            className="transform-gpu will-change-transform"
+          >
             <ApplicationFormBlock />
           </motion.div>
-          {/* <motion.div variants={itemVariants}>
-            <FooterBlock />
-          </motion.div> */}
-            {/* <NavBarSecond />       */}
-          {/* <motion.div variants={itemVariants}>
-            <FoundersBlock />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <OpportunitiesBlock />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <TariffBlock />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <CarouselBlock />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <EducationPlanBlock />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <ApplicationFormBlock />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <FooterBlock />
-          </motion.div> */}
+
 
         </motion.div>
       )}

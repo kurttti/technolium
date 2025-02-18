@@ -161,8 +161,6 @@ export default function MainPage() {
           >
             <ApplicationFormBlock />
           </motion.div>
-
-
         </motion.div>
       )}
     </>

@@ -160,30 +160,34 @@ const ApplicationFormBlock = () => {
     setError(null)
 
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append('name', formData.name)
-      formDataToSend.append('email', formData.email)
+      // const formDataToSend = new FormData()
+      // formDataToSend.append('name', formData.name)
+      // formDataToSend.append('email', formData.email)
       
-      const fullPhone = selectedCountry.code + digitsOnly;
-      formDataToSend.append('phone', fullPhone)
-      formDataToSend.append("type", "application")
-      formDataToSend.append("buttonType", "Льготное обучение")
-      formDataToSend.append("pageUrl", window.location.href)
+      // const fullPhone = selectedCountry.code + digitsOnly;
+      // formDataToSend.append('phone', fullPhone)
+      // formDataToSend.append("type", "application")
+      // formDataToSend.append("buttonType", "Льготное обучение")
+      // formDataToSend.append("pageUrl", window.location.href)
 
-      // Добавляем UTM метки
-      if (utmParams.utm_source) formDataToSend.append("utm_source", utmParams.utm_source)
-      if (utmParams.utm_medium) formDataToSend.append("utm_medium", utmParams.utm_medium)
-      if (utmParams.utm_campaign) formDataToSend.append("utm_campaign", utmParams.utm_campaign)
-      if (utmParams.utm_content) formDataToSend.append("utm_content", utmParams.utm_content)
-      if (utmParams.utm_term) formDataToSend.append("utm_term", utmParams.utm_term)
+      // // Добавляем UTM метки
+      // if (utmParams.utm_source) formDataToSend.append("utm_source", utmParams.utm_source)
+      // if (utmParams.utm_medium) formDataToSend.append("utm_medium", utmParams.utm_medium)
+      // if (utmParams.utm_campaign) formDataToSend.append("utm_campaign", utmParams.utm_campaign)
+      // if (utmParams.utm_content) formDataToSend.append("utm_content", utmParams.utm_content)
+      // if (utmParams.utm_term) formDataToSend.append("utm_term", utmParams.utm_term)
 
-      const result = await createBitrixDeal(formDataToSend)
+      // const result = await createBitrixDeal(formDataToSend)
 
-      if (result.success) {
-        setSuccess(true)
-      } else {
-        setError(result.message)
-      }
+      // if (result.success) {
+      //   setSuccess(true)
+      // } else {
+      //   setError(result.message)
+      // }
+
+      // Временно: всегда показываем успешное сообщение
+      setSuccess(true)
+      
     } catch (error) {
       console.error('Ошибка при отправке формы:', error)
       setError('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.')

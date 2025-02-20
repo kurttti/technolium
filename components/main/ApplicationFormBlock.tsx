@@ -228,7 +228,7 @@ const ApplicationFormBlock = ({
 
   if (success) {
     return (
-      <div id="application-form" className={`w-full ${fullscreen ? 'h-screen' : ''}ullscreenGradient ? styles.gradientBackground : ''}`}>
+      <div id="application-form" className={`w-full ${fullscreen ? 'h-screen' : ''} ${fullscreenGradient ? styles.gradientBackground : ''}`}>
       <div className={`${fullscreen ? 'h-screen flex items-center justify-center' : ''}`}>
         <motion.div 
           variants={successAnimation}
@@ -236,12 +236,12 @@ const ApplicationFormBlock = ({
           animate="show"
           className={`${fullscreen ? 'w-full' : 'max-w-content mx-auto rounded-[32px]'} ${fullscreenGradient ? '' : styles.gradientBackground}`}
         >
-          <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
+          <div className={`flex flex-col items-center w-full ${fullscreen ? 'justify-center h-screen' : 'py-6'} px-4`}>
             <motion.div 
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.3, type: "spring", stiffness: 200, damping: 20 }}
-              className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mx-auto flex items-center justify-center mb-4"
+              className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4"
             >
               <svg 
                 className="w-8 h-8 text-white" 
@@ -264,7 +264,7 @@ const ApplicationFormBlock = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-[32px] md:text-[48px] mb-4 text-center tracking-wider text-white" 
+              className="text-[32px] md:text-[48px] mb-4 text-center tracking-wider text-white max-w-[600px]" 
               style={{ fontFamily: 'BOWLER' }}
             >
               СПАСИБО ЗА ЗАЯВКУ!

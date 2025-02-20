@@ -69,7 +69,11 @@ interface FormData {
   email: string
 }
 
-const ApplicationFormBlock = () => {
+interface ApplicationFormBlockProps {
+  title?: string;
+}
+
+const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: ApplicationFormBlockProps) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -281,20 +285,20 @@ const ApplicationFormBlock = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8"
         >
-          <motion.h2 
+          <motion.h2
             variants={formAnimation}
             className="text-[32px] md:text-[64px] mb-2 md:mb-4 text-center tracking-wider text-white" 
             style={{ fontFamily: 'BOWLER' }}
           >
-            ОСТАВИТЬ ЗАЯВКУ
+            {title}
           </motion.h2>
-          <motion.h3 
+          {/* <motion.h3 
             variants={formAnimation}
             className="text-[24px] md:text-[32px] mb-6 md:mb-8 text-center tracking-wider text-white/80" 
             style={{ fontFamily: 'BOWLER' }}
           >
             НА ЛЬГОТНОЕ ОБУЧЕНИЕ
-          </motion.h3>
+          </motion.h3> */}
           
           <motion.form 
             variants={containerAnimation}

@@ -79,7 +79,7 @@ export default function MainPage() {
           variants={containerVariants}
           initial="initial"
           animate="animate"
-          className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 lg:space-y-16"
+          className="w-full max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 lg:space-y-16"
           style={{ 
             transformStyle: 'preserve-3d'
           }}
@@ -157,9 +157,9 @@ export default function MainPage() {
           <motion.div
             variants={itemVariants}
             whileHover="hover"
-            className="transform-gpu will-change-transform"
+            className="transform-gpu will-change-transform mb-24"
           >
-            <ApplicationFormBlock />
+            <ApplicationFormBlock submitToBitrix={false} fullscreen={false} fullscreenGradient={false} />
           </motion.div>
         </motion.div>
       )}

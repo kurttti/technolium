@@ -71,9 +71,19 @@ interface FormData {
 
 interface ApplicationFormBlockProps {
   title?: string;
+  submitToBitrix?: boolean;
+  applicationType?: 'standard' | 'individual' | 'quick-start';
+  fullscreen?: boolean;
+  fullscreenGradient?: boolean;
 }
 
-const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: ApplicationFormBlockProps) => {
+const ApplicationFormBlock = ({ 
+  title = 'ОСТАВИТЬ ЗАЯВКУ', 
+  submitToBitrix = true,
+  applicationType = 'standard',
+  fullscreen = false,
+  fullscreenGradient = false
+}: ApplicationFormBlockProps) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -164,33 +174,36 @@ const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: Appli
     setError(null)
 
     try {
-      // const formDataToSend = new FormData()
-      // formDataToSend.append('name', formData.name)
-      // formDataToSend.append('email', formData.email)
-      
-      // const fullPhone = selectedCountry.code + digitsOnly;
-      // formDataToSend.append('phone', fullPhone)
-      // formDataToSend.append("type", "application")
-      // formDataToSend.append("buttonType", "Льготное обучение")
-      // formDataToSend.append("pageUrl", window.location.href)
+      if (submitToBitrix) {
+        const formDataToSend = new FormData()
+        formDataToSend.append('name', formData.name)
+        formDataToSend.append('email', formData.email)
+        
+        const fullPhone = selectedCountry.code + digitsOnly;
+        formDataToSend.append('phone', fullPhone)
+        formDataToSend.append("type", "application")
+        formDataToSend.append("plan", applicationType)
+        formDataToSend.append("buttonType", title)
+        formDataToSend.append("pageUrl", window.location.href)
 
-      // // Добавляем UTM метки
-      // if (utmParams.utm_source) formDataToSend.append("utm_source", utmParams.utm_source)
-      // if (utmParams.utm_medium) formDataToSend.append("utm_medium", utmParams.utm_medium)
-      // if (utmParams.utm_campaign) formDataToSend.append("utm_campaign", utmParams.utm_campaign)
-      // if (utmParams.utm_content) formDataToSend.append("utm_content", utmParams.utm_content)
-      // if (utmParams.utm_term) formDataToSend.append("utm_term", utmParams.utm_term)
+        // Добавляем UTM метки
+        if (utmParams.utm_source) formDataToSend.append("utm_source", utmParams.utm_source)
+        if (utmParams.utm_medium) formDataToSend.append("utm_medium", utmParams.utm_medium)
+        if (utmParams.utm_campaign) formDataToSend.append("utm_campaign", utmParams.utm_campaign)
+        if (utmParams.utm_content) formDataToSend.append("utm_content", utmParams.utm_content)
+        if (utmParams.utm_term) formDataToSend.append("utm_term", utmParams.utm_term)
 
-      // const result = await createBitrixDeal(formDataToSend)
+        const result = await createBitrixDeal(formDataToSend)
 
-      // if (result.success) {
-      //   setSuccess(true)
-      // } else {
-      //   setError(result.message)
-      // }
-
-      // Временно: всегда показываем успешное сообщение
-      setSuccess(true)
+        if (result.success) {
+          setSuccess(true)
+        } else {
+          setError(result.message)
+        }
+      } else {
+        // Если submitToBitrix = false, просто показываем успешное сообщение
+        setSuccess(true)
+      }
       
     } catch (error) {
       console.error('Ошибка при отправке формы:', error)
@@ -215,12 +228,13 @@ const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: Appli
 
   if (success) {
     return (
-      <div id="application-form" className="w-full px-4 py-8">
+      <div id="application-form" className={`w-full ${fullscreen ? 'h-screen' : ''}ullscreenGradient ? styles.gradientBackground : ''}`}>
+      <div className={`${fullscreen ? 'h-screen flex items-center justify-center' : ''}`}>
         <motion.div 
           variants={successAnimation}
           initial="hidden"
           animate="show"
-          className={`max-w-content mx-auto rounded-[32px] ${styles.gradientBackground}`}
+          className={`${fullscreen ? 'w-full' : 'max-w-content mx-auto rounded-[32px]'} ${fullscreenGradient ? '' : styles.gradientBackground}`}
         >
           <div className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8">
             <motion.div 
@@ -266,24 +280,26 @@ const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: Appli
           </div>
         </motion.div>
       </div>
+      </div>
     )
   }
 
   return (
-    <div id="application-form" className="w-full px-4 py-8 md:pt-24">
+    <div id="application-form" className={`w-full ${fullscreen ? 'h-screen' : ''} ${fullscreenGradient ? styles.gradientBackground : ''}`}>
+      <div className={`${fullscreen ? 'h-screen flex items-center justify-center' : ''}`}>
       <motion.div 
         variants={formAnimation}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className={`max-w-content mx-auto rounded-[32px] ${styles.gradientBackground}`}
+        className={`${fullscreen ? 'w-full' : 'max-w-content mx-auto rounded-[32px]'} ${fullscreenGradient ? '' : styles.gradientBackground}`}
       >
         <motion.div 
           variants={containerAnimation}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col items-center py-8 md:py-16 px-4 md:px-8"
+          className={`flex flex-col items-center w-full px-4 ${fullscreen ? 'justify-center h-screen' : 'py-6'}`}
         >
           <motion.h2
             variants={formAnimation}
@@ -303,7 +319,7 @@ const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: Appli
           <motion.form 
             variants={containerAnimation}
             onSubmit={handleSubmit} 
-            className="w-full max-w-[600px] space-y-4"
+            className={`w-full ${fullscreen ? 'max-w-[800px]' : 'max-w-[600px]'} mx-auto space-y-4`}
           >
             <motion.div variants={formAnimation}>
               <Input
@@ -444,6 +460,7 @@ const ApplicationFormBlock = ({ title = 'ОСТАВИТЬ ЗАЯВКУ' }: Appli
           </motion.form>
         </motion.div>
       </motion.div>
+      </div>
 
       {error && (
         <NotificationToast

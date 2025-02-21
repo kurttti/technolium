@@ -10,7 +10,7 @@ export default function IndividualGuidance() {
     <main>
       <ApplicationFormBlock 
         title="ИНДИВИДУАЛЬНОЕ ВЕДЕНИЕ" 
-        applicationType="individual"
+        applicationType="webinar"
         fullscreen
       />
     </main>

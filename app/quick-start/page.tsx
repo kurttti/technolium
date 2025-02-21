@@ -10,7 +10,7 @@ export default function QuickStart() {
     <main>
       <ApplicationFormBlock 
         title="БЫСТРЫЙ СТАРТ В IT" 
-        applicationType="quick-start"
+        applicationType="webinar"
         fullscreen
       />
     </main>

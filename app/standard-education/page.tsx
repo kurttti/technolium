@@ -10,7 +10,7 @@ export default function StandardEducation() {
     <main>
       <ApplicationFormBlock 
         title="СТАНДАРТНОЕ ОБУЧЕНИЕ" 
-        applicationType="standard"
+        applicationType="webinar"
         fullscreen
       />
     </main>

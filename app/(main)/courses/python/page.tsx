@@ -5,24 +5,24 @@ import { motion } from 'framer-motion'
 const PythonCoursePage = () => {
   return (
     <div className="w-full">
-      <div className="max-w-content mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-section-margin mt-[60px] sm:mt-[80px] md:mt-[100px]">
+      <div className="max-w-content mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-section-margin mt-[30px] sm:mt-[80px]">
         {/* Название курса и слоган */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight lg:leading-h1 font-h1 mb-4 tracking-banner text-center uppercase"
-          style={{ fontFamily: 'BOWLER' }}
-        >
-          PYTHON ДЛЯ НАЧИНАЮЩИХ: ОТ
-          ОСНОВ К ПРОФЕССИОНАЛЬНОЙ
-          РАЗРАБОТКЕ
-        </motion.h1>
+        <div className="max-w-[280px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[900px] mx-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight lg:leading-h1 font-h1 mb-4 tracking-banner text-center uppercase"
+            style={{ fontFamily: 'BOWLER' }}
+          >
+            PYTHON ДЛЯ НАЧИНАЮЩИХ: ОТ ОСНОВ К ПРОФЕССИОНАЛЬНОЙ РАЗРАБОТКЕ
+          </motion.h1>
+        </div>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="text-[18px] sm:text-[22px] md:text-[26px] lg:text-[30px] leading-normal text-gray-600 mb-[70px] text-center"
+          className="text-[18px] sm:text-[22px] md:text-[26px] lg:text-[30px] leading-normal text-gray-600 mb-[70px] text-center max-w-[260px] sm:max-w-[450px] md:max-w-[600px] lg:max-w-[700px] mx-auto"
         >
           Освойте самый популярный язык программирования с нуля
         </motion.p>

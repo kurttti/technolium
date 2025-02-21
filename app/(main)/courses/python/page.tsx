@@ -15,7 +15,7 @@ const PythonCoursePage = () => {
             className="text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight lg:leading-h1 font-h1 mb-4 tracking-banner text-center uppercase"
             style={{ fontFamily: 'BOWLER' }}
           >
-            PYTHON ДЛЯ НАЧИНАЮЩИХ: ОТ ОСНОВ К ПРОФЕССИОНАЛЬНОЙ РАЗРАБОТКЕ
+            PYTHON: ОТ ОСНОВ К ПРОФЕССИОНАЛЬНОЙ РАЗРАБОТКЕ
           </motion.h1>
         </div>
         <motion.p 
@@ -246,7 +246,7 @@ const PythonCoursePage = () => {
         </section>
 
         {/* Познакомьтесь с инструктором */}
-        <section className="mb-8 sm:mb-10 md:mb-12">
+        {/* <section className="mb-8 sm:mb-10 md:mb-12">
           <h2 
             className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-none font-normal mb-6"
             style={{ fontFamily: 'BOWLER' }}
@@ -263,30 +263,55 @@ const PythonCoursePage = () => {
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Отзывы студентов */}
         <section className="mb-8 sm:mb-10 md:mb-12">
           <h2 
-            className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-none font-normal mb-6"
+            className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-none font-normal mb-8 sm:mb-10"
             style={{ fontFamily: 'BOWLER' }}
           >
             Отзывы студентов
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
-            <div className="bg-[#F8F8F8] p-5 sm:p-6 md:p-8 rounded-[16px] sm:rounded-[20px]">
-              <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] text-gray-700 mb-4">
-                "Отличный курс! За 3 месяца я освоил Python с нуля и уже создал свой первый проект.
-                Преподаватель объясняет сложные темы простым языком."
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 p-6 sm:p-8 rounded-[20px]">
+              <p className="text-[16px] sm:text-[18px] text-gray-700 mb-6 leading-relaxed">
+                "Профессионал своего дела. Хорошо и грамотно объясняет. Легко найти общий язык. После его объяснений все четко и ясно разложено в голове)"
               </p>
-              <p className="text-[14px] sm:text-[16px] font-medium">— Михаил, выпускник 2024 года</p>
+              <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+                <p className="text-[15px] sm:text-[16px] font-medium text-gray-900">Андрей</p>
+                <p className="text-[14px] text-gray-500">21 ноября</p>
+              </div>
             </div>
-            <div className="bg-[#F8F8F8] p-5 sm:p-6 md:p-8 rounded-[16px] sm:rounded-[20px]">
-              <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] text-gray-700 mb-4">
-                "Много практики и реальных примеров. После курса я смог найти работу junior-разработчиком.
-                Спасибо за качественное обучение!"
+
+            <div className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 p-6 sm:p-8 rounded-[20px]">
+              <p className="text-[16px] sm:text-[18px] text-gray-700 mb-6 leading-relaxed">
+                "Отличный профессионал своего дела, доступно объясняет, для меня все максимально понятно, надеюсь дальше больше!)"
               </p>
-              <p className="text-[14px] sm:text-[16px] font-medium">— Елена, выпускница 2024 года</p>
+              <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+                <p className="text-[15px] sm:text-[16px] font-medium text-gray-900">JET скупка</p>
+                <p className="text-[14px] text-gray-500">21 ноября</p>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 p-6 sm:p-8 rounded-[20px]">
+              <p className="text-[16px] sm:text-[18px] text-gray-700 mb-6 leading-relaxed">
+                "Занимаемся уже 2 недели, все нравится. Объясняет очень подробно, занятия интересные и продуктивные"
+              </p>
+              <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+                <p className="text-[15px] sm:text-[16px] font-medium text-gray-900">Владислав</p>
+                <p className="text-[14px] text-gray-500">16 ноября</p>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 p-6 sm:p-8 rounded-[20px]">
+              <p className="text-[16px] sm:text-[18px] text-gray-700 mb-6 leading-relaxed">
+                "Хороший преподаватель, провели занятие с ним, помог заполнить пробелы и объяснить много ньюансов, которые не понимала"
+              </p>
+              <div className="flex items-center justify-between border-t border-gray-100 pt-4">
+                <p className="text-[15px] sm:text-[16px] font-medium text-gray-900">Анастасия</p>
+                <p className="text-[14px] text-gray-500">16 октября</p>
+              </div>
             </div>
           </div>
         </section>

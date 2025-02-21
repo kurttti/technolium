@@ -44,7 +44,6 @@ interface BitrixDealData {
 }
 
 async function getLeadStages(): Promise<any> {
-  console.log('Getting lead stages...');
   const response = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.status.list`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -53,12 +52,10 @@ async function getLeadStages(): Promise<any> {
     })
   })
   const result = await response.json()
-  console.log('Lead stages:', result);
   return result.result
 }
 
 async function findExistingLead(email: string, phone: string): Promise<string | null> {
-  console.log('Searching for existing lead:', { email, phone });
   const response = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.lead.list`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -68,12 +65,10 @@ async function findExistingLead(email: string, phone: string): Promise<string | 
     }),
   })
   const result = await response.json()
-  console.log('Lead search result:', result);
   return result.result && result.result.length > 0 ? result.result[0].ID : null
 }
 
 async function updateLeadStatus(leadId: string, statusId: string): Promise<boolean> {
-  console.log('Updating lead status:', { leadId, statusId });
   const response = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.lead.update`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -83,19 +78,16 @@ async function updateLeadStatus(leadId: string, statusId: string): Promise<boole
     }),
   })
   const result = await response.json()
-  console.log('Update lead status result:', result);
   return !!result.result
 }
 
 async function createLead(data: BitrixLeadData): Promise<string> {
-  console.log('Creating new lead with data:', data);
   const response = await fetch(`${process.env.BITRIX24_WEBHOOK_URL}/crm.lead.add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ fields: data }),
   })
   const result = await response.json()
-  console.log('Create lead result:', result);
   if (!result.result) {
     throw new Error("Failed to create lead")
   }
@@ -116,26 +108,22 @@ export async function handleWebinarRegistration(
     referrer?: string
   }
 ): Promise<string> {
-  console.log('=== Starting handleWebinarRegistration ===');
-  console.log('Starting webinar registration process for:', { name, email, phone, webinarTitle });
   
   // Получаем список стадий
   const stages = await getLeadStages();
-  console.log('All stages:', stages);
   
-  // Находим стадию WEBINAR по имени
-  const webinarStage = stages.find((stage: any) => stage.NAME === "WEBINAR");
+  // Находим стадию ВЕБ ЗАЯВКА по имени
+  const webinarStage = stages.find((stage: any) => stage.NAME === "ВЕБ ЗАЯВКА");
   if (!webinarStage) {
-    throw new Error("WEBINAR stage not found");
+    throw new Error("ВЕБ ЗАЯВКА stage not found");
   }
-  console.log('Found WEBINAR stage:', webinarStage);
   
   // Создаем контакт или получаем существующий
   const contactId = await createOrGetContact(name, email, phone);
   
   // Создаем сделку для вебинара
   const dealData: BitrixDealData = {
-    TITLE: `${name}: Регистрация на вебинар ${webinarTitle}`,
+    TITLE: `${name}: ${webinarTitle}`,
     CONTACT_ID: contactId,
     ASSIGNED_BY_ID: process.env.BITRIX24_USER_ID!,
     STAGE_ID: webinarStage.STATUS_ID,
@@ -157,7 +145,6 @@ export async function handleWebinarRegistration(
   })
 
   const result = await response.json()
-  console.log('Create webinar deal result:', result);
 
   if (!result.result) {
     throw new Error("Failed to create webinar deal")
@@ -171,11 +158,8 @@ export async function updateWebinarAttendance(
   phone: string,
   attended: boolean
 ): Promise<boolean> {
-  console.log('=== Starting updateWebinarAttendance ===');
-  console.log('Updating webinar attendance for:', { email, phone, attended });
   const leadId = await findExistingLead(email, phone)
   if (!leadId) {
-    console.log('No lead found for attendance update');
     return false
   }
 
@@ -222,8 +206,8 @@ export async function createOrGetContact(name: string, email: string, phone: str
 
 export async function createBitrixDeal(formData: FormData) {
   try {
-    console.log('=== Starting createBitrixDeal ===');
-    console.log('FormData entries:', Object.fromEntries(formData.entries()));
+    // console.log('=== Starting createBitrixDeal ===');
+    // console.log('FormData entries:', Object.fromEntries(formData.entries()));
     const name = formData.get("name") as string
     const email = formData.get("email") as string
     const phone = formData.get("phone") as string
@@ -240,27 +224,27 @@ export async function createBitrixDeal(formData: FormData) {
     const utmTerm = formData.get("utm_term") as string
     const utmReferrer = formData.get("utm_referrer") as string
 
-    console.log('Form type:', type);
-    console.log('Plan:', plan);
+    // console.log('Form type:', type);
+    // console.log('Plan:', plan);
 
     // Если это регистрация на вебинар, используем специальную функцию
     if (type === "webinar") {
-      console.log('Processing webinar registration');
-      const webinarTitle = courseTitle || "Вебинар"
-      console.log('Calling handleWebinarRegistration with:', {
-        name,
-        email,
-        phone,
-        webinarTitle,
-        utmData: {
-          source: utmSource,
-          medium: utmMedium,
-          campaign: utmCampaign,
-          content: utmContent,
-          term: utmTerm,
-          referrer: utmReferrer
-        }
-      });
+      // console.log('Processing webinar registration');
+      const webinarTitle = formData.get("buttonType") as string || courseTitle || "Вебинар"
+      // console.log('Calling handleWebinarRegistration with:', {
+      //   name,
+      //   email,
+      //   phone,
+      //   webinarTitle,
+      //   utmData: {
+      //     source: utmSource,
+      //     medium: utmMedium,
+      //     campaign: utmCampaign,
+      //     content: utmContent,
+      //     term: utmTerm,
+      //     referrer: utmReferrer
+      //   }
+      // });
       await handleWebinarRegistration(name, email, phone, webinarTitle, {
         source: utmSource,
         medium: utmMedium,

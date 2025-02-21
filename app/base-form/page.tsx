@@ -9,7 +9,7 @@ export default function Application() {
   return (
     <main>
       <ApplicationFormBlock 
-        title="ЗАПИСЬ НА ВЕБИНАР"
+        title="ОСТАВИТЬ ЗАЯВКУ"
         applicationType="webinar"
         fullscreen
       />

@@ -72,7 +72,7 @@ interface FormData {
 interface ApplicationFormBlockProps {
   title?: string;
   submitToBitrix?: boolean;
-  applicationType?: 'standard' | 'individual' | 'quick-start';
+  applicationType?: 'standard' | 'individual' | 'quick-start' | 'webinar';
   fullscreen?: boolean;
   fullscreenGradient?: boolean;
 }
@@ -181,8 +181,7 @@ const ApplicationFormBlock = ({
         
         const fullPhone = selectedCountry.code + digitsOnly;
         formDataToSend.append('phone', fullPhone)
-        formDataToSend.append("type", "application")
-        formDataToSend.append("plan", applicationType)
+        formDataToSend.append("type", applicationType)
         formDataToSend.append("buttonType", title)
         formDataToSend.append("pageUrl", window.location.href)
 

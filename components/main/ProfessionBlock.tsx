@@ -145,17 +145,12 @@ const ProfessionBlock = () => {
                 ))}
                 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-btn-gap mt-6 sm:mt-8 md:mt-12 lg:mt-block-spacing-lg justify-center lg:justify-start">
-                  <button
-                    onClick={() => {
-                      const element = document.getElementById('application-form');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                    className="w-full sm:flex-1 max-w-[500px] h-[50px] sm:h-[60px] md:h-[70px] lg:h-[80px] bg-black text-white text-[16px] sm:text-[20px] md:text-[24px] lg:text-[30px] leading-normal font-text rounded-full hover:bg-black/90 transition-all duration-300 whitespace-nowrap px-4 sm:px-6 md:px-8 lg:px-10"
+                  <Link
+                    href="/courses/python"
+                    className="w-full sm:flex-1 max-w-[500px] h-[50px] sm:h-[60px] md:h-[70px] lg:h-[80px] bg-black text-white text-[16px] sm:text-[20px] md:text-[24px] lg:text-[30px] leading-normal font-text rounded-full hover:bg-black/90 transition-all duration-300 whitespace-nowrap px-4 sm:px-6 md:px-8 lg:px-10 flex items-center justify-center"
                   >
                     Смотреть программу обучения
-                  </button>
+                  </Link>
                   <button
                     onClick={() => {
                       const element = document.getElementById('application-form');

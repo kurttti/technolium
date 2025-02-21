@@ -2,6 +2,7 @@
 
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { ReactNode, useRef } from 'react'
+import ApplicationFormBlock from '@/components/main/ApplicationFormBlock'
 
 interface FadeInWhenVisibleProps {
   children: ReactNode;
@@ -86,7 +87,7 @@ const PythonCoursePage: React.FC = () => {
   
   return (
     <main className="w-full" ref={containerRef}>
-      <div className="max-w-content mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-section-margin mt-[30px] sm:mt-[80px]">
+      <div className="max-w-content mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-section-margin mt-[30px]">
         {/* Название курса и слоган */}
         <FadeInWhenVisible>
           <div className="max-w-[280px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[900px] mx-auto">
@@ -457,15 +458,8 @@ const PythonCoursePage: React.FC = () => {
 
       {/* Call to Action */}
       <FadeInWhenVisible>
-        <div className="text-center mt-8 sm:mt-10 md:mt-12">
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="bg-cta text-white w-full sm:w-auto px-6 sm:px-8 py-4 rounded-[12px] sm:rounded-btn text-[16px] sm:text-[18px] font-medium hover:bg-opacity-90 transition-colors"
-          >
-            Записаться на курс
-          </motion.button>
+        <div className="mt-8 sm:mt-10 md:mt-12">
+          <ApplicationFormBlock title="ЗАПИСАТЬСЯ НА КУРС PYTHON" />
         </div>
       </FadeInWhenVisible>
       </div>

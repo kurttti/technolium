@@ -4,15 +4,23 @@ import { motion } from 'framer-motion'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { news } from '../data'
+import { useEffect } from 'react'
 
 export default function NewsArticlePage() {
   const router = useRouter()
   const params = useParams()
   const id = Number(params.id)
 
-  // Проверяем существование новости
+  // Используем useEffect для навигации
+  useEffect(() => {
+    // Проверяем существование новости
+    if (isNaN(id) || id < 0 || id >= news.length) {
+      router.push('/news')
+    }
+  }, [id, router])
+
+  // Показываем загрузку или пустой контент пока проверяем ID
   if (isNaN(id) || id < 0 || id >= news.length) {
-    router.push('/news')
     return null
   }
 

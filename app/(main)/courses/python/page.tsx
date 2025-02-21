@@ -90,12 +90,12 @@ const PythonCoursePage: React.FC = () => {
       <div className="max-w-content mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-section-margin mt-[30px]">
         {/* Название курса и слоган */}
         <FadeInWhenVisible>
-          <div className="max-w-[280px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-[900px] mx-auto">
+          <div className="sm:max-w-[500px] md:max-w-[700px] lg:max-w-[900px] mx-auto">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-tight lg:leading-h1 font-h1 mb-4 tracking-banner text-center uppercase"
+            className="text-[22px] xs:text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] leading-[1.2] sm:leading-tight lg:leading-h1 font-h1 mb-4 tracking-banner text-center uppercase max-w-[280px] xs:max-w-[400px] sm:max-w-full mx-auto"
             style={{ fontFamily: 'BOWLER' }}
           >
             PYTHON: ОТ ОСНОВ К ПРОФЕССИОНАЛЬНОЙ РАЗРАБОТКЕ

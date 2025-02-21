@@ -2,15 +2,16 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const courses = [
   {
     id: 'python',
-    title: 'Python для начинающих',
+    title: 'Python',
     description: 'Освойте самый популярный язык программирования с нуля',
-    duration: '12 недель',
+    duration: '9 месяцев',
     level: 'Начинающий',
-    image: '/images/courses/python.png'
+    image: '/main/courses/python-main-banner.jpg'
   },
   // Добавьте больше курсов по мере необходимости
 ]
@@ -52,11 +53,12 @@ const CoursesPage = () => {
                   {/* Изображение курса */}
                   <div className="h-48 bg-gray-200 relative">
                     {course.image && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={course.image}
                         alt={course.title}
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     )}
                   </div>

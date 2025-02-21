@@ -8,7 +8,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 
 const navItems = [
-  { name: 'История Университета', href: '/history' },
+  { name: 'О нас', href: '/history' },
   { name: 'Профессии', href: '#profession-block' },
   { name: 'Формат обучения', href: '#education-format-block' },
   { name: 'Тарифы', href: '#tariff-block' },

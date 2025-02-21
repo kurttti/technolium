@@ -286,7 +286,7 @@ const PythonCoursePage: React.FC = () => {
           <StaggerContainer className="space-y-2 text-[16px] text-gray-700">
             <StaggerItem>• Онлайн формат с форумами и регулярными заданиями</StaggerItem>
             <StaggerItem>• Менторская поддержка и сессии вопросов-ответов</StaggerItem>
-            <StaggerItem>• Получение сертификата по завершении курса</StaggerItem>
+            {/* <StaggerItem>• Получение сертификата по завершении курса</StaggerItem> */}
           </StaggerContainer>
         </div>
 

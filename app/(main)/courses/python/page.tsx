@@ -87,46 +87,117 @@ const PythonCoursePage = () => {
           </ul>
         </section>
 
-        {/* Как устроен курс? */}
-        <section className="mb-8 sm:mb-10 md:mb-12">
-          <h2 
-            className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-none font-normal mb-6"
-            style={{ fontFamily: 'BOWLER' }}
-          >
-            Как устроен курс?
-          </h2>
-          <div className="bg-[#F8F8F8] p-5 sm:p-6 md:p-8 rounded-[16px] sm:rounded-[20px]">
-            <div className="mb-6">
-              <h3 className="text-[18px] sm:text-[20px] md:text-[22px] lg:text-[24px] font-medium mb-4">Модули курса:</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium mr-2">Модуль 1:</span>
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">Введение в Python и основы программирования</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium mr-2">Модуль 2:</span>
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">Структуры данных и функции</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium mr-2">Модуль 3:</span>
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">Объектно-ориентированное программирование</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium mr-2">Модуль 4:</span>
-                  <span className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">Работа с файлами и базами данных</span>
-                </li>
+      {/* Как устроен курс? */}
+      <section className="mb-8 sm:mb-10 md:mb-12">
+        <h2 
+          className="text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-none font-normal mb-6"
+          style={{ fontFamily: 'BOWLER' }}
+        >
+          Как устроен курс?
+        </h2>
+
+        {/* Базовый курс Python */}
+        <div className="bg-[#F8F8F8] p-5 sm:p-6 md:p-8 rounded-[16px] sm:rounded-[20px] mb-6">
+          <h3 className="text-[20px] sm:text-[24px] font-medium mb-4">
+            Базовый курс Python (11 модулей, 6 месяцев)
+          </h3>
+          <p className="text-[16px] sm:text-[18px] md:text-[20px] mb-4 text-gray-700">
+            Курс адаптирован для новичков без опыта программирования и охватывает фундаментальные основы:
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className="space-y-2 text-[16px] sm:text-[18px] text-gray-700">
+              <li>• Введение в программирование и установку Python</li>
+              <li>• Основы синтаксиса: переменные, операторы, комментарии</li>
+              <li>• Управление потоком: условия и циклы</li>
+              <li>• Функции и параметры</li>
+              <li>• Списки и словари</li>
+              <li>• Работа с файлами</li>
+            </ul>
+            <ul className="space-y-2 text-[16px] sm:text-[18px] text-gray-700">
+              <li>• Обработка исключений</li>
+              <li>• Модули и пакеты</li>
+              <li>• Основы ООП</li>
+              <li>• Введение в тестирование</li>
+              <li>• Версионный контроль с Git</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Специализации */}
+        <div className="mb-6">
+          <h3 className="text-[20px] sm:text-[24px] font-medium mb-4">Специализации</h3>
+          <p className="text-[16px] sm:text-[18px] md:text-[20px] mb-6 text-gray-700">
+            По завершении базового курса выберите одно из направлений для углубленного изучения:
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Нейросети и ML */}
+            <div className="bg-[#F8F8F8] p-6 rounded-[16px]">
+              <h4 className="font-medium text-[18px] mb-3">Нейросети и ML</h4>
+              <p className="text-[16px] text-gray-700 mb-2">Длительность: 5–6 месяцев</p>
+              <ul className="text-[16px] text-gray-700 space-y-2 mb-4">
+                <li>• NumPy и Pandas</li>
+                <li>• Scikit-learn</li>
+                <li>• TensorFlow и PyTorch</li>
+                <li>• Computer Vision</li>
               </ul>
+              <p className="text-[14px] text-gray-600">
+                Финальный проект: Система распознавания объектов
+              </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div>
-                <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium">Формат:</p>
-                <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">Онлайн, доступ 24/7</p>
-              </div>
-              <div>
-                <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-medium">Продолжительность:</p>
-                <p className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px]">12 недель, 6-8 часов в неделю</p>
-              </div>
+
+            {/* Backend-разработка */}
+            <div className="bg-[#F8F8F8] p-6 rounded-[16px]">
+              <h4 className="font-medium text-[18px] mb-3">Backend-разработка</h4>
+              <p className="text-[16px] text-gray-700 mb-2">Длительность: 4 месяца</p>
+              <ul className="text-[16px] text-gray-700 space-y-2 mb-4">
+                <li>• Введение в веб-разработку и HTTP</li>
+                <li>• PostgreSQL</li>
+                <li>• FastAPI</li>
+                <li>• Docker и Redis</li>
+                <li>• Микросервисы</li>
+              </ul>
+              <p className="text-[14px] text-gray-600">
+                Финальный проект: API для электронной коммерции
+              </p>
             </div>
+
+            {/* Автоматизация тестирования */}
+            <div className="bg-[#F8F8F8] p-6 rounded-[16px]">
+              <h4 className="font-medium text-[18px] mb-3">Автоматизация тестирования</h4>
+              <p className="text-[16px] text-gray-700 mb-2">Длительность: 4 месяца</p>
+              <ul className="text-[16px] text-gray-700 space-y-2 mb-4">
+                <li>• PyTest</li>
+                <li>• Selenium и Playwright</li>
+                <li>• API-тестирование</li>
+                <li>• CI/CD</li>
+              </ul>
+              <p className="text-[14px] text-gray-600">
+                Финальный проект: Фреймворк автоматизированного тестирования
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Поддержка и оценка */}
+        <div className="bg-[#F0F0F0] p-6 rounded-[16px] mb-6">
+          <h3 className="text-[18px] font-medium mb-4">Поддержка и оценка</h3>
+          <ul className="space-y-2 text-[16px] text-gray-700">
+            <li>• Онлайн формат с форумами и регулярными заданиями</li>
+            <li>• Менторская поддержка и сессии вопросов-ответов</li>
+            <li>• Получение сертификата по завершении курса</li>
+          </ul>
+        </div>
+
+          {/* Additional Features */}
+          <div className="bg-[#F0F0F0] p-6 rounded-[16px]">
+            <h3 className="text-[18px] font-medium mb-4">Дополнительные возможности</h3>
+            <ul className="space-y-2 text-[16px] text-gray-700">
+              <li>• Смена специализации за дополнительную плату</li>
+              <li>• Индивидуальные консультации с экспертами</li>
+              <li>• Помощь в трудоустройстве после защиты проекта</li>
+              <li>• Доступ к записям занятий в течение года</li>
+            </ul>
           </div>
         </section>
 

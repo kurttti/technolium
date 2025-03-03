@@ -21,7 +21,7 @@ interface TariffPlan {
 const tariffPlans: TariffPlan[] = [
   {
     title: "СТАНДАРТНЫЙ ТАРИФ",
-    basePrice: 91350,
+    basePrice: 119000,
     maxMonths: 18,
     features: [
       { name: "Записанные уроки в доступе навсегда" },
@@ -37,7 +37,7 @@ const tariffPlans: TariffPlan[] = [
   },
   {
     title: "ИНДИВИДУАЛЬНОЕ ВЕДЕНИЕ",
-    basePrice: 175000,
+    basePrice: 187000,
     maxMonths: 24,
     features: [
       { name: "Записанные уроки в доступе навсегда" },

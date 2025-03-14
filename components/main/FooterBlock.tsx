@@ -143,6 +143,16 @@ const FooterBlock = () => {
                   <motion.a 
                     variants={linkAnimation}
                     whileHover={{ x: 10, color: '#fff' }}
+                    href="https://drive.google.com/file/d/1sTANYrzGoEHvuPHm_E9eO041kWdPm2Ah/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="block transition-colors max-w-full md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%] break-words"
+                  >
+                    Образовательная программа «Python разработчик. Начальный уровень»
+                  </motion.a>
+                  <motion.a 
+                    variants={linkAnimation}
+                    whileHover={{ x: 10, color: '#fff' }}
                     href="mailto:info@technolium.ru"
                     className="block transition-colors"
                   >

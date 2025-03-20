@@ -133,7 +133,7 @@ const FooterBlock = () => {
                   <motion.a 
                     variants={linkAnimation}
                     whileHover={{ x: 10, color: '#fff' }}
-                    href="https://drive.google.com/file/d/1QIiUMpQ5xJS2F8CB0LeRLEgrodxadA-1/view?usp=drive_link"
+                    href="https://drive.google.com/file/d/1REnk0l6rpE6v2y5KXyQoeCHzdID3xIkN/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer" 
                     className="block transition-colors"

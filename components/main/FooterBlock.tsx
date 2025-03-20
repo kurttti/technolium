@@ -133,7 +133,7 @@ const FooterBlock = () => {
                   <motion.a 
                     variants={linkAnimation}
                     whileHover={{ x: 10, color: '#fff' }}
-                    href="https://drive.google.com/file/d/1BP1Rh0ZWpkEO7YwzYhKoIwnx4N2V1T0q/view"
+                    href="https://drive.google.com/file/d/1QIiUMpQ5xJS2F8CB0LeRLEgrodxadA-1/view?usp=drive_link"
                     target="_blank"
                     rel="noopener noreferrer" 
                     className="block transition-colors"
@@ -203,9 +203,9 @@ const FooterBlock = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 text-left">
               <motion.div variants={itemAnimation} className="space-y-2">
                 <h4 className="font-medium text-white/80">Регистрационные данные</h4>
-                <p>ИП БАЛОЯН А.Р.</p>
-                <p>ОГРНИП: 324237500502599</p>
-                <p>ИНН: 233608758888</p>
+                <p>ООО "Технолиум"</p>
+                <p>ОГРН: 1252300006617</p>
+                <p>ИНН: 2311375045</p>
               </motion.div>
               
               <motion.div variants={itemAnimation} className="space-y-2">

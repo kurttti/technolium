@@ -221,64 +221,59 @@ const PythonCoursePage: React.FC = () => {
                 По завершении базового курса выберите одно из направлений для углубленного изучения:
               </p>
               
-              <StaggerContainer className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-  <StaggerItem>
-    <div className="p-6 bg-gray-50 rounded-xl shadow-md flex flex-col">
-      <h3 className="text-xl font-bold mb-3">Машинное обучение и анализ данных</h3>
-      <p className="text-sm text-gray-700 font-medium mb-3">Длительность: 4 месяца</p>
-      <ul className="list-disc list-inside text-sm text-gray-600 mb-3 space-y-1">
-        <li>разбираться в библиотеках Python для анализа данных (NumPy, Pandas)</li>
-        <li>визуализировать данные и выявлять закономерности (Matplotlib, Seaborn)</li>
-        <li>готовить данные для моделей: очистка и преобразование признаков</li>
-        <li>строить и обучать модели машинного обучения: регрессия, классификация</li>
-        <li>применять методы обучения без учителя: кластеризация, понижение размерности</li>
-        <li>оценивать качество моделей (метрики, кросс-валидация) и улучшать их</li>
-        <li>разбираться в основах нейронных сетей и глубокого обучения</li>
-      </ul>
-      <p className="text-sm text-gray-700">
-        <span className="font-semibold">Финальный проект:</span> разработка ML-модели для решения прикладной задачи на реальном датасете
-      </p>
-    </div>
-  </StaggerItem>
+              <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6" staggerDelay={0.15}>
+                {/* Нейросети и ML */}
+                <StaggerItem>
+                  <div className="bg-[#F8F8F8] p-6 rounded-[16px] transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <h4 className="font-medium text-[18px] mb-3">Нейросети и ML</h4>
+                    <p className="text-[16px] text-gray-700 mb-2">Длительность: 5–6 месяцев</p>
+                    <StaggerContainer className="text-[16px] text-gray-700 space-y-2 mb-4">
+                      <StaggerItem>• NumPy и Pandas</StaggerItem>
+                      <StaggerItem>• Scikit-learn</StaggerItem>
+                      <StaggerItem>• TensorFlow и PyTorch</StaggerItem>
+                      <StaggerItem>• Computer Vision</StaggerItem>
+                    </StaggerContainer>
+                    <p className="text-[14px] text-gray-600">
+                      Финальный проект: Система распознавания объектов
+                    </p>
+                  </div>
+                </StaggerItem>
 
-  <StaggerItem>
-    <div className="p-6 bg-gray-50 rounded-xl shadow-md flex flex-col">
-      <h3 className="text-xl font-bold mb-3">Бэкенд-разработка на Python</h3>
-      <p className="text-sm text-gray-700 font-medium mb-3">Длительность: 5 месяцев</p>
-      <ul className="list-disc list-inside text-sm text-gray-600 mb-3 space-y-1">
-        <li>поднимать веб-сервер на Python (Flask/Django)</li>
-        <li>настраивать взаимодействие с базами данных (SQL, ORM)</li>
-        <li>проектировать базу данных</li>
-        <li>верстать веб-интерфейс на основе шаблонов Django</li>
-        <li>настраивать и проводить тестирование кода</li>
-        <li>создавать свой REST API</li>
-        <li>использовать Docker для сборки проекта</li>
-        <li>разрабатывать веб-проекты на Django и разворачивать их на сервере</li>
-      </ul>
-      <p className="text-sm text-gray-700">
-        <span className="font-semibold">Финальный проект:</span> веб-приложение «Доска объявлений» на Django (аналог Avito)
-      </p>
-    </div>
-  </StaggerItem>
+                {/* Backend-разработка */}
+                <StaggerItem>
+                  <div className="bg-[#F8F8F8] p-6 rounded-[16px] transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <h4 className="font-medium text-[18px] mb-3">Backend-разработка</h4>
+                    <p className="text-[16px] text-gray-700 mb-2">Длительность: 4 месяца</p>
+                    <StaggerContainer className="text-[16px] text-gray-700 space-y-2 mb-4">
+                      <StaggerItem>• Введение в веб-разработку и HTTP</StaggerItem>
+                      <StaggerItem>• PostgreSQL</StaggerItem>
+                      <StaggerItem>• FastAPI</StaggerItem>
+                      <StaggerItem>• Docker и Redis</StaggerItem>
+                      <StaggerItem>• Микросервисы</StaggerItem>
+                    </StaggerContainer>
+                    <p className="text-[14px] text-gray-600">
+                      Финальный проект: API для электронной коммерции
+                    </p>
+                  </div>
+                </StaggerItem>
 
-  <StaggerItem>
-    <div className="p-6 bg-gray-50 rounded-xl shadow-md flex flex-col">
-      <h3 className="text-xl font-bold mb-3">Автоматизация тестирования на Python</h3>
-      <p className="text-sm text-gray-700 font-medium mb-3">Длительность: 3 месяца</p>
-      <ul className="list-disc list-inside text-sm text-gray-600 mb-3 space-y-1">
-        <li>разбираться в основах тестирования ПО (виды тестов, тест-кейсы, баг-репорты)</li>
-        <li>писать автоматизированные тесты на Python с использованием PyTest</li>
-        <li>автоматизировать UI-тестирование веб-приложений с помощью Selenium WebDriver</li>
-        <li>тестировать REST API сервисы (отправлять HTTP-запросы и проверять ответы)</li>
-        <li>использовать Git и CI/CD для непрерывного запуска автотестов</li>
-        <li>анализировать результаты тестов и поддерживать автотесты (логирование, отладка)</li>
-      </ul>
-      <p className="text-sm text-gray-700">
-        <span className="font-semibold">Финальный проект:</span> разработка набора автотестов для веб-приложения, включая UI и API (например, сценарии регистрации и авторизации пользователей)
-      </p>
-    </div>
-  </StaggerItem>
-</StaggerContainer>
+                {/* Автоматизация тестирования */}
+                <StaggerItem>
+                  <div className="bg-[#F8F8F8] p-6 rounded-[16px] transform transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <h4 className="font-medium text-[18px] mb-3">Автоматизация тестирования</h4>
+                    <p className="text-[16px] text-gray-700 mb-2">Длительность: 4 месяца</p>
+                    <StaggerContainer className="text-[16px] text-gray-700 space-y-2 mb-4">
+                      <StaggerItem>• PyTest</StaggerItem>
+                      <StaggerItem>• Selenium и Playwright</StaggerItem>
+                      <StaggerItem>• API-тестирование</StaggerItem>
+                      <StaggerItem>• CI/CD</StaggerItem>
+                    </StaggerContainer>
+                    <p className="text-[14px] text-gray-600">
+                      Финальный проект: Фреймворк автоматизированного тестирования
+                    </p>
+                  </div>
+                </StaggerItem>
+              </StaggerContainer>
             </div>
           </section>
         </FadeInWhenVisible>

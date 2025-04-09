@@ -203,7 +203,7 @@ const FooterBlock = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 text-left">
               <motion.div variants={itemAnimation} className="space-y-2">
                 <h4 className="font-medium text-white/80">Регистрационные данные</h4>
-                <p>ИП БАЛОЯН А.Р.</p>
+                <p>ИП БАЛОЯН А Р</p>
                 <p>ОГРНИП: 324237500502599</p>
                 <p>ИНН: 233608758888</p>
               </motion.div>
